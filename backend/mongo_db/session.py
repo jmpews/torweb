@@ -76,8 +76,7 @@ class MongoSessionManager():
 def session(request):
     @functools.wraps(request)
     def _func(handler,*args, **kwargs):
-        s = MongoSessionManager.load_session(handler.get_secure_cookie('session_id',''))
-        handler.set_secure_cookie('session_id',s.get_session_id())
+        s = MongoSessionManager.load_session_from_request(handler)
         setattr(handler,'session',s.data)
         return_val = request(handler, *args, **kwargs)
         MongoSessionManager.update_session(s.get_session_id(),s.data)

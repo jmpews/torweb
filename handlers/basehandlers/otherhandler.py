@@ -17,7 +17,7 @@ class Adv_BaseRequestHandler(BaseRequestHandler):
     增加session,形成一个session属性进行调用,在finish时进行更新
     '''
     def __init__(self,application,request,**kwargs):
-        RequestHandler.__init__(self,application,request,**kwargs)
+        BaseRequestHandler.__init__(self,application,request,**kwargs)
         self._session=None
 
     def prepare(self):

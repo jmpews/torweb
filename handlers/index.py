@@ -1,21 +1,22 @@
 # coding:utf-8
 
-#from backend.mongo_db.session import session
-#from handlers.basehandlers.otherhandler import Adv_BaseReuqestHandler
+from backend.mongo_db.session import session
+from handlers.basehandlers.otherhandler import Adv_BaseRequestHandler
 from handlers.basehandlers.basehandler import BaseRequestHandler
 
 
 class IndexHandler(BaseRequestHandler):
 
-    #@session
+    @session
     def get(self, *args, **kwargs):
         #self.redirect('static/index.html')
+        self.session['key']='jmpews_key'
         self.render('index.html')
 
+class Index2Handler(Adv_BaseRequestHandler):
 
-    def post(self, *args, **kwargs):
-        #sessions=MongoSessionManager.load_session_request(self)
-        #sessions['test']='test_load'
-        #MongoSessionManager.update_session(sessions.get_session_id(),sessions)
-        #self.write('test')
-        pass
+    def get(self, *args, **kwargs):
+        #self.redirect('static/index.html')
+        self.session['key']='jmpews_key'
+        self.render('index.html')
+

@@ -41,4 +41,6 @@ Ex: `'ratelimit:127.0.0.1':5` & `expire(5)`
 
 `Rate_BaseRequestHandler` 访问频率处理handler
 
+## 使用&测试
 
+根据需要注释`handlers/index.py`的相应模块进行测试

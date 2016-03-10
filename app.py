@@ -8,10 +8,11 @@ from sys import argv
 
 import config
 from handlers.basehandlers.basehandler import ErrorHandler
-from handlers.index import IndexHandler
+from handlers.index import IndexHandler, Index2Handler
 
 handlers = [
     (r'/', IndexHandler),
+    (r'/2', Index2Handler),
 ]
 
 application = tornado.web.Application(

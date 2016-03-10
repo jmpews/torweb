@@ -2,9 +2,3 @@
 *.pyc
 __pycache__/*
 .idea/*
-c/*
-config.py
-alembic.ini
-pointrank.txt
-utils/pointrank.py
-handlers/cet/pycet_module

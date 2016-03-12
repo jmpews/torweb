@@ -1,10 +1,17 @@
-﻿# coding:utf-8
-
 import config
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from peewee import Model
+from playhouse.db_url import connect
+from playhouse.pool import PooledMySQLDatabase
+db_mysql = connect(config.BACKEND_MYSQL)
 
-db_mysql = create_engine(config.BACKEND_MYSQL)
-BaseModel = declarative_base()
-DBSession = sessionmaker(bind=db_mysql)
+# PooledMySQLDatabase
+#db = PooledMySQLDatabase(
+#    'seebugticket',
+#    max_connections=32,
+#    stale_timeout=300,  # 5 minutes.
+#    user='root',
+#    password='root'
+#)
+class BaseModel(Model):
+    class Meta:
+        database = db_mysql

@@ -13,8 +13,14 @@ class USER_LEVEL:
 
 
 class User(BaseModel):
+    ROLE=(
+        (0,'administrator'),
+    )
+
     #id = Column(Integer, primary_key=True, autoincrement=True)
     username = CharField(index=True, unique=True,max_length=16)
+    nickname=CharField(max_length=16)
+    role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
     password = CharField(max_length=32)
     # 密码加盐
     salt = CharField(max_length=64)
@@ -27,6 +33,8 @@ class User(BaseModel):
     reg_time = DateTimeField(default=datetime.datetime.now)
     key_time = BigIntegerField()
 
+    def __str__(self):
+        return "[%s-%s]" % (self.nickname,self.username)
 
     def is_admin(self):
         return self.level == USER_LEVEL.ADMIN
@@ -49,13 +57,13 @@ class User(BaseModel):
 
     # 创建新的用户
     @staticmethod
-    def new(username, password):
+    def new(username, nickname, password):
         salt = random_str()
         password_md5 = md5(password.encode('utf-8')).hexdigest()
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
         level = USER_LEVEL.NORMAL  # 首个用户赋予admin权限
         the_time = int(time.time())
-        ret = User.create(username=username, password=password_final, salt=salt, level=level, key=random_str(32), key_time = the_time, )
+        ret = User.create(username=username, nickname=nickname, password=password_final, salt=salt, level=level, key=random_str(32), key_time = the_time, )
         ret.save()
         return ret
 

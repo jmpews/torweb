@@ -20,6 +20,10 @@ Mysql做DataDB
 ### 参数安全处理
 对参数进行clean
 
+### Mysql设计
+#### peewee
+使用peewee做为driver,虽然使用了connectionpool但是没有添加RequestHook(在请求来时创建连接，请求结束释放),如果使用可能需要调节这里
+
 ### Mongo设计
 #### 用户Session
 `{ "_id" : "encrypt_id", "data" : { "key" : "value" } }`

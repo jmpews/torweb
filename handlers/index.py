@@ -23,8 +23,12 @@ class LoginHandler(BaseRequestHandler):
         post_data=get_cleaned_post_data(self,'username','password')
         user=User.auth(post_data['username'],post_data['password'])
         if user:
-            self.set_secure_cookie('user',user.username)
+            self.set_secure_cookie('uuid',user.username)
             result=json_result(0,'login success!')
+            self.redirect('/')
         else:
             result=json_result(-1,'login failed!')
-        self.write(result)
+            self.redirect('/login')
+        # write as json
+        #self.write(result)
+

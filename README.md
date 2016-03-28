@@ -67,7 +67,7 @@ net:
   bindIp: 127.0.0.1
 ```
 
-
+`python app.py -port=8001`
 
 ## 附录
 

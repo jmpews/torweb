@@ -17,7 +17,7 @@ class BaseRequestHandler(RequestHandler):
             self.redirect("/static/500.html")
 
     def get_current_user(self):
-        username = self.get_secure_cookie('user')
+        username = self.get_secure_cookie('uuid')
         if not username:
             return None
         user=User.get_by_username(username)

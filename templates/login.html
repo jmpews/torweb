@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Login</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        img {
+            width: 300px;
+        }
+        .slogan {
+            color: #A5A5A5;
+            font-size: 23px;
+        }
+    </style>
+</head>
+<body>
+    <img src="/static/images/logo.gif">
+    <div class="slogan">Please Login!</div>
+    <div>
+        <form action="/login" method="post">
+            <input type="text" name="username">
+            <input type="password" name="password">
+            <input type="submit" value="login">
+        </form>
+    </div>
+</body>
+</html>

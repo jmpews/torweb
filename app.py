@@ -8,11 +8,11 @@ from sys import argv
 
 import config
 from handlers.basehandlers.basehandler import ErrorHandler
-from handlers.index import IndexHandler, Index2Handler
+from handlers.index import IndexHandler, LoginHandler
 
 handlers = [
     (r'/', IndexHandler),
-    (r'/2', Index2Handler),
+    (r'/login', LoginHandler),
 ]
 
 application = tornado.web.Application(
@@ -21,6 +21,7 @@ application = tornado.web.Application(
     debug=config.DEBUG,
     static_path=path.join(path.dirname(path.abspath(__file__)), 'static'),
     template_path="templates",
+    login_url='/login',
     cookie_secret=config.COOKIE_SECRET,
 )
 

@@ -5,12 +5,12 @@ from backend.mongo_db.session import session
 from backend.mysql_model.user import User
 from handlers.basehandlers.basehandler import BaseRequestHandler
 
-from utils.util import set_api_header, json_result
+from utils.util import set_api_header, json_result, login_required
 from utils.util import get_cleaned_post_data
 
 class IndexHandler(BaseRequestHandler):
 
-    @tornado.web.authenticated
+    @login_required
     def get(self, *args, **kwargs):
         self.render('index.html')
 

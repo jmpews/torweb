@@ -1,7 +1,7 @@
 from tornado.web import RequestHandler
 from backend.mysql_model.user import User
 from utils import logger
-from utils.util import set_api_header,json_result
+from utils.util import set_api_header,json_result, RequestArgumentError
 import json
 import config
 
@@ -10,6 +10,12 @@ class BaseRequestHandler(RequestHandler):
     重写了异常处理
     '''
     def write_error(self, status_code, **kwargs):
+        if 'exc_info' in kwargs:
+            # 参数缺失异常
+            if isinstance(kwargs['exc_info'][1],RequestArgumentError):
+                self.write(json_result(kwargs['exc_info'][1].code,kwargs['exc_info'][1].msg))
+                return
+
         if status_code==400:
             self.write(json_result(400,'缺少参数'))
             return

@@ -2,16 +2,17 @@ import json
 from hashlib import md5
 import random
 from tornado.web import MissingArgumentError
-from tornado.httpclient import HTTPError
+from tornado.web import HTTPError
 
 import functools
 from urllib.parse import urlencode
 import urllib.parse as urlparse
 
 class RequestArgumentError(Exception):
-    def __init__(self,msg):
-        super(RequestArgumentError, self).__init__(msg)
+    def __init__(self,msg='Unknown',code=233):
         self.msg=msg
+        self.code=code
+        super(RequestArgumentError, self).__init__(code,msg)
     def __str__(self):
         return self.msg
 
@@ -26,7 +27,7 @@ def random_str(random_length=16):
 def clean_data(value):
     return value
 
-def get_cleaned_post_data(handler,*args):
+def get_cleaned_post_data_httperror(handler,*args):
     '''
     获取post参数，在这个过程进行参数净化，如果缺少参数则raise HTTPError到BaseHandler的write_error()处理函数
     '''
@@ -38,7 +39,7 @@ def get_cleaned_post_data(handler,*args):
             raise HTTPError(400)
     return data
 
-def get_cleaned_query_data(handler,*args):
+def get_cleaned_query_data_httperror(handler,*args):
     '''
     同上
     '''
@@ -50,7 +51,7 @@ def get_cleaned_query_data(handler,*args):
             raise HTTPError(400)
     return data
 
-def get_cleaned_query_data_bak(handler,*args):
+def get_cleaned_query_data(handler,args,blank=False):
     '''
     这个是自定义异常的，然后到get/post去catch然后异常处理，不如raise HTTPError来的通用.
     '''
@@ -59,8 +60,28 @@ def get_cleaned_query_data_bak(handler,*args):
         try:
             data[k]=handler.get_query_argument(k)
         except MissingArgumentError:
-            raise RequestArgumentError('缺少参数')
+            if blank:
+                data[k]=None
+            else:
+                raise RequestArgumentError(k+'arg not found')
     return data
+
+def get_cleaned_post_data(handler,args,blank=False):
+    '''
+    这个是自定义异常的，然后到get/post去catch然后异常处理，不如raise HTTPError来的通用.
+    '''
+    data={}
+    for k in args:
+        try:
+            data[k]=handler.get_body_argument(k)
+        except MissingArgumentError:
+            if blank:
+                data[k]=None
+            else:
+                raise RequestArgumentError(k+' arg not found')
+    return data
+
+
 
 def login_required(method):
     from tornado.httpclient import HTTPError

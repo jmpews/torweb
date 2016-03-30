@@ -6,7 +6,7 @@ from backend.mysql_model.user import User
 from handlers.basehandlers.basehandler import BaseRequestHandler
 
 from utils.util import set_api_header, json_result, login_required
-from utils.util import get_cleaned_post_data
+from utils.util import get_cleaned_post_data,RequestArgumentError
 
 class IndexHandler(BaseRequestHandler):
 
@@ -20,7 +20,12 @@ class LoginHandler(BaseRequestHandler):
         self.render('login.html')
 
     def post(self, *args, **kwargs):
-        post_data=get_cleaned_post_data(self,'username','password')
+        post_data=get_cleaned_post_data(self,['username','password'])
+        #try:
+        #    post_data=get_cleaned_post_data(self,['username','password'])
+        #except RequestArgumentError as e:
+        #    self.write(json_result(e.code,e.msg))
+        #    return
         user=User.auth(post_data['username'],post_data['password'])
         if user:
             self.set_secure_cookie('uuid',user.username)

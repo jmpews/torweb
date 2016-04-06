@@ -73,6 +73,8 @@ net:
 
 `python app.py -port=8001`
 
+默认账户 `{username: admin,password: root}`
+
 ## 附录
 
 ### Nginx配置文件

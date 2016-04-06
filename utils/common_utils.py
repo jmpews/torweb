@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 import logging, os, sys
 
-
 class Logger:
     def __init__(self, log_path, level=logging.DEBUG):
         self.logger = logging.getLogger(log_path)

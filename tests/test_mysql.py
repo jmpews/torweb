@@ -22,7 +22,7 @@ def test_user():
     user.set_password('root')
     print('change <admin> password to <root>')
 
-    if User.auth('admin_test','admin'):
+    if User.auth('admin','admin'):
         print('auth success!')
     else:
         print('auth failed!')

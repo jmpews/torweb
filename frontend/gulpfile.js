@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     less = require('gulp-less'),
+    sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     eslint = require('gulp-eslint');
@@ -24,8 +25,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('styles', function(){
-    return gulp.src('./src/bootstrap/less/bootstrap.less')
-    .pipe(less())
+    return sass(['./src/bootstrap/scss/bootstrap.scss','./src/styles/index.scss'])
     .pipe(autoprefixer('last 2 version', 'Safari 5', 'IE 8', 'IE 9', 'Opera 12.1', 'IOS 6', 'android 4'))
     .pipe(gulp.dest('src/assets/css'))
     .pipe(rename({suffix: '.min'}))
@@ -33,6 +33,7 @@ gulp.task('styles', function(){
     .pipe(gulp.dest('src/assets/css'))
     .pipe(notify({ message: 'Styles task complete' }));
 })
+
 
 gulp.task('images', function() {
   return gulp.src('src/images/**/*')
@@ -45,16 +46,20 @@ gulp.task('clean', function() {
     del(['src/assets/css', 'src/assets/js', 'src/assets/img'])
 });
 
-// Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'images');
-});
-
 gulp.task('watch', function() {
   // Watch .scss files
-  gulp.watch('src/bootstrap/less/*.less', ['styles']);
+  gulp.watch('src/bootstrap/scss/*.scss', ['styles']);
+  gulp.watch('src/styles/*.scss', ['styles']);
   // Watch .js files
   gulp.watch('src/scripts/**/*.js', ['scripts']);
   // Watch image files
   gulp.watch('src/images/**/*', ['images']);
 });
+
+// Default task
+gulp.task('default', ['clean'], function() {
+    gulp.start('styles', 'scripts', 'images');
+    gulp.start('watch');
+});
+
+

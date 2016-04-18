@@ -1,6 +1,5 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
-require('../elemental/less/elemental.less');
 import React from 'react';
 
 let yeomanImage = require('../images/yeoman.png');

@@ -34,3 +34,4 @@ bower_components/
 *.pyc
  __pycache__/*
 .idea/*
+*cache

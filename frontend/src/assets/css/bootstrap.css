@@ -3,6 +3,9 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+button:focus {
+  outline: none !important; }
+
 /*! normalize.css commit fe56763 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -308,6 +311,10 @@ a {
   a:focus, a:hover {
     color: #014c8c;
     text-decoration: underline; }
+  a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; }
 
 a:not([href]) {
   color: inherit;
@@ -556,7 +563,7 @@ kbd {
   font-size: 90%;
   color: #fff;
   background-color: #333;
-  border-radius: 0.2rem; }
+  border-radius: 0.1rem; }
   kbd kbd {
     padding: 0;
     font-size: 100%;
@@ -1904,7 +1911,7 @@ input[type="month"].form-control {
 .input-group-sm > .input-group-btn > .btn {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
-  border-radius: 0.2rem; }
+  border-radius: 0.1rem; }
 
 .form-control-lg, .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
@@ -2089,6 +2096,10 @@ input[type="checkbox"].disabled {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 0.1rem; }
+  .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; }
   .btn:focus, .btn:hover {
     text-decoration: none; }
   .btn.focus {
@@ -2454,7 +2465,7 @@ fieldset[disabled] a.btn {
 .btn-sm, .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
-  border-radius: 0.2rem; }
+  border-radius: 0.1rem; }
 
 .btn-block {
   display: block;
@@ -2785,7 +2796,7 @@ input[type="button"].btn-block {
   .input-group-sm > .input-group-btn > .input-group-addon.btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
-    border-radius: 0.2rem; }
+    border-radius: 0.1rem; }
   .input-group-addon.form-control-lg,
   .input-group-lg > .input-group-addon,
   .input-group-lg > .input-group-btn > .input-group-addon.btn {
@@ -3504,11 +3515,11 @@ input[type="button"].btn-block {
   padding: 0.275rem 0.75rem;
   font-size: 0.875rem; }
 .pagination-sm .page-item:first-child .page-link {
-  border-bottom-left-radius: 0.2rem;
-  border-top-left-radius: 0.2rem; }
+  border-bottom-left-radius: 0.1rem;
+  border-top-left-radius: 0.1rem; }
 .pagination-sm .page-item:last-child .page-link {
-  border-bottom-right-radius: 0.2rem;
-  border-top-right-radius: 0.2rem; }
+  border-bottom-right-radius: 0.1rem;
+  border-top-right-radius: 0.1rem; }
 
 .tag {
   display: inline-block;

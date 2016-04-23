@@ -8,9 +8,14 @@ ul {
 }
 
 body {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    color: #34495e;
+    margin: 0;
     background-color: #f7f7f7;
-    color: rgb(85, 85, 85);
+    // color: rgb(85, 85, 85);
     font-size: 13px;
+    a {
+    }
 }
 
 .cl::after {
@@ -150,34 +155,32 @@ body {
 .content {
     .content-container {
         margin: 0 auto;
+        padding-top: 7px;
         padding-bottom: 30px;
         background-color: white;
     }
-    .content-container {
-        .content-item {
-            border-bottom: 1px solid #eee;
-            padding-top: 13px;
-            padding-bottom: 7px;
-            position: relative;
-        }
-    }
 }
 
-.content-item {
-    .item-logo {
+.post-item {
+    border-bottom: 1px solid #eee;
+    padding-top: 13px;
+    padding-bottom: 7px;
+    position: relative;
+
+    .item-main {
+        padding-left: 0px;
+    }
+    .avatar {
         position: absolute;
-        top: 13px;
-        border-radius: 4px;
-        .avatar{
-            width: 50px;
+        img {
+            width: 40px;
             border-radius: 10px;
         }
     }
-    .item-main {
-        margin-left: 55px;
-        margin-right: 30px;
+    .item-mid {
+        margin-left: 50px;
         .item-title {
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 3px;
             word-wrap: break-word;
         }
@@ -190,9 +193,50 @@ body {
             }
         }
     }
-    .item-remain {
-        position: absolute;
-        right: 5px;
-        top: 13px;
+    .item-end {
     }
 }
+
+
+// post_detail.html
+//-------------------------------------------------------------------------------------
+.post-detail {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    span {
+        margin-right:  5px;
+    }
+    .post-title {
+        max-width: 500px;
+        margin: 0;
+        a {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 30px;
+        }
+    }
+    .post-info {
+        color: gray;
+    }
+}
+
+.post-reply {
+    span {
+        margin-right:  5px;
+    }
+    .avatar {
+        position: absolute;
+        img {
+            width: 40px;
+        }
+    }
+    .reply-main {
+        margin-left: 50px;
+    }
+    .reply-item {
+        margin-top: 10px;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+}
+

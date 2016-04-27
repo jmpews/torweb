@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="./assets/css/bootstrap.css">
-<link rel="stylesheet" href="./assets/css/index.css">
+<link rel="stylesheet" href="/assets/css/bootstrap.css">
+<link rel="stylesheet" href="/assets/css/index.css">
 </head>
 <body>
     <div class="header cl">
       <div class="header-container cl">
       <div class="header-logo">
-        <a href="#">Jmp</a>
+        <a href="/">Jmp</a>
       </div>
       <ul class="header-nav cl">
         <li>
@@ -38,7 +38,7 @@
     <div class="content">
         <div class="content-container container">
             <div class="post-detail">
-                <div class="post-title"><a href="/">搭配技巧</a></div>
+                <div class="post-title"><a href="/">{{post_detail['title']}}</a></div>
                 <div class="post-info"><span><a href="/">jmpews</a></span> <span>20分钟前</span></div>
 IDS(intrusion detection system),即入侵检测系统。是一种对网络传输进行即时监视，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于，IDS是一种积极主动的安全防护技术。
                 <div class="post-content"></div>
@@ -75,6 +75,22 @@ IDS(intrusion detection system),即入侵检测系统。是一种对网络传输
                         </div>
                     </div>
                 </div>
+                {% for post_reply in post_replys %}
+                <div class="reply-item">
+                    <div class="avatar"><img src="https://avatars0.githubusercontent.com/u/4661301?v=3&s=100"></div>
+                    <div class="reply-main">
+                        <div class="reply-head">
+                            <span><a href="/">{{post_reply['username']}}</a></span> <span>{{post_reply['create_time']}}</span> <span>{{post_reply['like_count']}}赞同</span>
+                        </div>
+                        <div class="reply-content">
+                            {{post_reply['content']}}
+                        </div>
+                        <div class="info">
+                            <span> <a href="/">回复</a></span> <span><a href="/">赞同</a></span>
+                        </div>
+                    </div>
+                </div>
+                {% end %}
             </div>
         </div>
     </div>

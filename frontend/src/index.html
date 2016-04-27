@@ -13,7 +13,7 @@
     <div class="header cl">
       <div class="header-container cl">
       <div class="header-logo">
-        <a href="#">Jmp</a>
+        <a href="/">Jmp</a>
       </div>
       <ul class="header-nav cl">
         <li>
@@ -87,6 +87,45 @@
                     <span> 30 </span>
                 </div>
             </div>
+            {% for post in posts %}
+            <div class="post-item cl">
+                <div class="item-main col-md-11">
+                <div class="avatar hidden-xs">
+                    <a href="#"><img src="http://cdn.v2ex.co/gravatar/ff5f2cbaa5e8c97198c8843ad7047681?s=48&d=retro" ></a>
+                </div>
+                <div class="item-mid clear-xs">
+                    <div class="item-title"><a href="/post/{{post['id']}}">{{post['title']}}</a></div>
+                    <div class="item-info">
+                        <span> {{post['category']}} </span> <span><a href="/">{{post['username']}}</a></span> <span> {{post['create_time']}} </span> <span> {{post['visit_count']}}人浏览<span>
+                    </div>
+                </div>
+                </div>
+                <div class="item-end col-md-1 hidden-xs">
+                    <span> {{post['reply_count']}} </span>
+                </div>
+            </div>
+            {% end %}
+            <nav style="text-align:center">
+                <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
         </div>
     </div>
     <div class="footer">

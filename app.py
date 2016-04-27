@@ -9,10 +9,13 @@ from sys import argv
 import config
 from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler
+from handlers.post import PostDetailHandler
 
 handlers = [
     (r'/', IndexHandler),
     (r'/login', LoginHandler),
+    (r'/post/(\d+)', PostDetailHandler),
+    (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/src/assets"}),
 ]
 
 application = tornado.web.Application(
@@ -20,7 +23,7 @@ application = tornado.web.Application(
     default_handler_class=ErrorHandler,
     debug=config.DEBUG,
     static_path=path.join(path.dirname(path.abspath(__file__)), 'static'),
-    template_path="templates",
+    template_path="frontend/src",
     login_url='/login',
     cookie_secret=config.COOKIE_SECRET,
 )

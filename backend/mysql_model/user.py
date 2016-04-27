@@ -14,7 +14,7 @@ class USER_LEVEL:
 
 class User(BaseModel):
     ROLE=(
-        (0,'administrator'),
+        (0,"administrator"),
     )
 
     #id = Column(Integer, primary_key=True, autoincrement=True)

@@ -13,6 +13,10 @@ class IndexHandler(BaseRequestHandler):
         posts=Post.list_recently()
         self.render('index.html', posts=posts)
 
+class RegisterHandler(BaseRequestHandler):
+    def get(self, *args, **kwargs):
+        self.render('register.html')
+
 class LoginHandler(BaseRequestHandler):
 
     def get(self, *args, **kwargs):

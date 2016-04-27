@@ -107,6 +107,13 @@ body {
 }
 .header-tip {
     line-height: 70px;
+    float: right;
+    a {
+        color: #0275d8;
+    }
+    a:focus, a:hover {
+        color: #fff;
+    }
 }
 
 .footer {
@@ -240,3 +247,10 @@ body {
     }
 }
 
+// login.html
+//-------------------------------------------------------------------------------------
+.content-container {
+    form {
+        margin-bottom: 13px;
+    }
+}

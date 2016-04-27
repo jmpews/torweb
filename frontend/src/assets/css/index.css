@@ -82,7 +82,12 @@ body {
     box-shadow: 0px -3px 2px rgba(0, 0, 0, 0.17); }
 
 .header-tip {
-  line-height: 70px; }
+  line-height: 70px;
+  float: right; }
+  .header-tip a {
+    color: #0275d8; }
+  .header-tip a:focus, .header-tip a:hover {
+    color: #fff; }
 
 .footer {
   background-color: white;
@@ -174,3 +179,6 @@ body {
   margin-top: 10px;
   padding-bottom: 7px;
   border-bottom: 1px solid #e5e5e5; }
+
+.content-container form {
+  margin-bottom: 13px; }

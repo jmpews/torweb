@@ -8,12 +8,13 @@ from sys import argv
 
 import config
 from handlers.basehandlers.basehandler import ErrorHandler
-from handlers.index import IndexHandler, LoginHandler
+from handlers.index import IndexHandler, LoginHandler, RegisterHandler
 from handlers.post import PostDetailHandler
 
 handlers = [
     (r'/', IndexHandler),
     (r'/login', LoginHandler),
+    (r'/register', RegisterHandler),
     (r'/post/(\d+)', PostDetailHandler),
     (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/src/assets"}),
 ]

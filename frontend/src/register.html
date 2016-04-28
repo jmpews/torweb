@@ -17,10 +17,10 @@
             </div>
             <ul class="header-nav cl">
                 <li>
-                    <a href="#">首页 <span class="sr-only">(current)</span></a>
+                    <a href="/">首页 <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                    <a href="#">社区</a>
+                    <a href="/">社区</a>
                 </li>
                 <li>
                     <a href="#">列表</a>
@@ -31,8 +31,8 @@
             </ul>
             <div class="header-tip hidden-xs">
                 <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-primary" role="button">登陆</a>
-                    <a class="btn btn-sm btn-outline-primary" role="button">注册</a>
+                    <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
+                    <a class="btn btn-sm btn-outline-primary" role="button" href="/register">注册</a>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     注册
                 </div>
                 <div class="card-block">
-                <form>
+                    <form id="register">
                     <fieldset class="form-group">
                         <label for="exampleInputEmail1">用户名</label>
                         <input type="text" class="form-control" id="" placeholder="username">
@@ -64,7 +64,8 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-primary">注册</button>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -93,7 +94,12 @@
         </div>
     </div>
 
-  <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
-  <!-- <script type="text/javascript" src="./assets/app.js"></script> -->
+    <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/parsley.js/2.3.5/parsley.min.js"></script>
+    <script>
+        $('#register').parsley();
+    </script>
+    <!-- <script type="text/javascript" src="./assets/app.js"></script> -->
 </body>
 </html>

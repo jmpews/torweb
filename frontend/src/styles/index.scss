@@ -18,6 +18,11 @@ body {
     }
 }
 
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
 .cl::after {
     content: "";
     display: table;
@@ -113,6 +118,28 @@ body {
     }
     a:focus, a:hover {
         color: #fff;
+    }
+    .options {
+        a, a:focus, a:hover {
+            color: #0275d8;
+        }
+        li {
+            float: left;
+            margin-right: 10px;
+            img {
+                width: 50px;
+            }
+        }
+        .dropdown {
+            .dropdown-menu {
+                font-size: 13px;
+                min-width: 0;
+            }
+            li {
+                float: none;
+                line-height: normal;
+            }
+        }
     }
 }
 
@@ -255,9 +282,8 @@ body {
     }
 }
 
-// form
+// form.error
 //-------------------------------------------------------------------------------------
-
 .parsley-errors-list {
     list-style: none outside none;
     color: #d9534f;

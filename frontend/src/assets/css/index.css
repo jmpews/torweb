@@ -12,6 +12,10 @@ body {
   background-color: #f7f7f7;
   font-size: 13px; }
 
+.list-inline {
+  padding-left: 0;
+  list-style: none; }
+
 .cl::after {
   content: "";
   display: table;
@@ -88,6 +92,19 @@ body {
     color: #0275d8; }
   .header-tip a:focus, .header-tip a:hover {
     color: #fff; }
+  .header-tip .options a, .header-tip .options a:focus, .header-tip .options a:hover {
+    color: #0275d8; }
+  .header-tip .options li {
+    float: left;
+    margin-right: 10px; }
+    .header-tip .options li img {
+      width: 50px; }
+  .header-tip .options .dropdown .dropdown-menu {
+    font-size: 13px;
+    min-width: 0; }
+  .header-tip .options .dropdown li {
+    float: none;
+    line-height: normal; }
 
 .footer {
   background-color: white;

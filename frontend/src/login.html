@@ -44,15 +44,15 @@
                     登陆
                 </div>
                 <div class="card-block">
-                <form>
+                <form data-parsley-validate="" action="/login" method="post">
                     <fieldset class="form-group">
-                        <label for="exampleInputEmail1">用户名</label>
-                        <input type="email" class="form-control" id="" placeholder="请输入您的用户名">
+                        <label for="username">用户名</label>
+                        <input type="email" class="form-control" id="username" placeholder="请输入您的用户名" required>
                         <small class="text-muted">我们保证您的信息安全.</small>
                     </fieldset>
                     <fieldset class="form-group">
-                        <label for="exampleInputPassword1">密码</label>
-                        <input type="password" class="form-control" id="" placeholder="请输入密码">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="请输入密码" required>
                     </fieldset>
                     <div class="checkbox">
                         <label>
@@ -91,6 +91,9 @@
     </div>
 
   <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+  <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/parsley.js/2.3.5/parsley.min.js"></script>
+  <script src="/assets/js/i18n/zh_cn.js"></script>
   <!-- <script type="text/javascript" src="./assets/app.js"></script> -->
 </body>
 </html>

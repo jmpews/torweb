@@ -44,25 +44,24 @@
                     注册
                 </div>
                 <div class="card-block">
-                    <form id="register">
+                    <form id="register" data-parsley-validate="">
                     <fieldset class="form-group">
-                        <label for="exampleInputEmail1">用户名</label>
-                        <input type="text" class="form-control" id="" placeholder="username">
+                        <label for="username">用户名</label>
+                        <input type="text" class="form-control" placeholder="username" id="username" data-parsley-length="[6, 18]" required>
                         <small class="text-muted">我们保证您的信息安全.</small>
                     </fieldset>
                     <fieldset class="form-group">
-                        <label for="exampleInputEmail1">邮箱</label>
-                        <input type="email" class="form-control" id="" placeholder="email">
+                        <label for="email">邮箱</label>
+                        <input type="email" class="form-control" id="email" placeholder="email" required>
                     </fieldset>
                     <fieldset class="form-group">
-                        <label for="exampleInputPassword1">密码</label>
-                        <input type="password" class="form-control" id="" placeholder="password">
+                        <label for="password1">密码</label>
+                        <input type="password" class="form-control" id="password1" placeholder="请输入密码" data-parsley-length="[6, 12]" required>
                     </fieldset>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> 同意协议
-                        </label>
-                    </div>
+                    <fieldset class="form-group">
+                        <label for="password2">重新输入密码</label>
+                        <input type="password" class="form-control" id="password2" placeholder="请重新输入密码" data-parsley-equalto="#password1" data-parsley-equalto-message="密码不匹配" required>
+                    </fieldset>
                     <button type="submit" class="btn btn-primary">注册</button>
                     </form>
                 </div>
@@ -97,8 +96,10 @@
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
     <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/parsley.js/2.3.5/parsley.min.js"></script>
-    <script>
-        $('#register').parsley();
+    <script src="/assets/js/i18n/zh_cn.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+    });
     </script>
     <!-- <script type="text/javascript" src="./assets/app.js"></script> -->
 </body>

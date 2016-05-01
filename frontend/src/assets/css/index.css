@@ -182,3 +182,8 @@ body {
 
 .content-container form {
   margin-bottom: 13px; }
+
+.parsley-errors-list {
+  list-style: none outside none;
+  color: #d9534f;
+  margin-left: 5px; }

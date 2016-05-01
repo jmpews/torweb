@@ -254,3 +254,12 @@ body {
         margin-bottom: 13px;
     }
 }
+
+// form
+//-------------------------------------------------------------------------------------
+
+.parsley-errors-list {
+    list-style: none outside none;
+    color: #d9534f;
+    margin-left: 5px;
+}

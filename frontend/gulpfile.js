@@ -43,7 +43,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('clean', function() {
-    del(['src/assets/css', 'src/assets/js', 'src/assets/img'])
+    del(['src/assets/css', 'src/assets/img'])
 });
 
 gulp.task('watch', function() {

@@ -15,12 +15,18 @@ class IndexHandler(BaseRequestHandler):
 
 class RegisterHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
-        self.render('register.html')
+        if self.current_user:
+            self.redirect('/')
+        else:
+            self.render('register.html')
 
 class LoginHandler(BaseRequestHandler):
 
     def get(self, *args, **kwargs):
-        self.render('login.html')
+        if self.current_user:
+            self.redirect('/')
+        else:
+            self.render('login.html')
 
     def post(self, *args, **kwargs):
         post_data=get_cleaned_post_data(self,['username','password'])

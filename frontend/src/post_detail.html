@@ -30,10 +30,26 @@
                 </li>
             </ul>
             <div class="header-tip hidden-xs">
-                <div class="btn-group">
+                {% if not current_user %}
+                <div class="btn-group" style="">
                     <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
                     <a class="btn btn-sm btn-outline-primary" role="button" href="/register">注册</a>
                 </div>
+                {% else %}
+                <ul class="options list-inline">
+                    <li class="dropdown">
+                        <a href="/" id="user-avatar">
+                            <img src="http://cdn.v2ex.co/avatar/3256/c48f/167722_normal.png?m=1460365682">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="user-avatar">
+                            <li class="dropdown-item"><a href="#">个人中心</a></li>
+                            <li class="dropdown-item"><a href="#">账号设置</a></li>
+                            <li class="dropdown-item"><a href="#">退出</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">消息</a></li>
+                </ul>
+                {% end %}
             </div>
         </div>
     </div>
@@ -121,7 +137,14 @@ IDS(intrusion detection system),即入侵检测系统。是一种对网络传输
         </div>
     </div>
 
-  <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
-  <!-- <script type="text/javascript" src="./assets/app.js"></script> -->
+    <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/parsley.js/2.3.5/parsley.min.js"></script>
+    <script src="/assets/js/i18n/zh_cn.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+    });
+    </script>
 </body>
 </html>

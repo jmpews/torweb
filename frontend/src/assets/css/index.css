@@ -101,7 +101,8 @@ body {
       width: 50px; }
   .header-tip .options .dropdown .dropdown-menu {
     font-size: 13px;
-    min-width: 0; }
+    min-width: 0;
+    margin: 0px; }
   .header-tip .options .dropdown li {
     float: none;
     line-height: normal; }

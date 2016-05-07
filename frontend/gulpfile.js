@@ -13,8 +13,7 @@ var gulp = require('gulp'),
     del = require('del');
 
 gulp.task('scripts', function() {
-  return gulp.src('src/scripts/**/*.js')
-    .pipe(eslint('.eslintrc'))
+  return gulp.src('src/scripts/*.js')
     .pipe(eslint.formatEach('compact', process.stderr))
     .pipe(concat('main.js'))
     .pipe(gulp.dest('src/assets/js'))
@@ -51,7 +50,7 @@ gulp.task('watch', function() {
   gulp.watch('src/bootstrap/scss/*.scss', ['styles']);
   gulp.watch('src/styles/*.scss', ['styles']);
   // Watch .js files
-  gulp.watch('src/scripts/**/*.js', ['scripts']);
+  gulp.watch('src/scripts/*.js', ['scripts']);
   // Watch image files
   gulp.watch('src/images/**/*', ['images']);
 });

@@ -1,11 +1,23 @@
 from tornado.web import RequestHandler
-from backend.mysql_model.user import User
-from utils import logger
-from utils.util import set_api_header,json_result, RequestArgumentError
 import json
+
 import config
+from utils.util import set_api_header,json_result, RequestArgumentError
+from utils import logger
+
+from backend.mysql_model import db_mysql
+from backend.mysql_model.user import User
+
 
 class BaseRequestHandler(RequestHandler):
+
+    '''
+    Peewee-Request-Hook-Connect
+    '''
+    def prepare(self):
+        db_mysql.connect()
+        return super(BaseRequestHandler, self).prepare()
+
     '''
     重写了异常处理
     '''
@@ -22,6 +34,9 @@ class BaseRequestHandler(RequestHandler):
         if not config.DEBUG:
             self.redirect("/static/500.html")
 
+    '''
+    获取当前用户
+    '''
     def get_current_user(self):
         username = self.get_secure_cookie('uuid')
         if not username:
@@ -29,11 +44,20 @@ class BaseRequestHandler(RequestHandler):
         user=User.get_by_username(username)
         return user
 
+    '''
+    Peewee-Request-Hook-Close
+    '''
+    def on_finish(self):
+        if not db_mysql.is_closed():
+           db_mysql.close()
+        return super(BaseRequestHandler, self).on_finish()
+
 class ErrorHandler(BaseRequestHandler):
     '''
     默认404处理
     '''
     def prepare(self):
+        super(BaseRequestHandler, self).prepare()
         if 'X-Real-IP' in self.request.headers:
             ip=self.request.headers['X-Real-IP']
         else:

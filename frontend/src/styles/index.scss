@@ -193,6 +193,12 @@ body {
         padding-top: 7px;
         // padding-bottom: 30px;
         background-color: white;
+
+        .content-header {
+            padding: 10px 0px 0;
+			margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
     }
 }
 
@@ -275,11 +281,14 @@ body {
     }
 }
 
-// login.html
+// form
 //-------------------------------------------------------------------------------------
 .content-container {
     form {
         margin-bottom: 13px;
+		label {
+			font-size: 18px;
+		}
     }
 }
 
@@ -289,4 +298,17 @@ body {
     list-style: none outside none;
     color: #d9534f;
     margin-left: 5px;
+}
+
+
+// rich-editor
+
+.note-editor.note-frame {
+	border:none;
+	border-left: 1px solid #F3EEEE;
+	border-right: 1px solid #F3EEEE;
+}
+
+.note-toolbar button {
+	height: 30px;
 }

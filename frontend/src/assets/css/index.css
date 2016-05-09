@@ -145,6 +145,10 @@ body {
   margin: 0 auto;
   padding-top: 7px;
   background-color: white; }
+  .content .content-container .content-header {
+    padding: 10px 0px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd; }
 
 .post-item {
   border-bottom: 1px solid #eee;
@@ -200,8 +204,18 @@ body {
 
 .content-container form {
   margin-bottom: 13px; }
+  .content-container form label {
+    font-size: 18px; }
 
 .parsley-errors-list {
   list-style: none outside none;
   color: #d9534f;
   margin-left: 5px; }
+
+.note-editor.note-frame {
+  border: none;
+  border-left: 1px solid #F3EEEE;
+  border-right: 1px solid #F3EEEE; }
+
+.note-toolbar button {
+  height: 30px; }

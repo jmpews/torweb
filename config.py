@@ -1,8 +1,15 @@
 PORT = 9000
 DEBUG = True
 
-#peewee
-BACKEND_MYSQL="mysql+pool://root:root@127.0.0.1/torweb?max_connections=20&stale_timeout=300"
+# peewee
+# BACKEND_MYSQL="mysql+pool://root:root@127.0.0.1/torweb?max_connections=20&stale_timeout=300"
+BACKEND_MYSQL={
+    'database':'torweb',
+    'max_connections':20,
+    'stale_timeout':300,
+    'user':'root',
+    'password':'root',
+}
 BACKEND_MONGO= "mongodb://127.0.0.1/torweb"
 BACKEND_REDIS=('localhost',6379,0)
 

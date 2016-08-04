@@ -1,10 +1,11 @@
 # coding:utf-8
 import sys
-import time,datetime
+import time, datetime
 from hashlib import md5
 from backend.mysql_model import BaseModel
 from peewee import *
 from utils.util import random_str
+
 
 class USER_LEVEL:
     BAN = 0
@@ -13,19 +14,19 @@ class USER_LEVEL:
 
 
 class User(BaseModel):
-    ROLE=(
-        (0,"administrator"),
+    ROLE = (
+        (0, "administrator"),
     )
 
-    #id = Column(Integer, primary_key=True, autoincrement=True)
-    username = CharField(index=True, unique=True,max_length=16)
-    nickname=CharField(max_length=16)
+    # id = Column(Integer, primary_key=True, autoincrement=True)
+    username = CharField(index=True, unique=True, max_length=16)
+    nickname = CharField(max_length=16)
     role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
     password = CharField(max_length=32)
     # 密码加盐
     salt = CharField(max_length=64)
     # token
-    key = CharField(index=True,max_length=64)
+    key = CharField(index=True, max_length=64)
     # 用户等级
     level = IntegerField()
 
@@ -34,7 +35,7 @@ class User(BaseModel):
     key_time = BigIntegerField()
 
     def __str__(self):
-        return "[%s-%s]" % (self.nickname,self.username)
+        return "[%s-%s]" % (self.nickname, self.username)
 
     def is_admin(self):
         return self.level == USER_LEVEL.ADMIN
@@ -44,7 +45,6 @@ class User(BaseModel):
         self.key = random_str(32)
         self.key_time = int(time.time())
         self.save()
-
 
     # 设置密码
     def set_password(self, new_password):
@@ -63,7 +63,8 @@ class User(BaseModel):
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
         level = USER_LEVEL.NORMAL  # 首个用户赋予admin权限
         the_time = int(time.time())
-        ret = User.create(username=username, nickname=nickname, password=password_final, salt=salt, level=level, key=random_str(32), key_time = the_time, )
+        ret = User.create(username=username, nickname=nickname, password=password_final, salt=salt, level=level,
+                          key=random_str(32), key_time=the_time, )
         ret.save()
         return ret
 
@@ -79,7 +80,7 @@ class User(BaseModel):
     @staticmethod
     def auth(username, password):
         try:
-            u = User.get(User.username==username)
+            u = User.get(User.username == username)
         except DoesNotExist:
             return False
         else:
@@ -92,7 +93,7 @@ class User(BaseModel):
     @staticmethod
     def exist(username):
         try:
-            r = User.get(User.username==username).count() > 0
+            r = User.get(User.username == username).count() > 0
         except DoesNotExist:
             return False
         else:
@@ -102,7 +103,7 @@ class User(BaseModel):
     def get_by_key(key):
         the_key = str(key or b'', 'utf-8')
         try:
-            r = User.get(User.key==the_key)
+            r = User.get(User.key == the_key)
         except DoesNotExist:
             return None
         else:
@@ -111,7 +112,7 @@ class User(BaseModel):
     @staticmethod
     def get_by_username(username):
         try:
-            r = User.get(User.username==username)
+            r = User.get(User.username == username)
         except DoesNotExist:
             return False
         else:
@@ -120,7 +121,7 @@ class User(BaseModel):
     @staticmethod
     def count():
         try:
-            r = User.select().where(User.level>0).count()
+            r = User.select().where(User.level > 0).count()
         except DoesNotExist:
             return 0
         else:

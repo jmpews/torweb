@@ -6,11 +6,12 @@ from peewee import *
 
 from utils.common_utils import TimeUtil
 
+
 class Post(BaseModel):
     CATEGORY = (
-        (0,'漏洞研究'),
-        (1,'Web安全'),
-        (2,'开发模式'),
+        (0, '漏洞研究'),
+        (1, 'Web安全'),
+        (2, '开发模式'),
     )
     category = IntegerField(choices=CATEGORY, default=2, verbose_name="帖子类别")
     title = CharField(verbose_name="帖子的标题")
@@ -27,26 +28,26 @@ class Post(BaseModel):
 
     def get_category(self):
         for c in Post.CATEGORY:
-            if c[0]==self.category:
+            if c[0] == self.category:
                 return c[1]
 
     def up_collect(self):
-        self.collect_count+=1
+        self.collect_count += 1
         self.save()
 
     def up_visit(self):
-        self.visit_count+=1
+        self.visit_count += 1
         self.save()
 
-    def up_reply(self,user='test'):
+    def up_reply(self, user='test'):
         self.reply_time = datetime.datetime.now()
-        self.reply_count+=1
+        self.reply_count += 1
         self.save()
 
     @staticmethod
     def list_recently(num=10):
-        posts=Post.select().order_by(Post.reply_time).limit(10)
-        result=[]
+        posts = Post.select().order_by(Post.reply_time).limit(10)
+        result = []
         for post in posts:
             result.append({
                 'id': post.id,
@@ -62,17 +63,18 @@ class Post(BaseModel):
         return result
 
     def detail(self):
-        result={}
-        result['title']=self.title
-        result['content']= self.content
-        result['category']=self.get_category()
-        result['username']=self.user.username
-        result['create_time']= TimeUtil.datetime_delta(self.create_time),
-        result['reply_time']= TimeUtil.datetime_delta(self.reply_time),
-        result['visit_count']= self.visit_count
+        result = {}
+        result['title'] = self.title
+        result['content'] = self.content
+        result['category'] = self.get_category()
+        result['username'] = self.user.username
+        result['create_time'] = TimeUtil.datetime_delta(self.create_time),
+        result['reply_time'] = TimeUtil.datetime_delta(self.reply_time),
+        result['visit_count'] = self.visit_count
         result['reply_count'] = self.reply_count
         result['collect_count'] = self.collect_count
         return result
+
 
 class PostReply(BaseModel):
     post = ForeignKeyField(Post, verbose_name="对应帖子")
@@ -85,13 +87,13 @@ class PostReply(BaseModel):
         return "[%s-%s]" % (self.user, self.content)
 
     def up_like(self):
-        self.like_count+=1
+        self.like_count += 1
         self.save()
 
     @staticmethod
     def list_all(post):
-        result=[]
-        postreplys=PostReply.select().where(PostReply.post==post)
+        result = []
+        postreplys = PostReply.select().where(PostReply.post == post)
         for reply in postreplys:
             result.append({
                 'username': reply.user.username,
@@ -100,4 +102,3 @@ class PostReply(BaseModel):
                 'like_count': reply.like_count
             })
         return result
-

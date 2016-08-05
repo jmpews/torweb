@@ -8,7 +8,7 @@ BACKEND_MYSQL={
     'max_connections':20,
     'stale_timeout':300,
     'user':'root',
-    'password':'root',
+    'password':'toor',
 }
 BACKEND_MONGO= "mongodb://127.0.0.1/torweb"
 BACKEND_REDIS=('localhost',6379,0)

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/assets/css/bootstrap.css">
 <link rel="stylesheet" href="/assets/css/summernote.css">
 <link rel="stylesheet" href="/assets/css/index.css">
+<link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="header cl">
@@ -58,13 +59,12 @@
     <div class="content">
         <div class="content-container container">
             <div class="content-header">
-                <h3>发帖子</h3>
+                <h3><span class="glyphicon glyphicon-grain" aria-hidden="true"></span>发帖子</h3>
             </div>
             <form data-parsley-validate="" action="/post/add" method="post">
                 <fieldset class="form-group">
                     <label for="title">帖子标题</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题" required>
-                    <small class="text-muted">我们保证您的信息安全.</small>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="password">内容</label>

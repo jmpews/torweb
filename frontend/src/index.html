@@ -113,7 +113,11 @@
                     登陆
                 </div>
                 <div class="card-block">
+                    {% if current_user %}
                     <a class="btn btn-primary" href="#" role="button">登陆</a>
+                    {% else %}
+                    {{current_user.username}}
+                    {% end %}
                 </div>
             </div>
 
@@ -122,7 +126,13 @@
                     服务器状态
                 </div>
                 <div class="card-block">
-                    如果你不是特别对他的每一句话感兴趣，不要随意用“关注”人的功能，因为关注以后，他的所有发帖回帖都会以通知的方式提醒你的！
+                    <ul>
+                        <li>CPU使用率:<span>{{systatus[0]}}</span></li>
+                        <li>RAM使用率:<span>{{systatus[1]}}</span></li>
+                        <li>连接数:<span>{{systatus[2]}}</span></li>
+                        <li>系统启动时间:<span>{{systatus[3]}}</span></li>
+
+                    </ul>
                 </div>
             </div>
 

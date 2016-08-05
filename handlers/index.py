@@ -1,5 +1,6 @@
 # coding:utf-8
 import tornado.web
+import config
 from backend.mysql_model.user import User
 from backend.mysql_model.post import Post
 from handlers.basehandlers.basehandler import BaseRequestHandler
@@ -11,7 +12,7 @@ from utils.util import get_cleaned_post_data, RequestArgumentError
 class IndexHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
         posts = Post.list_recently()
-        self.render('index.html', posts=posts)
+        self.render('index.html', posts=posts, systatus=config.sys_status)
 
 
 class RegisterHandler(BaseRequestHandler):

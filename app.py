@@ -7,6 +7,7 @@ from os import path
 from sys import argv
 
 import config
+from utils.util import monitor_system_status
 from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler, RegisterHandler
 from handlers.post import PostDetailHandler, PostAddHandler
@@ -36,6 +37,7 @@ if __name__ == "__main__":
     if len(argv) > 1 and  argv[1][:6] == '-port=':
         config.PORT = int(argv[1][6:])
 
+    monitor_system_status(config.sys_status)
     application.listen(config.PORT)
     print('Server started at port %s' % config.PORT)
     tornado.ioloop.IOLoop.instance().start()

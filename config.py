@@ -23,5 +23,7 @@ COOKIE_SECRET = "6aOO5ZC55LiN5pWj6ZW/5oGo77yM6Iqx5p+T5LiN6YCP5Lmh5oSB44CC"
 
 log_path = './'
 
+sys_status = [0, 0, 0, 0]
+
 domain = 'weixin.linevery.com'
 

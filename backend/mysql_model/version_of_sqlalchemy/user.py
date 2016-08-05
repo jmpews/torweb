@@ -3,9 +3,8 @@ import sys
 import time
 from hashlib import md5
 from backend.mysql_model import BaseModel, DBSession
-from sqlalchemy import Column, Integer, BigInteger, String, Float, ForeignKey, Boolean,DateTime, func, VARCHAR
+from sqlalchemy import Column, Integer, BigInteger, String, Float, ForeignKey, Boolean, DateTime, func, VARCHAR
 from utils.util import random_str
-
 
 
 class USER_LEVEL:
@@ -26,7 +25,7 @@ class User(BaseModel):
     level = Column(Integer)
 
     # default current time
-    reg_time = Column(DateTime,default=func.now())
+    reg_time = Column(DateTime, default=func.now())
     key_time = Column(BigInteger)
 
     __tablename__ = 'users'
@@ -42,7 +41,6 @@ class User(BaseModel):
         session.add(self)
         session.commit()
         session.close()
-
 
     # 设置密码
     def set_password(self, new_password):
@@ -65,8 +63,9 @@ class User(BaseModel):
         level = USER_LEVEL.ADMIN if cls.count() == 0 else USER_LEVEL.NORMAL  # 首个用户赋予admin权限
         the_time = int(time.time())
         session = DBSession()
-        ret = User(username=username, password=password_final,openid=openid , salt=salt, level=level, key=random_str(32),
-                          key_time = the_time, )
+        ret = User(username=username, password=password_final, openid=openid, salt=salt, level=level,
+                   key=random_str(32),
+                   key_time=the_time, )
         session.add(ret)
         session.commit()
         session.close()
@@ -83,7 +82,7 @@ class User(BaseModel):
     @classmethod
     def auth(cls, username, password):
         session = DBSession()
-        u = session.query(cls).filter(cls.username==username).first()
+        u = session.query(cls).filter(cls.username == username).first()
         session.close()
         if not u:
             return False
@@ -96,7 +95,7 @@ class User(BaseModel):
     @classmethod
     def exist(cls, username):
         session = DBSession()
-        r = session.query(cls).filter(cls.username==username).count() > 0
+        r = session.query(cls).filter(cls.username == username).count() > 0
         session.close()
         return r
 
@@ -104,18 +103,18 @@ class User(BaseModel):
     def get_by_key(cls, key):
         session = DBSession()
         the_key = str(key or b'', 'utf-8')
-        r = session.query(cls).filter(cls.key==the_key).first()
+        r = session.query(cls).filter(cls.key == the_key).first()
         session.close()
 
     @classmethod
     def get_by_username(cls, username):
         session = DBSession()
-        r = session.query(cls).filter(cls.username==username).first()
+        r = session.query(cls).filter(cls.username == username).first()
         session.close()
         return r
 
     @classmethod
     def count(cls):
         session = DBSession()
-        r = session.query(cls).filter(cls.level>0).count()
+        r = session.query(cls).filter(cls.level > 0).count()
         return r

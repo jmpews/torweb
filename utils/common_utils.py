@@ -2,6 +2,7 @@
 import logging, os, sys
 import datetime
 
+
 class Logger:
     def __init__(self, log_path, level=logging.DEBUG):
         self.logger = logging.getLogger(log_path)
@@ -37,16 +38,17 @@ class Logger:
     def exc(self, message):
         self.logger.exception(message)
 
+
 class TimeUtil:
     def get_weekday(date):
         week_day_dict = {
-            0 : '星期一',
-            1 : '星期二',
-            2 : '星期三',
-            3 : '星期四',
-            4 : '星期五',
-            5 : '星期六',
-            6 : '星期日',
+            0: '星期一',
+            1: '星期二',
+            2: '星期三',
+            3: '星期四',
+            4: '星期五',
+            5: '星期六',
+            6: '星期日',
         }
         day = date.weekday()
         return week_day_dict[day]

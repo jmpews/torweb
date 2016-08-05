@@ -113,10 +113,10 @@
                     登陆
                 </div>
                 <div class="card-block">
-                    {% if current_user %}
-                    <a class="btn btn-primary" href="#" role="button">登陆</a>
+                    {% if not current_user %}
+                        <a class="btn btn-primary" href="#" role="button">登陆</a>
                     {% else %}
-                    {{current_user.username}}
+                        {{current_user.username}}
                     {% end %}
                 </div>
             </div>

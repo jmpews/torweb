@@ -39,7 +39,7 @@
                 <ul class="options list-inline">
                     <li class="dropdown">
                         <a href="/" id="user-avatar">
-                            <img src="http://cdn.v2ex.co/avatar/3256/c48f/167722_normal.png?m=1460365682">
+                            <img src="/static/images/avatar_03.png">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="user-avatar">
                             <li class="dropdown-item"><a href="#">个人中心</a></li>
@@ -56,15 +56,19 @@
     </div>
     <div class="content-container container">
         <div class="col-md-9">
-        <div class="card">
+        <div class="card post-list-card">
             <div class="card-header">
-                登陆
+                主题:
+                <a href="/">开发模式</a> /
+                <a class="active" href="/">算法</a> /
+                <a href="/">开源项目</a> /
+                <a href="/">全部分类</a>
             </div>
             <div class="card-block">
             {% for post in posts %}
             <div class="post-item cl">
                 <div class="avatar hidden-xs">
-                    <a href="#"><img src="/static/images/avatar-0.jpg" ></a>
+                    <a href="#"><img src="/static/images/avatar_04.png" ></a>
                 </div>
 
                 <div class="item-mid clear-xs">
@@ -104,14 +108,24 @@
         </div>
         </div>
         <div class="sidebar col-md-3">
-        <div class="card">
-            <div class="card-header">
-                登陆
+            <div class="card">
+                <div class="card-header">
+                    登陆
+                </div>
+                <div class="card-block">
+                    <a class="btn btn-primary" href="#" role="button">登陆</a>
+                </div>
             </div>
-            <div class="card-block">
-                如果你不是特别对他的每一句话感兴趣，不要随意用“关注”人的功能，因为关注以后，他的所有发帖回帖都会以通知的方式提醒你的！
+
+            <div class="card">
+                <div class="card-header">
+                    服务器状态
+                </div>
+                <div class="card-block">
+                    如果你不是特别对他的每一句话感兴趣，不要随意用“关注”人的功能，因为关注以后，他的所有发帖回帖都会以通知的方式提醒你的！
+                </div>
             </div>
-        </div>
+
         </div>
     </div>
 

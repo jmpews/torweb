@@ -67,7 +67,7 @@ body {
 }
 
 .header-container {
-    width: 1180px;
+    // width: 1180px;
     margin: 0 auto;
 }
 
@@ -189,7 +189,7 @@ body {
     margin-top: 30px;
     padding-top: 7px;
     // padding-bottom: 30px;
-    background-color: white;
+    // background-color: white;
 
     .content-header {
         padding: 10px 0px 0;
@@ -210,9 +210,27 @@ body {
     padding-left: 0px;
 }
 
+.post-list-card {
+    box-shadow: inset 0 0 0 1px #e1e1e1;
+    a {
+        color: #565758;
+    }
+}
+.post-detail-card {
+    box-shadow: inset 0 0 0 1px #e1e1e1;
+    .user-name {
+        font-weight: bold;
+        color: black;
+    }
+    a {
+        color: #565758;
+    }
+}
+
+
 .post-item {
     border-bottom: 1px solid #eee;
-    padding-top: 13px;
+    padding-top: 17px;
     padding-bottom: 7px;
     position: relative;
     min-height: 68px;
@@ -229,7 +247,7 @@ body {
         margin-right: 40px;
         .item-title {
             font-size: 18px;
-            margin-bottom: 3px;
+            margin-bottom: 7px;
             word-wrap: break-word;
         }
 
@@ -259,6 +277,7 @@ body {
     span {
         margin-right:  5px;
     }
+
     .post-title {
         max-width: 500px;
         margin: 0;
@@ -270,6 +289,23 @@ body {
     }
     .post-info {
         color: gray;
+        margin-bottom: 10px;
+    }
+    .post-function {
+        margin-top: 20px;
+        text-align: right;
+        a {
+            color: #ABA8A6;
+        }
+        a:hover {
+            color: rgba(251, 135, 135, 0.97) !important;
+        }
+        span {
+            padding-right: 2px;
+        }
+        .fa {
+            padding-right: 1px;
+        }
     }
 }
 
@@ -283,13 +319,32 @@ body {
             width: 40px;
         }
     }
-    .reply-main {
-        margin-left: 50px;
-    }
     .reply-item {
         margin-top: 10px;
         padding-bottom: 7px;
         border-bottom: 1px solid #e5e5e5;
+        .reply-main {
+            margin-left: 50px;
+            .reply-head span {
+                color: #ABA8A6;
+            }
+        }
+    }
+    .reply-function {
+        margin-top: 7px;
+        text-align: right;
+        a {
+            color: #ABA8A6;
+        }
+        a:hover {
+            color: rgba(251, 135, 135, 0.97) !important;
+        }
+        span {
+            padding-right: 2px;
+        }
+        .fa {
+            padding-right: 1px;
+        }
     }
 }
 
@@ -323,4 +378,20 @@ body {
 
 .note-toolbar button {
 	height: 30px;
+}
+
+// card
+.card-header {
+    padding: 0.5rem 1.25rem !important;
+    color: gray;
+    a {
+        margin: 0 3px;
+
+    }
+    a.active {
+        color: #238efa !important;
+    }
+    a:hover {
+        color: #238efa !important;
+    }
 }

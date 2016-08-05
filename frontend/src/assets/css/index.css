@@ -50,7 +50,6 @@ body {
   box-shadow: 0 2px 10px #dadbdc; }
 
 .header-container {
-  width: 1180px;
   margin: 0 auto; }
 
 .header-logo {
@@ -141,8 +140,7 @@ body {
 .content-container {
   margin: 0 auto;
   margin-top: 30px;
-  padding-top: 7px;
-  background-color: white; }
+  padding-top: 7px; }
   .content-container .content-header {
     padding: 10px 0px 0;
     margin-bottom: 10px;
@@ -155,9 +153,22 @@ body {
 .sidebar {
   padding-left: 0px; }
 
+.post-list-card {
+  box-shadow: inset 0 0 0 1px #e1e1e1; }
+  .post-list-card a {
+    color: #565758; }
+
+.post-detail-card {
+  box-shadow: inset 0 0 0 1px #e1e1e1; }
+  .post-detail-card .user-name {
+    font-weight: bold;
+    color: black; }
+  .post-detail-card a {
+    color: #565758; }
+
 .post-item {
   border-bottom: 1px solid #eee;
-  padding-top: 13px;
+  padding-top: 17px;
   padding-bottom: 7px;
   position: relative;
   min-height: 68px; }
@@ -171,7 +182,7 @@ body {
     margin-right: 40px; }
     .post-item .item-mid .item-title {
       font-size: 18px;
-      margin-bottom: 3px;
+      margin-bottom: 7px;
       word-wrap: break-word; }
     .post-item .item-mid .item-info {
       font-size: 11px;
@@ -198,7 +209,19 @@ body {
       font-weight: 500;
       line-height: 30px; }
   .post-detail .post-info {
-    color: gray; }
+    color: gray;
+    margin-bottom: 10px; }
+  .post-detail .post-function {
+    margin-top: 20px;
+    text-align: right; }
+    .post-detail .post-function a {
+      color: #ABA8A6; }
+    .post-detail .post-function a:hover {
+      color: rgba(251, 135, 135, 0.97) !important; }
+    .post-detail .post-function span {
+      padding-right: 2px; }
+    .post-detail .post-function .fa {
+      padding-right: 1px; }
 
 .post-reply span {
   margin-right: 5px; }
@@ -206,12 +229,25 @@ body {
   position: absolute; }
   .post-reply .avatar img {
     width: 40px; }
-.post-reply .reply-main {
-  margin-left: 50px; }
 .post-reply .reply-item {
   margin-top: 10px;
   padding-bottom: 7px;
   border-bottom: 1px solid #e5e5e5; }
+  .post-reply .reply-item .reply-main {
+    margin-left: 50px; }
+    .post-reply .reply-item .reply-main .reply-head span {
+      color: #ABA8A6; }
+.post-reply .reply-function {
+  margin-top: 7px;
+  text-align: right; }
+  .post-reply .reply-function a {
+    color: #ABA8A6; }
+  .post-reply .reply-function a:hover {
+    color: rgba(251, 135, 135, 0.97) !important; }
+  .post-reply .reply-function span {
+    padding-right: 2px; }
+  .post-reply .reply-function .fa {
+    padding-right: 1px; }
 
 .content-container form {
   margin-bottom: 13px; }
@@ -230,3 +266,13 @@ body {
 
 .note-toolbar button {
   height: 30px; }
+
+.card-header {
+  padding: 0.5rem 1.25rem !important;
+  color: gray; }
+  .card-header a {
+    margin: 0 3px; }
+  .card-header a.active {
+    color: #238efa !important; }
+  .card-header a:hover {
+    color: #238efa !important; }

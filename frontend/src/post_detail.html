@@ -1,13 +1,14 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Torweb.Post.Detail</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="/assets/css/bootstrap.css">
-<link rel="stylesheet" href="/assets/css/index.css">
+    <meta charset="utf-8">
+    <title>Torweb.Post.Detail</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="header cl">
@@ -39,7 +40,7 @@
                 <ul class="options list-inline">
                     <li class="dropdown">
                         <a href="/" id="user-avatar">
-                            <img src="http://cdn.v2ex.co/avatar/3256/c48f/167722_normal.png?m=1460365682">
+                            <img src="/static/images/avatar_04.png">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="user-avatar">
                             <li class="dropdown-item"><a href="#">个人中心</a></li>
@@ -56,47 +57,57 @@
     </div>
     <div class="content-container container">
         <div class="col-md-9">
-        <div class="card">
+        <div class="card post-detail-card">
             <div class="card-header">
-                登陆
+                主题:
+                <a href="/">开发模式</a> /
+                <a class="active" href="/">算法</a> /
+                <a href="/">开源项目</a> /
+                <a href="/">全部分类</a>
             </div>
             <div class="card-block">
             <div class="post-detail">
                 <div class="post-title"><a href="/">{{post_detail['title']}}</a></div>
-                <div class="post-info"><span><a href="/">jmpews</a></span> <span>20分钟前</span></div>
-IDS(intrusion detection system),即入侵检测系统。是一种对网络传输进行即时监视，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于，IDS是一种积极主动的安全防护技术。
-                <div class="post-content"></div>
-                <div class="post-function"><span><a href="/">收藏</a></span><span><a href="/">点赞</a></span></div>
+                <div class="post-info"><span><a class="user-name" href="/">jmpews</a></span> <span>20分钟前</span></div>
+                <div class="post-content">
+                    IDS(intrusion detection system),即入侵检测系统。是一种对网络传输进行即时监视，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于，IDS是一种积极主动的安全防护技术。
+                </div>
+                <div class="post-function">
+                    <span><a href="/"><i class="fa fa-bookmark-o"></i>收藏</a></span>
+                    <span><a href="/"><i class="fa fa-thumbs-o-up"></i>点赞</a></span>
+                </div>
             </div>
 
             <div class="post-reply">
                 <div class="reply-item">
-                    <div class="avatar"><img src="https://avatars0.githubusercontent.com/u/4661301?v=3&s=100"></div>
-                    <div class="reply-main">
+                    <div class="avatar hidden-xs"><img src="/static/images/avatar_01.png"></div>
+                    <div class="reply-main clear-xs">
                         <div class="reply-head">
-                            <span><a href="/">jmpews</a></span> <span>11分钟前</span> <span>201赞同</span>
+                            <span><a class="user-name" href="/">jmpews</a></span> <span>11分钟前</span> <span>201赞同</span>
                         </div>
                         <div class="reply-content">
                             入侵检测系统的核心价值在于通过对全网信息的分析，了解信息系统的安全状况，进而指导信息系统安全建设目标以及安全策略的确立和调整，而入侵防御系统的核心价值在于安全策略的实施—对黑客行为的阻击;入侵检测系统需要部署在网络内部，监控范围可以覆盖整个子网，包括来自外部的数据以及内部终端之间传输的数据，入侵防御系统则必须部署在网络边界，抵御来自外部的入侵，对内部攻击行为无能为力。
                         </div>
-                        <div class="info">
-                            <span> <a href="/">回复</a></span> <span><a href="/">赞同</a></span>
+                        <div class="reply-function">
+                            <span> <a href="/"><i class="fa fa-reply"></i>回复</a></span>
+                            <span><a href="/"><i class="fa fa-thumbs-o-up"></i>赞同</a></span>
                         </div>
                     </div>
                 </div>
 
                 {% for post_reply in post_replys %}
                 <div class="reply-item">
-                    <div class="avatar"><img src="https://avatars0.githubusercontent.com/u/4661301?v=3&s=100"></div>
-                    <div class="reply-main">
+                    <div class="avatar hidden-xs"><img src="/static/images/avatar_02.png"></div>
+                    <div class="reply-main clear-xs">
                         <div class="reply-head">
-                            <span><a href="/">{{post_reply['username']}}</a></span> <span>{{post_reply['create_time']}}</span> <span>{{post_reply['like_count']}}赞同</span>
+                            <span><a class="user-name" href="/">{{post_reply['username']}}</a></span> <span>{{post_reply['create_time']}}</span> <span>{{post_reply['like_count']}}赞同</span>
                         </div>
                         <div class="reply-content">
                             {{post_reply['content']}}
                         </div>
-                        <div class="info">
-                            <span> <a href="/">回复</a></span> <span><a href="/">赞同</a></span>
+                        <div class="reply-function">
+                            <span> <a href="/"><i class="fa fa-reply"></i>回复</a></span>
+                            <span><a href="/"><i class="fa fa-thumbs-o-up"></i>赞同</a></span>
                         </div>
                     </div>
                 </div>

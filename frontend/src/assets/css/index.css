@@ -6,7 +6,7 @@ ul {
   padding: 0; }
 
 body {
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
   color: #34495e;
   margin: 0;
   background-color: #f7f7f7;
@@ -50,7 +50,7 @@ body {
   box-shadow: 0 2px 10px #dadbdc; }
 
 .header-container {
-  margin: 0 auto; }
+  margin: 0 30px; }
 
 .header-logo {
   text-align: center;
@@ -88,11 +88,11 @@ body {
   line-height: 70px;
   float: right; }
   .header-tip a {
-    color: #0275d8; }
+    color: #238efa; }
   .header-tip a:focus, .header-tip a:hover {
     color: #fff; }
   .header-tip .options a, .header-tip .options a:focus, .header-tip .options a:hover {
-    color: #0275d8; }
+    color: #238efa; }
   .header-tip .options li {
     float: left;
     margin-right: 10px; }
@@ -141,13 +141,13 @@ body {
   margin: 0 auto;
   margin-top: 30px;
   padding-top: 7px; }
-  .content-container .content-header {
+  .content-container .content-header-del {
     padding: 10px 0px 0;
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd; }
-    .content-container .content-header span {
+    .content-container .content-header-del span {
       font-size: 20px; }
-    .content-container .content-header .nav {
+    .content-container .content-header-del .nav {
       float: right; }
 
 .sidebar {
@@ -276,3 +276,79 @@ body {
     color: #238efa !important; }
   .card-header a:hover {
     color: #238efa !important; }
+
+.system-status-card li {
+  line-height: 20px; }
+.system-status-card span {
+  color: #238efa;
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 13px; }
+.system-status-card dt {
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 30px;
+  padding-left: 0px;
+  border-bottom: 1px dashed #eee; }
+.system-status-card dd {
+  color: #238efa;
+  font-weight: bold;
+  margin-bottom: 0px;
+  line-height: 30px;
+  padding-left: 0px;
+  border-bottom: 1px dashed #eee; }
+
+.register-card {
+  text-align: center; }
+
+.user-profile {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
+  .user-profile img {
+    width: 100%;
+    margin: 4px 0px 15px;
+    min-height: 190px;
+    border: 1px dashed #eee; }
+  .user-profile .row {
+    margin-left: 0px;
+    margin-right: 0px; }
+  .user-profile dt {
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 30px;
+    padding-left: 3px;
+    border-bottom: 1px dashed #d8d6d6; }
+  .user-profile dd {
+    margin-bottom: 0px;
+    line-height: 30px;
+    padding-left: 0px;
+    border-bottom: 1px dashed #d8d6d6; }
+
+.user-trend {
+  background-color: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
+  .user-trend li {
+    line-height: 25px;
+    color: #888; }
+    .user-trend li a {
+      color: #888; }
+    .user-trend li a:hover {
+      color: #238efa; }
+
+.profile-card .profile-card-head {
+  front-size: 14px;
+  text-decoration: underline;
+  text-align: center;
+  line-height: 40px;
+  padding: 5px;
+  background-color: #fbfbfb; }
+.profile-card .profile-card-body {
+  padding-left: 10px; }
+  .profile-card .profile-card-body li {
+    line-height: 30px;
+    border-bottom: 1px dashed #d8d6d6; }

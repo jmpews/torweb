@@ -144,20 +144,25 @@ class MonitorWorker(Thread):
         logger.debug("start monitor system status...")
         import psutil, datetime, time
         while True:
-            time.sleep(3)
-            s1 = psutil.cpu_percent()
-            s2 = psutil.virtual_memory()[2]
             try:
-                s3 = len(psutil.net_connections())
-            except:
-                s3 = 'unkown'
-            s4 = datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
-            #self.systatus = [s1, s2, s3, s4]
-            self.systatus[0] = s1
-            self.systatus[1] = s2
-            self.systatus[2] = s3
-            self.systatus[3] = s4
-            print(self.systatus)
+                time.sleep(3)
+                s1 = psutil.cpu_percent()
+                s2 = psutil.virtual_memory()[2]
+                try:
+                    s3 = len(psutil.net_connections())
+                except:
+                    s3 = 'unkown'
+                s4 = datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d")
+                #s4 = datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
+                #self.systatus = [s1, s2, s3, s4]
+                self.systatus[0] = s1
+                self.systatus[1] = s2
+                self.systatus[2] = s3
+                self.systatus[3] = s4
+                print(self.systatus)
+            except KeyboardInterrupt:
+                break
+
 def monitor_system_status(systatus):
     monitor = MonitorWorker('system', systatus)
     monitor.start()

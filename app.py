@@ -11,6 +11,8 @@ from utils.util import monitor_system_status
 from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler, RegisterHandler
 from handlers.post import PostDetailHandler, PostAddHandler
+from handlers.api import SystemStatusHandler
+from handlers.user import UserProfileHandler
 
 handlers = [
     (r'/', IndexHandler),
@@ -18,6 +20,11 @@ handlers = [
     (r'/register', RegisterHandler),
     (r'/post/(\d+)', PostDetailHandler),
     (r'/post/add', PostAddHandler),
+
+    (r'/user/(\d+)', UserProfileHandler),
+
+    (r'/api/systemstatus', SystemStatusHandler),
+
     (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/src/assets"}),
 ]
 

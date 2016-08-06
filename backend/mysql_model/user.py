@@ -1,5 +1,4 @@
 # coding:utf-8
-import sys
 import time, datetime
 from hashlib import md5
 from backend.mysql_model import BaseModel
@@ -126,3 +125,19 @@ class User(BaseModel):
             return 0
         else:
             return r
+
+
+class Profile(BaseModel):
+    user = ForeignKeyField(User, related_name='user_profile')
+    nickname = CharField(max_length=16)
+    weibo = CharField(max_length=16)
+    website = CharField(max_length=16)
+    reg_time = DateTimeField()
+    last_login_time = DateTimeField(default=datetime.datetime.now)
+
+
+class Follower(BaseModel):
+    user = ForeignKeyField(User, related_name='who_follow_this')
+    follow = ForeignKeyField(User, verbose_name='this_follow_who')
+    follow_time = DateTimeField(default=datetime.datetime.now)
+

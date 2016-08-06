@@ -42,7 +42,7 @@
                             <img src="/static/images/avatar_03.png">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="user-avatar">
-                            <li class="dropdown-item"><a href="#">个人中心</a></li>
+                            <li class="dropdown-item"><a href="/user/1">个人中心</a></li>
                             <li class="dropdown-item"><a href="#">账号设置</a></li>
                             <li class="dropdown-item"><a href="#">退出</a></li>
                         </ul>
@@ -108,31 +108,36 @@
         </div>
         </div>
         <div class="sidebar col-md-3">
-            <div class="card">
+            <div class="card register-card">
                 <div class="card-header">
                     登陆
                 </div>
                 <div class="card-block">
                     {% if not current_user %}
-                        <a class="btn btn-primary" href="#" role="button">登陆</a>
+                        <p><a class="btn btn-primary" href="/login" role="button">登陆</a></p>
+                        <div>没有账户? <a href="/register">点击注册</a></div>
                     {% else %}
                         {{current_user.username}}
                     {% end %}
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card system-status-card">
                 <div class="card-header">
                     服务器状态
                 </div>
                 <div class="card-block">
-                    <ul>
-                        <li>CPU使用率:<span>{{systatus[0]}}</span></li>
-                        <li>RAM使用率:<span>{{systatus[1]}}</span></li>
-                        <li>连接数:<span>{{systatus[2]}}</span></li>
-                        <li>系统启动时间:<span>{{systatus[3]}}</span></li>
+                    <dl class="row">
+                        <dt class="col-sm-6">CPU使用率:</dt>
+                        <dd class="col-sm-6"><span class="cpu-per">{{systatus[0]}}</span></dd>
+                        <dt class="col-sm-6">RAM使用率:</dt>
+                        <dd class="col-sm-6"><span class="ram-per">{{systatus[1]}}</span></dd>
+                        <dt class="col-sm-6">连接数:</dt>
+                        <dd class="col-sm-6"><span class="net-conn">{{systatus[2]}}</span></dd>
+                        <dt class="col-sm-6">系统启动时间:</dt>
+                        <dd class="col-sm-6"><span class="os-start">{{systatus[3]}}</span></dd>
 
-                    </ul>
+                    </dl>
                 </div>
             </div>
 
@@ -171,6 +176,7 @@
     <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            monitor_system_status()
         });
     </script>
 </body>

@@ -219,14 +219,17 @@ body {
         }
     }
 }
-.post-detail-card {
-    box-shadow: inset 0 0 0 1px #e1e1e1;
-    .user-name {
-        font-weight: bold;
-        color: black;
-    }
-    a {
-        color: #565758;
+.post-detail {
+    padding-left: 0px;
+    .card {
+        box-shadow: inset 0 0 0 1px #e1e1e1;
+        .user-name {
+            font-weight: bold;
+            color: black;
+        }
+        a {
+            color: #565758;
+        }
     }
 }
 

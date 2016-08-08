@@ -22,6 +22,8 @@ BACKEND_REDIS = ('localhost', 6379, 0)
 COOKIE_SECRET = "6aOO5ZC55LiN5pWj6ZW/5oGo77yM6Iqx5p+T5LiN6YCP5Lmh5oSB44CC"
 
 log_path = '/var/tmp/'
+avatar_upload_path = './static/images/avatars/'
+default_avatart = "avatar_01.png"
 
 sys_status = [0, 0, 0, 0]
 

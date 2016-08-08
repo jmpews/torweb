@@ -5,6 +5,7 @@ from backend.mysql_model import BaseModel
 from peewee import *
 from utils.util import random_str
 
+import config
 
 class USER_LEVEL:
     BAN = 0
@@ -20,6 +21,7 @@ class User(BaseModel):
     # id = Column(Integer, primary_key=True, autoincrement=True)
     username = CharField(index=True, unique=True, max_length=16)
     nickname = CharField(max_length=16)
+    avatar = CharField(max_length=20)
     role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
     password = CharField(max_length=32)
     # 密码加盐
@@ -62,8 +64,13 @@ class User(BaseModel):
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
         level = USER_LEVEL.NORMAL  # 首个用户赋予admin权限
         the_time = int(time.time())
-        u = User.create(username=username, nickname=nickname, password=password_final, salt=salt, level=level,
-                          key=random_str(32), key_time=the_time, )
+        u = User.create(username=username,
+                        nickname=nickname,
+                        password=password_final,
+                        salt=salt, level=level,
+                        key=random_str(32),
+                        key_time=the_time,
+                        avatar=config.default_avatar)
         u.save()
         p = Profile.create(user=u)
         p.save()

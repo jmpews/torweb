@@ -7,8 +7,10 @@
         <div class="content-container container">
             <div class="col-md-3">
                 <div class="user-avatar-edit">
-                    <img src="/static/images/avatar_03.png">
-                    <a class="btn btn-sm btn-outline-primary" role="button" href="/login">修改头像</a>
+                    <form enctype="multipart/form-data" action="/user/avatar/edit" method="post">
+                    <img id="avatar-preview"src="/avatar/{{current_user.avatar}}">
+                    <button class="btn btn-outline-primary select-avatar"><input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择</button>
+                    <button type="submit" class="btn btn-outline-primary">保存</button>
                 </div>
             </div>
             <div class="col-md-9">

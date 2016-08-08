@@ -49,7 +49,7 @@
 
                 {% for post_reply in post_replys %}
                 <div class="reply-item">
-                    <div class="avatar hidden-xs"><img src="/static/images/avatar_02.png"></div>
+                    <div class="avatar hidden-xs"><img src="/avatar/{{post_reply['avatar']}}"></div>
                     <div class="reply-main clear-xs">
                         <div class="reply-head">
                             <span><a class="user-name" href="/">{{post_reply['username']}}</a></span> <span>{{post_reply['create_time']}}</span> <span>{{post_reply['like_count']}}赞同</span>

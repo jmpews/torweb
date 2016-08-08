@@ -7,6 +7,8 @@ from handlers.basehandlers.basehandler import BaseRequestHandler
 from utils.util import login_required
 from utils.util import get_cleaned_post_data
 
+import config
+
 from utils.common_utils import TimeUtil
 
 class UserProfileHandler(BaseRequestHandler):
@@ -45,5 +47,18 @@ class UserProfileEditHandler(BaseRequestHandler):
         profile.nickname = post_data['nickname']
         profile.website = post_data['website']
         profile.save()
+        self.redirect('/user/edit')
+
+
+class UserAvatarEditHandler(BaseRequestHandler):
+    @login_required
+    def post(self, *args, **kwargs):
+        user = self.current_user
+        avatar = self.request.files['avatar'][0]
+        avatar_file_name = user.username + '.' + avatar['filename'].split('.')[-1]
+        avatar_file = open(config.avatar_upload_path + avatar_file_name, 'wb')
+        avatar_file.write(avatar['body'])
+        user.avatar = avatar_file_name
+        user.save()
         self.redirect('/user/edit')
 

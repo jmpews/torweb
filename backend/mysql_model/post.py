@@ -54,6 +54,7 @@ class Post(BaseModel):
                 'category': post.get_category(),
                 'title': post.title,
                 'username': post.user.username,
+                'avatar': post.user.avatar,
                 'create_time': TimeUtil.datetime_delta(post.create_time),
                 'reply_time': TimeUtil.datetime_delta(post.reply_time),
                 'visit_count': post.visit_count,
@@ -68,6 +69,7 @@ class Post(BaseModel):
         result['content'] = self.content
         result['category'] = self.get_category()
         result['username'] = self.user.username
+        result['avatar'] = self.user.avatar
         result['create_time'] = TimeUtil.datetime_delta(self.create_time),
         result['reply_time'] = TimeUtil.datetime_delta(self.reply_time),
         result['visit_count'] = self.visit_count
@@ -97,6 +99,7 @@ class PostReply(BaseModel):
         for reply in postreplys:
             result.append({
                 'username': reply.user.username,
+                'avatar': reply.user.avatar,
                 'content': reply.content,
                 'create_time': TimeUtil.datetime_delta(reply.create_time),
                 'like_count': reply.like_count

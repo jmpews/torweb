@@ -15,5 +15,5 @@ class Notification(BaseModel):
     msg = CharField(max_length=71)
     extra_user = ForeignKeyField(User, verbose_name="user", related_name="post")
     extra_post = ForeignKeyField(Post, verbose_name="post", related_name="reply")
-    extra_post_reply = ForeignKeyField(PostReply, verbose_name="postreply")
+    extra_post_reply = ForeignKeyField(PostReply, verbose_name="postreply", related_name="reply")
     is_read = BooleanField(default=False)

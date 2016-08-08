@@ -132,8 +132,8 @@ class User(BaseModel):
 class Profile(BaseModel):
     user = ForeignKeyField(User, related_name='user_profile')
     nickname = CharField(max_length=16, default="")
-    weibo = CharField(max_length=16, default="")
-    website = CharField(max_length=16, default="")
+    weibo = CharField(max_length=64, default="")
+    website = CharField(max_length=64, default="")
     reg_time = DateTimeField(default=datetime.datetime.now)
     last_login_time = DateTimeField(default=datetime.datetime.now)
 

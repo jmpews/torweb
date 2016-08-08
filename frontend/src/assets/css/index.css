@@ -153,10 +153,12 @@ body {
 .sidebar {
   padding-left: 0px; }
 
-.post-list-card {
-  box-shadow: inset 0 0 0 1px #e1e1e1; }
-  .post-list-card a {
-    color: #565758; }
+.post-list {
+  padding-left: 0px; }
+  .post-list .card {
+    box-shadow: inset 0 0 0 1px #e1e1e1; }
+    .post-list .card a {
+      color: #565758; }
 
 .post-detail-card {
   box-shadow: inset 0 0 0 1px #e1e1e1; }

@@ -16,6 +16,7 @@ class UserProfileHandler(BaseRequestHandler):
         profile = Profile.get_by_user(user)
         posts = Post.select().where(Post.user == user).limit(3)
 
+        userinfo['id'] = user.id
         userinfo['username'] = user.username
         userinfo['website'] = profile.website
         userinfo['nickname'] = profile.nickname

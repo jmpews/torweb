@@ -8,24 +8,22 @@
 {% end %}
 
 {% block content %}
-    <div class="content">
-        <div class="content-container container">
-            <div class="content-header">
-                <h3><span class="glyphicon glyphicon-grain" aria-hidden="true"></span>发帖子</h3>
-            </div>
-            <form data-parsley-validate="" action="/post/add" method="post">
-                <fieldset class="form-group">
-                    <label for="title">帖子标题</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题" required>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label for="password">内容</label>
-                    <div id="summernote">Please Write Here.</div>
-                    <input name="content" style="display:none;"/>
-                </fieldset>
-                <button type="submit" class="btn btn-primary">提交</button>
-            </form>
+    <div class="content-container container">
+        <div class="content-header">
+            <h3><span class="glyphicon glyphicon-grain" aria-hidden="true"></span>新主题</h3>
         </div>
+        <form data-parsley-validate="" action="/post/add" method="post">
+            <fieldset class="form-group">
+                <label for="title">标题</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题" required>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="password">内容</label>
+                <div id="summernote">Please Write Here.</div>
+                <input name="content" style="display:none;"/>
+            </fieldset>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
     </div>
 {% end %}
 

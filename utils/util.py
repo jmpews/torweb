@@ -145,7 +145,7 @@ class MonitorWorker(Thread):
         import psutil, datetime, time
         while True:
             try:
-                time.sleep(3)
+                time.sleep(30)
                 s1 = psutil.cpu_percent()
                 s2 = psutil.virtual_memory()[2]
                 try:

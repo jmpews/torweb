@@ -62,10 +62,12 @@ class User(BaseModel):
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
         level = USER_LEVEL.NORMAL  # 首个用户赋予admin权限
         the_time = int(time.time())
-        ret = User.create(username=username, nickname=nickname, password=password_final, salt=salt, level=level,
+        u = User.create(username=username, nickname=nickname, password=password_final, salt=salt, level=level,
                           key=random_str(32), key_time=the_time, )
-        ret.save()
-        return ret
+        u.save()
+        p = Profile.create(user=u)
+        p.save()
+        return u
 
     @staticmethod
     def password_change(username, password, new_password):
@@ -132,8 +134,16 @@ class Profile(BaseModel):
     nickname = CharField(max_length=16)
     weibo = CharField(max_length=16)
     website = CharField(max_length=16)
-    reg_time = DateTimeField()
+    reg_time = DateTimeField(default=datetime.datetime.now)
     last_login_time = DateTimeField(default=datetime.datetime.now)
+
+    def get_by_user(user):
+        try:
+            r = Profile.get(Profile.user == user)
+        except DoesNotExist:
+            return False
+        else:
+            return r
 
 
 class Follower(BaseModel):

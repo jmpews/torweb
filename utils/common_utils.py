@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import logging, os, sys
+import time
 import datetime
 
 
@@ -56,11 +57,20 @@ class TimeUtil:
     def datetime_format(value, format="%Y-%m-%d %H:%M"):
         return value.strftime(format)
 
-    def datetime_delta(time):
+    def datetime_format_date(value, format="%Y-%m-%d"):
+        return value.strftime(format)
+
+    def current_str_date():
+        return time.strftime('%Y-%m-%d', time.localtime())
+
+    def current_str_datetime():
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+
+    def datetime_delta(t):
         now = datetime.datetime.now()
-        time_date = now.date() - time.date()
+        time_date = now.date() - t.date()
         days = time_date.days
-        seconds = (now - time).seconds
+        seconds = (now - t).seconds
         # 星期一 8:00
         if days <= 6:
             if days < 1:
@@ -69,9 +79,9 @@ class TimeUtil:
                 elif seconds < 3600:
                     return '%s分钟前' % int(seconds / 60)
                 else:
-                    return TimeUtil.datetime_format(time, '%H:%M')
+                    return TimeUtil.datetime_format(t, '%H:%M')
             if days < 2:
-                return '昨天 ' + TimeUtil.datetime_format(time, '%H:%M')
-            return TimeUtil.get_weekday(time) + ' ' + TimeUtil.datetime_format(time, '%H:%M')
+                return '昨天 ' + TimeUtil.datetime_format(t, '%H:%M')
+            return TimeUtil.get_weekday(t) + ' ' + TimeUtil.datetime_format(t, '%H:%M')
         else:
             return TimeUtil.datetime_format(time, "%Y-%m-%d")

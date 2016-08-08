@@ -354,7 +354,7 @@ body {
     form {
         margin-bottom: 13px;
 		label {
-			font-size: 18px;
+			font-size: 13px;
 		}
     }
 }
@@ -441,7 +441,7 @@ body {
         width: 100%;
         margin: 4px 0px 15px;
         min-height: 190px;
-        border: 1px dashed #eee;
+        border: 1px dashed #eee
     }
     .row {
         margin-left: 0px;
@@ -497,11 +497,52 @@ body {
     }
     .profile-card-body {
         padding-left: 10px;
+        padding-right: 10px;
         li {
             line-height: 30px;
             border-bottom: 1px dashed #d8d6d6;
         }
         li:first-of-type {
+        }
+    }
+}
+
+//
+.user-avatar-edit {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    img {
+        width: 100%;
+        margin: 4px 0px 15px;
+        min-height: 100px;
+        border: 1px dashed #eee
+    }
+}
+.profile-edit {
+
+}
+.user-profile-edit {
+    background-color: #fff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    a {
+        color: #888;
+    }
+    a:hover {
+        color: #238efa;
+    }
+    .user-profile-edit-body {
+        padding-bottom: 10px;
+    }
+    form {
+        margin-top: 10px;
+        label {
+            text-align: center;
+        }
+        .form-control {
+            //padding: 0.3rem 0.75rem;
+            font-size: 13px;
         }
     }
 }

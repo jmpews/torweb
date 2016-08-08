@@ -20,10 +20,11 @@ class BaseModel(Model):
 
 
 def create_tmp_data():
-    from backend.mysql_model.user import User
+    from backend.mysql_model.user import User, Profile, Follower
     from backend.mysql_model.post import Post, PostReply
+    from backend.mysql_model.common import Notification
     print("Create TMP Data...")
-    db_mysql.create_tables([User, Post, PostReply], safe=True)
+    db_mysql.create_tables([User, Post, PostReply, Profile, Follower], safe=True)
 
     user = User.new(username='admin', nickname='admin', password='admin')
     print("create user, username:admin, password:admin")

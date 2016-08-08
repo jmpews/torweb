@@ -12,7 +12,7 @@ from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler, RegisterHandler
 from handlers.post import PostDetailHandler, PostAddHandler
 from handlers.api import SystemStatusHandler
-from handlers.user import UserProfileHandler
+from handlers.user import UserProfileHandler, UserProfileEditHandler
 
 handlers = [
     (r'/', IndexHandler),
@@ -22,6 +22,7 @@ handlers = [
     (r'/post/add', PostAddHandler),
 
     (r'/user/(\d+)', UserProfileHandler),
+    (r'/user/edit', UserProfileEditHandler),
 
     (r'/api/systemstatus', SystemStatusHandler),
 

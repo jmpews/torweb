@@ -252,7 +252,7 @@ body {
 .content-container form {
   margin-bottom: 13px; }
   .content-container form label {
-    font-size: 18px; }
+    font-size: 13px; }
 
 .parsley-errors-list {
   list-style: none outside none;
@@ -348,7 +348,35 @@ body {
   padding: 5px;
   background-color: #fbfbfb; }
 .profile-card .profile-card-body {
-  padding-left: 10px; }
+  padding-left: 10px;
+  padding-right: 10px; }
   .profile-card .profile-card-body li {
     line-height: 30px;
     border-bottom: 1px dashed #d8d6d6; }
+
+.user-avatar-edit {
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
+  .user-avatar-edit img {
+    width: 100%;
+    margin: 4px 0px 15px;
+    min-height: 100px;
+    border: 1px dashed #eee; }
+
+.user-profile-edit {
+  background-color: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
+  .user-profile-edit a {
+    color: #888; }
+  .user-profile-edit a:hover {
+    color: #238efa; }
+  .user-profile-edit .user-profile-edit-body {
+    padding-bottom: 10px; }
+  .user-profile-edit form {
+    margin-top: 10px; }
+    .user-profile-edit form label {
+      text-align: center; }
+    .user-profile-edit form .form-control {
+      font-size: 13px; }

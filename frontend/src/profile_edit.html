@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}Tornado.Index{% end %}
 
 {% block content %}
@@ -11,6 +10,7 @@
                     <img id="avatar-preview"src="/avatar/{{current_user.avatar}}">
                     <button class="btn btn-outline-primary select-avatar"><input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择</button>
                     <button type="submit" class="btn btn-outline-primary">保存</button>
+                    </form>
                 </div>
             </div>
             <div class="col-md-9">

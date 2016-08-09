@@ -28,6 +28,8 @@ def create_tmp_data():
 
     user = User.new(username='admin', nickname='admin', password='admin')
     print("create user, username:admin, password:admin")
+    user.user_profile.nickname = user.nickname
+    user.user_profile.nickname = user.nickname
     user.set_password('root')
     print("change admin password to 'root'")
     post = Post.create(

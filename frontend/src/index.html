@@ -12,7 +12,24 @@
                 <a class="active" href="/">通知公告</a> /
                 <a href="/">考研</a> /
                 <a href="/">讨论</a> /
-                <a href="/">全部分类</a>
+                <a class="card-header-all-bt" href="/">全部分类</a>
+            </div>
+            <div class="card-header-all">
+                <h3>所有分类</h3>
+                <div class="hd">
+                    <div class="card-header-all-cate">
+                        <h4>学院</h4>
+                        <a href="/">计算机</a> <a href="/">化学</a> <a href="/">经管</a> <a href="/">数学</a>
+                    </div>
+                    <div class="card-header-all-cate">
+                        <h4>通知</h4>
+                        <a href="/">学院通知</a> <a href="/">全校通知</a> <a href="/">教务通知</a> <a href="/">行政通知</a>
+                    </div>
+                    <div class="card-header-all-cate">
+                        <h4>学院</h4>
+                        <a href="/">计算机</a> <a href="/">化学</a> <a href="/">经管</a> <a href="/">数学</a>
+                    </div>
+                </div>
             </div>
             <div class="card-block">
             {% for post in posts %}
@@ -24,7 +41,7 @@
                 <div class="item-mid clear-xs">
                     <div class="item-title"><a href="/post/{{post['id']}}">{{post['title']}}</a></div>
                     <div class="item-info">
-                        <span> {{post['category']}} </span> <span><a href="/">{{post['username']}}</a></span> <span> {{post['create_time']}} </span> <span> {{post['visit_count']}}人浏览<span>
+                        <span> <a class="cate" href="/">{{post['category']}}</a> </span> <span><a class="username" href="/">{{post['username']}}</a></span> <span> {{post['create_time']}} </span> <span> {{post['visit_count']}}人浏览<span>
                     </div>
                 </div>
                 <div class="item-end hidden-xs">
@@ -64,7 +81,7 @@
                 </div>
                 <div class="card-block">
                     {% if not current_user %}
-                        <p><a class="btn btn-primary" href="/login" role="button">登陆</a></p>
+                        <p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>
                         <div>没有账户? <a href="/register">点击注册</a></div>
                     {% else %}
                         {{current_user.username}}
@@ -99,6 +116,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         monitor_system_status()
+        show_hide_nav();
     });
 </script>
 {% end %}

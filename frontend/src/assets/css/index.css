@@ -34,7 +34,8 @@ body {
     .header-container .header-logo {
       margin: 0 auto;
       width: 50px;
-      position: absolute; }
+      position: absolute;
+      left: 0px !important; }
     .header-container .header-nav {
       padding-left: 50px;
       max-width: none; }
@@ -53,12 +54,18 @@ body {
   margin: 0 30px; }
 
 .header-logo {
+  position: relative;
+  top: 50px;
   text-align: center;
   font-size: 14px;
   float: left;
-  margin-left: 30px;
-  margin-right: 30px;
-  line-height: 70px; }
+  padding-left: 15px;
+  padding-right: 15px;
+  left: -30px;
+  background-color: #238efa;
+  line-height: 40px; }
+  .header-logo a {
+    color: #fff; }
 
 .header-nav {
   height: 70px;
@@ -158,7 +165,7 @@ body {
   .post-list .card {
     box-shadow: inset 0 0 0 1px #e1e1e1; }
     .post-list .card a {
-      color: #565758; }
+      color: #807e7e; }
 
 .post-detail {
   padding-left: 0px; }
@@ -166,9 +173,9 @@ body {
     box-shadow: inset 0 0 0 1px #e1e1e1; }
     .post-detail .card .user-name {
       font-weight: bold;
-      color: black; }
+      color: #383838; }
     .post-detail .card a {
-      color: #565758; }
+      color: #807e7e; }
 
 .post-item {
   border-bottom: 1px solid #eee;
@@ -176,6 +183,8 @@ body {
   padding-bottom: 7px;
   position: relative;
   min-height: 68px; }
+  .post-item a:hover {
+    color: #6083a7 !important; }
   .post-item .avatar {
     position: absolute; }
     .post-item .avatar img {
@@ -193,6 +202,10 @@ body {
       color: #9A9999; }
       .post-item .item-mid .item-info span {
         margin-right: 5px; }
+        .post-item .item-mid .item-info span .username {
+          color: #383838; }
+        .post-item .item-mid .item-info span .cate {
+          color: #6083a7 !important; }
   .post-item .item-end {
     position: absolute;
     right: 0px;
@@ -211,7 +224,8 @@ body {
     .post-detail .post-title a {
       font-size: 24px;
       font-weight: 500;
-      line-height: 30px; }
+      line-height: 30px;
+      color: #5a5a5a; }
   .post-detail .post-info {
     color: gray;
     margin-bottom: 10px; }
@@ -271,15 +285,52 @@ body {
 .note-toolbar button {
   height: 30px; }
 
-.card-header {
-  padding: 0.5rem 1.25rem !important;
-  color: gray; }
-  .card-header a {
-    margin: 0 3px; }
-  .card-header a.active {
-    color: #238efa !important; }
-  .card-header a:hover {
-    color: #238efa !important; }
+.card {
+  border: none !important; }
+  .card .card-header {
+    position: relative;
+    padding: 0.5rem 1.25rem !important;
+    border-bottom: none !important;
+    color: gray; }
+    .card .card-header a {
+      margin: 0 3px; }
+    .card .card-header a.active {
+      color: #238efa !important; }
+    .card .card-header a:hover {
+      color: #238efa !important; }
+    .card .card-header .card-header-all-bt:hover .card-header-all {
+      display: block; }
+  .card .card-header:after {
+    content: "";
+    width: 50%;
+    height: 1px;
+    background: #238efa;
+    position: absolute;
+    left: 0;
+    bottom: 0px; }
+  .card .card-header-all {
+    display: none;
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+    padding: 5px;
+    border-left: 1px solid #238efa;
+    border-right: 1px solid #238efa;
+    border-bottom: 1px solid #238efa; }
+    .card .card-header-all h3 {
+      font-size: 14px;
+      line-height: 30px;
+      border-bottom: 1px solid #e8e8e8; }
+    .card .card-header-all .card-header-all-cate {
+      padding: 5px;
+      border-bottom: 1px solid #e8e8e8; }
+      .card .card-header-all .card-header-all-cate h4 {
+        font-size: 13px; }
+    .card .card-header-all .card-header-all-cate:last-of-type {
+      border-bottom: none; }
+  .card .card-header-all:hover {
+    display: none; }
 
 .system-status-card li {
   line-height: 20px; }

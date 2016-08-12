@@ -1,3 +1,4 @@
+# coding:utf-8
 import json
 from hashlib import md5
 import random
@@ -9,6 +10,7 @@ from urllib.parse import urlencode
 import urllib.parse as urlparse
 
 from utils import logger
+
 
 class RequestArgumentError(Exception):
     def __init__(self, msg='Unknown', code=233):

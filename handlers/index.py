@@ -4,15 +4,16 @@ import config
 from backend.mysql_model.user import User
 from backend.mysql_model.post import Post
 from handlers.basehandlers.basehandler import BaseRequestHandler
+from handlers.cache import catetopic
 
 from utils.util import json_result
-from utils.util import get_cleaned_post_data, RequestArgumentError
+from utils.util import get_cleaned_post_data
 
 
 class IndexHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
         posts = Post.list_recently()
-        self.render('index.html', posts=posts, systatus=config.sys_status)
+        self.render('index.html', posts=posts, catetopic=catetopic, systatus=config.sys_status)
 
 
 class RegisterHandler(BaseRequestHandler):

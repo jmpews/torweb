@@ -13,6 +13,7 @@ from handlers.index import IndexHandler, LoginHandler, RegisterHandler
 from handlers.post import PostDetailHandler, PostAddHandler
 from handlers.api import SystemStatusHandler
 from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler
+from handlers.cache import update_cache
 
 handlers = [
     (r'/', IndexHandler),
@@ -47,6 +48,7 @@ if __name__ == "__main__":
     if len(argv) > 1 and  argv[1][:6] == '-port=':
         config.PORT = int(argv[1][6:])
     monitor_system_status(config.sys_status)
+    update_cache()
     application.listen(config.PORT)
     print('Server started at port %s' % config.PORT)
     tornado.ioloop.IOLoop.instance().start()

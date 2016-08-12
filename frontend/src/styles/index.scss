@@ -407,7 +407,23 @@ body {
 
 .card {
     border: none !important;
-    // card
+	.current-topic {
+		background-color: #238efa;
+		float: left;
+		position: absolute;
+		// 垂直居中
+		top: 50%;
+		transform: translate(0,-50%);
+		left: -21px;
+		width: 21px;
+		span {
+			padding-left: 5px;
+			color: #fff;
+			font-size: 11px;
+			letter-spacing: 11px;
+			display: block;
+		}
+	}
     .card-header {
         position: relative;
         padding: 0.5rem 1.25rem !important;

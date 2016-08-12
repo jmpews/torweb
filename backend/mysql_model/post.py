@@ -6,14 +6,20 @@ from peewee import *
 
 from utils.common_utils import TimeUtil
 
+class PostCategory(BaseModel):
+    name = CharField(verbose_name='标题')
+    str = CharField(verbose_name='str', unique=True)
+
+
+class PostTopic(BaseModel):
+    category = ForeignKeyField(PostCategory, related_name='topics_category', null=True)
+    name = CharField(verbose_name='标题')
+    str = CharField(verbose_name='str', unique=True)
+
 
 class Post(BaseModel):
-    CATEGORY = (
-        (0, '漏洞研究'),
-        (1, 'Web安全'),
-        (2, '开发模式'),
-    )
-    category = IntegerField(choices=CATEGORY, default=2, verbose_name="帖子类别")
+    topic = ForeignKeyField(PostTopic, related_name='posts_topic', null=True)
+    # category = IntegerField(choices=CATEGORY, default=2, verbose_name="帖子类别")
     title = CharField(verbose_name="帖子的标题")
     content = TextField(verbose_name="帖子内容")
     user = ForeignKeyField(User, verbose_name="发帖人")
@@ -25,11 +31,6 @@ class Post(BaseModel):
 
     def __str__(self):
         return "[%s-%s]" % (self.title, self.user)
-
-    def get_category(self):
-        for c in Post.CATEGORY:
-            if c[0] == self.category:
-                return c[1]
 
     def up_collect(self):
         self.collect_count += 1
@@ -51,10 +52,9 @@ class Post(BaseModel):
         for post in posts:
             result.append({
                 'id': post.id,
-                'category': post.get_category(),
+                'topic': post.topic,
                 'title': post.title,
-                'username': post.user.username,
-                'avatar': post.user.avatar,
+                'user': post.user,
                 'create_time': TimeUtil.datetime_delta(post.create_time),
                 'reply_time': TimeUtil.datetime_delta(post.reply_time),
                 'visit_count': post.visit_count,
@@ -67,7 +67,7 @@ class Post(BaseModel):
         result = {}
         result['title'] = self.title
         result['content'] = self.content
-        result['category'] = self.get_category()
+        result['topic'] = self.topic.name
         result['username'] = self.user.username
         result['avatar'] = self.user.avatar
         result['create_time'] = TimeUtil.datetime_delta(self.create_time),

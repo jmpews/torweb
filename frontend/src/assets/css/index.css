@@ -342,6 +342,8 @@ body {
       border-bottom: 1px solid #e8e8e8; }
       .card .card-header-all .card-header-all-cate h4 {
         font-size: 13px; }
+      .card .card-header-all .card-header-all-cate a:hover {
+        color: #238efa !important; }
     .card .card-header-all .card-header-all-cate:last-of-type {
       border-bottom: none; }
   .card .card-header-all:hover {

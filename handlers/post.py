@@ -3,9 +3,12 @@ import tornado.web
 from backend.mysql_model.user import User
 from backend.mysql_model.post import Post, PostReply
 from handlers.basehandlers.basehandler import BaseRequestHandler
+from handlers.cache import catetopic
 
 from utils.util import login_required
 from utils.util import get_cleaned_post_data
+
+import config
 
 
 # 帖子详情

@@ -2,7 +2,7 @@
 import tornado.web
 import config
 from backend.mysql_model.user import User
-from backend.mysql_model.post import Post
+from backend.mysql_model.post import Post, PostTopic
 from handlers.basehandlers.basehandler import BaseRequestHandler
 from handlers.cache import catetopic
 
@@ -13,7 +13,23 @@ from utils.util import get_cleaned_post_data
 class IndexHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
         posts = Post.list_recently()
-        self.render('index.html', posts=posts, catetopic=catetopic, systatus=config.sys_status)
+
+        self.render('index.html',
+                    posts=posts,
+                    catetopic=catetopic,
+                    systatus=config.sys_status,
+                    current_topic=None)
+
+
+class IndexTopicHandler(BaseRequestHandler):
+    def get(self, topic_id, *args, **kwargs):
+        topic = PostTopic.get(PostTopic.str == topic_id)
+        posts = Post.list_by_topic(topic)
+        self.render('index.html',
+                    posts=posts,
+                    catetopic=catetopic,
+                    systatus=config.sys_status,
+                    current_topic=topic)
 
 
 class RegisterHandler(BaseRequestHandler):

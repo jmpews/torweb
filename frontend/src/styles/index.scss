@@ -417,6 +417,7 @@ body {
 		left: -21px;
 		width: 21px;
 		span {
+			// 文字竖排显示
 			padding-left: 5px;
 			color: #fff;
 			font-size: 11px;
@@ -473,10 +474,12 @@ body {
         .card-header-all-cate {
             padding: 5px;
             border-bottom: 1px solid #e8e8e8;
-
             h4 {
                 font-size: 13px;
             }
+			a:hover {
+				color: #238efa !important;
+			}
         }
         .card-header-all-cate:last-of-type {
             border-bottom: none;

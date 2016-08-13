@@ -63,6 +63,23 @@ class Post(BaseModel):
             })
         return result
 
+    @staticmethod
+    def list_by_topic(topic, num=10):
+        posts = Post.select().where(Post.topic == topic).order_by(Post.reply_time).limit(10)
+        result = []
+        for post in posts:
+            result.append({
+                'id': post.id,
+                'topic': post.topic,
+                'title': post.title,
+                'user': post.user,
+                'create_time': TimeUtil.datetime_delta(post.create_time),
+                'reply_time': TimeUtil.datetime_delta(post.reply_time),
+                'visit_count': post.visit_count,
+                'reply_count': post.reply_count,
+                'collect_count': post.collect_count
+            })
+        return result
     def detail(self):
         result = {}
         result['title'] = self.title

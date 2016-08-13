@@ -6,7 +6,9 @@
     <div class="content-container container">
         <div class="post-list col-md-9">
         <div class="card">
-			<div class="current-topic"><span>学院通知</span></div>
+            <div class="current-topic">
+                <span>{% if current_topic  %}{{current_topic.name}}{% else %}全部分类{% end %}</span>
+            </div>
             <div class="card-header">
                 主题:
                 <a href="/">学习资料</a> /

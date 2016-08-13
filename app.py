@@ -9,7 +9,7 @@ from sys import argv
 import config
 from utils.util import monitor_system_status
 from handlers.basehandlers.basehandler import ErrorHandler
-from handlers.index import IndexHandler, LoginHandler, RegisterHandler
+from handlers.index import IndexHandler, LoginHandler, RegisterHandler, IndexTopicHandler
 from handlers.post import PostDetailHandler, PostAddHandler
 from handlers.api import SystemStatusHandler
 from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler
@@ -17,6 +17,7 @@ from handlers.cache import update_cache
 
 handlers = [
     (r'/', IndexHandler),
+    (r'/topic/(\w+)', IndexTopicHandler),
     (r'/login', LoginHandler),
     (r'/register', RegisterHandler),
     (r'/post/(\d+)', PostDetailHandler),

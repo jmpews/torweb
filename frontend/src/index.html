@@ -10,11 +10,12 @@
                 <span>{% if current_topic  %}{{current_topic.name}}{% else %}全部分类{% end %}</span>
             </div>
             <div class="card-header">
-                主题:
-                <a href="/">学习资料</a> /
-                <a class="active" href="/">通知公告</a> /
-                <a href="/">考研</a> /
-                <a href="/">讨论</a> /
+                热门:
+                <a href="/topic/study">学习资料</a> /
+                <a class="active" href="/topic/">考研</a> /
+                <a href="/topic/movie">电影资源</a> /
+                <a href="/topic/notice">校园通知</a> /
+                <a href="/topic/photo">摄影</a> /
                 <a class="card-header-all-bt" href="/">全部分类</a>
             </div>
             <div class="card-header-all">
@@ -70,18 +71,27 @@
             <nav style="text-align:center">
                 <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1'] if pages['cp-1'] else pages['cp']}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <!-- 这里如果换成列表存放数据，这里直接使用for就可以了，但是字典表意更明确一点 -->
+                {% if pages['cp-2'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-2']}}">{{pages['cp-2']}}</a></li>
+                {% end %}
+                {% if pages['cp-1'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1']}}">{{pages['cp-1']}}</a></li>
+                {% end %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp']}}">{{pages['cp']}}</a></li>
+                {% if pages['cp+1'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1']}}">{{pages['cp+1']}}</a></li>
+                {% end %}
+                {% if pages['cp+2'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+2']}}">{{pages['cp+2']}}</a></li>
+                {% end %}
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1'] if pages['cp+1'] else pages['cp']}}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>

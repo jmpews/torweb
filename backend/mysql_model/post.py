@@ -46,8 +46,9 @@ class Post(BaseModel):
         self.save()
 
     @staticmethod
-    def list_recently(num=10):
-        posts = Post.select().order_by(Post.reply_time).limit(10)
+    def list_recently(page_limit=10, page_number=1):
+        page_number_limit = Post.select().order_by(Post.reply_time).count()
+        posts = Post.select().order_by(Post.reply_time).paginate(page_number, page_limit)
         result = []
         for post in posts:
             result.append({
@@ -61,11 +62,12 @@ class Post(BaseModel):
                 'reply_count': post.reply_count,
                 'collect_count': post.collect_count
             })
-        return result
+        return result, page_number_limit
 
     @staticmethod
-    def list_by_topic(topic, num=10):
-        posts = Post.select().where(Post.topic == topic).order_by(Post.reply_time).limit(10)
+    def list_by_topic(topic, page_limit=10, page_number=1):
+        page_number_limit = Post.select().where(Post.topic == topic).order_by(Post.reply_time).count()
+        posts = Post.select().where(Post.topic == topic).order_by(Post.reply_time).paginate(page_number, page_limit)
         result = []
         for post in posts:
             result.append({
@@ -79,7 +81,7 @@ class Post(BaseModel):
                 'reply_count': post.reply_count,
                 'collect_count': post.collect_count
             })
-        return result
+        return result, page_number_limit
     def detail(self):
         result = {}
         result['title'] = self.title

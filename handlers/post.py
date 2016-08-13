@@ -15,6 +15,7 @@ import config
 class PostDetailHandler(BaseRequestHandler):
     def get(self, post_id, *args, **kwargs):
         post = Post.get(Post.id == post_id)
+        post.up_visit()
         post_detail = post.detail()
         post_replys = PostReply.list_all(post)
         self.render('post_detail.html', post_detail=post_detail, post_replys=post_replys)

@@ -5,10 +5,10 @@ from backend.mysql_model.post import Post, PostReply
 from handlers.basehandlers.basehandler import BaseRequestHandler
 from handlers.cache import catetopic
 
+
 from utils.util import login_required
 from utils.util import get_cleaned_post_data
 
-import config
 
 
 # 帖子详情
@@ -25,7 +25,8 @@ class PostDetailHandler(BaseRequestHandler):
 class PostAddHandler(BaseRequestHandler):
     @login_required
     def get(self, *args, **kwargs):
-        self.render('post_new.html')
+        self.render('post_new.html',
+                    catetopic=catetopic)
 
     @login_required
     def post(self, *args, **kwargs):

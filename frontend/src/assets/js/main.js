@@ -68,8 +68,7 @@ function html5Reader(file){
     } 
 }
 
-function show_hide_nav() {
-    var t = 0;
+function index_show_hide_cate_nav() {
     $(".card-header-all-bt").mouseenter(function(e){
         $(".card-header-all").css('display','block');
     })
@@ -84,3 +83,66 @@ function show_hide_nav() {
     });
 }
 
+function post_new_show_hide_cate() {
+    $("#topic").on('click', function(e){
+        $(".card-header-all").css('display','block');
+    });
+    $(".card-header-all-cate a").on('click', function(e){
+        $(".card-header-all").css('display','none');
+        $("#topic").val($(this).html());
+    });
+}
+
+function show_hide_emoji_list() {
+    $("#emoji-btn").on('mousedown', function(e){
+        $('#summernote').summernote('saveRange');
+         }).on('click',function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $("#emoji-list").css('display', 'block');
+    });
+}
+function add_action_emoji_img() {
+    $('#emoji-list img.emoji').on('click', function(ei){
+        console.log('test');
+        var e = $('#summernote');
+        e.summernote('restoreRange');
+        e.summernote('insertImage', ei.target.src, function($image){
+            $image.addClass('emoji');
+            $image.css('width', '20px');
+        });
+    });
+};
+
+function add_action_emoji_char() {
+    $('#emoji-list li.emoji').on('click', function(ei){
+        var e = $('#summernote');
+        e.summernote('restoreRange');
+        debugger;
+         var t = $('<span class="emoji">'+window.emojiJSON[ei.target.attributes['em'].value].char+'</span>');
+         e.summernote('insertNode', t[0]);
+    });
+};
+// 两种方式处理emoji
+//  一种借助图片的方式，一种借助字符的方式
+function load_emoji() {
+    var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
+    for (var i=0; i<emojiArray.length; i++) {
+        $("#emoji-list").append('<img class="emoji" src="/static/images/emoji/basic/'+emojiArray[i]+'.png">')
+    }
+    add_action_emoji_img();
+    $.getJSON('/static/images/emoji/emojis.json', function(data){
+        window.emojiJSON=data;
+        $("#emoji-list").append('<li class="emoji" em="heart">'+emojiJSON.heart.char+'</li>');
+        add_action_emoji_char();
+    })
+}
+
+$(document).click(function() {
+    if ($("#emoji-list").is(":hidden")) {
+        return;
+    }
+    else {
+        $("#emoji-list").hide();
+    }
+});

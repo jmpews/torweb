@@ -18,7 +18,7 @@ class PostTopic(BaseModel):
 
 
 class Post(BaseModel):
-    topic = ForeignKeyField(PostTopic, related_name='posts_topic', null=True)
+    topic = ForeignKeyField(PostTopic, related_name='posts_topic')
     # category = IntegerField(choices=CATEGORY, default=2, verbose_name="帖子类别")
     title = CharField(verbose_name="帖子的标题")
     content = TextField(verbose_name="帖子内容")
@@ -44,7 +44,6 @@ class Post(BaseModel):
         self.reply_time = datetime.datetime.now()
         self.reply_count += 1
         self.save()
-
     @staticmethod
     def list_recently(page_limit=10, page_number=1):
         page_number_limit = Post.select().order_by(Post.reply_time).count()

@@ -14,6 +14,12 @@ def update_catetopic():
         for i in range(len(topics)):
             tmp.append(topics[i])
         catetopic['topics'].append(tmp)
+        tmp = []
+    topics = PostTopic.select().where(PostTopic.category == None)
+    for i in range(len(topics)):
+        tmp.append(topics[i])
+    catetopic['topics'].append(tmp)
+
 
 
 def update_cache():

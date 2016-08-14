@@ -505,6 +505,7 @@ body {
   vertical-align: text-bottom; }
 
 .post-new-html .emojis {
+  z-index: 1;
   display: none;
   position: absolute;
   width: 107px;

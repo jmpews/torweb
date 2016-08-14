@@ -1,12 +1,11 @@
 # coding:utf-8
 import tornado.web
-from backend.mysql_model.user import User
-from backend.mysql_model.post import Post, PostReply
+from backend.mysql_model.post import Post, PostReply, PostTopic
 from handlers.basehandlers.basehandler import BaseRequestHandler
 from handlers.cache import catetopic
 
 
-from utils.util import login_required
+from utils.util import login_required, json_result
 from utils.util import get_cleaned_post_data
 
 
@@ -30,10 +29,16 @@ class PostAddHandler(BaseRequestHandler):
 
     @login_required
     def post(self, *args, **kwargs):
-        post_data = get_cleaned_post_data(self, ['title', 'content'])
+        post_data = get_cleaned_post_data(self, ['title', 'content', 'topic'])
+        try:
+            topic = PostTopic.get(PostTopic.str == post_data['topic'])
+        except PostTopic.DoesNotExist:
+            self.write(json_result(1, '请选择正确主题'))
+            return
         post = Post.create(
-                title=post_data['title'],
-                content=post_data['content'],
-                user=self.current_user
+            topic=topic,
+            title=post_data['title'],
+            content=post_data['content'],
+            user=self.current_user
         )
-        self.redirect('/post/' + str(post.id))
+        self.write(json_result(0, {'post_id': post.id}))

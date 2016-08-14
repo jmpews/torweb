@@ -84,10 +84,10 @@ function index_show_hide_cate_nav() {
 }
 
 function post_new_show_hide_cate() {
-    $("#topic").on('click', function(e){
+    $(".post-new-html #topic").on('click', function(e){
         $(".card-header-all").css('display','block');
     });
-    $(".card-header-all-cate a").on('click', function(e){
+    $(".post-new-html .card-header-all-cate a").on('click', function(e){
         $(".card-header-all").css('display','none');
         $("#topic").val($(this).html());
     });

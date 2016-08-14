@@ -45,6 +45,12 @@
 						{% end %}
                     </div>
 					{% end %}
+                    <div class="card-header-all-cate">
+						<h4>未分类</h4>
+						{% for topic in catetopic['topics'][-1] %}
+						<a href="/topic/{{topic.str}}">{{topic.name}}</a>
+						{% end %}
+                    </div>
                 </div>
             </div>
             <div class="card-block">

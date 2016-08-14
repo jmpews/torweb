@@ -32,10 +32,16 @@
                                 <div class="card-header-all-cate">
                                     <h4>{{category.name}}</h4>
                                     {% for topic in topics %}
-                                    <a href="#blacnk">{{topic.name}}</a>
+                                    <a href="#blank" id="{{topic.str}}">{{topic.name}}</a>
                                     {% end %}
                                 </div>
                                 {% end %}
+                                <div class="card-header-all-cate">
+                                    <h4>未分类</h4>
+                                    {% for topic in catetopic['topics'][-1] %}
+                                    <a href="#blank" id="{{topic.str}}">{{topic.name}}</a>
+                                    {% end %}
+                                </div>
                              </div>
                         </div>
                     </div>
@@ -76,8 +82,8 @@
 <script src="/assets/js/i18n/summernote-zh-CN.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-    var e = $('#summernote');
-    e.summernote({
+    var topic = '';
+    $('#summernote').summernote({
         lang: 'zh-CN',
         height: 300,                 // set editor height
         minHeight: null,             // set minimum height of editor
@@ -90,9 +96,31 @@ $(document).ready(function () {
             ['misc', ['codeview']]
         ]
     });
-    $('form').on('submit', function (e) {
-        $(e.target).find('[name=content]').val(e.summernote('code'));
+    $('form').on('submit', function (event) {
+        event.preventDefault();
+         $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/post/add',
+            data: {
+                'title': $('#title').val(),
+                'topic': topic,
+                'content': $('#summernote').summernote('code')
+            },
+            success: function(result, status) {
+                if(result.errorcode == 0) {
+                    window.location.href="/post/"+result.data['post_id'];
+                }
+                else if(result.errorcode == 1) {
+                    alert(result.txt);
+                }
+            }
+        })
         return 1;
+    });
+    $(".post-new-html .card-header-all-cate a").on('click', function(e){
+        $("#topic").val($(this).html());
+        topic = $(this).attr('id');
     });
     post_new_show_hide_cate();
     show_hide_emoji_list();

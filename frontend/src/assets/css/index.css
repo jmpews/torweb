@@ -53,7 +53,7 @@ ul {
       padding-left: 15px;
       padding-right: 15px;
       left: -30px;
-      background-color: #238efa;
+      background-color: #FFBCBC;
       line-height: 40px; }
       .header .header-container .header-logo a {
         color: #fff; }
@@ -81,14 +81,12 @@ ul {
       line-height: 70px;
       float: right; }
       .header .header-container .header-tip .options a:focus, .header .header-container .header-tip .options a:hover {
-        color: #238efa; }
+        color: #FFBCBC; }
       .header .header-container .header-tip .options li {
         float: left;
         margin-right: 10px; }
         .header .header-container .header-tip .options li img {
           width: 50px; }
-        .header .header-container .header-tip .options li a {
-          color: #238efa; }
       .header .header-container .header-tip .options .dropdown .dropdown-menu {
         font-size: 13px;
         min-width: 0;
@@ -133,7 +131,7 @@ ul {
         line-height: 2;
         font-size: 13px;
         margin-bottom: 4px;
-        color: #666;
+        color: #9A9999;
         margin-left: 20px; }
         .footer .footer-container dl dd a {
           color: #555555; }
@@ -150,7 +148,7 @@ ul {
   padding-left: 0px; }
 
 .current-topic {
-  background-color: #238efa;
+  background-color: #FFBCBC;
   float: left;
   position: absolute;
   top: 50%;
@@ -175,8 +173,6 @@ ul {
     padding-bottom: 7px;
     position: relative;
     min-height: 68px; }
-    .post-list .post-item a:hover {
-      color: #6083a7; }
     .post-list .post-item .avatar {
       position: absolute; }
       .post-list .post-item .avatar img {
@@ -189,6 +185,8 @@ ul {
         font-size: 18px;
         margin-bottom: 7px;
         word-wrap: break-word; }
+        .post-list .post-item .item-mid .item-title a:hover {
+          color: #FFBCBC; }
       .post-list .post-item .item-mid .item-info {
         font-size: 11px; }
         .post-list .post-item .item-mid .item-info span {
@@ -216,7 +214,7 @@ ul {
   .post-detail .card {
     box-shadow: inset 0 0 0 1px #e1e1e1; }
     .post-detail .card a {
-      color: #807e7e; }
+      color: #9A9999; }
   .post-detail .post-title {
     max-width: 500px;
     margin: 0; }
@@ -224,7 +222,7 @@ ul {
       font-size: 24px;
       font-weight: 500;
       line-height: 30px;
-      color: #5a5a5a; }
+      color: #9A9999; }
   .post-detail .post-info {
     margin-bottom: 10px; }
   .post-detail .post-function {
@@ -286,7 +284,7 @@ ul {
     content: "";
     width: 50%;
     height: 1px;
-    background: #238efa;
+    background: #FFBCBC;
     position: absolute;
     left: 0;
     bottom: 0px; }
@@ -296,10 +294,10 @@ ul {
   margin: 0 3px; }
 .post-list .card-header a.active,
 .post-detail .card-header a.active {
-  color: #238efa !important; }
+  color: #FFBCBC !important; }
 .post-list .card-header a:hover,
 .post-detail .card-header a:hover {
-  color: #238efa !important; }
+  color: #FFBCBC !important; }
 
 .card-header-all {
   display: none;
@@ -308,9 +306,9 @@ ul {
   background-color: #fff;
   z-index: 1;
   padding: 5px;
-  border-left: 1px solid #238efa;
-  border-right: 1px solid #238efa;
-  border-bottom: 1px solid #238efa; }
+  border-left: 1px solid #FFBCBC;
+  border-right: 1px solid #FFBCBC;
+  border-bottom: 1px solid #FFBCBC; }
   .card-header-all h3 {
     font-size: 14px;
     line-height: 30px;
@@ -321,9 +319,9 @@ ul {
     .card-header-all .card-header-all-cate h4 {
       font-size: 13px; }
     .card-header-all .card-header-all-cate a {
-      color: #807e7e; }
+      color: #9A9999; }
     .card-header-all .card-header-all-cate a:hover {
-      color: #238efa; }
+      color: #FFBCBC; }
   .card-header-all .card-header-all-cate:last-of-type {
     border-bottom: none; }
 
@@ -333,7 +331,7 @@ ul {
 .system-status-card li {
   line-height: 20px; }
 .system-status-card span {
-  color: #238efa;
+  color: #9A9999;
   font-weight: bold;
   margin-left: 10px;
   font-size: 13px; }
@@ -346,7 +344,7 @@ ul {
   padding-left: 0px;
   border-bottom: 1px dashed #eee; }
 .system-status-card dd {
-  color: #238efa;
+  color: #FFBCBC;
   font-weight: bold;
   margin-bottom: 0px;
   line-height: 30px;
@@ -390,11 +388,11 @@ ul {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   padding-left: 0px; }
   .user-profile-trend li {
-    color: #888; }
+    color: #9A9999; }
     .user-profile-trend li a {
-      color: #888; }
+      color: #9A9999; }
     .user-profile-trend li a:hover {
-      color: #238efa; }
+      color: #FFBCBC; }
 
 .user-profile-card .profile-card-head {
   front-size: 14px;
@@ -442,9 +440,9 @@ ul {
   background-color: #fff;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
   .user-profile-edit a {
-    color: #888; }
+    color: #9A9999; }
   .user-profile-edit a:hover {
-    color: #238efa; }
+    color: #FFBCBC; }
   .user-profile-edit .user-profile-edit-body {
     padding-bottom: 10px; }
   .user-profile-edit form {

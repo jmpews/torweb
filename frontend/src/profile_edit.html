@@ -2,14 +2,13 @@
 {% block title %}Tornado.Index{% end %}
 
 {% block content %}
-    <div class="content">
-        <div class="content-container container">
+        <div class="content-container container user-profile-edit-html">
             <div class="col-md-3">
                 <div class="user-avatar-edit">
                     <form enctype="multipart/form-data" action="/user/avatar/edit" method="post">
                     <img id="avatar-preview"src="/avatar/{{current_user.avatar}}">
-                    <button class="btn btn-outline-primary select-avatar"><input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择</button>
-                    <button type="submit" class="btn btn-outline-primary">保存</button>
+                    <button class="btn btn-outline-primary btn-sm select-avatar"><input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择</button>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">保存</button>
                     </form>
                 </div>
             </div>
@@ -27,7 +26,7 @@
                         </li>
                     </ul>
                     <div class="user-profile-edit-body">
-                        <div class="profile-card">
+                        <div class="user-profile-card">
                             <div class="profile-card-head" style="border-top: none;">
                                 个人资料
                             </div>
@@ -59,7 +58,6 @@
                 </div>
             </div>
         </div>
-    </div>
 {% end %}
 
 {% block scripts %}

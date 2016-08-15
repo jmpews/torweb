@@ -7,11 +7,9 @@
 {% end %}
 
 {% block content %}
-
-    <div class="content">
-        <div class="content-container container">
+        <div class="content-container container user-profile-html">
             <div class="col-md-3">
-                <div class="user-profile">
+                <div class="user-profile-widget">
                     <img src="/static/images/avatar_03.png">
                     <dl class="row">
                         <dt class="col-xs-6">用户名:</dt>
@@ -24,7 +22,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="user-trend">
+                <div class="user-profile-trend">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">个人资料</a>
@@ -36,8 +34,8 @@
                             <a class="nav-link" href="#">个人关注</a>
                         </li>
                     </ul>
-                    <div class="profile-detail">
-                        <div class="profile-card">
+                    <div class="">
+                        <div class="user-profile-card">
                             <div class="profile-card-head" style="border-top: none;">
                                 个人资料
                             </div>
@@ -49,7 +47,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="profile-card">
+                        <div class="user-profile-card">
                             <div class="profile-card-head">
                                 发表过的主题
                             </div>
@@ -66,7 +64,6 @@
                 </div>
             </div>
         </div>
-    </div>
 {% end %}
 
 {% block scripts %}

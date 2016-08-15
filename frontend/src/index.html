@@ -5,7 +5,7 @@
 {% block content %}
     <div class="content-container container index-html">
         <div class="post-list col-md-9">
-        <div class="card">
+        <div class="card custom-card">
             <div class="current-topic">
                 <span>{% if current_topic  %}{{current_topic.name}}{% else %}全部分类{% end %}</span>
             </div>
@@ -108,7 +108,7 @@
         </div>
         </div>
         <div class="sidebar col-md-3">
-            <div class="card register-card">
+            <div class="card register-card custom-card">
                 <div class="card-header">
                     登陆
                 </div>
@@ -122,7 +122,7 @@
                 </div>
             </div>
 
-            <div class="card system-status-card">
+            <div class="card system-status-card custom-card">
                 <div class="card-header">
                     服务器状态
                 </div>

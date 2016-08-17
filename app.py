@@ -10,9 +10,9 @@ import config
 from utils.util import monitor_system_status
 from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler, RegisterHandler, IndexTopicHandler
-from handlers.post import PostDetailHandler, PostAddHandler
+from handlers.post import PostDetailHandler, PostAddHandler, PostReplyAddHandler, PostReplyOptHandler
 from handlers.api import SystemStatusHandler
-from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler
+from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserFollowerHandler
 from handlers.cache import update_cache
 
 handlers = [
@@ -22,9 +22,17 @@ handlers = [
     (r'/register', RegisterHandler),
     (r'/post/(\d+)', PostDetailHandler),
     (r'/post/add', PostAddHandler),
+    (r'/postreply/add', PostReplyAddHandler),
 
+    # 对post和reply的操作
+    (r'/postreplyopt', PostReplyOptHandler),
+
+
+    (r'/user/(\d+)/follower', UserFollowerHandler),
     (r'/user/(\d+)', UserProfileHandler),
     (r'/user/edit', UserProfileEditHandler),
+    (r'/user/notification', UserNotificationHandler),
+    (r'/user/follower', UserFollowerHandler),
     (r'/user/avatar/edit', UserAvatarEditHandler),
 
     (r'/api/systemstatus', SystemStatusHandler),

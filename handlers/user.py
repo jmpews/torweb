@@ -1,7 +1,8 @@
 # coding:utf-8
 import tornado.web
 from backend.mysql_model.user import User, Profile
-from backend.mysql_model.post import Post, PostReply
+from backend.mysql_model.common import Notification
+from backend.mysql_model.post import Post, PostReply, CollectPost
 from handlers.basehandlers.basehandler import BaseRequestHandler
 
 from utils.util import login_required
@@ -9,23 +10,21 @@ from utils.util import get_cleaned_post_data
 
 import config
 
-from utils.common_utils import TimeUtil
 
 class UserProfileHandler(BaseRequestHandler):
     def get(self, user_id, *args, **kwargs):
-        userinfo = {}
         user = User.get(User.id == user_id)
         profile = Profile.get_by_user(user)
-        posts = Post.select().where(Post.user == user).limit(3)
+        posts = Post.select().where(Post.user == user).limit(10)
+        postreplys = PostReply.select().where(PostReply.user == user).limit(10)
+        collectposts = CollectPost.select().where(CollectPost.user == user).limit(10)
 
-        userinfo['id'] = user.id
-        userinfo['username'] = user.username
-        userinfo['website'] = profile.website
-        userinfo['nickname'] = profile.nickname
-        userinfo['reg_time'] = TimeUtil.datetime_format_date(profile.reg_time)
-        userinfo['last_login_time'] = TimeUtil.datetime_format_date(profile.last_login_time)
-        userinfo['posts'] = posts
-        self.render('profile.html', userinfo=userinfo)
+        self.render('profile.html',
+                    user=user,
+                    profile=profile,
+                    posts=posts,
+                    postreplys=postreplys,
+                    collectposts=collectposts)
 
 class UserProfileEditHandler(BaseRequestHandler):
     @login_required
@@ -36,7 +35,6 @@ class UserProfileEditHandler(BaseRequestHandler):
         userinfo['username'] = user.username
         userinfo['website'] = profile.website
         userinfo['nickname'] = profile.nickname
-
         self.render('profile_edit.html', userinfo=userinfo)
 
     @login_required
@@ -61,4 +59,19 @@ class UserAvatarEditHandler(BaseRequestHandler):
         user.avatar = avatar_file_name
         user.save()
         self.redirect('/user/edit')
+
+class UserNotificationHandler(BaseRequestHandler):
+    @login_required
+    def get(self, *args, **kwargs):
+        user = self.current_user
+        profile = Profile.get(Profile.user == user)
+        notifications = Notification.select().where(Notification.user == user)
+        self.render('profile_notification.html',
+                    profile=profile,
+                    notifications=notifications,
+                    )
+
+class UserFollowerHandler(BaseRequestHandler):
+    def get(self, *args, **kwargs):
+        pass
 

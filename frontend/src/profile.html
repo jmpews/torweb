@@ -13,11 +13,11 @@
                     <img src="/static/images/avatar_03.png">
                     <dl class="row">
                         <dt class="col-xs-6">用户名:</dt>
-                        <dd class="col-xs-6"><span>@{{userinfo['username']}}</span></dd>
+                        <dd class="col-xs-6"><span>@{{user.username}}</span></dd>
                         <dt class="col-xs-6">注册时间:</dt>
-                        <dd class="col-xs-6"><span>{{userinfo['reg_time']}}</span></dd>
+                        <dd class="col-xs-6"><span class="friendly-time">{{profile.reg_time}}</span></dd>
                         <dt class="col-xs-6">上次登录时间:</dt>
-                        <dd class="col-xs-6"><span>30分钟前</span></dd>
+                        <dd class="col-xs-6"><span class="friendly-time">{{profile.last_login_time}}</span></dd>
                     </dl>
                 </div>
             </div>
@@ -41,21 +41,51 @@
                             </div>
                             <div class="profile-card-body">
                                 <ul class="list-inline">
-                                    <li>{{userinfo['nickname']}}</li>
-                                    <li>第{{userinfo['id']}}号Member</li>
-                                    <li>{{userinfo['reg_time']}}加入</li>
+                                    <li>{{profile.nickname}}</li>
+                                    <li>第{{user.id}}号Member</li>
+                                    <li>{{profile.reg_time}}加入</li>
                                 </ul>
                             </div>
                         </div>
+
                         <div class="user-profile-card">
                             <div class="profile-card-head">
-                                发表过的主题
+                                发表过的Post
                             </div>
                             <div class="profile-card-body">
                                 <ul class="list-inline">
-                                    <li> <a href="/">IDS防御系统兼职</a></li>
-                                    {% for post in userinfo['posts'] %}
+                                    {% for post in posts %}
                                     <li> <a href="/post/{{post.id}}">{{post.title}}</a></li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                发表过的评论
+                            </div>
+                            <div class="profile-card-body">
+                                <ul class="list-inline">
+                                    {% for postreply in postreplys %}
+                                    <li>
+                                        <a href="/post/{{postreply.post.id}}">《{{postreply.post.title}}》</a>
+                                        :
+                                        <a href="/post/{{postreply.post.id}}">{{postreply.content}}</a>
+                                    </li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                收藏过的Post
+                            </div>
+                            <div class="profile-card-body">
+                                <ul class="list-inline">
+                                    {% for collectpost in collectposts %}
+                                    <li> <a href="/post/{{collectpost.post.id}}">{{collectpost.post.title}}</a></li>
                                     {% end %}
                                 </ul>
                             </div>

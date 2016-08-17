@@ -21,18 +21,22 @@ class BaseModel(Model):
 
 def create_tmp_data():
     from backend.mysql_model.user import User, Profile, Follower
-    from backend.mysql_model.post import Post, PostReply, PostCategory, PostTopic
+    from backend.mysql_model.post import Post, PostReply, PostCategory, PostTopic, CollectPost
     from backend.mysql_model.common import Notification
     print("Create TMP Data...")
-    db_mysql.create_tables([User, PostCategory, PostTopic, Post, PostReply, Profile, Follower], safe=True)
+    db_mysql.create_tables([User, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification], safe=True)
 
     user = User.new(username='admin', nickname='admin', password='admin')
-    print("create user, username:admin, password:admin")
     user.user_profile.nickname = user.nickname
-    user.user_profile.nickname = user.nickname
-    user.set_password('root')
-    print("change admin password to 'root'")
+    user_test = User.new(username='root', nickname='root', password='root')
+    user_test.user_profile.nickname = user_test.nickname
 
+    # -------------------- 测试关注功能 ---------------
+    print('测试关注功能')
+    Follower.create(user=user, follower=user_test)
+
+    # -------------------- 测试分类功能 --------------
+    print('测试分类功能')
     postcategory0 = PostCategory.create(
         name='学习',
         str='study'
@@ -55,6 +59,9 @@ def create_tmp_data():
         name='灌水区',
         str='water'
     )
+
+    # ---------------- 测试新文章 --------------
+    print('测试新文章功能')
     post = Post.create(
         topic=posttopic0,
         title='test_vul_scan',
@@ -63,15 +70,7 @@ def create_tmp_data():
     )
     post.up_visit()
     post.up_collect()
-    print('new post <test_vul_scan:admin>')
-    postreply = PostReply.create(
-            post=post,
-            user=user,
-            content='test_reply'
-    )
-    print('new postreply <test_reply:admin>')
-    postreply.up_like()
-    post.up_reply()
+    Notification.new_post(post, user)
 
     post_test_0 = Post.create(
         topic=posttopic1,
@@ -79,11 +78,7 @@ def create_tmp_data():
         content="入侵检测系统的核心价值在于通过对全网信息的分析，了解信息系统的安全状况，进而指导信息系统安全建设目标以及安全策略的确立和调整，而入侵防御系统的核心价值在于安全策略的实施—对黑客行为的阻击",
             user=user
     )
-    postreply_test_0 = PostReply.create(
-            post=post_test_0,
-            user=user,
-            content='入侵检测系统需要部署在网络内部，监控范围可以覆盖整个子网，包括来自外部的数据以及内部终端之间传输的数据，入侵防御系统则必须部署在网络边界，抵御来自外部的入侵，对内部攻击行为无能为力。'
-    )
+    Notification.new_post(post_test_0, user)
 
     post_test_1 = Post.create(
         topic=posttopic2,
@@ -94,6 +89,27 @@ def create_tmp_data():
         而入侵防御系统的核心价值在于安全策略的实施—对黑客行为的阻击''',
         user=user
     )
+
+    Notification.new_post(post_test_1, user)
+
+    # ------------测试新回复--------------
+    print('测试新回复功能')
+    postreply = PostReply.create(
+            post=post,
+            user=user,
+            content='test_reply'
+    )
+    postreply.up_like()
+    post.update_latest_reply(postreply)
+
+    postreply_test_0 = PostReply.create(
+            post=post_test_0,
+            user=user,
+            content='入侵检测系统需要部署在网络内部，监控范围可以覆盖整个子网，包括来自外部的数据以及内部终端之间传输的数据，入侵防御系统则必须部署在网络边界，抵御来自外部的入侵，对内部攻击行为无能为力。'
+    )
+    post_test_0.update_latest_reply(postreply_test_0)
+    Notification.new_reply(postreply_test_0, post_test_0, user)
+
     postreply_test_1 = PostReply.create(
         post=post_test_1,
         user=user,
@@ -102,6 +118,9 @@ def create_tmp_data():
         包括来自外部的数据以及内部终端之间传输的数据，
         入侵防御系统则必须部署在网络边界，抵御来自外部的入侵，对内部攻击行为无能为力。'''
     )
+    post_test_1.update_latest_reply(postreply_test_1)
+    Notification.new_reply(postreply_test_1, post_test_1, user)
+
 
 db_init = MySQLDatabase('', user=BACKEND_MYSQL['user'], password=BACKEND_MYSQL['password'], host=BACKEND_MYSQL['host'],
                         port=BACKEND_MYSQL['port'])

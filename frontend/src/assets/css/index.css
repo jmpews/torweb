@@ -1,15 +1,16 @@
 body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
-  color: #9A9999;
+  color: #999;
   font-size: 13px;
   margin: 0;
-  background-color: #f7f7f7;
-  font-size: 13px; }
+  background-color: #f7f7f7; }
   body a {
-    color: #9A9999; }
+    color: #999; }
+    body a:hover, body a:focus {
+      color: #FFBCBC !important; }
 
-a:focus, a:hover {
-  text-decoration: none; }
+a.username {
+  color: #666; }
 
 ul {
   margin: 0;
@@ -37,6 +38,37 @@ ul {
   .clear-xs {
     margin-left: 0px !important;
     margin-right: 0px !important; } }
+a, a:focus, a:hover {
+  text-decoration: none;
+  outline: none; }
+
+.tag-success {
+  background-color: #e1e1e1; }
+
+.btn-primary {
+  background-color: #FFBCBC;
+  border-color: #FFBCBC; }
+  .btn-primary:hover {
+    background-color: #ff7070;
+    border-color: #ff7070; }
+
+.btn-outline-primary {
+  color: #FFBCBC;
+  border-color: #FFBCBC; }
+  .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    color: #fff !important;
+    background-color: #FFBCBC !important;
+    border-color: #FFBCBC !important; }
+
+.page-link {
+  color: #FFBCBC; }
+
+.page-link:focus, .page-link:hover {
+  color: #ff7070; }
+
+.form-control:focus {
+  border-color: #FFBCBC; }
+
 .header {
   margin: 0 auto;
   z-index: 999;
@@ -57,6 +89,8 @@ ul {
       line-height: 40px; }
       .header .header-container .header-logo a {
         color: #fff; }
+        .header .header-container .header-logo a:hover {
+          color: #fff !important; }
     .header .header-container .header-nav {
       height: 70px;
       width: 100%;
@@ -69,7 +103,7 @@ ul {
           display: block;
           padding: 16px 0 20px;
           font-size: 14px;
-          color: #9A9999;
+          color: #999;
           line-height: 30px;
           text-align: center;
           border-top: 4px solid transparent; }
@@ -80,8 +114,6 @@ ul {
     .header .header-container .header-tip {
       line-height: 70px;
       float: right; }
-      .header .header-container .header-tip .options a:focus, .header .header-container .header-tip .options a:hover {
-        color: #FFBCBC; }
       .header .header-container .header-tip .options li {
         float: left;
         margin-right: 10px; }
@@ -131,7 +163,7 @@ ul {
         line-height: 2;
         font-size: 13px;
         margin-bottom: 4px;
-        color: #9A9999;
+        color: #999;
         margin-left: 20px; }
         .footer .footer-container dl dd a {
           color: #555555; }
@@ -144,7 +176,11 @@ ul {
   margin-top: 30px;
   padding-top: 7px; }
 
-.sidebar {
+.index-html .col-md-9 {
+  padding-left: 0px; }
+  .index-html .col-md-9 .card-block {
+    padding: 0 1.25rem !important; }
+.index-html .col-md-3 {
   padding-left: 0px; }
 
 .current-topic {
@@ -163,58 +199,52 @@ ul {
     letter-spacing: 11px;
     display: block; }
 
-.post-list {
+.post-item {
+  border-bottom: 1px solid #eee;
+  padding-top: 17px;
+  padding-bottom: 7px;
+  position: relative;
+  min-height: 68px; }
+  .post-item .avatar {
+    position: absolute; }
+    .post-item .avatar img {
+      width: 40px;
+      border-radius: 10px; }
+  .post-item .item-mid {
+    margin-left: 50px;
+    margin-right: 40px; }
+    .post-item .item-mid .item-title {
+      font-size: 16px;
+      margin-bottom: 7px;
+      word-wrap: break-word; }
+      .post-item .item-mid .item-title a {
+        color: #666; }
+    .post-item .item-mid .item-info {
+      font-size: 11px; }
+      .post-item .item-mid .item-info span .username {
+        color: #666; }
+      .post-item .item-mid .item-info .divider {
+        margin: 0 3px;
+        color: #ccc; }
+  .post-item .item-end {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    line-height: 68px; }
+
+.post-detail-html .col-md-9, .post-detail-html .col-md-3 {
   padding-left: 0px; }
-  .post-list .card {
-    box-shadow: inset 0 0 0 1px #e1e1e1; }
-  .post-list .post-item {
-    border-bottom: 1px solid #eee;
-    padding-top: 17px;
-    padding-bottom: 7px;
-    position: relative;
-    min-height: 68px; }
-    .post-list .post-item .avatar {
-      position: absolute; }
-      .post-list .post-item .avatar img {
-        width: 40px;
-        border-radius: 10px; }
-    .post-list .post-item .item-mid {
-      margin-left: 50px;
-      margin-right: 40px; }
-      .post-list .post-item .item-mid .item-title {
-        font-size: 18px;
-        margin-bottom: 7px;
-        word-wrap: break-word; }
-        .post-list .post-item .item-mid .item-title a:hover {
-          color: #FFBCBC; }
-      .post-list .post-item .item-mid .item-info {
-        font-size: 11px; }
-        .post-list .post-item .item-mid .item-info span {
-          margin-right: 5px; }
-          .post-list .post-item .item-mid .item-info span .username {
-            color: #383838; }
-          .post-list .post-item .item-mid .item-info span .cate {
-            color: #6083a7; }
-    .post-list .post-item .item-end {
-      position: absolute;
-      right: 0px;
-      top: 0px;
-      width: 30px;
-      line-height: 68px; }
 
 .post-detail {
-  padding-left: 0px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e5e5e5; }
-  .post-detail .user-name {
-    font-weight: bold;
-    color: #383838; }
   .post-detail span {
     margin-right: 5px; }
   .post-detail .card {
     box-shadow: inset 0 0 0 1px #e1e1e1; }
     .post-detail .card a {
-      color: #9A9999; }
+      color: #999; }
   .post-detail .post-title {
     max-width: 500px;
     margin: 0; }
@@ -222,16 +252,19 @@ ul {
       font-size: 24px;
       font-weight: 500;
       line-height: 30px;
-      color: #9A9999; }
+      color: #666; }
   .post-detail .post-info {
-    margin-bottom: 10px; }
+    font-size: 11px;
+    margin-bottom: 5px; }
+    .post-detail .post-info .username {
+      color: #666; }
   .post-detail .post-function {
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: right; }
-    .post-detail .post-function a:hover {
-      color: rgba(251, 135, 135, 0.97) !important; }
     .post-detail .post-function span {
       padding-right: 2px; }
+    .post-detail .post-function a.post-collected {
+      color: #FFBCBC; }
     .post-detail .post-function .fa {
       padding-right: 1px; }
 
@@ -245,15 +278,44 @@ ul {
   border-bottom: 1px solid #e5e5e5; }
   .post-reply .reply-item .reply-main {
     margin-left: 50px; }
+  .post-reply .reply-item .reply-head {
+    font-size: 11px; }
+    .post-reply .reply-item .reply-head .username {
+      color: #666; }
 .post-reply .reply-function {
   margin-top: 7px;
   text-align: right; }
-  .post-reply .reply-function a:hover {
-    color: rgba(251, 135, 135, 0.97); }
+  .post-reply .reply-function a.postreply-supported {
+    color: #FFBCBC; }
   .post-reply .reply-function span {
     padding-right: 2px; }
   .post-reply .reply-function .fa {
     padding-right: 1px; }
+
+.post-reply-card .card-block {
+  padding: 10px; }
+.post-reply-card .mediumeditor {
+  min-height: 200px;
+  outline: none;
+  padding: 0px; }
+
+.medium-editor-toolbar .medium-editor-toolbar-actions li button {
+  border: none;
+  padding: 0px;
+  width: 40px;
+  height: 30px;
+  background-color: #fff;
+  border-right: 1px dashed #FFBCBC;
+  border-top: 1px dashed #FFBCBC;
+  border-bottom: 1px dashed #FFBCBC; }
+  .medium-editor-toolbar .medium-editor-toolbar-actions li button:hover {
+    background-color: #FFBCBC;
+    color: #fff; }
+.medium-editor-toolbar .medium-editor-toolbar-actions li:first-of-type button {
+  border-left: 1px dashed #FFBCBC; }
+
+.medium-toolbar-arrow-under:after {
+  border: 1px solid #FFBCBC; }
 
 .content-container form {
   margin-bottom: 13px; }
@@ -294,10 +356,7 @@ ul {
   margin: 0 3px; }
 .post-list .card-header a.active,
 .post-detail .card-header a.active {
-  color: #FFBCBC !important; }
-.post-list .card-header a:hover,
-.post-detail .card-header a:hover {
-  color: #FFBCBC !important; }
+  color: #FFBCBC; }
 
 .card-header-all {
   display: none;
@@ -312,16 +371,16 @@ ul {
   .card-header-all h3 {
     font-size: 14px;
     line-height: 30px;
-    border-bottom: 1px solid #e8e8e8; }
+    border-bottom: 1px solid #e8e8e8;
+    color: #666; }
   .card-header-all .card-header-all-cate {
     padding: 5px;
     border-bottom: 1px solid #e8e8e8; }
     .card-header-all .card-header-all-cate h4 {
-      font-size: 13px; }
+      font-size: 13px;
+      color: #666; }
     .card-header-all .card-header-all-cate a {
-      color: #9A9999; }
-    .card-header-all .card-header-all-cate a:hover {
-      color: #FFBCBC; }
+      color: #999; }
   .card-header-all .card-header-all-cate:last-of-type {
     border-bottom: none; }
 
@@ -331,7 +390,7 @@ ul {
 .system-status-card li {
   line-height: 20px; }
 .system-status-card span {
-  color: #9A9999;
+  color: #999;
   font-weight: bold;
   margin-left: 10px;
   font-size: 13px; }
@@ -358,6 +417,7 @@ ul {
   padding-right: 0px; }
 
 .user-profile-widget {
+  font-size: 12px;
   background-color: white;
   padding: 10px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
@@ -388,11 +448,7 @@ ul {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   padding-left: 0px; }
   .user-profile-trend li {
-    color: #9A9999; }
-    .user-profile-trend li a {
-      color: #9A9999; }
-    .user-profile-trend li a:hover {
-      color: #FFBCBC; }
+    color: #999; }
 
 .user-profile-card .profile-card-head {
   front-size: 14px;
@@ -440,9 +496,7 @@ ul {
   background-color: #fff;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
   .user-profile-edit a {
-    color: #9A9999; }
-  .user-profile-edit a:hover {
-    color: #FFBCBC; }
+    color: #999; }
   .user-profile-edit .user-profile-edit-body {
     padding-bottom: 10px; }
   .user-profile-edit form {
@@ -452,6 +506,9 @@ ul {
     .user-profile-edit form .form-control {
       font-size: 13px; }
 
+.user-profile-notification-html .col-md-3 {
+  padding-right: 0px; }
+
 .emoji {
   display: inline-block;
   font-size: 20px;
@@ -460,7 +517,8 @@ ul {
   margin: 0 2px;
   vertical-align: text-bottom; }
 
-.post-new-html .emojis {
+.post-new-html .emojis,
+.post-detail-html .emojis {
   z-index: 1;
   display: none;
   position: absolute;

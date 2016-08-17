@@ -91,6 +91,25 @@ def get_cleaned_post_data(handler, args, blank=False):
                 raise RequestArgumentError(k + ' arg not found')
     return data
 
+def get_cleaned_json_data(handler, args, blank=False):
+    '''
+    这个是自定义异常的，然后到get/post去catch然后异常处理，不如raise HTTPError来的通用.
+    '''
+    tmp = json.loads(handler.request.body.decode())
+    data = {}
+    for k in args:
+        tmp_x = tmp
+        for t in k.split('.'):
+            tmp_x = tmp_x.get(t)
+        if tmp_x:
+            data[k] = tmp_x
+        elif not tmp_x and blank:
+            data[k] = None
+        else:
+            raise RequestArgumentError(k + ' arg not found')
+    return data
+
+
 
 def login_required(method):
     from tornado.httpclient import HTTPError

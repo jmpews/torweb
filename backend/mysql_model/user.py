@@ -155,6 +155,6 @@ class Profile(BaseModel):
 
 class Follower(BaseModel):
     user = ForeignKeyField(User, related_name='who_follow_this')
-    follow = ForeignKeyField(User, verbose_name='this_follow_who')
+    follower = ForeignKeyField(User, verbose_name='this_follow_who')
     follow_time = DateTimeField(default=datetime.datetime.now)
 

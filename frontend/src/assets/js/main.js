@@ -68,7 +68,7 @@ function html5Reader(file){
     } 
 }
 
-function index_show_hide_cate_nav() {
+function show_hide_cate_nav() {
     $(".card-header-all-bt").mouseenter(function(e){
         $(".card-header-all").css('display','block');
     })
@@ -102,9 +102,8 @@ function show_hide_emoji_list() {
             $("#emoji-list").css('display', 'block');
     });
 }
-function add_action_emoji_img() {
+function add_action_emoji_img_summernote() {
     $('#emoji-list img.emoji').on('click', function(ei){
-        console.log('test');
         var e = $('#summernote');
         e.summernote('restoreRange');
         e.summernote('insertImage', ei.target.src, function($image){
@@ -114,30 +113,80 @@ function add_action_emoji_img() {
     });
 };
 
-function add_action_emoji_char() {
+function add_action_emoji_char_summernote() {
     $('#emoji-list li.emoji').on('click', function(ei){
         var e = $('#summernote');
         e.summernote('restoreRange');
-        debugger;
          var t = $('<span class="emoji">'+window.emojiJSON[ei.target.attributes['em'].value].char+'</span>');
          e.summernote('insertNode', t[0]);
     });
 };
 // 两种方式处理emoji
 //  一种借助图片的方式，一种借助字符的方式
-function load_emoji() {
+function load_emoji_summernote() {
     var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
     for (var i=0; i<emojiArray.length; i++) {
         $("#emoji-list").append('<img class="emoji" src="/static/images/emoji/basic/'+emojiArray[i]+'.png">')
     }
-    add_action_emoji_img();
+    add_action_emoji_img_summernote();
     $.getJSON('/static/images/emoji/emojis.json', function(data){
         window.emojiJSON=data;
         $("#emoji-list").append('<li class="emoji" em="heart">'+emojiJSON.heart.char+'</li>');
-        add_action_emoji_char();
+        add_action_emoji_char_summernote();
     })
 }
+function show_hide_emoji_list_medium() {
+    $("#emoji-btn").on('click',function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $("#emoji-list").css('display', 'block');
+    });
+}
+function add_action_emoji_img_medium() {
+    $('#emoji-list img.emoji').on('click', function(ei){
+        var e = $('#mediumeditor');
+        e.append('<img src="'+ei.target.src+'" class="emoji">');
+    });
+};
 
+function add_action_emoji_char_medium() {
+    $('#emoji-list li.emoji').on('click', function(ei){
+        var e = $('#mediumeditor');
+        e.append('<span class="emoji">'+window.emojiJSON[ei.target.attributes['em'].value].char+'</span>')
+    });
+};
+function load_emoji_medium() {
+    var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
+    for (var i=0; i<emojiArray.length; i++) {
+        $("#emoji-list").append('<img class="emoji" src="/static/images/emoji/basic/'+emojiArray[i]+'.png">')
+    }
+    add_action_emoji_img_medium();
+    $.getJSON('/static/images/emoji/emojis.json', function(data){
+        window.emojiJSON=data;
+        $("#emoji-list").append('<li class="emoji" em="heart">'+emojiJSON.heart.char+'</li>');
+        add_action_emoji_char_medium();
+    })
+}
+function getFriendlyTime(t)
+{
+    if(!t) return 'biu...';
+    var diff = Date.now() - Date.parse(t); 
+    var seconds = 1000, minutes = 1000 * 60, hours = 1000 * 60 * 60, days = 1000 * 60 * 60 * 24, weeks = 1000 * 60 * 60 * 24 * 7, months = 1000 * 60 * 60 * 24 * 30, year = 1000 * 60 * 60 * 24 * 365; 
+    if(diff < 2 * minutes) return "A moment ago";
+    if(diff < hours) return Math.floor(diff/minutes) + " mins ago";
+    if(diff < days) return (Math.floor(diff/hours)==1)?"an hour ago":Math.floor(diff/hours) + " hrs ago";
+    if(diff < weeks) return (Math.floor(diff/days)==1)?"yesterday":Math.floor(diff/days) + " days ago";
+    if(diff < months) return (Math.floor(diff/weeks)==1)?"last week":Math.floor(diff/weeks) + " weeks ago";
+    if(diff < year) return (Math.floor(diff/months)==1)?"last month":Math.floor(diff/months) + " months ago";
+    return (Math.floor(diff/year)==1)?"an year ago":Math.floor(diff/year) + " yrs ago";
+}
+
+// 友好替换时间
+function replate_friendly_time() {
+    $('.friendly-time').each(function(i, item){
+        $(item).html(getFriendlyTime($(item).html()));
+    });
+}
 $(document).click(function() {
     if ($("#emoji-list").is(":hidden")) {
         return;
@@ -145,4 +194,7 @@ $(document).click(function() {
     else {
         $("#emoji-list").hide();
     }
+});
+$(document).ready(function () {
+    replate_friendly_time();
 });

@@ -4,7 +4,7 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: $lightpink;
+$base-color: #2fca7b;
 $link-color: $base-color;
 $link-hover-color: darken($link-color, 15%) !default;
 $btn-color: $link-color;
@@ -330,7 +330,9 @@ a, a:focus, a:hover {
     padding-bottom: 7px;
     position: relative;
     min-height: 68px;
-
+    a:hover {
+        color: $base-color !important;
+    }
     .avatar {
         position: absolute;
         img {

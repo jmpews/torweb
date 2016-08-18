@@ -158,3 +158,16 @@ class Follower(BaseModel):
     follower = ForeignKeyField(User, verbose_name='this_follow_who')
     follow_time = DateTimeField(default=datetime.datetime.now)
 
+    @staticmethod
+    def is_follow(user, current_user):
+        is_follow = None
+        if current_user and user != current_user:
+            is_follow = True
+            try:
+                Follower.get(Follower.user == user, Follower.follower == current_user)
+            except Follower.DoesNotExist:
+                is_follow = False
+        return is_follow
+
+
+

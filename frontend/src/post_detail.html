@@ -59,7 +59,7 @@
                 <div class="card-block">
                     <div class="post-detail">
                         <div class="post-title"><a href="/">{{post_detail.title}}</a></div>
-                        <div class="post-info"><span><a class="username" href="/">jmpews</a></span> <span>20分钟前</span></div>
+                        <div class="post-info"><span><a class="username" href="/user/{{post_detail.user.id}}">{{post_detail.user.username}}</a></span> <span>{{post_detail.create_time}}</span></div>
                         <div class="post-content">
                             {% raw post_detail.content %}
                             IDS(intrusion detection system),即入侵检测系统。是一种对网络传输进行即时监视，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于，IDS是一种积极主动的安全防护技术。
@@ -72,11 +72,11 @@
 
                     <div class="post-reply">
                         {% for post_reply in post_replys %}
-                        <div class="reply-item">
+                        <div class="reply-item" reply_id="{{post_reply.id}}">
                             <div class="avatar hidden-xs"><img src="/avatar/{{post_reply.user.avatar}}"></div>
                             <div class="reply-main clear-xs">
                                 <div class="reply-head">
-                                    <span><a class="username" href="/">{{post_reply.user.username}}</a></span>
+                                    <span><a class="username" href="/user/{{post_reply.user.id}}">{{post_reply.user.username}}</a></span>
                                     <span class="divider">•</span>
                                     <span class="friendly-time">{{datetime_delta(post_reply.create_time)}}</span>
                                     <span class="divider">•</span>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="reply-function">
                                     <!-- <span> <a href="/"><i class="fa fa-reply"></i>回复</a></span> -->
-                                    <span><a href="#support" class="support-reply" reply='{{post_reply.id}}'><i class="fa fa-thumbs-o-up"></i>赞同</a></span>
+                                    <span><a href="#support" class="support-reply"><i class="fa fa-thumbs-o-up"></i>赞同</a></span>
                                 </div>
                             </div>
                         </div>
@@ -204,8 +204,7 @@
         return 1;
     });
     $('.support-reply').on('click', function(e){
-        e.preventDefault();
-        reply_id = $(e.target).attr('reply');
+        reply_id = $(e.target).parents('.reply-item[reply_id]').attr('reply_id')
         if(!reply_id)
             $.notify('错误....');
         console.log(reply_id);

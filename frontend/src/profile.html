@@ -15,10 +15,19 @@
                         <dt class="col-xs-6">用户名:</dt>
                         <dd class="col-xs-6"><span>@{{user.username}}</span></dd>
                         <dt class="col-xs-6">注册时间:</dt>
-                        <dd class="col-xs-6"><span class="friendly-time">{{profile.reg_time}}</span></dd>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.reg_time)}}</span></dd>
                         <dt class="col-xs-6">上次登录时间:</dt>
-                        <dd class="col-xs-6"><span class="friendly-time">{{profile.last_login_time}}</span></dd>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.last_login_time)}}</span></dd>
                     </dl>
+                    {% if is_follow != None %}
+                        <div class="text-center">
+                        {% if is_follow %}
+                            <a class="btn btn-sm btn-outline-primary" href="#" role="button">已关注</a>
+                        {% else %}
+                            <a class="btn btn-sm btn-outline-primary" href="#" role="button">关注</a>
+                        {% end %}
+                        </div>
+                    {% end %}
                 </div>
             </div>
             <div class="col-md-9">

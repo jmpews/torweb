@@ -1,6 +1,6 @@
 # coding:utf-8
 import tornado.web
-from backend.mysql_model.user import User, Profile
+from backend.mysql_model.user import User, Profile, Follower
 from backend.mysql_model.common import Notification
 from backend.mysql_model.post import Post, PostReply, CollectPost
 from handlers.basehandlers.basehandler import BaseRequestHandler
@@ -18,12 +18,15 @@ class UserProfileHandler(BaseRequestHandler):
         posts = Post.select().where(Post.user == user).limit(10)
         postreplys = PostReply.select().where(PostReply.user == user).limit(10)
         collectposts = CollectPost.select().where(CollectPost.user == user).limit(10)
+        # 是否显示关注
+        is_follow = Follower.is_follow(user, self.current_user)
 
         self.render('profile.html',
                     user=user,
                     profile=profile,
                     posts=posts,
                     postreplys=postreplys,
+                    is_follow=is_follow,
                     collectposts=collectposts)
 
 class UserProfileEditHandler(BaseRequestHandler):

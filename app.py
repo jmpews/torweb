@@ -15,6 +15,8 @@ from handlers.api import SystemStatusHandler
 from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserFollowerHandler
 from handlers.cache import update_cache
 
+from utils import ui_methods
+
 handlers = [
     (r'/', IndexHandler),
     (r'/topic/(\w+)', IndexTopicHandler),
@@ -41,8 +43,13 @@ handlers = [
     (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/src/assets"}),
 ]
 
+ui_build_methods = {
+    'datetime_delta': ui_methods.datetime_delta
+}
+
 application = tornado.web.Application(
     handlers=handlers,
+    ui_methods=ui_build_methods,
     default_handler_class=ErrorHandler,
     debug=config.DEBUG,
     static_path=path.join(path.dirname(path.abspath(__file__)), 'static'),

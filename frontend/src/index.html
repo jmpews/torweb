@@ -67,7 +67,7 @@
                         <span class="divider">•</span>
 						<span><a class="username" href="/user/{{post.user.id}}">{{post.user.username}}</a></span>
                         <span class="divider">•</span>
-                        <span class="friendly-time">{{post.latest_reply_time}}</span>
+                        <span class="friendly-time">{{datetime_delta(post.latest_reply_time)}}</span>
                         {% if post.latest_reply_user %}
                         <span class="divider">•</span>
                         <span><a class="username" href="/user/{{post.latest_reply_user.id}}">{{post.latest_reply_user.nickname}} </a>最后回复</span>

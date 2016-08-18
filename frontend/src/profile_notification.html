@@ -15,9 +15,9 @@
                         <dt class="col-xs-6">用户名:</dt>
                         <dd class="col-xs-6"><span>@{{current_user.username}}</span></dd>
                         <dt class="col-xs-6">注册时间:</dt>
-                        <dd class="col-xs-6"><span class="friendly-time">{{profile.reg_time}}</span></dd>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.reg_time)}}</span></dd>
                         <dt class="col-xs-6">上次登录时间:</dt>
-                        <dd class="col-xs-6"><span class="friendly-time">{{profile.last_login_time}}</span></dd>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.last_login_time)}}</span></dd>
                     </dl>
                 </div>
             </div>

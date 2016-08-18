@@ -167,8 +167,12 @@ function load_emoji_medium() {
         add_action_emoji_char_medium();
     })
 }
+
 function getFriendlyTime(t)
 {
+    t = t.replace('-', '/')
+    t = t.replace('-', '/')
+    console.log(t);
     if(!t) return 'biu...';
     var diff = Date.now() - Date.parse(t); 
     var seconds = 1000, minutes = 1000 * 60, hours = 1000 * 60 * 60, days = 1000 * 60 * 60 * 24, weeks = 1000 * 60 * 60 * 24 * 7, months = 1000 * 60 * 60 * 24 * 30, year = 1000 * 60 * 60 * 24 * 365; 
@@ -196,5 +200,5 @@ $(document).click(function() {
     }
 });
 $(document).ready(function () {
-    replate_friendly_time();
+    //replate_friendly_time();
 });

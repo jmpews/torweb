@@ -41,6 +41,8 @@ class Logger:
 
 
 class TimeUtil:
+
+    @staticmethod
     def get_weekday(date):
         week_day_dict = {
             0: '星期一',
@@ -54,18 +56,23 @@ class TimeUtil:
         day = date.weekday()
         return week_day_dict[day]
 
+    @staticmethod
     def datetime_format(value, format="%Y-%m-%d %H:%M"):
         return value.strftime(format)
 
+    @staticmethod
     def datetime_format_date(value, format="%Y-%m-%d"):
         return value.strftime(format)
 
+    @staticmethod
     def current_str_date():
         return time.strftime('%Y-%m-%d', time.localtime())
 
+    @staticmethod
     def current_str_datetime():
         return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
+    @staticmethod
     def datetime_delta(t):
         now = datetime.datetime.now()
         time_date = now.date() - t.date()

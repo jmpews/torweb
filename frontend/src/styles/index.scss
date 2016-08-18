@@ -24,7 +24,7 @@ body {
     a {
         color: $font-color;
         &:hover, &:focus {
-            color: $link-color !important;
+            color: $link-color;
         }
     }
 }
@@ -43,6 +43,10 @@ ul {
 
 .float-right {
     float: right;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .float-left {
@@ -67,6 +71,27 @@ ul {
         margin-right: 0px!important;
     }
 }
+// ---------------------notification.js-------------------------
+.alert-info {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: #fff;
+    padding-left: 30px;
+    text-align: center;
+    max-width: 300px;
+    opacity: 0.7;
+    &:hover {
+        opacity: 1;
+    }
+}
+.close {
+    color: #fff;
+    opacity: 0.5;
+    &:hover {
+        color: #fff;
+        opacity: 1;
+    }
+}
 
 // ---------------------bootstrap.css----------------------------
 a, a:focus, a:hover {
@@ -81,6 +106,7 @@ a, a:focus, a:hover {
     background-color: $btn-color;
     border-color: $btn-color;
     &:hover {
+        color: #fff !important;
         background-color: $btn-hover-color;
         border-color: $btn-hover-color;
     }
@@ -321,6 +347,9 @@ a, a:focus, a:hover {
             word-wrap: break-word;
             a{
                 color: $important-font-color;
+                &:hover {
+                    color: $base-color;
+                }
             }
         }
         .item-info {
@@ -571,6 +600,9 @@ a, a:focus, a:hover {
         }
         a {
             color: $font-color;
+            &:hover{
+                color: $base-color;
+            }
         }
     }
     .card-header-all-cate:last-of-type {

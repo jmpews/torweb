@@ -7,7 +7,7 @@ body {
   body a {
     color: #999; }
     body a:hover, body a:focus {
-      color: #FFBCBC !important; }
+      color: #FFBCBC; }
 
 a.username {
   color: #666; }
@@ -22,6 +22,9 @@ ul {
 
 .float-right {
   float: right; }
+
+.text-center {
+  text-align: center; }
 
 .float-left {
   float: left; }
@@ -38,6 +41,24 @@ ul {
   .clear-xs {
     margin-left: 0px !important;
     margin-right: 0px !important; } }
+.alert-info {
+  background-color: #FFBCBC;
+  border-color: #FFBCBC;
+  color: #fff;
+  padding-left: 30px;
+  text-align: center;
+  max-width: 300px;
+  opacity: 0.7; }
+  .alert-info:hover {
+    opacity: 1; }
+
+.close {
+  color: #fff;
+  opacity: 0.5; }
+  .close:hover {
+    color: #fff;
+    opacity: 1; }
+
 a, a:focus, a:hover {
   text-decoration: none;
   outline: none; }
@@ -49,6 +70,7 @@ a, a:focus, a:hover {
   background-color: #FFBCBC;
   border-color: #FFBCBC; }
   .btn-primary:hover {
+    color: #fff !important;
     background-color: #ff7070;
     border-color: #ff7070; }
 
@@ -219,6 +241,8 @@ a, a:focus, a:hover {
       word-wrap: break-word; }
       .post-item .item-mid .item-title a {
         color: #666; }
+        .post-item .item-mid .item-title a:hover {
+          color: #FFBCBC; }
     .post-item .item-mid .item-info {
       font-size: 11px; }
       .post-item .item-mid .item-info span .username {
@@ -381,6 +405,8 @@ a, a:focus, a:hover {
       color: #666; }
     .card-header-all .card-header-all-cate a {
       color: #999; }
+      .card-header-all .card-header-all-cate a:hover {
+        color: #FFBCBC; }
   .card-header-all .card-header-all-cate:last-of-type {
     border-bottom: none; }
 

@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Tornado.Index{% end %}
+
+{% block content %}
+    <div class="content-container container index-html">
+        <div class="col-md-9">
+        <div class="card custom-card">
+            <div class="current-topic">
+                <span>{% if current_topic  %}{{current_topic.name}}{% else %}全部分类{% end %}</span>
+            </div>
+            <div class="card-header">
+                热门:
+                <a href="/topic/study">学习资料</a> /
+                <a class="active" href="/topic/">考研</a> /
+                <a href="/topic/movie">电影资源</a> /
+                <a href="/topic/notice">校园通知</a> /
+                <a href="/topic/photo">摄影</a> /
+                <a class="card-header-all-bt" href="/">全部分类</a>
+            </div>
+            <div class="card-header-all">
+                <h3>所有分类</h3>
+                <div class="hd">
+                    <div class="card-header-all-cate">
+                        <h4>学院</h4>
+                        <a href="/">计算机</a> <a href="/">化学</a> <a href="/">经管</a> <a href="/">数学</a>
+                    </div>
+                    <div class="card-header-all-cate">
+                        <h4>通知</h4>
+                        <a href="/">学院通知</a> <a href="/">全校通知</a> <a href="/">教务通知</a> <a href="/">行政通知</a>
+                    </div>
+                    <div class="card-header-all-cate">
+                        <h4>学院</h4>
+                        <a href="/">计算机</a> <a href="/">化学</a> <a href="/">经管</a> <a href="/">数学</a>
+                    </div>
+                    <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
+                    {% set len_categorys = len(catetopic['categorys']) %}
+                    {% for i in range(len_categorys) %}
+                    {% set category = catetopic['categorys'][i] %}
+                    {% set topics = catetopic['topics'][i] %}
+                    <div class="card-header-all-cate">
+                        <h4>{{category.name}}</h4>
+                        {% for topic in topics %}
+                        <a href="/topic/{{topic.str}}">{{topic.name}}</a>
+                        {% end %}
+                    </div>
+                    {% end %}
+                    <div class="card-header-all-cate">
+                        <h4>未分类</h4>
+                        {% for topic in catetopic['topics'][-1] %}
+                        <a href="/topic/{{topic.str}}">{{topic.name}}</a>
+                        {% end %}
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+            {% for post in posts %}
+            <div class="post-item cl">
+                <div class="avatar hidden-xs">
+                    <a href="#"><img src="/avatar/{{post.user.avatar}}" ></a>
+                </div>
+
+                <div class="item-mid clear-xs">
+                    <div class="item-title"><a href="/post/{{post.id}}">{{post.title}}</a></div>
+                    <div class="item-info">
+                        <span><a class="cate" href="/topic/{{post.topic.str}}">{{post.topic.name}}</a></span>
+                        <span class="divider">•</span>
+						<span><a class="username" href="/user/{{post.user.id}}">{{post.user.username}}</a></span>
+                        <span class="divider">•</span>
+                        <span class="friendly-time">{{datetime_delta(post.latest_reply_time)}}</span>
+                        {% if post.latest_reply_user %}
+                        <span class="divider">•</span>
+                        <span><a class="username" href="/user/{{post.latest_reply_user.id}}">{{post.latest_reply_user.nickname}} </a>最后回复</span>
+                        {% end %}
+                        <span class="divider">•</span>
+                        <span>{{post.visit_count}} 浏览<span>
+                    </div>
+                </div>
+                <div class="item-end hidden-xs">
+                    <span class="tag tag-pill tag-success">{{post.reply_count}}</span>
+                </div>
+
+            </div>
+            {% end %}
+            <nav style="text-align:center">
+                <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1'] if pages['cp-1'] else pages['cp']}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <!-- 这里如果换成列表存放数据，这里直接使用for就可以了，但是字典表意更明确一点 -->
+                {% if pages['cp-2'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-2']}}">{{pages['cp-2']}}</a></li>
+                {% end %}
+                {% if pages['cp-1'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1']}}">{{pages['cp-1']}}</a></li>
+                {% end %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp']}}">{{pages['cp']}}</a></li>
+                {% if pages['cp+1'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1']}}">{{pages['cp+1']}}</a></li>
+                {% end %}
+                {% if pages['cp+2'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+2']}}">{{pages['cp+2']}}</a></li>
+                {% end %}
+                <li class="page-item">
+                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1'] if pages['cp+1'] else pages['cp']}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card register-card custom-card">
+                <div class="card-header">
+                    登陆
+                </div>
+                <div class="card-block">
+                    {% if not current_user %}
+                        <p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>
+                        <div>没有账户? <a href="/register">点击注册</a></div>
+                    {% else %}
+                        {{current_user.username}}
+                    {% end %}
+                </div>
+            </div>
+
+            <div class="card system-status-card custom-card">
+                <div class="card-header">
+                    服务器状态
+                </div>
+                <div class="card-block">
+                    <dl class="row">
+                        <dt class="col-xs-6">CPU使用率:</dt>
+                        <dd class="col-xs-6"><span class="cpu-per">{{systatus[0]}}</span></dd>
+                        <dt class="col-xs-6">RAM使用率:</dt>
+                        <dd class="col-xs-6"><span class="ram-per">{{systatus[1]}}</span></dd>
+                        <dt class="col-xs-6">连接数:</dt>
+                        <dd class="col-xs-6"><span class="net-conn">{{systatus[2]}}</span></dd>
+                        <dt class="col-xs-6">系统启动时间:</dt>
+                        <dd class="col-xs-6"><span class="os-start">{{systatus[3]}}</span></dd>
+
+                    </dl>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% end %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        monitor_system_status()
+        show_hide_cate_nav();
+    });
+</script>
+{% end %}

@@ -1,0 +1,813 @@
+
+$lightpink: #FFBCBC;
+$lightgreen: #A4EDA4;
+$lightgreen2: #2fca7b;
+$bg1: #e1e1e1;
+
+$base-color: #2fca7b;
+$link-color: $base-color;
+$link-hover-color: darken($link-color, 15%) !default;
+$btn-color: $link-color;
+$btn-hover-color: $link-hover-color;
+$font-color: #999;
+$important-font-color: #666;
+$base-background-color: #f7f7f7;
+$other-background-color: #e1e1e1;
+
+// ---------------------全局自定义样式---------------------
+body {
+    font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
+    color: $font-color;
+    font-size: 13px;
+    margin: 0;
+    background-color: $base-background-color;
+    a {
+        color: $font-color;
+        &:hover, &:focus {
+            color: $link-color;
+        }
+    }
+}
+a.username {
+    color: $important-font-color;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
+.float-right {
+    float: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.float-left {
+    float: left;
+}
+
+// 清除浮动
+.cl::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 767px){
+    // 隐藏元素
+    .hidden-xs {
+        display: none!important;
+    }
+    // 清除格式
+    .clear-xs {
+        margin-left: 0px!important;
+        margin-right: 0px!important;
+    }
+}
+// ---------------------notification.js-------------------------
+.alert-info {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: #fff;
+    padding-left: 30px;
+    text-align: center;
+    max-width: 300px;
+    opacity: 0.7;
+    &:hover {
+        opacity: 1;
+    }
+}
+.close {
+    color: #fff;
+    opacity: 0.5;
+    &:hover {
+        color: #fff;
+        opacity: 1;
+    }
+}
+
+// ---------------------bootstrap.css----------------------------
+a, a:focus, a:hover {
+    text-decoration: none;
+    outline: none;
+}
+.tag-success {
+    background-color: $other-background-color;
+}
+
+.btn-primary {
+    background-color: $btn-color;
+    border-color: $btn-color;
+    &:hover {
+        color: #fff !important;
+        background-color: $btn-hover-color;
+        border-color: $btn-hover-color;
+    }
+}
+.btn-outline-primary {
+    color: $btn-color;
+    border-color: $btn-color;
+    &:hover, &:focus, &:active {
+        color: #fff;
+        background-color: $btn-color;
+        border-color: $btn-color;
+    }
+}
+.page-link {
+    color: $link-color;
+}
+.page-link:focus, .page-link:hover {
+    color: $link-hover-color;
+}
+.form-control:focus {
+    border-color: $base-color;
+}
+
+
+// ---------------------页面样式-header部分样式-------------------
+.header {
+    margin: 0 auto;
+    z-index: 999;
+    background-color: rgba(255,255,255,.8);
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 2px 10px #dadbdc;
+    .header-container {
+        margin: 0 30px;
+        .header-logo {
+            position: relative;
+            top: 50px;
+            text-align: center;
+            font-size: 14px;
+            padding-left: 15px;
+            padding-right: 15px;
+            left: -30px;
+            background-color: $base-color;
+            line-height: 40px;
+            a {
+                color: #fff;
+                &:hover {
+                    color: #fff !important;
+                }
+            }
+        }
+        .header-nav {
+            height: 70px;
+            width: 100%;
+            max-width: 324px;
+            li {
+                float: left;
+                position: relative;
+                width: 25%;
+                a {
+                    display: block;
+                    padding: 16px 0 20px;
+                    font-size: 14px;
+                    color: $font-color;
+                    line-height: 30px;
+                    text-align: center;
+                    border-top: 4px solid transparent;
+                }
+
+                a:focus, a:hover {
+                    color: black;
+                    background-color: #fff;
+                    box-shadow: 0px -3px 2px rgba(0, 0, 0, 0.17);
+                }
+            }
+        }
+        .header-tip {
+            line-height: 70px;
+            float: right;
+            .options {
+                li {
+                    float: left;
+                    margin-right: 10px;
+                    img {
+                        width: 50px;
+                    }
+                    a {
+                    }
+                }
+                .dropdown {
+                    .dropdown-menu {
+                        font-size: 13px;
+                        min-width: 0;
+                        margin: 0px;
+                    }
+                    li {
+                        float: none;
+                        line-height: normal;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px){
+    .header-container{
+        width: 100%!important;
+        .header-logo {
+            margin: 0 auto;
+            width: 50px;
+            position: absolute;
+            left: 0px !important;
+        }
+        .header-nav {
+            padding-left: 50px;
+            max-width: none;
+            li {
+                width: 25%;
+            }
+        }
+    }
+}
+
+
+// ---------------------页面样式-header部分样式-------------------
+.footer {
+    background-color: white;
+    margin-top:20px;
+    padding-top: 20px;
+    .footer-container{
+        margin-top: 10px;
+        dl {
+            margin: 0;
+            float: left;
+            width: 240px;
+            padding-left: 22px;
+
+            dt {
+                font-size: 16px;
+                color: #333;
+                font-weight: 300;
+                margin-bottom: 10px;
+                padding-left: 16px;
+                line-height: 1;
+                border-left: 3px solid #d8d8d8;
+            }
+            dd {
+                line-height: 2;
+                font-size: 13px;
+                margin-bottom: 4px;
+                color: $font-color;
+                margin-left: 20px;
+                a {
+                    color: rgb(85, 85, 85);
+                }
+            }
+        }
+        .footer-logo {
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+}
+
+// ---------------------页面样式-content部分样式-------------------
+.content-container {
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-top: 7px;
+    // .content-header-del {
+    //     padding: 10px 0px 0;
+    //     margin-bottom: 10px;
+    //     border-bottom: 1px solid #ddd;
+    //     span {
+    //         font-size: 20px;
+    //     }
+    //     .nav {
+    //         float: right;
+    //     }
+    // }
+
+}
+
+// ---------------------页面样式-index.html-----------------------
+
+.index-html {
+    .col-md-9 {
+        padding-left: 0px;
+        .card-block {
+            padding: 0 1.25rem !important;
+        }
+    }
+    .col-md-3 {
+        padding-left: 0px;
+    }
+}
+
+.current-topic {
+    background-color: $base-color;
+    float: left;
+    position: absolute;
+    // 垂直居中
+    top: 50%;
+    transform: translate(0,-50%);
+    left: -21px;
+    width: 21px;
+    span {
+        // 文字竖排显示
+        padding-left: 5px;
+        color: #fff;
+        font-size: 11px;
+        letter-spacing: 11px;
+        display: block;
+    }
+}
+
+
+.post-item {
+    border-bottom: 1px solid #eee;
+    padding-top: 17px;
+    padding-bottom: 7px;
+    position: relative;
+    min-height: 68px;
+    a:hover {
+        color: $base-color !important;
+    }
+    .avatar {
+        position: absolute;
+        img {
+            width: 40px;
+            border-radius: 10px;
+        }
+    }
+    .item-mid {
+        margin-left: 50px;
+        margin-right: 40px;
+        .item-title {
+            font-size: 16px;
+            margin-bottom: 7px;
+            word-wrap: break-word;
+            a{
+                color: $important-font-color;
+                &:hover {
+                    color: $base-color;
+                }
+            }
+        }
+        .item-info {
+            font-size: 11px;
+            span {
+                .username {
+                    color: $important-font-color;
+                }
+                .cate {
+                }
+            }
+            .divider {
+                margin: 0 3px;
+                color: #ccc;
+            }
+        }
+    }
+    .item-end {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 30px;
+        line-height: 68px;;
+    }
+}
+
+
+// ---------------------页面样式-post_detail.html-----------------------
+.post-detail-html {
+    .col-md-9, .col-md-3 {
+        padding-left: 0px;
+    }
+
+}
+.post-detail {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    span {
+        margin-right:  5px;
+    }
+    .card {
+        box-shadow: inset 0 0 0 1px #e1e1e1;
+        a {
+            color: $font-color;
+        }
+    }
+   .post-title {
+        max-width: 500px;
+        margin: 0;
+        a {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 30px;
+            color: $important-font-color;
+        }
+    }
+    .post-info {
+        font-size: 11px;
+        margin-bottom: 5px;
+        .username {
+            color: $important-font-color;
+        }
+
+    }
+
+    .post-function {
+        margin-top: 10px;
+        text-align: right;
+        span {
+            padding-right: 2px;
+        }
+        a.post-collected {
+            color: $base-color;
+        }
+        .fa {
+            padding-right: 1px;
+        }
+    }
+}
+
+
+.post-reply {
+    .avatar {
+        position: absolute;
+        img {
+            width: 40px;
+        }
+    }
+    .reply-item {
+        margin-top: 10px;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #e5e5e5;
+        .reply-main {
+            margin-left: 50px;
+        }
+        .reply-head {
+            font-size: 11px;
+            .username {
+                color: $important-font-color;
+            }
+        }
+    }
+    .reply-function {
+        margin-top: 7px;
+        text-align: right;
+        a.postreply-supported {
+            color: $base-color;
+        }
+
+        span {
+            padding-right: 2px;
+        }
+        .fa {
+            padding-right: 1px;
+        }
+    }
+}
+.post-reply-card {
+    .card-block {
+        padding: 10px;
+    }
+    .mediumeditor {
+        min-height: 200px;
+        outline: none;
+        padding: 0px;
+    }
+}
+// -------------------medium-editor样式表
+.medium-editor-toolbar{
+    .medium-editor-toolbar-actions {
+        li {
+            button {
+                border: none;
+                padding: 0px;
+                width: 40px;
+                height: 30px;
+                //padding: 10px;
+                background-color: #fff;
+                border-right: 1px dashed $base-color;
+                border-top: 1px dashed $base-color;
+                border-bottom: 1px dashed $base-color;
+                &:hover {
+                    background-color: $base-color;
+                    color: #fff;
+                }
+            }
+
+            &:first-of-type {
+                button {
+                    border-left: 1px dashed $base-color;
+                }
+            }
+        }
+    }
+}
+.medium-toolbar-arrow-under:after {
+    border: 1px solid $base-color;
+}
+
+// ---------------------页面样式-post_detail.html-----------------------
+
+.content-container {
+    form {
+        margin-bottom: 13px;
+		label {
+			font-size: 13px;
+		}
+        .parsley-errors-list {
+            list-style: none outside none;
+            color: #d9534f;
+            margin-left: 5px;
+        }
+    }
+}
+
+
+// ---------------------页面样式-post_new.html-----------------------
+
+.note-editor.note-frame {
+	border:none;
+	border-left: 1px solid #F3EEEE;
+	border-right: 1px solid #F3EEEE;
+    p {
+        margin-bottom: 0.3rem !important;
+    }
+}
+
+.note-toolbar button {
+	height: 30px;
+}
+
+// ---------------------自定义card-header
+.custom-card.card {
+    border: none !important;
+    &>.card-header {
+        position: relative;
+        padding: 0.5rem 1.25rem !important;
+        border-bottom: none !important;
+    }
+
+    &>.card-header:after {
+        content: "";
+        width: 50%;
+        height: 1px;
+        background: $base-color;
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+    }
+
+}
+
+.post-list .card-header,
+.post-detail .card-header{
+    a {
+        margin: 0 3px;
+
+    }
+    a.active {
+        color: $link-color;
+    }
+}
+
+// -----------------------------一些自定义组件---------------------------
+// 自定义下拉分类组件
+.card-header-all {
+    display: none;
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+    padding: 5px;
+    border-left: 1px solid $base-color;
+    border-right: 1px solid $base-color;
+    border-bottom: 1px solid $base-color;
+    h3 {
+        font-size: 14px;
+        line-height: 30px;
+        border-bottom: 1px solid #e8e8e8;
+        color: $important-font-color;
+    }
+    .card-header-all-cate {
+        padding: 5px;
+        border-bottom: 1px solid #e8e8e8;
+        h4 {
+            font-size: 13px;
+            color: $important-font-color;
+        }
+        a {
+            color: $font-color;
+            &:hover{
+                color: $base-color;
+            }
+        }
+    }
+    .card-header-all-cate:last-of-type {
+        border-bottom: none;
+    }
+}
+
+.card-header-all:hover {
+    display: block;
+}
+
+// 系统状态显示组件
+.system-status-card {
+    li {
+        line-height: 20px;
+    }
+    span {
+        color: $font-color;
+        font-weight: bold;
+        margin-left: 10px;
+        font-size: 13px;
+    }
+    dt {
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 30px;
+        padding-left: 0px;
+        border-bottom: 1px dashed #eee;
+    }
+
+    dd {
+        color: $base-color;
+        font-weight: bold;
+        margin-bottom: 0px;
+        line-height: 30px;
+        padding-left: 0px;
+        border-bottom: 1px dashed #eee;
+    }
+}
+
+.register-card {
+    text-align: center;
+}
+
+
+// ---------------------页面样式-profile.html-----------------------
+.user-profile-html .col-md-3 {
+    padding-right: 0px;
+}
+.user-profile-widget {
+    font-size: 12px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    img {
+        width: 100%;
+        margin: 4px 0px 15px;
+        min-height: 100px;
+        border: 1px dashed #eee
+    }
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    dt {
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 30px;
+        padding-left: 3px;
+        border-bottom: 1px dashed #d8d6d6;
+    }
+
+    dd {
+        margin-bottom: 0px;
+        line-height: 30px;
+        padding-left: 0px;
+        border-bottom: 1px dashed #d8d6d6;
+    }
+}
+
+// 用户动态流组件
+.user-profile-trend {
+    background-color: #fff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    padding-left: 0px;
+    // text-align: center;
+    li {
+        color: $font-color;
+    }
+}
+
+// 自定义 card组件
+.user-profile-card {
+    .profile-card-head {
+        front-size: 14px;
+        text-decoration: underline;
+        text-align: center;
+        line-height: 40px;
+        padding: 5px;
+        background-color: #fbfbfb;
+        //border-top: 1px dashed #d8d6d6;
+        //border-bottom: 1px dashed #d8d6d6;
+    }
+    .profile-card-body {
+        padding-left: 10px;
+        padding-right: 10px;
+        li {
+            line-height: 30px;
+            border-bottom: 1px dashed #d8d6d6;
+        }
+        li:first-of-type {
+        }
+    }
+}
+
+// ---------------------页面样式-profile_edit.html-----------------------
+.user-profile-edit-html {
+    .col-md-9 {
+        padding-left: 0px;
+    }
+    .col-md-3 {
+        padding-left: 0px;
+    }
+}
+
+.user-avatar-edit {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    img {
+        max-width: 100%;
+        margin: 4px 0px 15px;
+        min-height: 100px;
+        border: 1px dashed #eee
+    }
+    .select-avatar {
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
+    }
+
+    .select-avatar input.file-input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+}
+.user-profile-edit {
+    background-color: #fff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    a {
+        color: $font-color;
+    }
+    .user-profile-edit-body {
+        padding-bottom: 10px;
+    }
+    form {
+        margin-top: 10px;
+        label {
+            text-align: center;
+        }
+        .form-control {
+            //padding: 0.3rem 0.75rem;
+            font-size: 13px;
+        }
+    }
+}
+
+// ---------------------页面样式-profile_notification.html-----------------------
+.user-profile-notification-html .col-md-3 {
+    padding-right: 0px;
+}
+// ---------------------------emoji表情-----------------------
+.emoji {
+    display: inline-block;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin: 0 2px;
+    vertical-align: text-bottom;
+}
+.post-new-html .emojis,
+.post-detail-html .emojis,
+{
+    z-index: 1;
+    display: none;
+    position: absolute;
+    width: 107px;
+    margin-top: 5px;
+    padding: 5px;
+    padding-bottom: 0;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.22);
+}

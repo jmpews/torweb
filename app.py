@@ -12,7 +12,7 @@ from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler, RegisterHandler, IndexTopicHandler
 from handlers.post import PostDetailHandler, PostAddHandler, PostReplyAddHandler, PostReplyOptHandler
 from handlers.api import SystemStatusHandler
-from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserFollowerHandler
+from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserOptHandler
 from handlers.cache import update_cache
 
 from utils import ui_methods
@@ -28,13 +28,13 @@ handlers = [
 
     # 对post和reply的操作
     (r'/postreplyopt', PostReplyOptHandler),
+    # 对user的操作
+    (r'/useropt', UserOptHandler),
 
 
-    (r'/user/(\d+)/follower', UserFollowerHandler),
     (r'/user/(\d+)', UserProfileHandler),
     (r'/user/edit', UserProfileEditHandler),
     (r'/user/notification', UserNotificationHandler),
-    (r'/user/follower', UserFollowerHandler),
     (r'/user/avatar/edit', UserAvatarEditHandler),
 
     (r'/api/systemstatus', SystemStatusHandler),

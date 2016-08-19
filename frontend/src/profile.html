@@ -22,9 +22,9 @@
                     {% if is_follow != None %}
                         <div class="text-center">
                         {% if is_follow %}
-                            <a class="btn btn-sm btn-outline-primary" href="#" role="button">已关注</a>
+                            <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="1" role="button">已关注</a>
                         {% else %}
-                            <a class="btn btn-sm btn-outline-primary" href="#" role="button">关注</a>
+                            <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="0" role="button">关注</a>
                         {% end %}
                         </div>
                     {% end %}
@@ -108,7 +108,53 @@
 {% block scripts %}
 <script type="text/javascript">
     $(document).ready(function () {
+        var user_id = {{user.id}};
         monitor_system_status()
+        $('.follow-user').on('mouseover', function(e){
+            if($(e.target).attr('is_follow') == '1') {
+                $(e.target).html('取消关注');
+            }
+        })
+        .on('mouseout', function(e){
+            if($(e.target).attr('is_follow') == '1') {
+                $(e.target).html('已关注');
+            }
+        })
+        .on('click', function(e){
+            var data;
+            if($(e.target).attr('is_follow') == '0') {
+                data = {'opt': 'follow-user', 'data': {'user': user_id}}
+            }
+            else if ($(e.target).attr('is_follow') == '1'){
+                data = {'opt': 'unfollow-user', 'data': {'user': user_id}}
+            }
+            $.ajax({
+               type: 'post',
+               dataType: 'json',
+               url: '/useropt',
+               data: JSON.stringify(data),
+               success: function(result, status) {
+                   if(result.errorcode == 0) {
+                       $(e.target).addClass('post-collected');
+                        if($(e.target).attr('is_follow') == '0') {
+                            $(e.target).attr('is_follow', '1');
+                            $.notify('关注成功');
+                            $(e.target).html('已关注');
+                       }
+                       else {
+                            $(e.target).attr('is_follow', '0');
+                            $.notify('取关成功');
+                            $(e.target).html('关注');
+                       }
+                   }
+                   else if(result.errorcode == 1) {
+                       $.notify(result.txt);
+                   }
+                   else{
+                   }
+                }
+            });
+        });
     });
 </script>
 {% end %}

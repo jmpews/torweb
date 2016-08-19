@@ -115,9 +115,9 @@ a, a:focus, a:hover {
     color: $btn-color;
     border-color: $btn-color;
     &:hover, &:focus, &:active {
-        color: #fff !important;
-        background-color: $btn-color !important;
-        border-color: $btn-color !important;
+        color: #fff;
+        background-color: $btn-color;
+        border-color: $btn-color;
     }
 }
 .page-link {
@@ -725,16 +725,22 @@ a, a:focus, a:hover {
 }
 
 // ---------------------页面样式-profile_edit.html-----------------------
-.user-profile-edit-html .col-md-3 {
-    padding-right: 0px;
+.user-profile-edit-html {
+    .col-md-9 {
+        padding-left: 0px;
+    }
+    .col-md-3 {
+        padding-left: 0px;
+    }
 }
+
 .user-avatar-edit {
     text-align: center;
     background-color: white;
     padding: 10px;
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
     img {
-        width: 100%;
+        max-width: 100%;
         margin: 4px 0px 15px;
         min-height: 100px;
         border: 1px dashed #eee

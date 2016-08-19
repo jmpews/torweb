@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Tornado.Index{% end %}
-
+{% block styles %}
+<link href="//cdn.bootcss.com/cropper/2.3.3/cropper.min.css" rel="stylesheet">
+{% end %}
 {% block content %}
         <div class="content-container container user-profile-edit-html">
             <div class="col-md-3">
                 <div class="user-avatar-edit">
                     <form enctype="multipart/form-data" action="/user/avatar/edit" method="post">
-                    <img id="avatar-preview"src="/avatar/{{current_user.avatar}}">
-                    <button class="btn btn-outline-primary btn-sm select-avatar"><input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择</button>
-                    <button type="submit" class="btn btn-outline-primary btn-sm">保存</button>
+                        <img id="avatar-preview"src="/avatar/{{current_user.avatar}}">
+                    <button class="btn btn-outline-primary btn-sm select-avatar">
+                        <input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择
+                    </button>
+                    <button type="submit" class="btn btn-outline-primary btn-sm upload-avatar">保存</button>
                     </form>
                 </div>
             </div>
@@ -61,7 +65,35 @@
 {% end %}
 
 {% block scripts %}
+<script src="//cdn.bootcss.com/cropper/2.3.3/cropper.min.js"></script>
 <script type="text/javascript">
+$('#avatar-preview').cropper({
+    viewMode: 3,
+    aspectRatio: 1 / 1,
+    autoCropArea: 0.5,
+    checkImageOrigin: true,
+});
+
+$('.upload-avatar').on('click', function(e){
+    e.preventDefault();
+    var avatar64 = $('#avatar-preview').cropper('getCroppedCanvas', {width: 100, height: 100}).toDataURL()
+    $.ajax({
+       type: 'post',
+       dataType: 'json',
+       url: '/useropt',
+       data: JSON.stringify({'opt': 'update-avatar', 'data': {'avatar': avatar64.split(',')[1]}}),
+       success: function(result, status) {
+           if(result.errorcode == 0) {
+               $.notify('头像更换成功');
+           }
+           else if(result.errorcode == 1) {
+               alert(result.txt);
+           }
+       }
+    });
+});
+
+
 $('form').on('submit', function (e) {
     return 1;
 });

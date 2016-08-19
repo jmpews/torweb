@@ -6,7 +6,7 @@ from backend.mysql_model.post import Post, PostReply, CollectPost
 from handlers.basehandlers.basehandler import BaseRequestHandler
 
 from utils.util import login_required
-from utils.util import get_cleaned_post_data
+from utils.util import get_cleaned_post_data, get_cleaned_json_data, json_result
 
 import config
 
@@ -74,7 +74,44 @@ class UserNotificationHandler(BaseRequestHandler):
                     notifications=notifications,
                     )
 
-class UserFollowerHandler(BaseRequestHandler):
-    def get(self, *args, **kwargs):
-        pass
+# 和postreplyopthandelr设计的类似，api模式
+class UserOptHandler(BaseRequestHandler):
+    @login_required
+    def post(self, *args, **kwargs):
+        # 这个函数有点意思, 一直做参数安全clean
+        json_data = get_cleaned_json_data(self, ['opt', 'data'])
+        data = json_data['data']
+        opt = json_data['opt']
+        if opt == 'follow-user':
+            try:
+                user = User.get(User.id == data['user'])
+            except:
+                self.write(json_result(1, '没有该用户'))
+                return
+            Follower.create(user=user, follower=self.current_user)
+            self.write(json_result(0, 'success'))
+        elif opt == 'unfollow-user':
+            try:
+                user = User.get(User.id == data['user'])
+            except:
+                self.write(json_result(1, '没有该用户'))
+            try:
+                f = Follower.get(Follower.user == user, Follower.follower == self.current_user)
+            except:
+                self.write(json_result(1, '还没有关注他'))
+            f.delete_instance()
+            self.write(json_result(0, 'success'))
+        elif opt == 'update-avatar':
+            import pdb;pdb.set_trace()
+            import base64
+            avatar = base64.b64decode(data['avatar'])
+            user = self.current_user
+            avatar_file_name = user.username + '.png'
+            avatar_file = open(config.avatar_upload_path + avatar_file_name, 'wb')
+            avatar_file.write(avatar)
+            user.avatar = avatar_file_name
+            user.save()
+            self.write(json_result(0, 'success'))
+        else:
+            self.write(json_result(1, 'opt不支持'))
 

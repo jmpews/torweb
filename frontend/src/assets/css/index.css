@@ -78,9 +78,9 @@ a, a:focus, a:hover {
   color: #2fca7b;
   border-color: #2fca7b; }
   .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
-    color: #fff !important;
-    background-color: #2fca7b !important;
-    border-color: #2fca7b !important; }
+    color: #fff;
+    background-color: #2fca7b;
+    border-color: #2fca7b; }
 
 .page-link {
   color: #2fca7b; }
@@ -492,8 +492,10 @@ a, a:focus, a:hover {
     line-height: 30px;
     border-bottom: 1px dashed #d8d6d6; }
 
+.user-profile-edit-html .col-md-9 {
+  padding-left: 0px; }
 .user-profile-edit-html .col-md-3 {
-  padding-right: 0px; }
+  padding-left: 0px; }
 
 .user-avatar-edit {
   text-align: center;
@@ -501,7 +503,7 @@ a, a:focus, a:hover {
   padding: 10px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); }
   .user-avatar-edit img {
-    width: 100%;
+    max-width: 100%;
     margin: 4px 0px 15px;
     min-height: 100px;
     border: 1px dashed #eee; }

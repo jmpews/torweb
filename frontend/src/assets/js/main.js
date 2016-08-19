@@ -30,6 +30,7 @@ function monitor_system_status() {
 }
 
 function change_image_preview() {
+    $inputFileElm = $(this);
     var pic = document.getElementById("avatar-preview");
     var file = document.getElementById("avatar");
     console.log(pic);
@@ -38,6 +39,10 @@ function change_image_preview() {
     // gif在IE浏览器暂时无法显示
     if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
         alert("文件必须为图片！"); return;
+    }
+    if(file.size > 1024*3000){
+        alert("上传图片不要超过3000KB");
+        return;
     }
     // IE浏览器
     if (document.all) {
@@ -53,19 +58,27 @@ function change_image_preview() {
             // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
             pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
         }
-    }else{
-        html5Reader(file);
     }
+    else {
+        var f = file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(f);
+        reader.onload = function(e) {
+            pic.src=this.result;
+            $(pic).cropper('reset').cropper('replace', this.result);
+        }
+    }
+    $inputFileElm.val("");
 }
 
-function html5Reader(file){ 
-    var file = file.files[0]; 
-    var reader = new FileReader(); 
-    reader.readAsDataURL(file); 
-    reader.onload = function(e){ 
+function html5Reader(file) {
+    var file = file.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(e) {
         var pic = document.getElementById("avatar-preview");
         pic.src=this.result;
-    } 
+    }
 }
 
 function show_hide_cate_nav() {

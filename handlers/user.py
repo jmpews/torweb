@@ -102,7 +102,6 @@ class UserOptHandler(BaseRequestHandler):
             f.delete_instance()
             self.write(json_result(0, 'success'))
         elif opt == 'update-avatar':
-            import pdb;pdb.set_trace()
             import base64
             avatar = base64.b64decode(data['avatar'])
             user = self.current_user

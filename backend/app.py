@@ -39,8 +39,9 @@ handlers = [
 
     (r'/api/systemstatus', SystemStatusHandler),
 
-    (r'/avatar/(.*)', tornado.web.StaticFileHandler, {"path": "static/images/avatars"}),
-    (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/dist"}),
+    (r'/avatar/(.*)', tornado.web.StaticFileHandler, {"path": "static/images/avatars/"}),
+    (r'/assets/lib/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/lib/"}),
+    (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/assets/"}),
 ]
 
 ui_build_methods = {
@@ -53,7 +54,7 @@ application = tornado.web.Application(
     default_handler_class=ErrorHandler,
     debug=config.DEBUG,
     static_path=path.join(path.dirname(path.abspath(__file__)), 'static'),
-    template_path="frontend/dist",
+    template_path="frontend/",
     login_url='/login',
     cookie_secret=config.COOKIE_SECRET,
 )

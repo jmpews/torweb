@@ -1,4 +1,4 @@
-
+@charset "UTF-8";
 $lightpink: #FFBCBC;
 $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
@@ -479,7 +479,7 @@ a, a:focus, a:hover {
         padding: 0px;
     }
 }
-// -------------------medium-editor样式表
+// -------------------medium-editor样式表------------------------
 .medium-editor-toolbar{
     .medium-editor-toolbar-actions {
         li {
@@ -798,7 +798,7 @@ a, a:focus, a:hover {
     vertical-align: text-bottom;
 }
 .post-new-html .emojis,
-.post-detail-html .emojis,
+.post-detail-html .emojis
 {
     z-index: 1;
     display: none;

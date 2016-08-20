@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "homepage": "https://github.com/jmpews/torweb",
+  "authors": [
+    "jmpews <jmpews@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.6.3",
+    "cropper": "^2.3.3",
+    "jquery": "^3.1.0",
+    "summernote": "^0.8.2",
+    "medium-editor": "^5.21.1",
+    "parsleyjs": "^2.4.4",
+    "bootstrap": "^3.3.7"
+  }
+}

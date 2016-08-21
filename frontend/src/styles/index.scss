@@ -4,7 +4,7 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: #2fca7b;
+$base-color: #e95420;
 $link-color: $base-color;
 $link-hover-color: darken($link-color, 15%) !default;
 $btn-color: $link-color;
@@ -71,6 +71,22 @@ ul {
         margin-right: 0px!important;
     }
 }
+
+// ---------------------summernote.js-------------------------
+.note-toolbar {
+    padding: 0;
+    background-color: #fff;
+    border-bottom: none;
+    & > .btn-group {
+        margin-top: 0;
+    }
+    .note-btn {
+        background: none;
+        border: none;
+    }
+}
+
+
 // ---------------------notification.js-------------------------
 .alert-info {
     background-color: $base-color;

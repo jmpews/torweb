@@ -1,0 +1,39 @@
+
+$border-radius:          .1rem !default;
+$border-radius-sm:       .1rem !default;
+
+$brand-success:             #1ab667 !default;
+$btn-secondary-border:           #dbe2e7 !default;
+$btn-secondary-color:            #788188 !default;
+$btn-padding-y:                  .3rem !default;
+$brand-primary:             #2fca7b !default;
+
+$card-cap-bg:              #f7fafa !default;
+
+@import "../../bower_components/bootstrap/scss/bootstrap";
+
+a, a:focus, a:hover {
+  text-decoration: none;
+  outline: none;
+}
+// _reboot.scss
+button:focus {
+  outline: none!important;
+}
+
+// _mixins/_tab-focus.scss
+@mixin tab-focus() {
+  outline: none!important;
+}
+
+.card-header {
+  box-shadow: inset 0 0 0 1px #e1e1e1;
+  background-color: #fbfbfb;
+}
+
+.card {
+  box-shadow: inset 0 0 0 1px #e1e1e1;
+  a {
+  }
+}
+

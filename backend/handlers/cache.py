@@ -1,12 +1,15 @@
 # coding:utf-8
 from utils import logger
-from db.mysql_model.post import PostCategory, PostTopic
+from db.mysql_model.post import PostCategory, PostTopic, Post
 
 catetopic = {'categorys': [], 'topics': []}
+cache_hot_post = {'reply': [], 'visit': []}
 
 
 def update_catetopic():
-    categorys = PostCategory.select().limit(10)
+    catetopic['categorys'] = []
+    catetopic['topics'] = []
+    categorys = PostCategory.select()
     for t in range(len(categorys)):
         catetopic['categorys'].append(categorys[t])
         tmp = []
@@ -21,10 +24,15 @@ def update_catetopic():
     catetopic['topics'].append(tmp)
 
 def update_hot_post():
-    
+    cache_hot_post['reply'] = []
+    cache_hot_post['visit'] = []
+    posts = Post.select().order_by(Post.reply_count).limit(4)
+    for post in posts:
+        cache_hot_post['reply'].append(post)
 
 
 def update_cache():
     logger.debug('start update cache...')
     update_catetopic()
+    update_hot_post()
 

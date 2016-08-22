@@ -123,6 +123,18 @@
             </div>
         </div> <!-- end col-md-9-->
         <div class="col-md-3">
+        <div class="card post-hot-card custom-card">
+            <div class="card-header">
+                <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
+            </div>
+            <div class="card-block">
+                <ul class="list-inline">
+                    {% for post in cache_hot_post['reply'] %}
+                    <li><a href="/post/{{post.id}}">{{post.title}}</a></li>
+                    {% end %}
+                </ul>
+            </div>
+        </div>
         <div class="card custom-card">
             <div class="card-header">
                 登陆

@@ -135,12 +135,11 @@
                     <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
                 </div>
                 <div class="card-block">
-                    {% if not current_user %}
-                    <p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>
-                    <div>没有账户? <a href="/register">点击注册</a></div>
-                    {% else %}
-                    {{current_user.username}}
-                    {% end %}
+                    <ul class="list-inline">
+                        {% for post in cache_hot_post['reply'] %}
+                        <li><a href="/post/{{post.id}}">{{post.title}}</a></li>
+                        {% end %}
+                    </ul>
                 </div>
             </div>
 

@@ -5,7 +5,7 @@ from db.mysql_model.common import Notification
 
 
 from handlers.basehandlers.basehandler import BaseRequestHandler
-from handlers.cache import catetopic
+from handlers.cache import catetopic, cache_hot_post
 
 
 from utils.util import login_required, json_result
@@ -22,6 +22,7 @@ class PostDetailHandler(BaseRequestHandler):
         self.render('post_detail.html',
                     post_detail=post_detail,
                     post_replys=post_replys,
+                    cache_hot_post=cache_hot_post,
                     catetopic=catetopic)
 
 

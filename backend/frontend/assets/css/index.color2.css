@@ -9,7 +9,7 @@ body a {
   color: #999;
 }
 body a:hover, body a:focus {
-  color: #e95420;
+  color: #A4EDA4;
 }
 
 a.username {
@@ -55,7 +55,7 @@ ul {
   }
 }
 .fa {
-  color: #e95420;
+  color: #A4EDA4;
 }
 
 .note-toolbar {
@@ -78,8 +78,8 @@ ul {
 }
 
 .alert-info {
-  background-color: #e95420;
-  border-color: #e95420;
+  background-color: #A4EDA4;
+  border-color: #A4EDA4;
   color: #fff;
   padding-left: 30px;
   text-align: center;
@@ -109,35 +109,35 @@ a, a:focus, a:hover {
 }
 
 .btn-primary {
-  background-color: #e95420;
-  border-color: #e95420;
+  background-color: #A4EDA4;
+  border-color: #A4EDA4;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff !important;
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #64e064;
+  border-color: #64e064;
 }
 
 .btn-outline-primary {
-  color: #e95420;
-  border-color: #e95420;
+  color: #A4EDA4;
+  border-color: #A4EDA4;
 }
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
   color: #fff;
-  background-color: #e95420;
-  border-color: #e95420;
+  background-color: #A4EDA4;
+  border-color: #A4EDA4;
 }
 
 .page-link {
-  color: #e95420;
+  color: #A4EDA4;
 }
 
 .page-link:focus, .page-link:hover {
-  color: #ac3911;
+  color: #64e064;
 }
 
 .form-control:focus {
-  border-color: #e95420;
+  border-color: #A4EDA4;
 }
 
 .header {
@@ -156,7 +156,7 @@ a, a:focus, a:hover {
   text-align: center;
   font-size: 14px;
   left: -30px;
-  background-color: #e95420;
+  background-color: #A4EDA4;
   line-height: 40px;
 }
 .header .header-container .header-logo .color {
@@ -307,7 +307,7 @@ a, a:focus, a:hover {
 }
 
 .current-topic {
-  background-color: #e95420;
+  background-color: #A4EDA4;
   float: left;
   position: absolute;
   top: 50%;
@@ -331,7 +331,7 @@ a, a:focus, a:hover {
   min-height: 68px;
 }
 .post-item a:hover {
-  color: #e95420 !important;
+  color: #A4EDA4 !important;
 }
 .post-item .avatar {
   position: absolute;
@@ -353,7 +353,7 @@ a, a:focus, a:hover {
   color: #666;
 }
 .post-item .item-mid .item-title a:hover {
-  color: #e95420;
+  color: #A4EDA4;
 }
 .post-item .item-mid .item-info {
   font-size: 11px;
@@ -415,7 +415,7 @@ a, a:focus, a:hover {
   padding-right: 2px;
 }
 .post-detail .post-function a.post-collected {
-  color: #e95420;
+  color: #A4EDA4;
 }
 .post-detail .post-function .fa {
   padding-right: 1px;
@@ -446,7 +446,7 @@ a, a:focus, a:hover {
   text-align: right;
 }
 .post-reply .reply-function a.postreply-supported {
-  color: #e95420;
+  color: #A4EDA4;
 }
 .post-reply .reply-function span {
   padding-right: 2px;
@@ -470,20 +470,20 @@ a, a:focus, a:hover {
   width: 40px;
   height: 30px;
   background-color: #fff;
-  border-right: 1px dashed #e95420;
-  border-top: 1px dashed #e95420;
-  border-bottom: 1px dashed #e95420;
+  border-right: 1px dashed #A4EDA4;
+  border-top: 1px dashed #A4EDA4;
+  border-bottom: 1px dashed #A4EDA4;
 }
 .medium-editor-toolbar .medium-editor-toolbar-actions li button:hover {
-  background-color: #e95420;
+  background-color: #A4EDA4;
   color: #fff;
 }
 .medium-editor-toolbar .medium-editor-toolbar-actions li:first-of-type button {
-  border-left: 1px dashed #e95420;
+  border-left: 1px dashed #A4EDA4;
 }
 
 .medium-toolbar-arrow-under:after {
-  border: 1px solid #e95420;
+  border: 1px solid #A4EDA4;
 }
 
 .content-container form {
@@ -523,7 +523,7 @@ a, a:focus, a:hover {
   content: "";
   width: 50%;
   height: 1px;
-  background: #e95420;
+  background: #A4EDA4;
   position: absolute;
   left: 0;
   bottom: 0px;
@@ -535,7 +535,7 @@ a, a:focus, a:hover {
 }
 .post-list .card-header a.active,
 .post-detail .card-header a.active {
-  color: #e95420;
+  color: #A4EDA4;
 }
 
 .card-header-all {
@@ -545,9 +545,9 @@ a, a:focus, a:hover {
   background-color: #fff;
   z-index: 999;
   padding: 5px;
-  border-left: 1px solid #e95420;
-  border-right: 1px solid #e95420;
-  border-bottom: 1px solid #e95420;
+  border-left: 1px solid #A4EDA4;
+  border-right: 1px solid #A4EDA4;
+  border-bottom: 1px solid #A4EDA4;
 }
 .card-header-all h3 {
   font-size: 14px;
@@ -567,7 +567,7 @@ a, a:focus, a:hover {
   color: #999;
 }
 .card-header-all .card-header-all-cate a:hover {
-  color: #e95420;
+  color: #A4EDA4;
 }
 .card-header-all .card-header-all-cate:last-of-type {
   border-bottom: none;

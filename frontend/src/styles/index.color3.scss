@@ -9,7 +9,7 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: #e95420;
+$base-color: $color3;
 $link-color: $base-color;
 $link-hover-color: darken($link-color, 15%) !default;
 $btn-color: $link-color;

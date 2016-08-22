@@ -28,7 +28,34 @@ function monitor_system_status() {
     })
     setTimeout(monitor_system_status, 5000);
 }
-
+function change_theme() {
+    $('.color').on('click', function (e) {
+        var color = $(e.target).attr('color');
+        $.cookie('theme', color, {expires: 30});
+        $('#theme').attr('href', '/assets/css/index.'+color+'.css');
+    });
+}
+function set_theme() {
+    // function getCookie(c_name)
+    // {
+    //     if (document.cookie.length>0)
+    //     {
+    //         c_start=document.cookie.indexOf(c_name + "=")
+    //         if (c_start!=-1)
+    //         {
+    //             c_start=c_start + c_name.length+1
+    //             c_end=document.cookie.indexOf(";",c_start)
+    //             if (c_end==-1) c_end=document.cookie.length
+    //             return unescape(document.cookie.substring(c_start,c_end))
+    //         }
+    //     }
+    //     return ""
+    // }
+    var theme = $.cookie('theme');
+    if(theme) {
+        $('#theme').attr('href', '/assets/css/index.'+theme+'.css');
+    }
+}
 function change_image_preview() {
     $inputFileElm = $(this);
     var pic = document.getElementById("avatar-preview");
@@ -211,4 +238,6 @@ $(document).click(function() {
 });
 $(document).ready(function () {
     //replate_friendly_time();
+    // set_theme();
+    change_theme();
 });

@@ -4,7 +4,7 @@ import config
 from db.mysql_model.user import User
 from db.mysql_model.post import Post, PostTopic
 from handlers.basehandlers.basehandler import BaseRequestHandler
-from handlers.cache import catetopic
+from handlers.cache import catetopic, cache_hot_post
 
 from utils.util import json_result
 from utils.util import get_cleaned_post_data, get_cleaned_query_data
@@ -45,6 +45,7 @@ class IndexHandler(BaseRequestHandler):
         self.render('index.html',
                     posts=posts,
                     catetopic=catetopic,
+                    cache_hot_post=cache_hot_post,
                     systatus=config.sys_status,
                     current_topic=None,
                     pages=pages,
@@ -61,14 +62,21 @@ class IndexTopicHandler(BaseRequestHandler):
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
         if current_page:
             current_page = int(current_page)
+            if current_page < 1:
+                self.redirect("/static/404.html")
+                return
             posts, page_number_limit = Post.list_by_topic(topic, page_number=current_page)
         else:
             current_page = 1
             posts, page_number_limit = Post.list_by_topic(topic)
+        if not posts:
+            self.redirect("/static/404.html")
+            return
         pages = get_page_nav(current_page, page_number_limit)
         self.render('index.html',
                     posts=posts,
                     catetopic=catetopic,
+                    cache_hot_post=cache_hot_post,
                     systatus=config.sys_status,
                     current_topic=topic,
                     pages=pages,

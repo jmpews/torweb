@@ -8,15 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bs4_custom.css">
-    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     {% block styles %}{% end %}
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.css" />
 </head>
 <body>
     <div class="header cl">
         <div class="header-container clear-xs cl">
             <div class="header-logo float-left">
                 <a href="/">Jmp</a>
+                <div class="theme">
+                    <span class="color color1" color="color1"></span>
+                    <span class="color color2" color="color2"></span>
+                    <span class="color color3" color="color3"></span>
+                    <span class="color color4" color="color4"></span>
+                </div>
             </div>
             <ul class="header-nav float-left list-inline cl">
                 <li>
@@ -85,6 +91,7 @@
 
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
     <script src="/assets/js/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="/assets/js/parsley.min.js"></script>
     <script src="/assets/i18n/zh_cn.js"></script>
     <script src="/assets/js/main.js"></script>

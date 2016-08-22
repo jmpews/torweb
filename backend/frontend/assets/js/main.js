@@ -82,16 +82,13 @@ function html5Reader(file) {
 }
 
 function show_hide_cate_nav() {
-    $(".card-header-all-bt").mouseenter(function(e){
-        $(".card-header-all").css('display','block');
-    })
-    $(".card-header").mouseleave(function(e) {
-        $(".card-header-all").css('display','none');
-        //$(".card-header-all").css('display','none');
+    // 解决进去时下拉菜单显示
+    $(".card-header-all-bt, .card-header:after").mouseenter(function(e){
+        // $(".card-header-all").css('display','block');
+        $('.card-header-all').fadeIn(500);
     });
-    $(".card-header-all").mouseenter(function(e){
-        $(".card-header-all").css('display','block');
-    }).mouseleave(function(e) {
+    $('.all-cate-card').mouseleave(function(e) {
+        // $('.card-header-all').fadeOut(500);
         $(".card-header-all").css('display','none');
     });
 }

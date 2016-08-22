@@ -54,6 +54,10 @@ ul {
     margin-right: 0px !important;
   }
 }
+.fa {
+  color: #e95420;
+}
+
 .note-toolbar {
   padding: 0;
   background-color: #fff;
@@ -550,11 +554,12 @@ a, a:focus, a:hover {
 }
 .system-status-card span {
   color: #999;
-  font-weight: bold;
+  font-weight: normal;
   margin-left: 10px;
   font-size: 13px;
 }
 .system-status-card dt {
+  font-weight: normal;
   text-align: right;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -564,8 +569,7 @@ a, a:focus, a:hover {
   border-bottom: 1px dashed #eee;
 }
 .system-status-card dd {
-  color: #e95420;
-  font-weight: bold;
+  font-weight: normal;
   margin-bottom: 0px;
   line-height: 30px;
   padding-left: 0px;
@@ -576,8 +580,8 @@ a, a:focus, a:hover {
   text-align: center;
 }
 
-.user-profile-html .col-md-3 {
-  padding-right: 0px;
+.user-profile-html .col-md-9, .user-profile-html .col-md-3 {
+  padding-left: 0px;
 }
 
 .user-profile-widget {

@@ -20,6 +20,8 @@ def update_catetopic():
         tmp.append(topics[i])
     catetopic['topics'].append(tmp)
 
+def update_hot_post():
+    
 
 
 def update_cache():

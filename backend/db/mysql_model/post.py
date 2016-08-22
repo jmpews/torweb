@@ -3,8 +3,8 @@ import datetime
 from .user import User
 from db.mysql_model import BaseModel
 from peewee import *
+import config
 
-from utils.common_utils import TimeUtil
 
 class PostCategory(BaseModel):
     name = CharField(verbose_name='标题')
@@ -47,7 +47,7 @@ class Post(BaseModel):
         self.save()
 
     @staticmethod
-    def list_recently(page_limit=10, page_number=1):
+    def list_recently(page_limit=config.default_page_limit, page_number=1):
         page_number_limit = Post.select().order_by(Post.latest_reply_time).count()
         posts = Post.select().order_by(Post.latest_reply_time).paginate(page_number, page_limit)
         # result = []
@@ -65,8 +65,9 @@ class Post(BaseModel):
         #     })
         return posts, page_number_limit
 
+
     @staticmethod
-    def list_by_topic(topic, page_limit=10, page_number=1):
+    def list_by_topic(topic, page_limit=config.default_page_limit, page_number=1):
         page_number_limit = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time).count()
         posts = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time).paginate(page_number, page_limit)
         return posts, page_number_limit

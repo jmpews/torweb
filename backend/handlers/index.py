@@ -9,19 +9,20 @@ from handlers.cache import catetopic
 from utils.util import json_result
 from utils.util import get_cleaned_post_data, get_cleaned_query_data
 
-def get_page_nav(current_page, page_number_limit, page_limit=10):
+def get_page_nav(current_page, page_number_limit, page_limit=config.default_page_limit):
     # 页导航(cp:当前页, <:前一页, >:后一页)
     # 模型: < cp-2, cp-1, cp, cp+1, cp+2A >
     # 这里如果换成列表存放，在模板里面会好操作一点
     pages = {'cp-2': 0, 'cp-1': 0, 'cp': current_page, 'cp+1': 0, 'cp+2': 0}
-    if current_page-1 > 1:
+    #import pdb; pdb.set_trace()
+    if current_page-1 >= 1:
         pages['cp-1'] = current_page-1
-    if current_page-2 > 1:
+    if current_page-2 >= 1:
         pages['cp-2'] = current_page-2
 
-    if (current_page+1)*page_limit < page_number_limit:
+    if (current_page)*page_limit < page_number_limit:
         pages['cp+1'] = current_page+1
-    if (current_page+2)*page_limit < page_number_limit:
+    if (current_page+1)*page_limit < page_number_limit:
         pages['cp+2'][1] = current_page+2
     return pages
 
@@ -30,10 +31,16 @@ class IndexHandler(BaseRequestHandler):
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
         if current_page:
             current_page = int(current_page)
+            if current_page < 1:
+                self.redirect("/static/404.html")
+                return
             posts, page_number_limit = Post.list_recently(page_number=current_page)
         else:
             current_page = 1
             posts, page_number_limit = Post.list_recently()
+        if not posts:
+            self.redirect("/static/404.html")
+            return
         pages = get_page_nav(current_page, page_number_limit)
         self.render('index.html',
                     posts=posts,

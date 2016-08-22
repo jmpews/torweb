@@ -24,7 +24,7 @@ COOKIE_SECRET = "6aOO5ZC55LiN5pWj6ZW/5oGo77yM6Iqx5p+T5LiN6YCP5Lmh5oSB44CC"
 log_path = '/var/tmp/'
 avatar_upload_path = './static/images/avatars/'
 default_avatar = "avatar_01.png"
-default_page_limit = 10
+default_page_limit = 3
 
 sys_status = [0, 0, 0, 0]
 

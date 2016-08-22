@@ -9,7 +9,7 @@
         <div class="content-container container user-profile-html">
             <div class="col-md-3">
                 <div class="user-profile-widget">
-                    <img src="/static/images/avatar_03.png">
+                    <img src="/avatar/{{user.avatar}}">
                     <dl class="row">
                         <dt class="col-xs-6">用户名:</dt>
                         <dd class="col-xs-6"><span>@{{user.username}}</span></dd>
@@ -61,11 +61,15 @@
                                 发表过的Post
                             </div>
                             <div class="profile-card-body">
+                                {% if posts %}
                                 <ul class="list-inline">
                                     {% for post in posts %}
-                                    <li> <a href="/post/{{post.id}}">{{post.title}}</a></li>
+                                    <li> <a href="/post/{{post.id}}">《{{post.title}}》</a></li>
                                     {% end %}
                                 </ul>
+                                {% else %}
+                                <div class="text-center">暂无</div>
+                                {% end %}
                             </div>
                         </div>
 
@@ -93,7 +97,7 @@
                             <div class="profile-card-body">
                                 <ul class="list-inline">
                                     {% for collectpost in collectposts %}
-                                    <li> <a href="/post/{{collectpost.post.id}}">{{collectpost.post.title}}</a></li>
+                                    <li> <a href="/post/{{collectpost.post.id}}">《{{collectpost.post.title}}》</a></li>
                                     {% end %}
                                 </ul>
                             </div>

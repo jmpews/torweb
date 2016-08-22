@@ -71,6 +71,10 @@ ul {
         margin-right: 0px!important;
     }
 }
+// ---------------------fa.js-------------------------
+.fa {
+    color: $base-color;
+}
 
 // ---------------------summernote.js-------------------------
 .note-toolbar {
@@ -639,11 +643,12 @@ a, a:focus, a:hover {
     }
     span {
         color: $font-color;
-        font-weight: bold;
+        font-weight: normal;
         margin-left: 10px;
         font-size: 13px;
     }
     dt {
+        font-weight: normal;
         text-align: right;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -654,8 +659,7 @@ a, a:focus, a:hover {
     }
 
     dd {
-        color: $base-color;
-        font-weight: bold;
+        font-weight: normal;
         margin-bottom: 0px;
         line-height: 30px;
         padding-left: 0px;
@@ -669,8 +673,11 @@ a, a:focus, a:hover {
 
 
 // ---------------------页面样式-profile.html-----------------------
-.user-profile-html .col-md-3 {
-    padding-right: 0px;
+.user-profile-html {
+    .col-md-9, .col-md-3 {
+        padding-left: 0px;
+    }
+
 }
 .user-profile-widget {
     font-size: 12px;

@@ -22,6 +22,7 @@ class User(BaseModel):
     username = CharField(index=True, unique=True, max_length=16)
     nickname = CharField(max_length=16)
     avatar = CharField(max_length=20)
+    theme = CharField(max_length=16, null=True)
     role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
     password = CharField(max_length=32)
     # 密码加盐
@@ -134,6 +135,16 @@ class User(BaseModel):
             return 0
         else:
             return r
+
+    def get_theme_by_cookie_user(self, handler):
+        theme_color = handler.get_cookie('theme', '')
+        if theme_color != '':
+            return '.' + theme_color
+        if self.theme:
+            handler.set_cookie('theme', self.theme)
+            return '.' + self.theme
+        return ''
+
 
 
 class Profile(BaseModel):

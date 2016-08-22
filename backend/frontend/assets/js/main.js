@@ -32,6 +32,20 @@ function change_theme() {
     $('.color').on('click', function (e) {
         var color = $(e.target).attr('color');
         $.cookie('theme', color, {expires: 30});
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/useropt',
+            data: JSON.stringify({'opt': 'update-theme', 'data': {'theme': color}}),
+            success: function(result, status) {
+                if(result.errorcode == 0) {
+                    $.notify('主题保存成功');
+                }
+                else if(result.errorcode == 1) {
+                    alert(result.txt);
+                }
+            }
+        });
         $('#theme').attr('href', '/assets/css/index.'+color+'.css');
     });
 }

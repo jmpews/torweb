@@ -111,6 +111,11 @@ class UserOptHandler(BaseRequestHandler):
             user.avatar = avatar_file_name
             user.save()
             self.write(json_result(0, 'success'))
+        elif opt == 'update-theme':
+            user = self.current_user
+            user.theme = data['theme']
+            user.save()
+            self.write(json_result(0, 'success'))
         else:
             self.write(json_result(1, 'opt不支持'))
 

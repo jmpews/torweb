@@ -29,7 +29,6 @@ var lib= { // 第三方依赖文件
             'bower_components/cropper/dist/cropper.min.js',
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/parsleyjs/dist/parsley.min.js',
-            'bower_components/summernote/dist/summernote.min.js',
             'bower_components/medium-editor/dist/js/medium-editor.min.js',
             'bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js'
@@ -38,7 +37,6 @@ var lib= { // 第三方依赖文件
             'bower_components/font-awesome/css/font-awesome.min.css',
             'bower_components/medium-editor/dist/css/medium-editor.min.css',
             'bower_components/cropper/dist/cropper.min.css',
-            'bower_components/summernote/dist/summernote.css'
         ],
         path: [
             'bower_components/summernote/dist/font',

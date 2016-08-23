@@ -131,10 +131,16 @@ a, a:focus, a:hover {
 .btn-outline-primary:active.focus,
 .btn-outline-primary.active:hover,
 .btn-outline-primary.active:focus,
-.btn-outline-primary.active.focus {
+.btn-outline-primary.active.focus,
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-primary:active.focus,
+.btn-primary.active:hover,
+.btn-primary.active:focus,
+.btn-primary.active.focus {
   color: #fff;
-  background-color: #e95420;
-  border-color: #e95420;
+  background-color: #ac3911;
+  border-color: #ac3911;
 }
 
 .btn-outline-primary {
@@ -453,6 +459,9 @@ a, a:focus, a:hover {
 }
 .post-detail .post-function .fa {
   padding-right: 1px;
+}
+.post-detail .post-content img {
+  max-width: 90%;
 }
 
 .post-reply .avatar {

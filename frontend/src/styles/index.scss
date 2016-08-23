@@ -158,10 +158,16 @@ a, a:focus, a:hover {
 .btn-outline-primary:active.focus,
 .btn-outline-primary.active:hover,
 .btn-outline-primary.active:focus,
-.btn-outline-primary.active.focus{
+.btn-outline-primary.active.focus,
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-primary:active.focus,
+.btn-primary.active:hover,
+.btn-primary.active:focus,
+.btn-primary.active.focus{
     color: #fff;
-    background-color: $btn-color;
-    border-color: $btn-color;
+    background-color: $btn-hover-color;
+    border-color: $btn-hover-color;
 }
 .btn-outline-primary {
     color: $btn-color;
@@ -521,6 +527,11 @@ a, a:focus, a:hover {
         }
         .fa {
             padding-right: 1px;
+        }
+    }
+    .post-content {
+        img {
+            max-width: 90%;
         }
     }
 }

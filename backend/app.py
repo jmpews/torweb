@@ -12,6 +12,7 @@ from handlers.basehandlers.basehandler import ErrorHandler
 from handlers.index import IndexHandler, LoginHandler, RegisterHandler, IndexTopicHandler
 from handlers.post import PostDetailHandler, PostAddHandler, PostReplyAddHandler, PostReplyOptHandler
 from handlers.api import SystemStatusHandler
+from handlers.another import AnotherHandler
 from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserOptHandler
 from handlers.cache import update_cache
 
@@ -42,6 +43,8 @@ handlers = [
     (r'/avatar/(.*)', tornado.web.StaticFileHandler, {"path": "static/images/avatars/"}),
     (r'/assets/lib/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/lib/"}),
     (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/assets/"}),
+
+    (r'/another', AnotherHandler),
 ]
 
 ui_build_methods = {

@@ -12,6 +12,7 @@ $bg1: #e1e1e1;
 $base-color: #e95420;
 $link-color: $base-color;
 $link-hover-color: darken($link-color, 15%) !default;
+$link-light-color:  lighten($link-color, 15%) !default;
 $btn-color: $link-color;
 $btn-hover-color: $link-hover-color;
 $font-color: #999;
@@ -90,6 +91,10 @@ ul {
 // ---------------------fa.js-------------------------
 .fa {
     color: $base-color;
+    padding: 0 3px;
+    &:hover {
+        color: $base-color;
+    }
 }
 
 // ---------------------summernote.js-------------------------
@@ -402,7 +407,25 @@ a, a:focus, a:hover {
         padding-right: 0px;
     }
 }
-
+.all-cate-card {
+    .divider {
+        margin: 0 3px;
+    }
+}
+.card-header-all-bt {
+    border-left: 1px solid $font-color;
+    margin-left: 4px;
+    padding-left: 4px;
+    .fa {
+        color: $font-color;
+        padding-right: 2px;
+    }
+    &:hover {
+        .fa {
+            color: $base-color;
+        }
+    }
+}
 .current-topic {
     background-color: $base-color;
     float: left;
@@ -460,6 +483,7 @@ a, a:focus, a:hover {
                     color: $important-font-color;
                 }
                 .cate {
+                    color: $link-light-color;
                 }
             }
             .divider {
@@ -469,6 +493,7 @@ a, a:focus, a:hover {
         }
     }
     .item-end {
+        color: $base-color;
         position: absolute;
         right: 0px;
         top: 0px;

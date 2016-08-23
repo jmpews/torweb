@@ -64,6 +64,10 @@ ul {
 }
 .fa {
   color: #e95420;
+  padding: 0 3px;
+}
+.fa:hover {
+  color: #e95420;
 }
 
 .note-toolbar {
@@ -346,6 +350,23 @@ a, a:focus, a:hover {
   padding-right: 0px;
 }
 
+.all-cate-card .divider {
+  margin: 0 3px;
+}
+
+.card-header-all-bt {
+  border-left: 1px solid #999;
+  margin-left: 4px;
+  padding-left: 4px;
+}
+.card-header-all-bt .fa {
+  color: #999;
+  padding-right: 2px;
+}
+.card-header-all-bt:hover .fa {
+  color: #e95420;
+}
+
 .current-topic {
   background-color: #e95420;
   float: left;
@@ -401,11 +422,15 @@ a, a:focus, a:hover {
 .post-item .item-mid .item-info span .username {
   color: #666;
 }
+.post-item .item-mid .item-info span .cate {
+  color: #f08966;
+}
 .post-item .item-mid .item-info .divider {
   margin: 0 3px;
   color: #ccc;
 }
 .post-item .item-end {
+  color: #e95420;
   position: absolute;
   right: 0px;
   top: 0px;

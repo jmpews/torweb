@@ -47,7 +47,7 @@ var lib= { // 第三方依赖文件
     scss: [
         'src/lib/bootstrap/scss/bootstrap.scss'
     ]
-}
+};
 
 // // 过滤文件, 根据bower.json自动生成
 // var filterByExtension = function(extension) {
@@ -87,7 +87,7 @@ gulp.task('copy', function () {
 
 //deal with custom scipt
 gulp.task('scripts', function() {
-    return gulp.src('./src/scripts/*.js')
+    return gulp.src('./src/scripts/index.js')
         .pipe(jshint.reporter('default'))
         .pipe(concat('main.js'))
         .pipe(gulp.dest(distPath+'/assets/js'))
@@ -96,6 +96,17 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest(distPath+'/assets/js'))
         .pipe(notify({ message: 'Scripts task complete' }));
 });
+//deal with tinymce-upload
+gulp.task('scripts-plugin', function() {
+    return gulp.src('./src/scripts/plugin.js')
+        .pipe(jshint.reporter('default'))
+        .pipe(gulp.dest('../backend/frontend/assets/tinymce/plugins/pasteUpload'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('../backend/frontend/assets/tinymce/plugins/pasteUpload'))
+        .pipe(notify({ message: 'scripts-plugin task complete' }));
+});
+
 //deal with custom styles
 gulp.task('styles', function(){
     //return sass(['./src/styles/**/*.scss','./src/lib/bootstrap/scss/bootstrap.scss'], { style: 'expanded'})
@@ -132,7 +143,8 @@ gulp.task('watch', function() {
     // 监听文件变化
     gulp.watch('src/bootstrap/scss/*.scss', ['styles']);
     gulp.watch('src/styles/*.scss', ['styles']);
-    gulp.watch('src/scripts/*.js', ['scripts']);
+    gulp.watch('src/scripts/index.js', ['scripts']);
+    gulp.watch('src/scripts/plugin.js', ['scripts-plugin']);
     gulp.watch('src/images/**/*', ['images']);
     // gulp.watch('src/bower_components/**/*', ['bower']);
     gulp.watch('src/*.html', ['htmls']);
@@ -140,7 +152,7 @@ gulp.task('watch', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.run('styles', 'scripts', 'images', 'htmls', 'copy');
+    gulp.run('styles', 'scripts', 'images', 'htmls', 'copy', 'scripts-plugin');
     gulp.run('watch')
 });
 

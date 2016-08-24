@@ -37,13 +37,23 @@ body {
         }
     }
 }
-
+.divider {
+    margin: 0 3px;
+    color: $font-color;
+}
+.important-divider {
+    margin: 0 3px;
+    color: $base-color;
+}
 .blur {
     -moz-filter: blur(5px);
     -webkit-filter: blur(5px);
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(5px);
+}
+.important-font {
+    color: $base-color;
 }
 a.username {
     color: $important-font-color;
@@ -413,9 +423,6 @@ a, a:focus, a:hover {
     }
 }
 .card-header-all-bt {
-    border-left: 1px solid $font-color;
-    margin-left: 4px;
-    padding-left: 4px;
     .fa {
         color: $font-color;
         padding-right: 2px;
@@ -799,6 +806,7 @@ a, a:focus, a:hover {
     padding: 10px;
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
     img {
+        max-width: 200px;
         width: 100%;
         margin: 4px 0px 15px;
         min-height: 100px;
@@ -837,6 +845,33 @@ a, a:focus, a:hover {
     }
 }
 
+// 用户动态流组件
+.user-profile-follow {
+    background-color: #fff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    padding-left: 0px;
+    // text-align: center;
+    .profile-card-body {
+        padding: 10px;
+
+    }
+    li {
+        text-align: center;
+        color: $font-color;
+        float: left;
+        a {
+        }
+        span {
+            display: block;
+            line-height: 1;
+        }
+        img {
+            display: block;
+            width: 30px;
+        }
+    }
+}
+
 // 自定义 card组件
 .user-profile-card {
     .profile-card-head {
@@ -861,6 +896,13 @@ a, a:focus, a:hover {
     }
 }
 
+// ---------------------页面样式-follow.html-----------------------
+.user-profile-follower-html {
+    .col-md-9, .col-md-3 {
+        padding-left: 0px;
+    }
+
+}
 // ---------------------页面样式-profile_edit.html-----------------------
 .user-profile-edit-html {
     .col-md-9 {

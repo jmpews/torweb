@@ -74,6 +74,20 @@ class UserNotificationHandler(BaseRequestHandler):
                     notifications=notifications,
                     )
 
+class UserFollowerHandler(BaseRequestHandler):
+    def get(self, user_id, *args, **kwargs):
+        user = User.get(User.id == user_id)
+        who_follow = Follower.select().where(Follower.user == user)
+        follow_who = Follower.select().where(Follower.follower == user)
+        profile = Profile.get_by_user(user)
+        is_follow = Follower.is_follow(user, self.current_user)
+        self.render('profile_follower.html',
+                    user=user,
+                    profile=profile,
+                    who_follow=who_follow,
+                    follow_who=follow_who,
+                    is_follow=is_follow)
+
 # 和postreplyopthandelr设计的类似，api模式
 class UserOptHandler(BaseRequestHandler):
     @login_required

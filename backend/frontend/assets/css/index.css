@@ -12,12 +12,26 @@ body a:hover, body a:focus {
   color: #e95420;
 }
 
+.divider {
+  margin: 0 3px;
+  color: #999;
+}
+
+.important-divider {
+  margin: 0 3px;
+  color: #e95420;
+}
+
 .blur {
   -moz-filter: blur(5px);
   -webkit-filter: blur(5px);
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
+}
+
+.important-font {
+  color: #e95420;
 }
 
 a.username {
@@ -354,11 +368,6 @@ a, a:focus, a:hover {
   margin: 0 3px;
 }
 
-.card-header-all-bt {
-  border-left: 1px solid #999;
-  margin-left: 4px;
-  padding-left: 4px;
-}
 .card-header-all-bt .fa {
   color: #999;
   padding-right: 2px;
@@ -692,6 +701,7 @@ a, a:focus, a:hover {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
 }
 .user-profile-widget img {
+  max-width: 200px;
   width: 100%;
   margin: 4px 0px 15px;
   min-height: 100px;
@@ -726,6 +736,28 @@ a, a:focus, a:hover {
   color: #999;
 }
 
+.user-profile-follow {
+  background-color: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  padding-left: 0px;
+}
+.user-profile-follow .profile-card-body {
+  padding: 10px;
+}
+.user-profile-follow li {
+  text-align: center;
+  color: #999;
+  float: left;
+}
+.user-profile-follow li span {
+  display: block;
+  line-height: 1;
+}
+.user-profile-follow li img {
+  display: block;
+  width: 30px;
+}
+
 .user-profile-card .profile-card-head {
   front-size: 14px;
   text-decoration: underline;
@@ -741,6 +773,10 @@ a, a:focus, a:hover {
 .user-profile-card .profile-card-body li {
   line-height: 30px;
   border-bottom: 1px dashed #d8d6d6;
+}
+
+.user-profile-follower-html .col-md-9, .user-profile-follower-html .col-md-3 {
+  padding-left: 0px;
 }
 
 .user-profile-edit-html .col-md-9 {

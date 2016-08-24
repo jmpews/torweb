@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Tornado.Profile.Follower{% end %}
+{% block styles %}
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+{% end %}
+
+{% block content %}
+        <div class="content-container container user-profile-follower-html">
+            <div class="col-md-3">
+                <div class="user-profile-widget">
+                    <div class="text-center">
+                        <img src="/avatar/{{user.avatar}}">
+                    </div>
+                    <dl class="row">
+                        <dt class="col-xs-6">用户名:</dt>
+                        <dd class="col-xs-6"><span>@{{user.username}}</span></dd>
+                        <dt class="col-xs-6">注册时间:</dt>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.reg_time)}}</span></dd>
+                        <dt class="col-xs-6">上次登录时间:</dt>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.last_login_time)}}</span></dd>
+                    </dl>
+                    {% if is_follow != None %}
+                    <div class="text-center">
+                        {% if is_follow %}
+                        <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="1" role="button">已关注</a>
+                        {% else %}
+                        <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="0" role="button">关注</a>
+                        {% end %}
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="user-profile-follow">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/edit">个人设置</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/notification">消息通知</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/follower/{{user.id}}">个人关注</a>
+                        </li>
+                    </ul>
+                    <div class="">
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                关注者
+                            </div>
+                            <div class="profile-card-body cl">
+                                <ul class="list-inline">
+                                    {% for who in follow_who %}
+                                    <li><a href="/user/{{who.follower.id}}"><img src="/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                粉丝
+                            </div>
+                            <div class="profile-card-body cl">
+                                {% if who_follow %}
+                                <ul class="list-inline">
+                                    {% for who in who_follow %}
+                                    <li><img src="/avatar/{{who.user.avatar}}"><a href="/user/{{who.user.id}}"><span>{{who.user.username}}</span></a> </li>
+                                    {% end %}
+                                </ul>
+                                {% else %}
+                                <div class="text-center">
+                                <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+{% end %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+</script>
+{% end %}

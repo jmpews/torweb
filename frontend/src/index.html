@@ -20,6 +20,7 @@
                 <a href="/topic/notice">校园通知</a>
                 <span class="divider">/</span>
                 <a href="/topic/photo">摄影</a>
+                <span class="important-divider">|</span>
                 <a class="card-header-all-bt" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
             </div>
             <div class="card-header-all">
@@ -141,7 +142,7 @@
                 <div class="card-block">
                     <ul class="list-inline">
                         {% for post in cache_hot_post['reply'] %}
-                        <li><a href="/post/{{post.id}}">{{post.title}}</a></li>
+                        <li><span class="">{{post.reply_count}} ℃</span> <span class="important-divider">|</span> <a href="/post/{{post.id}}">{{post.title}}</a></li>
                         {% end %}
                     </ul>
                 </div>

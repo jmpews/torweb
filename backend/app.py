@@ -14,7 +14,7 @@ from handlers.post import PostDetailHandler, PostAddHandler, PostReplyAddHandler
 from handlers.api import SystemStatusHandler
 from handlers.utils import UploadImgHandler
 from handlers.another import AnotherHandler
-from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserOptHandler
+from handlers.user import UserProfileHandler, UserProfileEditHandler, UserAvatarEditHandler, UserNotificationHandler, UserOptHandler, UserFollowerHandler
 from handlers.cache import update_cache
 
 from utils import ui_methods
@@ -32,6 +32,8 @@ handlers = [
     (r'/postreplyopt', PostReplyOptHandler),
     # 对user的操作
     (r'/useropt', UserOptHandler),
+    # follower关注者
+    (r'/follower/(\d+)', UserFollowerHandler),
 
 
     (r'/user/(\d+)', UserProfileHandler),

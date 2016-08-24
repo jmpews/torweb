@@ -67,7 +67,9 @@
                                     {% end %}
                                 </ul>
                                 {% else %}
-                                <div class="text-center"><i class="fa fa-meh-o" aria-hidden="true"></i>暂无</div>
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
                                 {% end %}
                             </div>
                         </div>
@@ -77,6 +79,7 @@
                                 发表过的评论
                             </div>
                             <div class="profile-card-body">
+                                {% if postreplys %}
                                 <ul class="list-inline">
                                     {% for postreply in postreplys %}
                                     <li>
@@ -86,6 +89,11 @@
                                     </li>
                                     {% end %}
                                 </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
                             </div>
                         </div>
 
@@ -94,11 +102,17 @@
                                 收藏过的Post
                             </div>
                             <div class="profile-card-body">
+                                {% if collectposts %}
                                 <ul class="list-inline">
                                     {% for collectpost in collectposts %}
                                     <li> <a href="/post/{{collectpost.post.id}}">《{{collectpost.post.title}}》</a></li>
                                     {% end %}
                                 </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
                             </div>
                         </div>
                     </div>

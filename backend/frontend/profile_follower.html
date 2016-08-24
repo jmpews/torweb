@@ -35,10 +35,7 @@
                 <div class="user-profile-follow">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/edit">个人设置</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/notification">消息通知</a>
+                            <a class="nav-link" href="/user/{{user.id}}">个人资料</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="/follower/{{user.id}}">个人关注</a>
@@ -50,11 +47,17 @@
                                 关注者
                             </div>
                             <div class="profile-card-body cl">
+                                {% if follow_who %}
                                 <ul class="list-inline">
                                     {% for who in follow_who %}
                                     <li><a href="/user/{{who.follower.id}}"><img src="/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
                                     {% end %}
                                 </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
                             </div>
                         </div>
 

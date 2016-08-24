@@ -9,7 +9,9 @@
         <div class="content-container container user-profile-notification-html">
             <div class="col-md-3">
                 <div class="user-profile-widget">
-                    <img src="/avatar/{{current_user.avatar}}">
+                    <div class="text-center">
+                        <img src="/avatar/{{current_user.avatar}}">
+                    </div>
                     <dl class="row">
                         <dt class="col-xs-6">用户名:</dt>
                         <dd class="col-xs-6"><span>@{{current_user.username}}</span></dd>
@@ -39,6 +41,7 @@
                                 消息通知
                             </div>
                             <div class="profile-card-body">
+                                {% if notifications %}
                                 <ul class="list-inline">
                                     {% for notice in notifications %}
                                         {% if notice.opt == 1 %}
@@ -59,6 +62,11 @@
                                         {% end %}
                                     {% end %}
                                 </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
                             </div>
                         </div>
 

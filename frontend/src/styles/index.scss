@@ -1,6 +1,7 @@
 @charset "UTF-8";
 $color1: #FFBCBC;
-$color2: #A4EDA4;
+//$color2: #A4EDA4;
+$color2: #000;
 $color3: #2fca7b;
 $color4: #e95420;
 
@@ -410,7 +411,7 @@ a, a:focus, a:hover {
     .col-md-9 {
         padding-right: 0px;
         .card-block {
-            padding: 0 1.25rem !important;
+            padding: 0 1.25rem;
         }
     }
     .col-md-3 {
@@ -460,7 +461,7 @@ a, a:focus, a:hover {
     position: relative;
     min-height: 68px;
     a:hover {
-        color: $base-color !important;
+        color: $base-color;
     }
     .avatar {
         position: absolute;
@@ -477,9 +478,10 @@ a, a:focus, a:hover {
             margin-bottom: 7px;
             word-wrap: break-word;
             a{
-                color: $important-font-color;
+                color: $link-color;
+                //color: $important-font-color;
                 &:hover {
-                    color: $base-color;
+                    text-decoration: underline;
                 }
             }
         }
@@ -490,7 +492,8 @@ a, a:focus, a:hover {
                     color: $important-font-color;
                 }
                 .cate {
-                    color: $link-light-color;
+                    color: $font-color;
+                    background-color: #f5f5f5;
                 }
             }
             .divider {
@@ -513,7 +516,7 @@ a, a:focus, a:hover {
 // ---------------------页面样式-post_detail.html-----------------------
 .post-detail-html {
     .col-md-9, .col-md-3 {
-        padding-left: 0px;
+        padding-right: 0px;
     }
 
 }
@@ -730,16 +733,19 @@ a, a:focus, a:hover {
         color: $important-font-color;
     }
     .card-header-all-cate {
-        padding: 5px;
+        padding: 5px 0;
         border-bottom: 1px solid #e8e8e8;
         h4 {
             font-size: 13px;
             color: $important-font-color;
         }
-        a {
-            color: $font-color;
-            &:hover{
-                color: $base-color;
+        .card-header-all-cate-topic {
+            padding-left: 10px;
+            a {
+                color: $font-color;
+                &:hover {
+                    color: $base-color;
+                }
             }
         }
     }
@@ -751,6 +757,46 @@ a, a:focus, a:hover {
 .card-header-all:hover {
     display: block;
 }
+
+.all-cate-card-footer {
+    .card-block {
+        padding: 0 !important;
+        padding-left: 5px !important;
+    }
+}
+.card-header-all-footer {
+    width: 100%;
+    background-color: #fff;
+    z-index: 999;
+    h3 {
+        font-size: 14px;
+        line-height: 30px;
+        border-bottom: 1px solid #e8e8e8;
+        color: $important-font-color;
+    }
+    .card-header-all-cate {
+        padding: 5px 0;
+        border-bottom: 1px solid #e8e8e8;
+        h4 {
+            font-size: 13px;
+            color: $important-font-color;
+        }
+        .card-header-all-cate-topic {
+            padding-left: 10px;
+            a {
+                color: $font-color;
+                &:hover {
+                    color: $base-color;
+                }
+            }
+        }
+    }
+    .card-header-all-cate:last-of-type {
+        border-bottom: none;
+    }
+}
+
+
 
 // 系统状态显示组件
 .system-status-card {
@@ -786,6 +832,9 @@ a, a:focus, a:hover {
   li {
       padding: 3px 0;
       border-bottom: 1px dashed #eee;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
   }
 }
 .register-card {
@@ -796,7 +845,7 @@ a, a:focus, a:hover {
 // ---------------------页面样式-profile.html-----------------------
 .user-profile-html {
     .col-md-9, .col-md-3 {
-        padding-left: 0px;
+        padding-right: 0px;
     }
 
 }
@@ -875,7 +924,8 @@ a, a:focus, a:hover {
 // 自定义 card组件
 .user-profile-card {
     .profile-card-head {
-        front-size: 14px;
+        color: $important-font-color;
+        font-size: 14px;
         text-decoration: underline;
         text-align: center;
         line-height: 40px;
@@ -890,8 +940,15 @@ a, a:focus, a:hover {
         li {
             line-height: 30px;
             border-bottom: 1px dashed #d8d6d6;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
         }
         li:first-of-type {
+        }
+        .fa {
+            font-size: 16px;
         }
     }
 }
@@ -899,7 +956,7 @@ a, a:focus, a:hover {
 // ---------------------页面样式-follow.html-----------------------
 .user-profile-follower-html {
     .col-md-9, .col-md-3 {
-        padding-left: 0px;
+        padding-right: 0px;
     }
 
 }

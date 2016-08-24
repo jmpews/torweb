@@ -84,7 +84,7 @@ $('.upload-avatar').on('click', function(e){
        success: function(result, status) {
            if(result.errorcode == 0) {
                $.notify('头像更换成功');
-               window.location.href='.';
+               window.location.reload();
            }
            else if(result.errorcode == 1) {
                alert(result.txt);

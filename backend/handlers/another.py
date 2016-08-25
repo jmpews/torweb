@@ -6,5 +6,5 @@ from handlers.basehandlers.basehandler import BaseRequestHandler
 
 class AnotherHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
-        self.render('another.html')
+        self.render('recommend/recommend.html')
 

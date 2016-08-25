@@ -26,7 +26,7 @@ def update_catetopic():
 def update_hot_post():
     cache_hot_post['reply'] = []
     cache_hot_post['visit'] = []
-    posts = Post.select().order_by(Post.reply_count).limit(4)
+    posts = Post.select().order_by(Post.reply_count.desc()).limit(4)
     for post in posts:
         cache_hot_post['reply'].append(post)
 

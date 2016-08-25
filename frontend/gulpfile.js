@@ -128,7 +128,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('htmls', function() {
-    return gulp.src('./src/*.html')
+    return gulp.src('./src/**/*.html')
         .pipe(gulp.dest(distPath))
         .pipe(notify({ message: 'Htmls task complete' }));
 });
@@ -147,7 +147,7 @@ gulp.task('watch', function() {
     gulp.watch('src/scripts/plugin.js', ['scripts-plugin']);
     gulp.watch('src/images/**/*', ['images']);
     // gulp.watch('src/bower_components/**/*', ['bower']);
-    gulp.watch('src/*.html', ['htmls']);
+    gulp.watch('src/**/*.html', ['htmls']);
 });
 
 // Default task
@@ -171,7 +171,7 @@ gulp.task('watchx', function(){
     gulp.watch('src/scripts/*.js', ['scripts']);
     gulp.watch('src/images/**/*', ['images']);
     // gulp.watch('src/bower_components/**/*', ['bower']);
-    gulp.watch('src/*.html', ['htmls']);
+    gulp.watch('src/**/*.html', ['htmls']);
     // 创建LiveReload服务
     livereload.listen();
     // 监听app文件夹下面的所有文件，有变化的浏览器就会重新加载

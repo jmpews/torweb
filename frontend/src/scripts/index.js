@@ -128,7 +128,7 @@ function show_hide_cate_nav() {
         // $(".card-header-all").css('display','block');
         $('.card-header-all').fadeIn(500);
     });
-    $('.all-cate-card').mouseleave(function(e) {
+    $('.card-header-all').parent().mouseleave(function(e) {
         // $('.card-header-all').fadeOut(500);
         $(".card-header-all").css('display','none');
     });

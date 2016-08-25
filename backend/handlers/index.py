@@ -28,6 +28,12 @@ def get_page_nav(current_page, page_number_limit, page_limit=config.default_page
 
 class IndexHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
+        # from profiling.tracing import TracingProfiler
+        #
+        # # profile your program.
+        # profiler = TracingProfiler()
+        # profiler.start()
+
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
         if current_page:
             current_page = int(current_page)
@@ -50,6 +56,8 @@ class IndexHandler(BaseRequestHandler):
                     current_topic=None,
                     pages=pages,
                     pages_prefix_url='/?page=')
+        # profiler.stop()
+        # profiler.run_viewer()
 
 
 class IndexTopicHandler(BaseRequestHandler):
@@ -115,3 +123,9 @@ class LoginHandler(BaseRequestHandler):
             self.redirect('/login')
             # write as json
             # self.write(result)
+
+class LogoutHandler(BaseRequestHandler):
+    def get(self, *args, **kwargs):
+        if self.current_user:
+            self.clear_cookie('uuid')
+        self.redirect('/')

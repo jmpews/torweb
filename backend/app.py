@@ -9,7 +9,7 @@ from sys import argv
 import config
 from utils.util import monitor_system_status
 from handlers.basehandlers.basehandler import ErrorHandler
-from handlers.index import IndexHandler, LoginHandler, RegisterHandler, IndexTopicHandler
+from handlers.index import IndexHandler, LoginHandler, RegisterHandler, IndexTopicHandler, LogoutHandler
 from handlers.post import PostDetailHandler, PostAddHandler, PostReplyAddHandler, PostReplyOptHandler
 from handlers.api import SystemStatusHandler
 from handlers.utils import UploadImgHandler
@@ -23,6 +23,7 @@ handlers = [
     (r'/', IndexHandler),
     (r'/topic/(\w+)', IndexTopicHandler),
     (r'/login', LoginHandler),
+    (r'/logout', LogoutHandler),
     (r'/register', RegisterHandler),
     (r'/post/(\d+)', PostDetailHandler),
     (r'/post/add', PostAddHandler),
@@ -48,7 +49,7 @@ handlers = [
     (r'/assets/lib/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/lib/"}),
     (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/assets/"}),
 
-    (r'/another', AnotherHandler),
+    (r'/recommend', AnotherHandler),
 ]
 
 ui_build_methods = {

@@ -147,7 +147,8 @@ gulp.task('watch', function() {
     gulp.watch('src/scripts/plugin.js', ['scripts-plugin']);
     gulp.watch('src/images/**/*', ['images']);
     // gulp.watch('src/bower_components/**/*', ['bower']);
-    gulp.watch('src/**/*.html', ['htmls']);
+    gulp.watch('src/*.html', ['htmls']);
+    gulp.watch('src/recommend/*.html', ['htmls']);
 });
 
 // Default task

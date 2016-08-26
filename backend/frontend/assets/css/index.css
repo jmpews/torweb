@@ -968,3 +968,94 @@ a:hover .fa {
   background-size: cover;
   height: 100vh;
 }
+.recommend .section-header {
+  text-align: center;
+  font-size: 30px;
+  line-height: 60px;
+  position: relative;
+}
+.recommend .section-header:after {
+  text-align: center;
+  content: "";
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+  height: 2px;
+  background: #e95420;
+  position: absolute;
+  bottom: -1px;
+}
+.recommend .section-content {
+  position: relative;
+  padding: 10px;
+}
+.recommend .section-content img {
+  width: 150px;
+}
+.recommend .section-content .ccard {
+  float: left;
+  margin: 5px;
+}
+.recommend .section-content .ccard:hoverx .ccard-logo {
+  overflow: auto;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.recommend .section-content .ccard:hoverx .ccard-content {
+  display: block;
+}
+.recommend .section-content .ccard .ccard-logo {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  background-color: #fff;
+  border: 1px dashed #999;
+}
+.recommend .section-content .ccard .ccard-logo img {
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.recommend .section-content .ccard .ccard-content {
+  display: none;
+  background-color: #fff;
+  padding: 5px;
+}
+.recommend .section-content .ccard .ccard-content pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.recommend .section-content .ccard .ccard-content .ccard-title {
+  text-align: center;
+  font-size: 14px;
+}
+.recommend .section-content .intro {
+  display: none;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  padding: 10px;
+  opacity: 0.8;
+}
+.recommend .section-content .intro .ccard-title {
+  text-align: center;
+  font-size: 14px;
+}
+.recommend .section-content .intro pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}

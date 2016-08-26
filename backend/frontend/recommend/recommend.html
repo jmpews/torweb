@@ -119,12 +119,16 @@ Shadowsocks分为服务器端和客户端。在使用之前，需要先将服务
         }
     });
     $('.ccard-logo').on('click', function (e) {
-        console.log('show');
         e.preventDefault();
         e.stopPropagation();
+        $('.ccard-logo').removeClass('active');
+        $(e.currentTarget).addClass('active');
         var c = $(e.currentTarget).next().html();
         $('.intro').html(c);
-        $('.intro').css('display', 'block');
+        if ($(".intro").is(":hidden")) {
+            console.log('show');
+            $('.intro').css('display', 'block');
+        }
     });
 
 </script>

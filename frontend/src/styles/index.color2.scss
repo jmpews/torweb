@@ -1071,6 +1071,14 @@ a:hover {
                 color: $base-color;
             }
         }
+        .options .dropdown{
+            a {
+                color: $font-color;
+                &:hover {
+                    color: $base-color;
+                }
+            }
+        }
     }
     .recommend-header {
         .author {
@@ -1163,6 +1171,9 @@ a:hover {
                     position: absolute;
                     top: 0; left: 0; bottom: 0; right: 0;
                 }
+                &.active {
+                    border: 1px solid $base-color;
+                }
             }
             .ccard-content {
                 display: none;
@@ -1186,7 +1197,6 @@ a:hover {
         .intro {
             display: none;
             background-color: #fff;
-            position: absolute;
             top: 0;
             z-index: 20;
             padding: 10px;

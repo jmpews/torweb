@@ -928,6 +928,12 @@ a:hover .fa {
 .recommend .header a:hover {
   color: #000;
 }
+.recommend .header .options .dropdown a {
+  color: #999;
+}
+.recommend .header .options .dropdown a:hover {
+  color: #000;
+}
 .recommend .recommend-header .author {
   position: absolute;
   right: 10px;
@@ -1023,6 +1029,9 @@ a:hover .fa {
   bottom: 0;
   right: 0;
 }
+.recommend .section-content .ccard .ccard-logo.active {
+  border: 1px solid #000;
+}
 .recommend .section-content .ccard .ccard-content {
   display: none;
   background-color: #fff;
@@ -1042,7 +1051,6 @@ a:hover .fa {
 .recommend .section-content .intro {
   display: none;
   background-color: #fff;
-  position: absolute;
   top: 0;
   z-index: 20;
   padding: 10px;

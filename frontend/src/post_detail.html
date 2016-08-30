@@ -10,7 +10,7 @@
 {% block content %}
     <div class="content-container container post-detail-html">
         <div class="col-md-9">
-            <div class="card custom-card">
+            <div class="card all-cate-card custom-card">
                 <div class="card-header">
                     热门:
                     <a href="/topic/study">学习资料</a> /
@@ -134,26 +134,33 @@
             </div>
         </div> <!-- end col-md-9-->
         <div class="col-md-3">
-        <div class="card post-hot-card custom-card">
-            <div class="card-header">
-                <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
+            <div class="card notice-card custom-card">
+                <div class="card-header">
+                    <i class="fa fa-flag" aria-hidden="true"></i>通知
+                </div>
+                <div class="card-block">
+                    <p>1. 目前社区上线测试, 欢迎大家提各种意见. </p>
+                    <p>2. 社区已经开源, 传送门. <a target="_blank" href="https://github.com/jmpews/torweb"><i class="fa fa-github" aria-hidden="true"></i>torweb</a></p>
+                    <!--{% if not current_user %}-->
+                    <!--<p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>-->
+                    <!--<div>没有账户? <a href="/register">点击注册</a></div>-->
+                    <!--{% else %}-->
+                    <!--{{current_user.username}}-->
+                    <!--{% end %}-->
+                </div>
             </div>
-            <div class="card-block">
-                <ul class="list-inline">
-                    {% for post in cache_hot_post['reply'] %}
-                    <li><span class="">{{post.reply_count}} ℃</span> <span class="important-divider">|</span> <a href="/post/{{post.id}}">{{post.title}}</a></li>
-                    {% end %}
-                </ul>
+            <div class="card post-hot-card custom-card">
+                <div class="card-header">
+                    <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
+                </div>
+                <div class="card-block">
+                    <ul class="list-inline">
+                        {% for post in cache_hot_post['reply'] %}
+                        <li><span class="">{{post.reply_count}} ℃</span> <span class="important-divider">|</span> <a href="/post/{{post.id}}">{{post.title}}</a></li>
+                        {% end %}
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="card custom-card">
-            <div class="card-header">
-                登陆
-            </div>
-            <div class="card-block">
-                如果你不是特别对他的每一句话感兴趣，不要随意用“关注”人的功能，因为关注以后，他的所有发帖回帖都会以通知的方式提醒你的！
-            </div>
-        </div>
         </div>
     </div>
 {% end %}

@@ -32,7 +32,7 @@ body {
     //background-image: url("/assets/images/LPBackground.svg");
     background-color: $base-background-color;
     a {
-        color: $font-color;
+        color: $link-color;
         &:hover, &:focus {
             color: $link-color;
         }
@@ -409,6 +409,20 @@ a:hover {
 
 }
 
+@media (min-width: 1200px) {
+    .content-container {
+        max-width: none;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+@media (min-width: 1450px) {
+    .content-container {
+        max-width: none;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
 // ---------------------页面样式-index.html-----------------------
 
 .index-html {
@@ -423,18 +437,26 @@ a:hover {
     }
 }
 .all-cate-card {
+    .card-header {
+        color: $font-color !important;
+        a {
+            color: $font-color;
+        }
+    }
     .divider {
         margin: 0 3px;
     }
 }
 .card-header-all-bt {
+    color: $important-font-color !important;
     .fa {
-        color: $font-color;
+        color: $important-font-color !important;
         padding-right: 2px;
     }
     &:hover {
+        color: $base-color !important;
         .fa {
-            color: $base-color;
+            color: $base-color !important;
         }
     }
 }
@@ -465,7 +487,7 @@ a:hover {
     position: relative;
     min-height: 68px;
     a:hover {
-        color: $base-color;
+        color: $link-color;
     }
     .avatar {
         position: absolute;
@@ -482,9 +504,10 @@ a:hover {
             margin-bottom: 7px;
             word-wrap: break-word;
             a{
-                color: $link-color;
-                //color: $important-font-color;
+                //color: $link-color;
+                color: $important-font-color;
                 &:hover {
+                    color: $link-color;
                     text-decoration: underline;
                 }
             }
@@ -557,11 +580,20 @@ a:hover {
     .post-function {
         margin-top: 10px;
         text-align: right;
+        a {
+            color: $font-color;
+            &:hover {
+                color: $link-color;
+            }
+        }
         span {
             padding-right: 2px;
         }
         a.post-collected {
             color: $base-color;
+            .fa {
+                color: $link-color;
+            }
         }
         .fa {
             color: $font-color;
@@ -599,8 +631,17 @@ a:hover {
     .reply-function {
         margin-top: 7px;
         text-align: right;
+        a {
+            color: $font-color;
+            &:hover {
+                color: $link-color;
+            }
+        }
         a.postreply-supported {
-            color: $base-color;
+            color: $link-color;
+            .fa {
+                color: $link-color;
+            }
         }
 
         span {
@@ -690,6 +731,8 @@ a:hover {
     //border: none !important;
     &>.card-header {
         position: relative;
+        color: $important-font-color;
+        background-color: #fff;
         padding: 0.5rem 1.25rem !important;
     }
 
@@ -837,10 +880,15 @@ a:hover {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      a {
+          color: $font-color;
+          &:hover {
+              color: $link-color;
+          }
+      }
   }
 }
 .register-card {
-    text-align: center;
 }
 
 
@@ -1123,7 +1171,11 @@ a:hover {
         background-size: cover;
         height: 100vh;
     }
+    section {
+        background-color: #F1F4F1;
+    }
     .section-header {
+        color: $important-font-color;
         text-align: center;
         font-size: 30px;
         line-height: 60px;
@@ -1148,7 +1200,7 @@ a:hover {
         }
         .ccard {
             float: left;
-            margin: 5px;
+            margin: 10px;
             &:hoverx {
               .ccard-logo {
                   overflow: auto;
@@ -1164,7 +1216,7 @@ a:hover {
                 width: 170px;
                 height: 170px;
                 background-color: #fff;
-                border: 1px dashed $font-color;
+                //border: 1px dashed $font-color;
                 img {
                     overflow: auto;
                     margin: auto;
@@ -1172,7 +1224,7 @@ a:hover {
                     top: 0; left: 0; bottom: 0; right: 0;
                 }
                 &.active {
-                    border: 1px solid $base-color;
+                    border: 1px solid $link-light-color;
                 }
             }
             .ccard-content {
@@ -1199,7 +1251,8 @@ a:hover {
             background-color: #fff;
             top: 0;
             z-index: 20;
-            padding: 10px;
+            padding: 20px;
+            margin-bottom: 10px;
             opacity: 0.8;
             .ccard-title {
                 text-align: center;

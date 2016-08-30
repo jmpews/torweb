@@ -182,17 +182,19 @@
         </div>
         </div>
         <div class="col-md-3">
-            <div class="card register-card custom-card">
+            <div class="card notice-card custom-card">
                 <div class="card-header">
-                    登陆
+                    <i class="fa fa-flag" aria-hidden="true"></i>通知
                 </div>
                 <div class="card-block">
-                    {% if not current_user %}
-                        <p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>
-                        <div>没有账户? <a href="/register">点击注册</a></div>
-                    {% else %}
-                        {{current_user.username}}
-                    {% end %}
+                    <p>1. 目前社区上线测试, 欢迎大家提各种意见. </p>
+                    <p>2. 社区已经开源, 传送门. <a target="_blank" href="https://github.com/jmpews/torweb"><i class="fa fa-github" aria-hidden="true"></i>torweb</a></p>
+                    <!--{% if not current_user %}-->
+                        <!--<p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>-->
+                        <!--<div>没有账户? <a href="/register">点击注册</a></div>-->
+                    <!--{% else %}-->
+                        <!--{{current_user.username}}-->
+                    <!--{% end %}-->
                 </div>
             </div>
 

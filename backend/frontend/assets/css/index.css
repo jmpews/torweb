@@ -6,7 +6,7 @@ body {
   background-color: #f7f7f7;
 }
 body a {
-  color: #999;
+  color: #e95420;
 }
 body a:hover, body a:focus {
   color: #e95420;
@@ -355,6 +355,20 @@ a:hover .fa {
   padding-top: 7px;
 }
 
+@media (min-width: 1200px) {
+  .content-container {
+    max-width: none;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+@media (min-width: 1450px) {
+  .content-container {
+    max-width: none;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
 .index-html .col-md-9 {
   padding-right: 0px;
 }
@@ -365,16 +379,28 @@ a:hover .fa {
   padding-right: 0px;
 }
 
+.all-cate-card .card-header {
+  color: #999 !important;
+}
+.all-cate-card .card-header a {
+  color: #999;
+}
 .all-cate-card .divider {
   margin: 0 3px;
 }
 
+.card-header-all-bt {
+  color: #666 !important;
+}
 .card-header-all-bt .fa {
-  color: #999;
+  color: #666 !important;
   padding-right: 2px;
 }
+.card-header-all-bt:hover {
+  color: #e95420 !important;
+}
 .card-header-all-bt:hover .fa {
-  color: #e95420;
+  color: #e95420 !important;
 }
 
 .current-topic {
@@ -421,9 +447,10 @@ a:hover .fa {
   word-wrap: break-word;
 }
 .post-item .item-mid .item-title a {
-  color: #e95420;
+  color: #666;
 }
 .post-item .item-mid .item-title a:hover {
+  color: #e95420;
   text-decoration: underline;
 }
 .post-item .item-mid .item-info {
@@ -487,10 +514,19 @@ a:hover .fa {
   margin-top: 10px;
   text-align: right;
 }
+.post-detail .post-function a {
+  color: #999;
+}
+.post-detail .post-function a:hover {
+  color: #e95420;
+}
 .post-detail .post-function span {
   padding-right: 2px;
 }
 .post-detail .post-function a.post-collected {
+  color: #e95420;
+}
+.post-detail .post-function a.post-collected .fa {
   color: #e95420;
 }
 .post-detail .post-function .fa {
@@ -524,7 +560,16 @@ a:hover .fa {
   margin-top: 7px;
   text-align: right;
 }
+.post-reply .reply-function a {
+  color: #999;
+}
+.post-reply .reply-function a:hover {
+  color: #e95420;
+}
 .post-reply .reply-function a.postreply-supported {
+  color: #e95420;
+}
+.post-reply .reply-function a.postreply-supported .fa {
   color: #e95420;
 }
 .post-reply .reply-function span {
@@ -592,6 +637,8 @@ a:hover .fa {
 
 .custom-card.card > .card-header {
   position: relative;
+  color: #666;
+  background-color: #fff;
   padding: 0.5rem 1.25rem !important;
 }
 .custom-card.card > .card-header:after {
@@ -726,9 +773,11 @@ a:hover .fa {
   white-space: nowrap;
   overflow: hidden;
 }
-
-.register-card {
-  text-align: center;
+.post-hot-card li a {
+  color: #999;
+}
+.post-hot-card li a:hover {
+  color: #e95420;
 }
 
 .user-profile-html .col-md-9, .user-profile-html .col-md-3 {
@@ -974,7 +1023,11 @@ a:hover .fa {
   background-size: cover;
   height: 100vh;
 }
+.recommend section {
+  background-color: #F1F4F1;
+}
 .recommend .section-header {
+  color: #666;
   text-align: center;
   font-size: 30px;
   line-height: 60px;
@@ -1000,7 +1053,7 @@ a:hover .fa {
 }
 .recommend .section-content .ccard {
   float: left;
-  margin: 5px;
+  margin: 10px;
 }
 .recommend .section-content .ccard:hoverx .ccard-logo {
   overflow: auto;
@@ -1018,7 +1071,6 @@ a:hover .fa {
   width: 170px;
   height: 170px;
   background-color: #fff;
-  border: 1px dashed #999;
 }
 .recommend .section-content .ccard .ccard-logo img {
   overflow: auto;
@@ -1030,7 +1082,7 @@ a:hover .fa {
   right: 0;
 }
 .recommend .section-content .ccard .ccard-logo.active {
-  border: 1px solid #e95420;
+  border: 1px solid #f08966;
 }
 .recommend .section-content .ccard .ccard-content {
   display: none;
@@ -1053,7 +1105,8 @@ a:hover .fa {
   background-color: #fff;
   top: 0;
   z-index: 20;
-  padding: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 .recommend .section-content .intro .ccard-title {

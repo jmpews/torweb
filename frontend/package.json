@@ -1,0 +1,37 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "del": "^2.2.2",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-cache": "^0.4.5",
+    "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-filter": "^4.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-log": "^0.0.0",
+    "gulp-print": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-ruby-sass": "^2.1.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "gulp-webserver": "^0.9.1",
+    "jshint": "^2.9.3",
+    "install": "^0.8.1",
+    "main-bower-files": "^2.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

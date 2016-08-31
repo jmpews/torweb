@@ -47,7 +47,7 @@ handlers = [
 
     (r'/avatar/(.*)', tornado.web.StaticFileHandler, {"path": "static/images/avatars/"}),
     (r'/assets/lib/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/lib/"}),
-    (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/assets/"}),
+    (r'/assets/(.*)', tornado.web.StaticFileHandler, {"path": "frontend/static/assets/"}),
 
     (r'/recommend', AnotherHandler),
 ]
@@ -62,7 +62,7 @@ application = tornado.web.Application(
     default_handler_class=ErrorHandler,
     debug=config.DEBUG,
     static_path=path.join(path.dirname(path.abspath(__file__)), 'static'),
-    template_path="frontend/",
+    template_path="frontend/static/",
     login_url='/login',
     cookie_secret=config.COOKIE_SECRET,
 )

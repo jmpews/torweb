@@ -19,7 +19,7 @@ var gulp = require('gulp'),
     flatten = require('gulp-flatten');
     util = require('gulp-util')
 
-var distPath='../backend/frontend/';
+var distPath='./static/';
 
 var lib= { // 第三方依赖文件
     js: [
@@ -100,10 +100,10 @@ gulp.task('scripts', function() {
 gulp.task('scripts-plugin', function() {
     return gulp.src('./src/scripts/plugin.js')
         .pipe(jshint.reporter('default'))
-        .pipe(gulp.dest('../backend/frontend/assets/tinymce/plugins/pasteUpload'))
+        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(gulp.dest('../backend/frontend/assets/tinymce/plugins/pasteUpload'))
+        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
         .pipe(notify({ message: 'scripts-plugin task complete' }));
 });
 

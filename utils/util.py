@@ -147,16 +147,49 @@ def set_api_header(request):
 
 
 def json_result(error_code, data):
+    '''
+    format result as json
+    :param error_code:
+    :param data:
+    :return:
+    '''
     if isinstance(data, str):
         result = {'errorcode': error_code, 'txt': data}
     else:
         result = {'errorcode': error_code, 'data': data}
     return json.dumps(result)
 
+def get_page_nav(current_page, page_number_limit, page_limit=10):
+    '''
+    pagination
+    :param current_page:
+    :param page_number_limit: 当前结果集的数据量
+    :param page_limit: 每一页数据量
+    :return:
+    # 页导航(cp:当前页, <:前一页, >:后一页)
+    # 模型: < cp-2, cp-1, cp, cp+1, cp+2A >
+    # 这里如果换成列表存放，在模板里面会好操作一点
+    '''
+    pages = {'cp-2': 0, 'cp-1': 0, 'cp': current_page, 'cp+1': 0, 'cp+2': 0}
+    #import pdb; pdb.set_trace()
+    if current_page-1 >= 1:
+        pages['cp-1'] = current_page-1
+    if current_page-2 >= 1:
+        pages['cp-2'] = current_page-2
+
+    if (current_page)*page_limit < page_number_limit:
+        pages['cp+1'] = current_page+1
+    if (current_page+1)*page_limit < page_number_limit:
+        pages['cp+2'][1] = current_page+2
+    return pages
+
+
 from threading import Thread
 
-
 class MonitorWorker(Thread):
+    '''
+    监视系统状态线程
+    '''
     def __init__(self, name, systatus):
         Thread.__init__(self)
         self.name = name
@@ -180,7 +213,6 @@ class MonitorWorker(Thread):
                 self.systatus[1] = s2
                 self.systatus[2] = s3
                 self.systatus[3] = s4
-                print(self.systatus)
             except KeyboardInterrupt:
                 break
 

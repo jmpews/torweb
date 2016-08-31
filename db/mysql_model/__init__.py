@@ -2,7 +2,7 @@ from config import BACKEND_MYSQL
 from peewee import Model, MySQLDatabase
 from playhouse.pool import PooledMySQLDatabase
 
-# PooledMySQLDatabase
+# PooledMySQLDatabase, 连接池
 db_mysql = PooledMySQLDatabase(
         BACKEND_MYSQL['database'],
         max_connections=BACKEND_MYSQL['max_connections'],
@@ -125,8 +125,8 @@ def create_tmp_data():
 db_init = MySQLDatabase('', user=BACKEND_MYSQL['user'], password=BACKEND_MYSQL['password'], host=BACKEND_MYSQL['host'],
                         port=BACKEND_MYSQL['port'])
 
-if not db_init.execute_sql("select * from information_schema.schemata where schema_name = 'torweb'").fetchone():
-    db_init.execute_sql("create database torweb default character set utf8 default collate utf8_general_ci")
+if not db_init.execute_sql("select * from information_schema.schemata where schema_name = '{0}'".format(BACKEND_MYSQL['database'])).fetchone():
+    db_init.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci".format(BACKEND_MYSQL['database']))
     create_tmp_data()
 
 db_init.close()

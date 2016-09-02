@@ -3,9 +3,8 @@ import time, datetime
 from hashlib import md5
 from db.mysql_model import BaseModel
 from peewee import *
-from utils.util import random_str
+from custor.utils import random_str
 
-import config
 
 class USER_LEVEL:
     BAN = 0
@@ -71,7 +70,7 @@ class User(BaseModel):
                         salt=salt, level=level,
                         key=random_str(32),
                         key_time=the_time,
-                        avatar=config.default_avatar)
+                        avatar='/x/x.jpg')
         u.save()
         p = Profile.create(user=u)
         p.save()

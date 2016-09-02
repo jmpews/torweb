@@ -317,7 +317,7 @@ define("tinymce/geom/Rect", [
 	};
 });
 
-// Included from: js/tinymce/classes/util/Promise.js
+// Included from: js/tinymce/classes/utils/Promise.js
 
 /**
  * Promise.js
@@ -520,7 +520,7 @@ define("tinymce/util/Promise", [], function() {
 /* jshint ignore:end */
 /* eslint-enable */
 
-// Included from: js/tinymce/classes/util/Delay.js
+// Included from: js/tinymce/classes/utils/Delay.js
 
 /**
  * Delay.js
@@ -538,7 +538,7 @@ define("tinymce/util/Promise", [], function() {
  * @class tinymce.util.Delay
  */
 define("tinymce/util/Delay", [
-	"tinymce/util/Promise"
+	"tinymce/utils/Promise"
 ], function(Promise) {
 	var requestAnimationFramePromise;
 
@@ -915,7 +915,7 @@ define("tinymce/Env", [], function() {
  * @class tinymce.dom.EventUtils
  */
 define("tinymce/dom/EventUtils", [
-	"tinymce/util/Delay",
+	"tinymce/utils/Delay",
 	"tinymce/Env"
 ], function(Delay, Env) {
 	"use strict";
@@ -1316,7 +1316,7 @@ define("tinymce/dom/EventUtils", [
 		 * @param {Object} target Target node/window or custom object.
 		 * @param {String} names Optional event name to unbind.
 		 * @param {function} callback Optional callback function to unbind.
-		 * @return {EventUtils} Event utils instance.
+		 * @return {EventUtils} Event custor instance.
 		 */
 		self.unbind = function(target, names, callback) {
 			var id, callbackList, i, ci, name, eventMap;
@@ -1405,7 +1405,7 @@ define("tinymce/dom/EventUtils", [
 		 * @param {Object} target Target node/window or custom object.
 		 * @param {String} name Event name to fire.
 		 * @param {Object} args Optional arguments to send to the observers.
-		 * @return {EventUtils} Event utils instance.
+		 * @return {EventUtils} Event custor instance.
 		 */
 		self.fire = function(target, name, args) {
 			var id;
@@ -1440,7 +1440,7 @@ define("tinymce/dom/EventUtils", [
 		 *
 		 * @method clean
 		 * @param {Object} target Target node/window object.
-		 * @return {EventUtils} Event utils instance.
+		 * @return {EventUtils} Event custor instance.
 		 */
 		self.clean = function(target) {
 			var i, children, unbind = self.unbind;
@@ -3555,7 +3555,7 @@ return Sizzle;
 
 /*eslint-enable */
 
-// Included from: js/tinymce/classes/util/Arr.js
+// Included from: js/tinymce/classes/utils/Arr.js
 
 /**
  * Arr.js
@@ -3711,7 +3711,7 @@ define("tinymce/util/Arr", [], function() {
 	};
 });
 
-// Included from: js/tinymce/classes/util/Tools.js
+// Included from: js/tinymce/classes/utils/Tools.js
 
 /**
  * Tools.js
@@ -3731,7 +3731,7 @@ define("tinymce/util/Arr", [], function() {
  */
 define("tinymce/util/Tools", [
 	"tinymce/Env",
-	"tinymce/util/Arr"
+	"tinymce/utils/Arr"
 ], function(Env, Arr) {
 	/**
 	 * Removes whitespace from the beginning and end of a string.
@@ -4192,7 +4192,7 @@ define("tinymce/util/Tools", [
 define("tinymce/dom/DomQuery", [
 	"tinymce/dom/EventUtils",
 	"tinymce/dom/Sizzle",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/Env"
 ], function(EventUtils, Sizzle, Tools, Env) {
 	var doc = document, push = Array.prototype.push, slice = Array.prototype.slice;
@@ -6252,7 +6252,7 @@ define("tinymce/dom/TreeWalker", [], function() {
  * @class tinymce.dom.Range
  */
 define("tinymce/dom/Range", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	// Range constructor
 	function Range(dom) {
@@ -7044,7 +7044,7 @@ define("tinymce/dom/Range", [
  * @version 3.4
  */
 define("tinymce/html/Entities", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	var makeMap = Tools.makeMap;
 
@@ -7311,8 +7311,8 @@ define("tinymce/html/Entities", [
  * @private
  */
 define("tinymce/dom/StyleSheetLoader", [
-	"tinymce/util/Tools",
-	"tinymce/util/Delay"
+	"tinymce/utils/Tools",
+	"tinymce/utils/Delay"
 ], function(Tools, Delay) {
 	"use strict";
 
@@ -7517,7 +7517,7 @@ define("tinymce/dom/DOMUtils", [
 	"tinymce/dom/Range",
 	"tinymce/html/Entities",
 	"tinymce/Env",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/dom/StyleSheetLoader"
 ], function(Sizzle, $, Styles, EventUtils, TreeWalker, Range, Entities, Env, Tools, StyleSheetLoader) {
 	// Shorten names
@@ -9382,7 +9382,7 @@ define("tinymce/dom/DOMUtils", [
  */
 define("tinymce/dom/ScriptLoader", [
 	"tinymce/dom/DOMUtils",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(DOMUtils, Tools) {
 	var DOM = DOMUtils.DOM;
 	var each = Tools.each, grep = Tools.grep;
@@ -9622,7 +9622,7 @@ define("tinymce/dom/ScriptLoader", [
  */
 define("tinymce/AddOnManager", [
 	"tinymce/dom/ScriptLoader",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(ScriptLoader, Tools) {
 	var each = Tools.each;
 
@@ -10200,7 +10200,7 @@ define("tinymce/caret/CaretContainer", [
  * @class tinymce.dom.RangeUtils
  */
 define("tinymce/dom/RangeUtils", [
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/dom/TreeWalker",
 	"tinymce/dom/NodeType",
 	"tinymce/dom/Range",
@@ -10840,7 +10840,7 @@ define("tinymce/dom/RangeUtils", [
 define("tinymce/NodeChange", [
 	"tinymce/dom/RangeUtils",
 	"tinymce/Env",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(RangeUtils, Env, Delay) {
 	return function(editor) {
 		var lastRng, lastPath = [];
@@ -11506,7 +11506,7 @@ define("tinymce/html/Node", [], function() {
  * @version 3.4
  */
 define("tinymce/html/Schema", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	var mapCache = {}, dummyObj = {};
 	var makeMap = Tools.makeMap, each = Tools.each, extend = Tools.extend, explode = Tools.explode, inArray = Tools.inArray;
@@ -12543,7 +12543,7 @@ define("tinymce/html/Schema", [
 define("tinymce/html/SaxParser", [
 	"tinymce/html/Schema",
 	"tinymce/html/Entities",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Schema, Entities, Tools) {
 	var each = Tools.each;
 
@@ -12991,7 +12991,7 @@ define("tinymce/html/DomParser", [
 	"tinymce/html/Node",
 	"tinymce/html/Schema",
 	"tinymce/html/SaxParser",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Node, Schema, SaxParser, Tools) {
 	var makeMap = Tools.makeMap, each = Tools.each, explode = Tools.explode, extend = Tools.extend;
 
@@ -13814,7 +13814,7 @@ define("tinymce/html/DomParser", [
  */
 define("tinymce/html/Writer", [
 	"tinymce/html/Entities",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Entities, Tools) {
 	var makeMap = Tools.makeMap;
 
@@ -14178,7 +14178,7 @@ define("tinymce/dom/Serializer", [
 	"tinymce/html/Node",
 	"tinymce/html/Schema",
 	"tinymce/Env",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/text/Zwsp"
 ], function(DOMUtils, DomParser, SaxParser, Entities, Serializer, Node, Schema, Env, Tools, Zwsp) {
 	var each = Tools.each, trim = Tools.trim;
@@ -15171,7 +15171,7 @@ define("tinymce/dom/TridentSelection", [], function() {
 	return Selection;
 });
 
-// Included from: js/tinymce/classes/util/VK.js
+// Included from: js/tinymce/classes/utils/VK.js
 
 /**
  * VK.js
@@ -15231,9 +15231,9 @@ define("tinymce/util/VK", [
  * @class tinymce.dom.ControlSelection
  */
 define("tinymce/dom/ControlSelection", [
-	"tinymce/util/VK",
-	"tinymce/util/Tools",
-	"tinymce/util/Delay",
+	"tinymce/utils/VK",
+	"tinymce/utils/Tools",
+	"tinymce/utils/Delay",
 	"tinymce/Env",
 	"tinymce/dom/NodeType"
 ], function(VK, Tools, Delay, Env, NodeType) {
@@ -15866,7 +15866,7 @@ define("tinymce/dom/ControlSelection", [
 	};
 });
 
-// Included from: js/tinymce/classes/util/Fun.js
+// Included from: js/tinymce/classes/utils/Fun.js
 
 /**
  * Fun.js
@@ -15977,7 +15977,7 @@ define("tinymce/util/Fun", [], function() {
  */
 define("tinymce/caret/CaretCandidate", [
 	"tinymce/dom/NodeType",
-	"tinymce/util/Arr",
+	"tinymce/utils/Arr",
 	"tinymce/caret/CaretContainer"
 ], function(NodeType, Arr, CaretContainer) {
 	var isContentEditableTrue = NodeType.isContentEditableTrue,
@@ -16264,7 +16264,7 @@ define("tinymce/text/ExtendingChar", [], function() {
  * var caretPos2 = CaretPosition.fromRangeStart(someRange);
  */
 define("tinymce/caret/CaretPosition", [
-	"tinymce/util/Fun",
+	"tinymce/utils/Fun",
 	"tinymce/dom/NodeType",
 	"tinymce/dom/DOMUtils",
 	"tinymce/dom/RangeUtils",
@@ -16663,8 +16663,8 @@ define("tinymce/caret/CaretPosition", [
 define('tinymce/caret/CaretBookmark', [
 	'tinymce/dom/NodeType',
 	'tinymce/dom/DOMUtils',
-	'tinymce/util/Fun',
-	'tinymce/util/Arr',
+	'tinymce/utils/Fun',
+	'tinymce/utils/Arr',
 	'tinymce/caret/CaretPosition'
 ], function(NodeType, DomUtils, Fun, Arr, CaretPosition) {
 	var isText = NodeType.isText,
@@ -16915,7 +16915,7 @@ define('tinymce/caret/CaretBookmark', [
  */
 define("tinymce/dom/BookmarkManager", [
 	"tinymce/Env",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/caret/CaretContainer",
 	"tinymce/caret/CaretBookmark",
 	"tinymce/caret/CaretPosition",
@@ -17384,7 +17384,7 @@ define("tinymce/dom/Selection", [
 	"tinymce/dom/BookmarkManager",
 	"tinymce/dom/NodeType",
 	"tinymce/Env",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/caret/CaretPosition"
 ], function(TreeWalker, TridentSelection, ControlSelection, RangeUtils, BookmarkManager, NodeType, Env, Tools, CaretPosition) {
 	var each = Tools.each, trim = Tools.trim;
@@ -18396,7 +18396,7 @@ define("tinymce/dom/Selection", [
  */
 define("tinymce/dom/ElementUtils", [
 	"tinymce/dom/BookmarkManager",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(BookmarkManager, Tools) {
 	var each = Tools.each;
 
@@ -18519,7 +18519,7 @@ define("tinymce/dom/ElementUtils", [
  * @class tinymce.fmt.Preview
  */
 define("tinymce/fmt/Preview", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	var each = Tools.each;
 
@@ -18670,7 +18670,7 @@ define("tinymce/fmt/Preview", [
  * @class tinymce.fmt.Hooks
  */
 define("tinymce/fmt/Hooks", [
-	"tinymce/util/Arr",
+	"tinymce/utils/Arr",
 	"tinymce/dom/NodeType",
 	"tinymce/dom/DomQuery"
 ], function(Arr, NodeType, $) {
@@ -18751,7 +18751,7 @@ define("tinymce/Formatter", [
 	"tinymce/dom/RangeUtils",
 	"tinymce/dom/BookmarkManager",
 	"tinymce/dom/ElementUtils",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/fmt/Preview",
 	"tinymce/fmt/Hooks"
 ], function(TreeWalker, RangeUtils, BookmarkManager, ElementUtils, Tools, Preview, Hooks) {
@@ -21174,7 +21174,7 @@ define("tinymce/Formatter", [
  * @class tinymce.UndoManager
  */
 define("tinymce/UndoManager", [
-	"tinymce/util/VK",
+	"tinymce/utils/VK",
 	"tinymce/Env"
 ], function(VK, Env) {
 	return function(editor) {
@@ -22370,7 +22370,7 @@ define("tinymce/ForceBlocks", [], function() {
  * @class tinymce.caret.CaretUtils
  */
 define("tinymce/caret/CaretUtils", [
-	"tinymce/util/Fun",
+	"tinymce/utils/Fun",
 	"tinymce/dom/TreeWalker",
 	"tinymce/dom/NodeType",
 	"tinymce/caret/CaretPosition",
@@ -22687,8 +22687,8 @@ define("tinymce/caret/CaretWalker", [
 	"tinymce/caret/CaretCandidate",
 	"tinymce/caret/CaretPosition",
 	"tinymce/caret/CaretUtils",
-	"tinymce/util/Arr",
-	"tinymce/util/Fun"
+	"tinymce/utils/Arr",
+	"tinymce/utils/Fun"
 ], function(NodeType, CaretCandidate, CaretPosition, CaretUtils, Arr, Fun) {
 	var isContentEditableFalse = NodeType.isContentEditableFalse,
 		isText = NodeType.isText,
@@ -22918,7 +22918,7 @@ define("tinymce/caret/CaretWalker", [
  * @private
  */
 define("tinymce/InsertList", [
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/caret/CaretWalker",
 	"tinymce/caret/CaretPosition"
 ], function(Tools, CaretWalker, CaretPosition) {
@@ -23100,7 +23100,7 @@ define("tinymce/InsertList", [
  */
 define("tinymce/InsertContent", [
 	"tinymce/Env",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/html/Serializer",
 	"tinymce/caret/CaretWalker",
 	"tinymce/caret/CaretPosition",
@@ -23484,7 +23484,7 @@ define("tinymce/InsertContent", [
  */
 define("tinymce/EditorCommands", [
 	"tinymce/Env",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/dom/RangeUtils",
 	"tinymce/dom/TreeWalker",
 	"tinymce/InsertContent"
@@ -24222,7 +24222,7 @@ define("tinymce/EditorCommands", [
 	};
 });
 
-// Included from: js/tinymce/classes/util/URI.js
+// Included from: js/tinymce/classes/utils/URI.js
 
 /**
  * URI.js
@@ -24239,7 +24239,7 @@ define("tinymce/EditorCommands", [
  * @class tinymce.util.URI
  */
 define("tinymce/util/URI", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	var each = Tools.each, trim = Tools.trim;
 	var queryParts = "source protocol authority userInfo user password host port relative path directory file query anchor".split(' ');
@@ -24365,7 +24365,7 @@ define("tinymce/util/URI", [
 		 * @return {String} Relative URI from the point specified in the current URI instance.
 		 * @example
 		 * // Converts an absolute URL to an relative URL url will be somedir/somefile.htm
-		 * var url = new tinymce.util.URI('http://www.site.com/dir/').toRelative('http://www.site.com/dir/somedir/somefile.htm');
+		 * var url = new tinymce.utils.URI('http://www.site.com/dir/').toRelative('http://www.site.com/dir/somedir/somefile.htm');
 		 */
 		toRelative: function(uri) {
 			var self = this, output;
@@ -24413,7 +24413,7 @@ define("tinymce/util/URI", [
 		 * @return {String} Absolute URI from the point specified in the current URI instance.
 		 * @example
 		 * // Converts an relative URL to an absolute URL url will be http://www.site.com/dir/somedir/somefile.htm
-		 * var url = new tinymce.util.URI('http://www.site.com/dir/').toAbsolute('somedir/somefile.htm');
+		 * var url = new tinymce.utils.URI('http://www.site.com/dir/').toAbsolute('somedir/somefile.htm');
 		 */
 		toAbsolute: function(uri, noHost) {
 			uri = new URI(uri, {base_uri: this});
@@ -24657,7 +24657,7 @@ define("tinymce/util/URI", [
 	return URI;
 });
 
-// Included from: js/tinymce/classes/util/Class.js
+// Included from: js/tinymce/classes/utils/Class.js
 
 /**
  * Class.js
@@ -24681,7 +24681,7 @@ define("tinymce/util/URI", [
  * * Defaults settings
  */
 define("tinymce/util/Class", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	var each = Tools.each, extend = Tools.extend;
 
@@ -24827,7 +24827,7 @@ define("tinymce/util/Class", [
 	return Class;
 });
 
-// Included from: js/tinymce/classes/util/EventDispatcher.js
+// Included from: js/tinymce/classes/utils/EventDispatcher.js
 
 /**
  * EventDispatcher.js
@@ -24851,7 +24851,7 @@ define("tinymce/util/Class", [
  *  eventDispatcher.fire('click', {data: 123});
  */
 define("tinymce/util/EventDispatcher", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	var nativeEvents = Tools.makeMap(
 		"focus blur focusin focusout click dblclick mousedown mouseup mousemove mouseover beforepaste paste cut copy selectionchange " +
@@ -25206,7 +25206,7 @@ define("tinymce/data/Binding", [], function() {
 	return Binding;
 });
 
-// Included from: js/tinymce/classes/util/Observable.js
+// Included from: js/tinymce/classes/utils/Observable.js
 
 /**
  * Observable.js
@@ -25224,7 +25224,7 @@ define("tinymce/data/Binding", [], function() {
  * @mixin tinymce.util.Observable
  */
 define("tinymce/util/Observable", [
-	"tinymce/util/EventDispatcher"
+	"tinymce/utils/EventDispatcher"
 ], function(EventDispatcher) {
 	function getEventDispatcher(obj) {
 		if (!obj._eventDispatcher) {
@@ -25358,9 +25358,9 @@ define("tinymce/util/Observable", [
  */
 define("tinymce/data/ObservableObject", [
 	"tinymce/data/Binding",
-	"tinymce/util/Observable",
-	"tinymce/util/Class",
-	"tinymce/util/Tools"
+	"tinymce/utils/Observable",
+	"tinymce/utils/Class",
+	"tinymce/utils/Tools"
 ], function(Binding, Observable, Class, Tools) {
 	function isNode(node) {
 		return node.nodeType > 0;
@@ -25577,7 +25577,7 @@ define("tinymce/data/ObservableObject", [
  * @class tinymce.ui.Selector
  */
 define("tinymce/ui/Selector", [
-	"tinymce/util/Class"
+	"tinymce/utils/Class"
 ], function(Class) {
 	"use strict";
 
@@ -25929,9 +25929,9 @@ define("tinymce/ui/Selector", [
  * @class tinymce.ui.Collection
  */
 define("tinymce/ui/Collection", [
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/ui/Selector",
-	"tinymce/util/Class"
+	"tinymce/utils/Class"
 ], function(Tools, Selector, Class) {
 	"use strict";
 
@@ -26367,7 +26367,7 @@ define("tinymce/ui/Collection", [
  * @class tinymce.ui.DomUtils
  */
 define("tinymce/ui/DomUtils", [
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/dom/DOMUtils"
 ], function(Tools, DOMUtils) {
 	"use strict";
@@ -26596,7 +26596,7 @@ define("tinymce/ui/BoxUtils", [
  * @class tinymce.ui.ClassList
  */
 define("tinymce/ui/ClassList", [
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Tools) {
 	"use strict";
 
@@ -26750,7 +26750,7 @@ define("tinymce/ui/ClassList", [
  * @static
  */
 define("tinymce/ui/ReflowQueue", [
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(Delay) {
 	var dirtyCtrls = {}, animationFrameRequested;
 
@@ -26832,9 +26832,9 @@ define("tinymce/ui/ReflowQueue", [
  * @class tinymce.ui.Control
  */
 define("tinymce/ui/Control", [
-	"tinymce/util/Class",
-	"tinymce/util/Tools",
-	"tinymce/util/EventDispatcher",
+	"tinymce/utils/Class",
+	"tinymce/utils/Tools",
+	"tinymce/utils/EventDispatcher",
 	"tinymce/data/ObservableObject",
 	"tinymce/ui/Collection",
 	"tinymce/ui/DomUtils",
@@ -28663,7 +28663,7 @@ define("tinymce/ui/Container", [
 	"tinymce/ui/Selector",
 	"tinymce/ui/Factory",
 	"tinymce/ui/KeyboardNavigation",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/dom/DomQuery",
 	"tinymce/ui/ClassList",
 	"tinymce/ui/ReflowQueue"
@@ -29807,7 +29807,7 @@ define("tinymce/ui/FloatPanel", [
 	"tinymce/ui/Resizable",
 	"tinymce/ui/DomUtils",
 	"tinymce/dom/DomQuery",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(Panel, Movable, Resizable, DomUtils, $, Delay) {
 	"use strict";
 
@@ -30223,7 +30223,7 @@ define("tinymce/ui/Window", [
 	"tinymce/ui/DragHelper",
 	"tinymce/ui/BoxUtils",
 	"tinymce/Env",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(FloatPanel, Panel, DomUtils, $, DragHelper, BoxUtils, Env, Delay) {
 	"use strict";
 
@@ -31498,7 +31498,7 @@ define("tinymce/ui/Notification", [
 	"tinymce/ui/Control",
 	"tinymce/ui/Movable",
 	"tinymce/ui/Progress",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(Control, Movable, Progress, Delay) {
 	return Control.extend({
 		Mixins: [Movable],
@@ -31656,7 +31656,7 @@ define("tinymce/ui/Notification", [
  */
 define("tinymce/NotificationManager", [
 	"tinymce/ui/Notification",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(Notification, Delay) {
 	return function(editor) {
 		var self = this, notifications = [];
@@ -31843,7 +31843,7 @@ define("tinymce/dom/NodePath", [
 	};
 });
 
-// Included from: js/tinymce/classes/util/Quirks.js
+// Included from: js/tinymce/classes/utils/Quirks.js
 
 /**
  * Quirks.js
@@ -31864,15 +31864,15 @@ define("tinymce/dom/NodePath", [
  * @class tinymce.util.Quirks
  */
 define("tinymce/util/Quirks", [
-	"tinymce/util/VK",
+	"tinymce/utils/VK",
 	"tinymce/dom/RangeUtils",
 	"tinymce/dom/TreeWalker",
 	"tinymce/dom/NodePath",
 	"tinymce/html/Node",
 	"tinymce/html/Entities",
 	"tinymce/Env",
-	"tinymce/util/Tools",
-	"tinymce/util/Delay",
+	"tinymce/utils/Tools",
+	"tinymce/utils/Delay",
 	"tinymce/caret/CaretContainer",
 	"tinymce/caret/CaretPosition",
 	"tinymce/caret/CaretWalker"
@@ -33643,9 +33643,9 @@ define("tinymce/util/Quirks", [
  * @extends tinymce.util.Observable
  */
 define("tinymce/EditorObservable", [
-	"tinymce/util/Observable",
+	"tinymce/utils/Observable",
 	"tinymce/dom/DOMUtils",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Observable, DOMUtils, Tools) {
 	var DOM = DOMUtils.DOM, customEventRootDelegates;
 
@@ -33947,7 +33947,7 @@ define("tinymce/Mode", [], function() {
  * editor.shortcuts.add('access+a', function() {}); // "access" maps to ctrl+alt on Mac and shift+alt on PC
  */
 define("tinymce/Shortcuts", [
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/Env"
 ], function(Tools, Env) {
 	var each = Tools.each, explode = Tools.explode;
@@ -34175,9 +34175,9 @@ define("tinymce/Shortcuts", [
  * });
  */
 define("tinymce/file/Uploader", [
-	"tinymce/util/Promise",
-	"tinymce/util/Tools",
-	"tinymce/util/Fun"
+	"tinymce/utils/Promise",
+	"tinymce/utils/Tools",
+	"tinymce/utils/Fun"
 ], function(Promise, Tools, Fun) {
 	return function(uploadStatus, settings) {
 		var pendingPromises = {};
@@ -34393,7 +34393,7 @@ define("tinymce/file/Uploader", [
  * @class tinymce.file.Conversions
  */
 define("tinymce/file/Conversions", [
-	"tinymce/util/Promise"
+	"tinymce/utils/Promise"
 ], function(Promise) {
 	function blobUriToBlob(url) {
 		return new Promise(function(resolve) {
@@ -34502,9 +34502,9 @@ define("tinymce/file/Conversions", [
  * @class tinymce.file.ImageScanner
  */
 define("tinymce/file/ImageScanner", [
-	"tinymce/util/Promise",
-	"tinymce/util/Arr",
-	"tinymce/util/Fun",
+	"tinymce/utils/Promise",
+	"tinymce/utils/Arr",
+	"tinymce/utils/Fun",
 	"tinymce/file/Conversions",
 	"tinymce/Env"
 ], function(Promise, Arr, Fun, Conversions, Env) {
@@ -34650,8 +34650,8 @@ define("tinymce/file/ImageScanner", [
  * @class tinymce.file.BlobCache
  */
 define("tinymce/file/BlobCache", [
-	"tinymce/util/Arr",
-	"tinymce/util/Fun"
+	"tinymce/utils/Arr",
+	"tinymce/utils/Fun"
 ], function(Arr, Fun) {
 	return function() {
 		var cache = [], constant = Fun.constant;
@@ -34815,7 +34815,7 @@ define("tinymce/file/UploadStatus", [
  * @class tinymce.EditorUpload
  */
 define("tinymce/EditorUpload", [
-	"tinymce/util/Arr",
+	"tinymce/utils/Arr",
 	"tinymce/file/Uploader",
 	"tinymce/file/ImageScanner",
 	"tinymce/file/BlobCache",
@@ -35051,7 +35051,7 @@ define("tinymce/caret/FakeCaret", [
 	"tinymce/dom/RangeUtils",
 	"tinymce/dom/DomQuery",
 	"tinymce/geom/ClientRect",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(CaretContainer, CaretPosition, NodeType, RangeUtils, $, ClientRect, Delay) {
 	var isContentEditableFalse = NodeType.isContentEditableFalse;
 
@@ -35241,7 +35241,7 @@ define("tinymce/caret/FakeCaret", [
  * @class tinymce.dom.Dimensions
  */
 define("tinymce/dom/Dimensions", [
-	"tinymce/util/Arr",
+	"tinymce/utils/Arr",
 	"tinymce/dom/NodeType",
 	"tinymce/geom/ClientRect"
 ], function(Arr, NodeType, ClientRect) {
@@ -35308,8 +35308,8 @@ define("tinymce/dom/Dimensions", [
  * @class tinymce.caret.LineWalker
  */
 define("tinymce/caret/LineWalker", [
-	"tinymce/util/Fun",
-	"tinymce/util/Arr",
+	"tinymce/utils/Fun",
+	"tinymce/utils/Arr",
 	"tinymce/dom/Dimensions",
 	"tinymce/caret/CaretCandidate",
 	"tinymce/caret/CaretUtils",
@@ -35476,8 +35476,8 @@ define("tinymce/caret/LineWalker", [
  * @class tinymce.caret.LineUtils
  */
 define("tinymce/caret/LineUtils", [
-	"tinymce/util/Fun",
-	"tinymce/util/Arr",
+	"tinymce/utils/Fun",
+	"tinymce/utils/Arr",
 	"tinymce/dom/NodeType",
 	"tinymce/dom/Dimensions",
 	"tinymce/geom/ClientRect",
@@ -35615,8 +35615,8 @@ define("tinymce/caret/LineUtils", [
  */
 define("tinymce/DragDropOverrides", [
 	"tinymce/dom/NodeType",
-	"tinymce/util/Arr",
-	"tinymce/util/Fun"
+	"tinymce/utils/Arr",
+	"tinymce/utils/Fun"
 ], function(
 	NodeType,
 	Arr,
@@ -35867,10 +35867,10 @@ define("tinymce/SelectionOverrides", [
 	"tinymce/dom/NodeType",
 	"tinymce/dom/RangeUtils",
 	"tinymce/geom/ClientRect",
-	"tinymce/util/VK",
-	"tinymce/util/Fun",
-	"tinymce/util/Arr",
-	"tinymce/util/Delay",
+	"tinymce/utils/VK",
+	"tinymce/utils/Fun",
+	"tinymce/utils/Arr",
+	"tinymce/utils/Delay",
 	"tinymce/DragDropOverrides",
 	"tinymce/text/Zwsp"
 ], function(
@@ -36762,7 +36762,7 @@ define("tinymce/SelectionOverrides", [
 	return SelectionOverrides;
 });
 
-// Included from: js/tinymce/classes/util/Uuid.js
+// Included from: js/tinymce/classes/utils/Uuid.js
 
 /**
  * Uuid.js
@@ -36860,23 +36860,23 @@ define("tinymce/Editor", [
 	"tinymce/EnterKey",
 	"tinymce/ForceBlocks",
 	"tinymce/EditorCommands",
-	"tinymce/util/URI",
+	"tinymce/utils/URI",
 	"tinymce/dom/ScriptLoader",
 	"tinymce/dom/EventUtils",
 	"tinymce/WindowManager",
 	"tinymce/NotificationManager",
 	"tinymce/html/Schema",
 	"tinymce/html/DomParser",
-	"tinymce/util/Quirks",
+	"tinymce/utils/Quirks",
 	"tinymce/Env",
-	"tinymce/util/Tools",
-	"tinymce/util/Delay",
+	"tinymce/utils/Tools",
+	"tinymce/utils/Delay",
 	"tinymce/EditorObservable",
 	"tinymce/Mode",
 	"tinymce/Shortcuts",
 	"tinymce/EditorUpload",
 	"tinymce/SelectionOverrides",
-	"tinymce/util/Uuid"
+	"tinymce/utils/Uuid"
 ], function(
 	DOMUtils, DomQuery, AddOnManager, NodeChange, Node, DomSerializer, Serializer,
 	Selection, Formatter, UndoManager, EnterKey, ForceBlocks, EditorCommands,
@@ -39009,7 +39009,7 @@ define("tinymce/Editor", [
 	return Editor;
 });
 
-// Included from: js/tinymce/classes/util/I18n.js
+// Included from: js/tinymce/classes/utils/I18n.js
 
 /**
  * I18n.js
@@ -39151,7 +39151,7 @@ define("tinymce/util/I18n", [], function() {
  */
 define("tinymce/FocusManager", [
 	"tinymce/dom/DOMUtils",
-	"tinymce/util/Delay",
+	"tinymce/utils/Delay",
 	"tinymce/Env"
 ], function(DOMUtils, Delay, Env) {
 	var selectionChangeHandler, documentFocusInHandler, documentMouseUpHandler, DOM = DOMUtils.DOM;
@@ -39174,7 +39174,7 @@ define("tinymce/FocusManager", [
 		}
 
 		// We can't store a real range on IE 11 since it gets mutated so we need to use a bookmark object
-		// TODO: Move this to a separate range utils class since it's it's logic is present in Selection as well.
+		// TODO: Move this to a separate range custor class since it's it's logic is present in Selection as well.
 		function createBookmark(dom, rng) {
 			if (rng && rng.startContainer) {
 				// Verify that the range is within the root of the editor
@@ -39425,12 +39425,12 @@ define("tinymce/EditorManager", [
 	"tinymce/Editor",
 	"tinymce/dom/DomQuery",
 	"tinymce/dom/DOMUtils",
-	"tinymce/util/URI",
+	"tinymce/utils/URI",
 	"tinymce/Env",
-	"tinymce/util/Tools",
-	"tinymce/util/Promise",
-	"tinymce/util/Observable",
-	"tinymce/util/I18n",
+	"tinymce/utils/Tools",
+	"tinymce/utils/Promise",
+	"tinymce/utils/Observable",
+	"tinymce/utils/I18n",
 	"tinymce/FocusManager"
 ], function(Editor, $, DOMUtils, URI, Env, Tools, Promise, Observable, I18n, FocusManager) {
 	var DOM = DOMUtils.DOM;
@@ -40169,7 +40169,7 @@ define("tinymce/EditorManager", [
  */
 define("tinymce/LegacyInput", [
 	"tinymce/EditorManager",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(EditorManager, Tools) {
 	var each = Tools.each, explode = Tools.explode;
 
@@ -40234,7 +40234,7 @@ define("tinymce/LegacyInput", [
 	});
 });
 
-// Included from: js/tinymce/classes/util/XHR.js
+// Included from: js/tinymce/classes/utils/XHR.js
 
 /**
  * XHR.js
@@ -40266,8 +40266,8 @@ define("tinymce/LegacyInput", [
  * });
  */
 define("tinymce/util/XHR", [
-	"tinymce/util/Observable",
-	"tinymce/util/Tools"
+	"tinymce/utils/Observable",
+	"tinymce/utils/Tools"
 ], function(Observable, Tools) {
 	var XHR = {
 		/**
@@ -40347,7 +40347,7 @@ define("tinymce/util/XHR", [
 	return XHR;
 });
 
-// Included from: js/tinymce/classes/util/JSON.js
+// Included from: js/tinymce/classes/utils/JSON.js
 
 /**
  * JSON.js
@@ -40460,7 +40460,7 @@ define("tinymce/util/JSON", [], function() {
 	};
 });
 
-// Included from: js/tinymce/classes/util/JSONRequest.js
+// Included from: js/tinymce/classes/utils/JSONRequest.js
 
 /**
  * JSONRequest.js
@@ -40500,9 +40500,9 @@ define("tinymce/util/JSON", [], function() {
  * });
  */
 define("tinymce/util/JSONRequest", [
-	"tinymce/util/JSON",
-	"tinymce/util/XHR",
-	"tinymce/util/Tools"
+	"tinymce/utils/JSON",
+	"tinymce/utils/XHR",
+	"tinymce/utils/Tools"
 ], function(JSON, XHR, Tools) {
 	var extend = Tools.extend;
 
@@ -40573,7 +40573,7 @@ define("tinymce/util/JSONRequest", [
 	return JSONRequest;
 });
 
-// Included from: js/tinymce/classes/util/JSONP.js
+// Included from: js/tinymce/classes/utils/JSONP.js
 
 /**
  * JSONP.js
@@ -40614,7 +40614,7 @@ define("tinymce/util/JSONP", [
 	};
 });
 
-// Included from: js/tinymce/classes/util/LocalStorage.js
+// Included from: js/tinymce/classes/utils/LocalStorage.js
 
 /**
  * LocalStorage.js
@@ -40855,7 +40855,7 @@ define("tinymce/Compat", [
 	"tinymce/dom/EventUtils",
 	"tinymce/dom/ScriptLoader",
 	"tinymce/AddOnManager",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/Env"
 ], function(DOMUtils, EventUtils, ScriptLoader, AddOnManager, Tools, Env) {
 	var tinymce = window.tinymce;
@@ -40941,8 +40941,8 @@ define("tinymce/Compat", [
  * @class tinymce.ui.Layout
  */
 define("tinymce/ui/Layout", [
-	"tinymce/util/Class",
-	"tinymce/util/Tools"
+	"tinymce/utils/Class",
+	"tinymce/utils/Tools"
 ], function(Class, Tools) {
 	"use strict";
 
@@ -42172,7 +42172,7 @@ define("tinymce/ui/ColorButton", [
 	});
 });
 
-// Included from: js/tinymce/classes/util/Color.js
+// Included from: js/tinymce/classes/utils/Color.js
 
 /**
  * Color.js
@@ -42433,7 +42433,7 @@ define("tinymce/ui/ColorPicker", [
 	"tinymce/ui/Widget",
 	"tinymce/ui/DragHelper",
 	"tinymce/ui/DomUtils",
-	"tinymce/util/Color"
+	"tinymce/utils/Color"
 ], function(Widget, DragHelper, DomUtils, Color) {
 	"use strict";
 
@@ -42921,7 +42921,7 @@ define("tinymce/ui/FormItem", [
 define("tinymce/ui/Form", [
 	"tinymce/ui/Container",
 	"tinymce/ui/FormItem",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(Container, FormItem, Tools) {
 	"use strict";
 
@@ -43133,7 +43133,7 @@ define("tinymce/ui/FieldSet", [
  */
 define("tinymce/ui/FilePicker", [
 	"tinymce/ui/ComboBox",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(ComboBox, Tools) {
 	"use strict";
 
@@ -43570,7 +43570,7 @@ define("tinymce/ui/FormatControls", [
 	"tinymce/ui/Control",
 	"tinymce/ui/Widget",
 	"tinymce/ui/FloatPanel",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/EditorManager",
 	"tinymce/Env"
 ], function(Control, Widget, FloatPanel, Tools, EditorManager, Env) {
@@ -44347,7 +44347,7 @@ define("tinymce/ui/GridLayout", [
  */
 define("tinymce/ui/Iframe", [
 	"tinymce/ui/Widget",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(Widget, Delay) {
 	"use strict";
 
@@ -45042,7 +45042,7 @@ define("tinymce/ui/MenuItem", [
 	"tinymce/ui/Widget",
 	"tinymce/ui/Factory",
 	"tinymce/Env",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function(Widget, Factory, Env, Delay) {
 	"use strict";
 
@@ -45379,7 +45379,7 @@ define("tinymce/ui/MenuItem", [
 define("tinymce/ui/Throbber", [
 	"tinymce/dom/DomQuery",
 	"tinymce/ui/Control",
-	"tinymce/util/Delay"
+	"tinymce/utils/Delay"
 ], function($, Control, Delay) {
 	"use strict";
 
@@ -45472,7 +45472,7 @@ define("tinymce/ui/Menu", [
 	"tinymce/ui/FloatPanel",
 	"tinymce/ui/MenuItem",
 	"tinymce/ui/Throbber",
-	"tinymce/util/Tools"
+	"tinymce/utils/Tools"
 ], function(FloatPanel, MenuItem, Throbber, Tools) {
 	"use strict";
 
@@ -46696,7 +46696,7 @@ define("tinymce/ui/TabPanel", [
  */
 define("tinymce/ui/TextBox", [
 	"tinymce/ui/Widget",
-	"tinymce/util/Tools",
+	"tinymce/utils/Tools",
 	"tinymce/ui/DomUtils"
 ], function(Widget, Tools, DomUtils) {
 	return Widget.extend({
@@ -46919,5 +46919,5 @@ define("tinymce/Register", [
 	return {};
 });
 
-expose(["tinymce/geom/Rect","tinymce/util/Promise","tinymce/util/Delay","tinymce/Env","tinymce/dom/EventUtils","tinymce/dom/Sizzle","tinymce/util/Tools","tinymce/dom/DomQuery","tinymce/html/Styles","tinymce/dom/TreeWalker","tinymce/html/Entities","tinymce/dom/DOMUtils","tinymce/dom/ScriptLoader","tinymce/AddOnManager","tinymce/dom/RangeUtils","tinymce/html/Node","tinymce/html/Schema","tinymce/html/SaxParser","tinymce/html/DomParser","tinymce/html/Writer","tinymce/html/Serializer","tinymce/dom/Serializer","tinymce/util/VK","tinymce/dom/ControlSelection","tinymce/dom/BookmarkManager","tinymce/dom/Selection","tinymce/Formatter","tinymce/UndoManager","tinymce/EditorCommands","tinymce/util/URI","tinymce/util/Class","tinymce/util/EventDispatcher","tinymce/util/Observable","tinymce/ui/Selector","tinymce/ui/Collection","tinymce/ui/ReflowQueue","tinymce/ui/Control","tinymce/ui/Factory","tinymce/ui/KeyboardNavigation","tinymce/ui/Container","tinymce/ui/DragHelper","tinymce/ui/Scrollable","tinymce/ui/Panel","tinymce/ui/Movable","tinymce/ui/Resizable","tinymce/ui/FloatPanel","tinymce/ui/Window","tinymce/ui/MessageBox","tinymce/WindowManager","tinymce/ui/Tooltip","tinymce/ui/Widget","tinymce/ui/Progress","tinymce/ui/Notification","tinymce/NotificationManager","tinymce/EditorObservable","tinymce/Shortcuts","tinymce/Editor","tinymce/util/I18n","tinymce/FocusManager","tinymce/EditorManager","tinymce/util/XHR","tinymce/util/JSON","tinymce/util/JSONRequest","tinymce/util/JSONP","tinymce/util/LocalStorage","tinymce/Compat","tinymce/ui/Layout","tinymce/ui/AbsoluteLayout","tinymce/ui/Button","tinymce/ui/ButtonGroup","tinymce/ui/Checkbox","tinymce/ui/ComboBox","tinymce/ui/ColorBox","tinymce/ui/PanelButton","tinymce/ui/ColorButton","tinymce/util/Color","tinymce/ui/ColorPicker","tinymce/ui/Path","tinymce/ui/ElementPath","tinymce/ui/FormItem","tinymce/ui/Form","tinymce/ui/FieldSet","tinymce/ui/FilePicker","tinymce/ui/FitLayout","tinymce/ui/FlexLayout","tinymce/ui/FlowLayout","tinymce/ui/FormatControls","tinymce/ui/GridLayout","tinymce/ui/Iframe","tinymce/ui/InfoBox","tinymce/ui/Label","tinymce/ui/Toolbar","tinymce/ui/MenuBar","tinymce/ui/MenuButton","tinymce/ui/MenuItem","tinymce/ui/Throbber","tinymce/ui/Menu","tinymce/ui/ListBox","tinymce/ui/Radio","tinymce/ui/ResizeHandle","tinymce/ui/SelectBox","tinymce/ui/Slider","tinymce/ui/Spacer","tinymce/ui/SplitButton","tinymce/ui/StackLayout","tinymce/ui/TabPanel","tinymce/ui/TextBox"]);
+expose(["tinymce/geom/Rect","tinymce/utils/Promise","tinymce/utils/Delay","tinymce/Env","tinymce/dom/EventUtils","tinymce/dom/Sizzle","tinymce/utils/Tools","tinymce/dom/DomQuery","tinymce/html/Styles","tinymce/dom/TreeWalker","tinymce/html/Entities","tinymce/dom/DOMUtils","tinymce/dom/ScriptLoader","tinymce/AddOnManager","tinymce/dom/RangeUtils","tinymce/html/Node","tinymce/html/Schema","tinymce/html/SaxParser","tinymce/html/DomParser","tinymce/html/Writer","tinymce/html/Serializer","tinymce/dom/Serializer","tinymce/utils/VK","tinymce/dom/ControlSelection","tinymce/dom/BookmarkManager","tinymce/dom/Selection","tinymce/Formatter","tinymce/UndoManager","tinymce/EditorCommands","tinymce/utils/URI","tinymce/utils/Class","tinymce/utils/EventDispatcher","tinymce/utils/Observable","tinymce/ui/Selector","tinymce/ui/Collection","tinymce/ui/ReflowQueue","tinymce/ui/Control","tinymce/ui/Factory","tinymce/ui/KeyboardNavigation","tinymce/ui/Container","tinymce/ui/DragHelper","tinymce/ui/Scrollable","tinymce/ui/Panel","tinymce/ui/Movable","tinymce/ui/Resizable","tinymce/ui/FloatPanel","tinymce/ui/Window","tinymce/ui/MessageBox","tinymce/WindowManager","tinymce/ui/Tooltip","tinymce/ui/Widget","tinymce/ui/Progress","tinymce/ui/Notification","tinymce/NotificationManager","tinymce/EditorObservable","tinymce/Shortcuts","tinymce/Editor","tinymce/utils/I18n","tinymce/FocusManager","tinymce/EditorManager","tinymce/utils/XHR","tinymce/utils/JSON","tinymce/utils/JSONRequest","tinymce/utils/JSONP","tinymce/utils/LocalStorage","tinymce/Compat","tinymce/ui/Layout","tinymce/ui/AbsoluteLayout","tinymce/ui/Button","tinymce/ui/ButtonGroup","tinymce/ui/Checkbox","tinymce/ui/ComboBox","tinymce/ui/ColorBox","tinymce/ui/PanelButton","tinymce/ui/ColorButton","tinymce/utils/Color","tinymce/ui/ColorPicker","tinymce/ui/Path","tinymce/ui/ElementPath","tinymce/ui/FormItem","tinymce/ui/Form","tinymce/ui/FieldSet","tinymce/ui/FilePicker","tinymce/ui/FitLayout","tinymce/ui/FlexLayout","tinymce/ui/FlowLayout","tinymce/ui/FormatControls","tinymce/ui/GridLayout","tinymce/ui/Iframe","tinymce/ui/InfoBox","tinymce/ui/Label","tinymce/ui/Toolbar","tinymce/ui/MenuBar","tinymce/ui/MenuButton","tinymce/ui/MenuItem","tinymce/ui/Throbber","tinymce/ui/Menu","tinymce/ui/ListBox","tinymce/ui/Radio","tinymce/ui/ResizeHandle","tinymce/ui/SelectBox","tinymce/ui/Slider","tinymce/ui/Spacer","tinymce/ui/SplitButton","tinymce/ui/StackLayout","tinymce/ui/TabPanel","tinymce/ui/TextBox"]);
 })(this);

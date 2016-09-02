@@ -1,16 +1,16 @@
-from config import BACKEND_MYSQL
+from settings.config import config
 from peewee import Model, MySQLDatabase
 from playhouse.pool import PooledMySQLDatabase
 
 # PooledMySQLDatabase, 连接池
 db_mysql = PooledMySQLDatabase(
-        BACKEND_MYSQL['database'],
-        max_connections=BACKEND_MYSQL['max_connections'],
-        stale_timeout=BACKEND_MYSQL['stale_timeout'],  # 5 minutes.
-        user=BACKEND_MYSQL['user'],
-        password=BACKEND_MYSQL['password'],
-        host=BACKEND_MYSQL['host'],
-        port=BACKEND_MYSQL['port']
+        config.BACKEND_MYSQL['database'],
+        max_connections=config.BACKEND_MYSQL['max_connections'],
+        stale_timeout=config.BACKEND_MYSQL['stale_timeout'],  # 5 minutes.
+        user=config.BACKEND_MYSQL['user'],
+        password=config.BACKEND_MYSQL['password'],
+        host=config.BACKEND_MYSQL['host'],
+        port=config.BACKEND_MYSQL['port']
 )
 
 
@@ -122,11 +122,14 @@ def create_tmp_data():
     Notification.new_reply(postreply_test_1, post_test_1, user)
 
 
-db_init = MySQLDatabase('', user=BACKEND_MYSQL['user'], password=BACKEND_MYSQL['password'], host=BACKEND_MYSQL['host'],
-                        port=BACKEND_MYSQL['port'])
+db_init = MySQLDatabase('',
+                        user=config.BACKEND_MYSQL['user'],
+                        password=config.BACKEND_MYSQL['password'],
+                        host=config.BACKEND_MYSQL['host'],
+                        port=config.BACKEND_MYSQL['port'])
 
-if not db_init.execute_sql("select * from information_schema.schemata where schema_name = '{0}'".format(BACKEND_MYSQL['database'])).fetchone():
-    db_init.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci".format(BACKEND_MYSQL['database']))
+if not db_init.execute_sql("select * from information_schema.schemata where schema_name = '{0}'".format(config.BACKEND_MYSQL['database'])).fetchone():
+    db_init.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci".format(config.BACKEND_MYSQL['database']))
     create_tmp_data()
 
 db_init.close()

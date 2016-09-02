@@ -3,7 +3,8 @@ import datetime
 from .user import User
 from db.mysql_model import BaseModel
 from peewee import *
-import config
+
+from settings.config import config
 
 
 class PostCategory(BaseModel):

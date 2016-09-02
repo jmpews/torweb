@@ -11,7 +11,7 @@
 /*global tinymce:true */
 
 (function () {
-    var ajaxUrl = '/utils/uploadimg';
+    var ajaxUrl = '/custor/uploadimg';
     var loadingImage = '<img id="loadingImg" src="http://static.cnblogs.com/images/loading.gif" alt="" />';
 
     tinymce.create('tinymce.plugins.PasteUploadPlugin', {

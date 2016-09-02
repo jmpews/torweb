@@ -1,0 +1,176 @@
+{% extends "../base.html" %}
+
+{% block title %}Tornado.Post.Detail{% end %}
+{% block styles %}
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+{% end %}
+
+{% block content %}
+        <div class="content-container container user-profile-html">
+            <div class="col-md-3">
+                <div class="user-profile-widget">
+                    <div class="text-center">
+                        <img src="/avatar/{{user.avatar}}">
+                    </div>
+                    <dl class="row">
+                        <dt class="col-xs-6">用户名:</dt>
+                        <dd class="col-xs-6"><span>@{{user.username}}</span></dd>
+                        <dt class="col-xs-6">注册时间:</dt>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.reg_time)}}</span></dd>
+                        <dt class="col-xs-6">上次登录时间:</dt>
+                        <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.last_login_time)}}</span></dd>
+                    </dl>
+                    {% if is_follow != None %}
+                        <div class="text-center">
+                        {% if is_follow %}
+                            <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="1" role="button">已关注</a>
+                        {% else %}
+                            <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="0" role="button">关注</a>
+                        {% end %}
+                        </div>
+                    {% end %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="user-profile-trend">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/user/{{user.id}}">个人资料</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/follower/{{user.id}}">个人关注</a>
+                        </li>
+                    </ul>
+                    <div class="">
+                        <div class="user-profile-card">
+                            <div class="profile-card-head" style="border-top: none;">
+                                个人资料
+                            </div>
+                            <div class="profile-card-body">
+                                <ul class="list-inline">
+                                    <li>{{profile.nickname}}</li>
+                                    <li>第{{user.id}}号Member</li>
+                                    <li>{{profile.reg_time}}加入</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                发表过的Post
+                            </div>
+                            <div class="profile-card-body">
+                                {% if posts %}
+                                <ul class="list-inline">
+                                    {% for post in posts %}
+                                    <li> <a href="/post/{{post.id}}">《{{post.title}}》</a></li>
+                                    {% end %}
+                                </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
+                            </div>
+                        </div>
+
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                发表过的评论
+                            </div>
+                            <div class="profile-card-body">
+                                {% if postreplys %}
+                                <ul class="list-inline">
+                                    {% for postreply in postreplys %}
+                                    <li>
+                                        <a href="/post/{{postreply.post.id}}">《{{postreply.post.title}}》</a>
+                                        :
+                                        <a href="/post/{{postreply.post.id}}">{{postreply.content}}</a>
+                                    </li>
+                                    {% end %}
+                                </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
+                            </div>
+                        </div>
+
+                        <div class="user-profile-card">
+                            <div class="profile-card-head">
+                                收藏过的Post
+                            </div>
+                            <div class="profile-card-body">
+                                {% if collectposts %}
+                                <ul class="list-inline">
+                                    {% for collectpost in collectposts %}
+                                    <li> <a href="/post/{{collectpost.post.id}}">《{{collectpost.post.title}}》</a></li>
+                                    {% end %}
+                                </ul>
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                                </div>
+                                {% end %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% end %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var user_id = {{user.id}};
+        monitor_system_status()
+        $('.follow-user').on('mouseover', function(e){
+            if($(e.target).attr('is_follow') == '1') {
+                $(e.target).html('取消关注');
+            }
+        })
+        .on('mouseout', function(e){
+            if($(e.target).attr('is_follow') == '1') {
+                $(e.target).html('已关注');
+            }
+        })
+        .on('click', function(e){
+            var data;
+            if($(e.target).attr('is_follow') == '0') {
+                data = {'opt': 'follow-user', 'data': {'user': user_id}}
+            }
+            else if ($(e.target).attr('is_follow') == '1'){
+                data = {'opt': 'unfollow-user', 'data': {'user': user_id}}
+            }
+            $.ajax({
+               type: 'post',
+               dataType: 'json',
+               url: '/useropt',
+               data: JSON.stringify(data),
+               success: function(result, status) {
+                   if(result.errorcode == 0) {
+                       $(e.target).addClass('post-collected');
+                        if($(e.target).attr('is_follow') == '0') {
+                            $(e.target).attr('is_follow', '1');
+                            $.notify('关注成功');
+                            $(e.target).html('已关注');
+                       }
+                       else {
+                            $(e.target).attr('is_follow', '0');
+                            $.notify('取关成功');
+                            $(e.target).html('关注');
+                       }
+                   }
+                   else if(result.errorcode == 1) {
+                       $.notify(result.txt);
+                   }
+                   else{
+                   }
+                }
+            });
+        });
+    });
+</script>
+{% end %}

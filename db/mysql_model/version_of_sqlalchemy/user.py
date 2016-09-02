@@ -4,7 +4,7 @@ import time
 from hashlib import md5
 from db.mysql_model import BaseModel, DBSession
 from sqlalchemy import Column, Integer, BigInteger, String, Float, ForeignKey, Boolean, DateTime, func, VARCHAR
-from utils.util import random_str
+from custor.utils import random_str
 
 
 class USER_LEVEL:

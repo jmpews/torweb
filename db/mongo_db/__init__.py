@@ -1,4 +1,4 @@
-import config
+from settings.config import config
 
 from pymongo import MongoClient
 

@@ -1,7 +1,7 @@
 import config
 from db.mongo_db import DB_mongo
 
-from utils.util import random_str
+from custor.utils import random_str
 
 import functools
 

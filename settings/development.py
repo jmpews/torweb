@@ -17,7 +17,7 @@ BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
 BACKEND_REDIS = ('localhost', 6379, 0)
 
 STATIC_PATH = (
-    (r'/avatar/(.*)', {'path': 'static/images/avatars/'}),
+    (r'/avatar/(.*)', {'path': 'frontend/static/assets/'}),
     (r'/assets/lib/(.*)', {'path': 'frontend/lib/'}),
     (r'/assets/(.*)', {'path':'frontend/static/assets/'})
 )

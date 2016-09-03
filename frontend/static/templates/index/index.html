@@ -72,7 +72,7 @@
             {% for post in posts %}
             <div class="post-item cl">
                 <div class="avatar hidden-xs">
-                    <a href="#"><img src="/avatar/{{post.user.avatar}}" ></a>
+                    <a href="#"><img src="/assets/images/avatar/{{post.user.avatar}}" ></a>
                 </div>
 
                 <div class="item-mid clear-xs">
@@ -88,7 +88,7 @@
                         <span><a class="username" href="/user/{{post.latest_reply_user.id}}">{{post.latest_reply_user.nickname}} </a>最后回复</span>
                         {% end %}
                         <span class="divider">•</span>
-                        <span>{{post.visit_count}} 浏览<span>
+                        <span>{{post.visit_count}} 浏览</span>
                     </div>
                 </div>
                 <div class="item-end hidden-xs">
@@ -131,7 +131,7 @@
         </div>
         <div class="card all-cate-card-footer custom-card">
             <div class="card-header">
-                所有分类
+                <i class="fa fa-align-left" aria-hidden="true"></i>所有分类
             </div>
             <div class="card-block">
                 <div class="card-header-all-footer">
@@ -181,6 +181,8 @@
             </div>
         </div>
         </div>
+
+        <!-- ***侧边栏*** -->
         <div class="col-md-3">
             <div class="card notice-card custom-card">
                 <div class="card-header">
@@ -200,7 +202,7 @@
 
             <div class="card post-hot-card custom-card">
                 <div class="card-header">
-                    <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
+                    <i class="fa fa-fire" aria-hidden="true"></i>Hot文章
                 </div>
                 <div class="card-block">
                     <ul class="list-inline">
@@ -213,7 +215,7 @@
 
             <div class="card system-status-card custom-card">
                 <div class="card-header">
-                    <i class="fa fa-desktop" aria-hidden="true"></i> 服务器状态
+                    <i class="fa fa-desktop" aria-hidden="true"></i>服务器状态
                 </div>
                 <div class="card-block">
                     <dl class="row">

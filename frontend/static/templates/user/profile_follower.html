@@ -10,7 +10,7 @@
             <div class="col-md-3">
                 <div class="user-profile-widget">
                     <div class="text-center">
-                        <img src="/avatar/{{user.avatar}}">
+                        <img src="/assets/images/avatar/{{user.avatar}}">
                     </div>
                     <dl class="row">
                         <dt class="col-xs-6">用户名:</dt>
@@ -50,7 +50,7 @@
                                 {% if follow_who %}
                                 <ul class="list-inline">
                                     {% for who in follow_who %}
-                                    <li><a href="/user/{{who.follower.id}}"><img src="/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
+                                    <li><a href="/user/{{who.follower.id}}"><img src="/assets/images/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
                                     {% end %}
                                 </ul>
                                 {% else %}
@@ -69,7 +69,7 @@
                                 {% if who_follow %}
                                 <ul class="list-inline">
                                     {% for who in who_follow %}
-                                    <li><img src="/avatar/{{who.user.avatar}}"><a href="/user/{{who.user.id}}"><span>{{who.user.username}}</span></a> </li>
+                                    <li><img src="/assets/images/avatar/{{who.user.avatar}}"><a href="/user/{{who.user.id}}"><span>{{who.user.username}}</span></a> </li>
                                     {% end %}
                                 </ul>
                                 {% else %}

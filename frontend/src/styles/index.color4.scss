@@ -32,7 +32,7 @@ body {
     //background-image: url("/assets/images/LPBackground.svg");
     background-color: $base-background-color;
     a {
-        color: $font-color;
+        color: $link-color;
         &:hover, &:focus {
             color: $link-color;
         }
@@ -103,6 +103,7 @@ ul {
 .fa {
     color: $base-color;
     padding: 0 3px;
+    //padding-right: 3px;
     &:hover {
         color: $base-color !important;
     }
@@ -409,6 +410,20 @@ a:hover {
 
 }
 
+@media (min-width: 1200px) {
+    .content-container {
+        max-width: none;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+@media (min-width: 1450px) {
+    .content-container {
+        max-width: none;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
 // ---------------------页面样式-index.html-----------------------
 
 .index-html {
@@ -423,18 +438,26 @@ a:hover {
     }
 }
 .all-cate-card {
+    .card-header {
+        color: $font-color !important;
+        a {
+            color: $font-color;
+        }
+    }
     .divider {
         margin: 0 3px;
     }
 }
 .card-header-all-bt {
+    color: $important-font-color !important;
     .fa {
-        color: $font-color;
+        color: $important-font-color !important;
         padding-right: 2px;
     }
     &:hover {
+        color: $base-color !important;
         .fa {
-            color: $base-color;
+            color: $base-color !important;
         }
     }
 }
@@ -465,7 +488,7 @@ a:hover {
     position: relative;
     min-height: 68px;
     a:hover {
-        color: $base-color;
+        color: $link-color;
     }
     .avatar {
         position: absolute;
@@ -482,9 +505,10 @@ a:hover {
             margin-bottom: 7px;
             word-wrap: break-word;
             a{
-                color: $link-color;
-                //color: $important-font-color;
+                //color: $link-color;
+                color: $important-font-color;
                 &:hover {
+                    color: $link-color;
                     text-decoration: underline;
                 }
             }
@@ -523,11 +547,9 @@ a:hover {
         padding-right: 0px;
     }
 }
-.post-detail {
-    padding-bottom: 10px;
+.post-detail-card {
     border-bottom: 1px solid #e5e5e5;
     span {
-        margin-right:  5px;
     }
     .card {
         box-shadow: inset 0 0 0 1px #e1e1e1;
@@ -535,39 +557,74 @@ a:hover {
             color: $font-color;
         }
     }
-    .post-title {
-        max-width: 500px;
-        margin: 0;
-        a {
-            font-size: 24px;
-            font-weight: 500;
-            line-height: 30px;
-            color: $important-font-color;
+    .post-detail-header {
+        padding: 5px;
+        border-bottom: 1px dashed #e0e0e0;
+        position: relative;
+        .avatar {
+            width: 50px;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            img {
+                //居中处理
+                width: 40px;
+                margin: auto;
+                position: absolute;
+                top: 0; left: 0; bottom: 0; right: 0;
+            }
         }
-    }
-    .post-info {
-        font-size: 11px;
-        margin-bottom: 5px;
-        .username {
-            color: $important-font-color;
+        .post-detail-header-mid {
+            position: relative;
+            margin-left: 50px;
+        }
+        .post-title {
+            max-width: 500px;
+            margin: 0;
+            a {
+                font-size: 24px;
+                font-weight: 500;
+                line-height: 30px;
+                color: $important-font-color;
+            }
         }
 
+        .post-info {
+            font-size: 11px;
+            margin-bottom: 5px;
+            .username {
+                color: $important-font-color;
+            }
+
+        }
     }
 
     .post-function {
+        padding-bottom: 5px;
+        border-bottom: 1px solid #e5e5e5;
         margin-top: 10px;
         text-align: right;
+        a {
+            color: $font-color;
+            padding: 2px;
+            &:hover {
+                color: $link-color;
+                background-color: #efefef;;
+            }
+        }
         span {
-            padding-right: 2px;
         }
         a.post-collected {
             color: $base-color;
+            .fa {
+                color: $link-color;
+            }
         }
         .fa {
             color: $font-color;
         }
     }
     .post-content {
+        color: $important-font-color;
         img {
             max-width: 90%;
         }
@@ -583,7 +640,7 @@ a:hover {
         }
     }
     .reply-item {
-        margin-top: 10px;
+        padding-top: 5px;
         padding-bottom: 7px;
         border-bottom: 1px solid #e5e5e5;
         .reply-main {
@@ -594,13 +651,30 @@ a:hover {
             .username {
                 color: $important-font-color;
             }
+            .floor {
+                color: $color3;
+            }
+        }
+        &:last-of-type {
+            border-bottom: none;
         }
     }
     .reply-function {
         margin-top: 7px;
         text-align: right;
+        a {
+            color: $font-color;
+            padding: 2px;
+            &:hover {
+                color: $link-color;
+                background-color: #efefef;;
+            }
+        }
         a.postreply-supported {
-            color: $base-color;
+            color: $link-color;
+            .fa {
+                color: $link-color;
+            }
         }
 
         span {
@@ -619,6 +693,11 @@ a:hover {
         min-height: 200px;
         outline: none;
         padding: 0px;
+        blockquote {
+          margin: 15px;
+          border-left: 3px solid #2ecc71;
+          padding-left: 9px;
+        }
     }
 }
 // -------------------medium-editor样式表------------------------
@@ -658,9 +737,9 @@ a:hover {
 .content-container {
     form {
         margin-bottom: 13px;
-        label {
-            font-size: 13px;
-        }
+		label {
+			font-size: 13px;
+		}
         .parsley-errors-list {
             list-style: none outside none;
             color: #d9534f;
@@ -673,16 +752,16 @@ a:hover {
 // ---------------------页面样式-post_new.html-----------------------
 
 .note-editor.note-frame {
-    border:none;
-    border-left: 1px solid #F3EEEE;
-    border-right: 1px solid #F3EEEE;
+	border:none;
+	border-left: 1px solid #F3EEEE;
+	border-right: 1px solid #F3EEEE;
     p {
         margin-bottom: 0.3rem !important;
     }
 }
 
 .note-toolbar button {
-    height: 30px;
+	height: 30px;
 }
 
 // ---------------------自定义card-header
@@ -690,7 +769,12 @@ a:hover {
     //border: none !important;
     &>.card-header {
         position: relative;
-        padding: 0.5rem 1.25rem !important;
+        color: $important-font-color;
+        background-color: #fff;
+        padding: 0.5rem 1rem !important;
+        .fa {
+             padding-right: 5px;
+        }
     }
 
     &>.card-header:after {
@@ -831,16 +915,21 @@ a:hover {
     }
 }
 .post-hot-card {
-    li {
-        padding: 3px 0;
-        border-bottom: 1px dashed #eee;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
+  li {
+      padding: 3px 0;
+      border-bottom: 1px dashed #eee;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      a {
+          color: $font-color;
+          &:hover {
+              color: $link-color;
+          }
+      }
+  }
 }
 .register-card {
-    text-align: center;
 }
 
 
@@ -985,21 +1074,21 @@ a:hover {
         border: 1px dashed #eee
     }
     .select-avatar {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
     }
 
     .select-avatar input.file-input {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        filter: alpha(opacity=0);
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
     }
 }
 .user-profile-edit {
@@ -1123,7 +1212,11 @@ a:hover {
         background-size: cover;
         height: 100vh;
     }
+    section {
+        background-color: #F1F4F1;
+    }
     .section-header {
+        color: $important-font-color;
         text-align: center;
         font-size: 30px;
         line-height: 60px;
@@ -1148,23 +1241,23 @@ a:hover {
         }
         .ccard {
             float: left;
-            margin: 5px;
+            margin: 10px;
             &:hoverx {
-                .ccard-logo {
-                    overflow: auto;
-                    margin: auto;
-                    top: 0; left: 0; bottom: 0; right: 0;
-                }
-                .ccard-content {
-                    display: block;
-                }
+              .ccard-logo {
+                  overflow: auto;
+                  margin: auto;
+                  top: 0; left: 0; bottom: 0; right: 0;
+              }
+              .ccard-content {
+                  display: block;
+              }
             }
             .ccard-logo {
                 position: relative;
                 width: 170px;
                 height: 170px;
                 background-color: #fff;
-                border: 1px dashed $font-color;
+                //border: 1px dashed $font-color;
                 img {
                     overflow: auto;
                     margin: auto;
@@ -1172,7 +1265,7 @@ a:hover {
                     top: 0; left: 0; bottom: 0; right: 0;
                 }
                 &.active {
-                    border: 1px solid $base-color;
+                    border: 1px solid $link-light-color;
                 }
             }
             .ccard-content {
@@ -1199,7 +1292,8 @@ a:hover {
             background-color: #fff;
             top: 0;
             z-index: 20;
-            padding: 10px;
+            padding: 20px;
+            margin-bottom: 10px;
             opacity: 0.8;
             .ccard-title {
                 text-align: center;

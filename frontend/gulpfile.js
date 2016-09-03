@@ -17,7 +17,7 @@ var gulp = require('gulp'),
     del = require('del');
     print = require('gulp-print');
     flatten = require('gulp-flatten');
-    util = require('gulp-util')
+    util = require('gulp-util');
 
 var distPath='./static/';
 
@@ -96,16 +96,6 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest(distPath+'/assets/js'))
         .pipe(notify({ message: 'Scripts task complete' }));
 });
-//deal with tinymce-upload
-gulp.task('scripts-plugin', function() {
-    return gulp.src('./src/scripts/plugin.js')
-        .pipe(jshint.reporter('default'))
-        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
-        .pipe(notify({ message: 'scripts-plugin task complete' }));
-});
 
 //deal with custom styles
 gulp.task('styles', function(){
@@ -119,6 +109,17 @@ gulp.task('styles', function(){
         .pipe(notify({ message: 'Styles task complete' }));
 });
 
+//deal with tinymce-upload
+gulp.task('scripts-plugin', function() {
+    return gulp.src('./src/scripts/plugin.js')
+        .pipe(jshint.reporter('default'))
+        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
+        .pipe(notify({ message: 'scripts-plugin task complete' }));
+});
+
 
 gulp.task('images', function() {
     return gulp.src('./src/images/**/*')
@@ -128,7 +129,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('htmls', function() {
-    return gulp.src('./src/**/*.html')
+    return gulp.src('./templates/**/*.html')
         .pipe(gulp.dest(distPath))
         .pipe(notify({ message: 'Htmls task complete' }));
 });
@@ -146,35 +147,11 @@ gulp.task('watch', function() {
     gulp.watch('src/scripts/index.js', ['scripts']);
     gulp.watch('src/scripts/plugin.js', ['scripts-plugin']);
     gulp.watch('src/images/**/*', ['images']);
-    // gulp.watch('src/bower_components/**/*', ['bower']);
-    gulp.watch('src/*.html', ['htmls']);
-    gulp.watch('src/recommend/*.html', ['htmls']);
 });
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.run('styles', 'scripts', 'images', 'htmls', 'copy', 'scripts-plugin');
+    gulp.run('styles', 'scripts', 'images', 'copy', 'scripts-plugin');
     gulp.run('watch')
 });
 
-
-// watch任务
-gulp.task('watchx', function(){
-    // 启动web服务
-    connect.server({
-        root: [__dirname],
-        port: 8099,
-        livereload: true
-    });
-    // 监听文件变化
-    gulp.watch('src/bootstrap/scss/*.scss', ['styles']);
-    gulp.watch('src/styles/*.scss', ['styles']);
-    gulp.watch('src/scripts/*.js', ['scripts']);
-    gulp.watch('src/images/**/*', ['images']);
-    // gulp.watch('src/bower_components/**/*', ['bower']);
-    gulp.watch('src/**/*.html', ['htmls']);
-    // 创建LiveReload服务
-    livereload.listen();
-    // 监听app文件夹下面的所有文件，有变化的浏览器就会重新加载
-    gulp.watch(['./src/**']).on('change', livereload.changed);
-});

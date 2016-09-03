@@ -6,7 +6,7 @@ body {
   background-color: #f7f7f7;
 }
 body a {
-  color: #999;
+  color: #FFBCBC;
 }
 body a:hover, body a:focus {
   color: #FFBCBC;
@@ -355,6 +355,20 @@ a:hover .fa {
   padding-top: 7px;
 }
 
+@media (min-width: 1200px) {
+  .content-container {
+    max-width: none;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+@media (min-width: 1450px) {
+  .content-container {
+    max-width: none;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
 .index-html .col-md-9 {
   padding-right: 0px;
 }
@@ -365,16 +379,28 @@ a:hover .fa {
   padding-right: 0px;
 }
 
+.all-cate-card .card-header {
+  color: #999 !important;
+}
+.all-cate-card .card-header a {
+  color: #999;
+}
 .all-cate-card .divider {
   margin: 0 3px;
 }
 
+.card-header-all-bt {
+  color: #666 !important;
+}
 .card-header-all-bt .fa {
-  color: #999;
+  color: #666 !important;
   padding-right: 2px;
 }
+.card-header-all-bt:hover {
+  color: #FFBCBC !important;
+}
 .card-header-all-bt:hover .fa {
-  color: #FFBCBC;
+  color: #FFBCBC !important;
 }
 
 .current-topic {
@@ -421,9 +447,10 @@ a:hover .fa {
   word-wrap: break-word;
 }
 .post-item .item-mid .item-title a {
-  color: #FFBCBC;
+  color: #666;
 }
 .post-item .item-mid .item-title a:hover {
+  color: #FFBCBC;
   text-decoration: underline;
 }
 .post-item .item-mid .item-info {
@@ -453,50 +480,85 @@ a:hover .fa {
   padding-right: 0px;
 }
 
-.post-detail {
-  padding-bottom: 10px;
+.post-detail-card {
   border-bottom: 1px solid #e5e5e5;
 }
-.post-detail span {
-  margin-right: 5px;
-}
-.post-detail .card {
+.post-detail-card .card {
   box-shadow: inset 0 0 0 1px #e1e1e1;
 }
-.post-detail .card a {
+.post-detail-card .card a {
   color: #999;
 }
-.post-detail .post-title {
+.post-detail-card .post-detail-header {
+  padding: 5px;
+  border-bottom: 1px dashed #e0e0e0;
+  position: relative;
+}
+.post-detail-card .post-detail-header .avatar {
+  width: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.post-detail-card .post-detail-header .avatar img {
+  width: 40px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.post-detail-card .post-detail-header .post-detail-header-mid {
+  position: relative;
+  margin-left: 50px;
+}
+.post-detail-card .post-detail-header .post-title {
   max-width: 500px;
   margin: 0;
 }
-.post-detail .post-title a {
+.post-detail-card .post-detail-header .post-title a {
   font-size: 24px;
   font-weight: 500;
   line-height: 30px;
   color: #666;
 }
-.post-detail .post-info {
+.post-detail-card .post-detail-header .post-info {
   font-size: 11px;
   margin-bottom: 5px;
 }
-.post-detail .post-info .username {
+.post-detail-card .post-detail-header .post-info .username {
   color: #666;
 }
-.post-detail .post-function {
+.post-detail-card .post-function {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e5e5e5;
   margin-top: 10px;
   text-align: right;
 }
-.post-detail .post-function span {
-  padding-right: 2px;
+.post-detail-card .post-function a {
+  color: #999;
+  padding: 2px;
 }
-.post-detail .post-function a.post-collected {
+.post-detail-card .post-function a:hover {
+  color: #FFBCBC;
+  background-color: #efefef;
+}
+.post-detail-card .post-function a.post-collected {
   color: #FFBCBC;
 }
-.post-detail .post-function .fa {
+.post-detail-card .post-function a.post-collected .fa {
+  color: #FFBCBC;
+}
+.post-detail-card .post-function .fa {
   color: #999;
 }
-.post-detail .post-content img {
+.post-detail-card .post-content {
+  color: #666;
+}
+.post-detail-card .post-content img {
   max-width: 90%;
 }
 
@@ -507,7 +569,7 @@ a:hover .fa {
   width: 40px;
 }
 .post-reply .reply-item {
-  margin-top: 10px;
+  padding-top: 5px;
   padding-bottom: 7px;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -520,11 +582,28 @@ a:hover .fa {
 .post-reply .reply-item .reply-head .username {
   color: #666;
 }
+.post-reply .reply-item .reply-head .floor {
+  color: #2fca7b;
+}
+.post-reply .reply-item:last-of-type {
+  border-bottom: none;
+}
 .post-reply .reply-function {
   margin-top: 7px;
   text-align: right;
 }
+.post-reply .reply-function a {
+  color: #999;
+  padding: 2px;
+}
+.post-reply .reply-function a:hover {
+  color: #FFBCBC;
+  background-color: #efefef;
+}
 .post-reply .reply-function a.postreply-supported {
+  color: #FFBCBC;
+}
+.post-reply .reply-function a.postreply-supported .fa {
   color: #FFBCBC;
 }
 .post-reply .reply-function span {
@@ -541,6 +620,11 @@ a:hover .fa {
   min-height: 200px;
   outline: none;
   padding: 0px;
+}
+.post-reply-card .mediumeditor blockquote {
+  margin: 15px;
+  border-left: 3px solid #2ecc71;
+  padding-left: 9px;
 }
 
 .medium-editor-toolbar .medium-editor-toolbar-actions li button {
@@ -592,7 +676,12 @@ a:hover .fa {
 
 .custom-card.card > .card-header {
   position: relative;
-  padding: 0.5rem 1.25rem !important;
+  color: #666;
+  background-color: #fff;
+  padding: 0.5rem 1rem !important;
+}
+.custom-card.card > .card-header .fa {
+  padding-right: 5px;
 }
 .custom-card.card > .card-header:after {
   content: "";
@@ -726,9 +815,11 @@ a:hover .fa {
   white-space: nowrap;
   overflow: hidden;
 }
-
-.register-card {
-  text-align: center;
+.post-hot-card li a {
+  color: #999;
+}
+.post-hot-card li a:hover {
+  color: #FFBCBC;
 }
 
 .user-profile-html .col-md-9, .user-profile-html .col-md-3 {
@@ -974,7 +1065,11 @@ a:hover .fa {
   background-size: cover;
   height: 100vh;
 }
+.recommend section {
+  background-color: #F1F4F1;
+}
 .recommend .section-header {
+  color: #666;
   text-align: center;
   font-size: 30px;
   line-height: 60px;
@@ -1000,7 +1095,7 @@ a:hover .fa {
 }
 .recommend .section-content .ccard {
   float: left;
-  margin: 5px;
+  margin: 10px;
 }
 .recommend .section-content .ccard:hoverx .ccard-logo {
   overflow: auto;
@@ -1018,7 +1113,6 @@ a:hover .fa {
   width: 170px;
   height: 170px;
   background-color: #fff;
-  border: 1px dashed #999;
 }
 .recommend .section-content .ccard .ccard-logo img {
   overflow: auto;
@@ -1030,7 +1124,7 @@ a:hover .fa {
   right: 0;
 }
 .recommend .section-content .ccard .ccard-logo.active {
-  border: 1px solid #FFBCBC;
+  border: 1px solid white;
 }
 .recommend .section-content .ccard .ccard-content {
   display: none;
@@ -1053,7 +1147,8 @@ a:hover .fa {
   background-color: #fff;
   top: 0;
   z-index: 20;
-  padding: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 .recommend .section-content .intro .ccard-title {

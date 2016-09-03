@@ -177,10 +177,10 @@ function add_action_emoji_char_summernote() {
 function load_emoji_summernote() {
     var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
     for (var i=0; i<emojiArray.length; i++) {
-        $("#emoji-list").append('<img class="emoji" src="/static/images/emoji/basic/'+emojiArray[i]+'.png">')
+        $("#emoji-list").append('<img class="emoji" src="/assets/images/emoji/basic/'+emojiArray[i]+'.png">')
     }
     add_action_emoji_img_summernote();
-    $.getJSON('/static/images/emoji/emojis.json', function(data){
+    $.getJSON('/assets/images/emoji/emojis.json', function(data){
         window.emojiJSON=data;
         $("#emoji-list").append('<li class="emoji" em="heart">'+emojiJSON.heart.char+'</li>');
         add_action_emoji_char_summernote();
@@ -209,10 +209,10 @@ function add_action_emoji_char_medium() {
 function load_emoji_medium() {
     var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
     for (var i=0; i<emojiArray.length; i++) {
-        $("#emoji-list").append('<img class="emoji" src="/static/images/emoji/basic/'+emojiArray[i]+'.png">')
+        $("#emoji-list").append('<img class="emoji" src="/assets/images/emoji/basic/'+emojiArray[i]+'.png">')
     }
     add_action_emoji_img_medium();
-    $.getJSON('/static/images/emoji/emojis.json', function(data){
+    $.getJSON('/assets/images/emoji/emojis.json', function(data){
         window.emojiJSON=data;
         $("#emoji-list").append('<li class="emoji" em="heart">'+emojiJSON.heart.char+'</li>');
         add_action_emoji_char_medium();

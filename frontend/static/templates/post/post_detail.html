@@ -10,7 +10,7 @@
 {% block content %}
     <div class="content-container container post-detail-html">
         <div class="col-md-9">
-            <div class="card all-cate-card custom-card">
+            <div class="card all-cate-card post-detail-card custom-card">
                 <div class="card-header">
                     热门:
                     <a href="/topic/study">学习资料</a> /
@@ -66,32 +66,48 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="card-block">
-                    <div class="post-detail">
+                <div class="post-detail-header cl">
+                    <div class="avatar hidden-xs "><img src="/assets/images/avatar/{{post_detail.user.avatar}}"></div>
+                    <div class="post-detail-header-mid">
                         <div class="post-title"><a href="/">{{post_detail.title}}</a></div>
-                        <div class="post-info"><span><a class="username" href="/user/{{post_detail.user.id}}">{{post_detail.user.username}}</a></span> <span>{{post_detail.create_time}}</span></div>
+                        <div class="post-info">
+                            <span><a class="username" href="/user/{{post_detail.user.id}}">{{post_detail.user.username}}</a></span>
+                            <span class="divider">•</span>
+                            <span>{{post_detail.create_time}}</span>
+                            {% if post_detail.latest_reply_user %}
+                            <span class="divider">•</span>
+                            <span><a class="username" href="/user/{{post_detail.latest_reply_user.id}}">{{post_detail.latest_reply_user.nickname}} </a>最后回复</span>
+                            {% end %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="">
                         <div class="post-content">
                             {% raw post_detail.content %}
                             IDS(intrusion detection system),即入侵检测系统。是一种对网络传输进行即时监视，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于，IDS是一种积极主动的安全防护技术。
                         </div>
                         <div class="post-function">
                             <span><a href="#blank" class="collect-post"><i class="fa fa-bookmark-o"></i>收藏</a></span>
+                            <span class="divider">•</span>
+                            <span>{{post_detail.visit_count}} 浏览</span>
                             <!-- <span><a href="#blank" class=""><i class="fa fa-thumbs-o-up"></i>点赞</a></span> -->
                         </div>
                     </div>
 
                     <div class="post-reply">
-                        {% for post_reply in post_replys %}
+                        {% for i, post_reply in enumerate(post_replys) %}
                         <div class="reply-item" reply_id="{{post_reply.id}}">
-                            <div class="avatar hidden-xs"><img src="/avatar/{{post_reply.user.avatar}}"></div>
+                            <div class="avatar hidden-xs"><img src="/assets/images/avatar/{{post_reply.user.avatar}}"></div>
                             <div class="reply-main clear-xs">
                                 <div class="reply-head">
                                     <span><a class="username" href="/user/{{post_reply.user.id}}">{{post_reply.user.username}}</a></span>
                                     <span class="divider">•</span>
                                     <span class="friendly-time">{{datetime_delta(post_reply.create_time)}}</span>
                                     <span class="divider">•</span>
-                                    <span>{{post_reply.like_count}}赞同</span>
+                                    <span>{{post_reply.like_count}} 赞同</span>
+                                    <span class="divider">•</span>
+                                    <span class="floor">#{{i}}</span>
                                 </div>
                                 <div class="reply-content">
                                     {% raw post_reply.content %}
@@ -116,7 +132,7 @@
                     <form>
                     <div class="mediumeditor" id="mediumeditor">Please Write Here.</div>
                     <div class="form-group float-left">
-                        <img class="emoji" id="emoji-btn" src="/static/images/emoji/basic/smile.png">
+                        <img class="emoji" id="emoji-btn" src="/assets/images/emoji/basic/smile.png">
                         <ul id="emoji-list" class="emojis list-inline" style="display: none;">
                         </ul>
                     </div>
@@ -181,35 +197,21 @@
             cleanTags: ['meta']
         },
         toolbar: {
-            buttons: [
-                'bold',
-                'italic',
-                {
-                    name: 'h1',
-                    action: 'append-h2',
-                    aria: 'header type 1',
-                    tagNames: ['h2'],
-                    contentDefault: '<b>H1</b>',
-                    classList: ['custom-class-h1'],
-                    attrs: {
-                        'data-custom-attr': 'attr-value-h1'
-                    }
-                },
-                {
-                    name: 'h2',
-                    action: 'append-h3',
-                    aria: 'header type 2',
-                    tagNames: ['h3'],
-                    contentDefault: '<b>H2</b>',
-                    classList: ['custom-class-h2'],
-                    attrs: {
-                        'data-custom-attr': 'attr-value-h2'
-                    }
-                },
-                'justifyCenter',
-                'quote',
-                'anchor'
-            ]
+            /* These are the default options for the toolbar,
+            if nothing is passed this is what is used */
+            allowMultiParagraphSelection: true,
+            buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+            diffLeft: 0,
+            diffTop: -10,
+            firstButtonClass: 'medium-editor-button-first',
+            lastButtonClass: 'medium-editor-button-last',
+            relativeContainer: null,
+            standardizeSelectionStart: false,
+            static: false,
+            /* options which only apply when static is true */
+            align: 'center',
+            sticky: false,
+            updateOnEmptySelection: false
         }
     });
     $('form').on('submit', function (event) {
@@ -253,7 +255,7 @@
                }
            }
         });
-    })
+    });
     $('.collect-post').on('click', function(e){
         e.preventDefault();
         $.ajax({

@@ -4,9 +4,9 @@
 
 {% block styles %}
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+{#<script src="//cdn.bootcss.com/tinymce/4.4.3/tinymce.min.js"></script>#}
 <script src="/assets/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
-
 </script>
 {% end %}
 
@@ -68,7 +68,7 @@
                         <input name="image" type="file" id="upload" class="hidden" hidden>
                     </div>
                     <div class="form-group float-left">
-                        <img class="emoji" id="emoji-btn" src="/static/images/emoji/basic/smile.png">
+                        <img class="emoji" id="emoji-btn" src="/assets/images/emoji/basic/smile.png">
                         <ul id="emoji-list" class="emojis list-inline" style="display: none;">
                         </ul>
                     </div>
@@ -92,7 +92,7 @@
             paste_data_images: true,
             plugins: ['code','paste wordcount textcolor', 'pasteUpload',
                 'insertdatetime media nonbreaking save table contextmenu directionality',
-                'advlist autolink lists link image preview hr anchor pagebreak',],
+                'advlist autolink lists link image preview hr anchor pagebreak'],
             toolbar: "insertfile undo redo | styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             images_upload_handler: function (blobInfo, success, failure) {
                 console.log('image_upload-handler.');
@@ -102,7 +102,7 @@
                     formData.append("mimeType", getMimeType(file, filename));
                     console.log('uploading: '+filename);
                     $.ajax({
-                        url: '/custor/uploadimg',
+                        url: '/utils/uploadimg',
                         data: formData,
                         type: 'post',
                         processData: false,
@@ -114,7 +114,7 @@
                         success: function (result) {
                             console.log('upload complete.');
                             if(result.errorcode == 0) {
-                                success('/static/images/'+result.data.image);
+                                success('/assests/images/'+result.data.image);
                                 return;
                             }
                             else {
@@ -147,7 +147,7 @@
 
         });
 
-//        $('#tinymce').pasteUploadImage();
+        //$('#tinymce').pasteUploadImage();
 
 
     var topic = '';

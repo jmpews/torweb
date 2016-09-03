@@ -264,7 +264,7 @@ define("tinymce/pasteplugin/SmartPaste", [
 	"tinymce/util/Tools"
 ], function (Tools) {
 	var isAbsoluteUrl = function (url) {
-		return /^https?:\/\/[\w\?\-\/+=.&%]+$/i.test(url);
+		return /^https?:\/\/[\w\?\-\/+=.&%@~#]+$/i.test(url);
 	};
 
 	var isImageUrl = function (url) {
@@ -942,7 +942,6 @@ define("tinymce/pasteplugin/Clipboard", [
 			}
 
 			editor.on('drop', function(e) {
-				console.log('drop 945');
 				var dropContent, rng;
 
 				rng = getCaretRangeFromEvent(e);
@@ -1767,6 +1766,15 @@ define("tinymce/pasteplugin/Plugin", [
 			editor.focus();
 		}
 
+		// draw back if power version is requested and registered
+		if (/(^|[ ,])powerpaste([, ]|$)/.test(settings.plugins) && PluginManager.get('powerpaste')) {
+			/*eslint no-console:0 */
+			if (typeof console !== "undefined" && console.log) {
+				console.log("PowerPaste is incompatible with Paste plugin! Remove 'paste' from the 'plugins' option.");
+			}
+			return;
+		}
+
 		self.clipboard = clipboard = new Clipboard(editor);
 		self.quirks = new Quirks(editor);
 		self.wordFilter = new WordFilter(editor);
@@ -1799,7 +1807,6 @@ define("tinymce/pasteplugin/Plugin", [
 
 		// Block all drag/drop events
 		if (editor.settings.paste_block_drop) {
-			console.log('block drop');
 			editor.on('dragend dragover draggesture dragdrop drop drag', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -1809,7 +1816,6 @@ define("tinymce/pasteplugin/Plugin", [
 		// Prevent users from dropping data images on Gecko
 		if (!editor.settings.paste_data_images) {
 			editor.on('drop', function(e) {
-				console.log('drop 1812');
 				var dataTransfer = e.dataTransfer;
 
 				if (dataTransfer && dataTransfer.files && dataTransfer.files.length > 0) {

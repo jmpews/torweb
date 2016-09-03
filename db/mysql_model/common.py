@@ -25,25 +25,24 @@ class Notification(BaseModel):
     is_read = BooleanField(default=False)
 
     @staticmethod
-    def new_post(post, user):
-        followers = Follower.select(Follower.follower).where(Follower.user == user)
+    def new_post(post):
+        followers = Follower.select(Follower.follower).where(Follower.user == post.user)
         for follower in followers:
-            print(follower)
             Notification.create(user=follower.follower,
                                 opt=1,
                                 msg='发表新文章',
-                                extra_user=user,
+                                extra_user=post.user,
                                 extra_post=post
                                 )
 
     @staticmethod
-    def new_reply(postreply, post, user):
-        followers = Follower.select(Follower.follower).where(Follower.user == user)
+    def new_reply(postreply, post):
+        followers = Follower.select(Follower.follower).where(Follower.user == postreply.user)
         for follower in followers:
             Notification.create(user=follower.follower,
                                 opt=2,
                                 msg='发表新评论',
-                                extra_user=user,
+                                extra_user=postreply.user,
                                 extra_post=post,
                                 extra_post_reply=postreply,
                                 )

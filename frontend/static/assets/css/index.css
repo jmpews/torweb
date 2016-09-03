@@ -283,6 +283,21 @@ a:hover .fa {
 .header .header-container .header-tip .options li img {
   width: 50px;
 }
+.header .header-container .header-tip .options li a {
+  padding: 5px;
+  color: #999;
+}
+.header .header-container .header-tip .options li a:hover {
+  color: #e95420;
+  background-color: #efefef;
+}
+.header .header-container .header-tip .options .dropdown a {
+  color: #999;
+}
+.header .header-container .header-tip .options .dropdown a:hover {
+  color: #e95420;
+  background: none;
+}
 .header .header-container .header-tip .options .dropdown .dropdown-menu {
   font-size: 13px;
   min-width: 0;
@@ -385,6 +400,9 @@ a:hover .fa {
 .all-cate-card .card-header a {
   color: #999;
 }
+.all-cate-card .card-header a:hover {
+  color: #e95420;
+}
 .all-cate-card .divider {
   margin: 0 3px;
 }
@@ -435,7 +453,17 @@ a:hover .fa {
 }
 .post-item .avatar img {
   width: 40px;
-  border-radius: 10px;
+  border-radius: 40px;
+}
+.post-item .avatar span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 50%;
 }
 .post-item .item-mid {
   margin-left: 50px;
@@ -459,9 +487,13 @@ a:hover .fa {
 .post-item .item-mid .item-info span .username {
   color: #666;
 }
+.post-item .item-mid .item-info span .username:hover {
+  color: #e95420;
+}
 .post-item .item-mid .item-info span .cate {
+  padding: 2px;
   color: #999;
-  background-color: #f5f5f5;
+  background-color: #efefef;
 }
 .post-item .item-mid .item-info .divider {
   margin: 0 3px;
@@ -504,6 +536,22 @@ a:hover .fa {
 }
 .post-detail-card .post-detail-header .avatar img {
   width: 40px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.post-detail-card .post-detail-header .avatar span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 50%;
   margin: auto;
   position: absolute;
   top: 0;
@@ -567,6 +615,16 @@ a:hover .fa {
 }
 .post-reply .avatar img {
   width: 40px;
+}
+.post-reply .avatar span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 50%;
 }
 .post-reply .reply-item {
   padding-top: 5px;
@@ -731,9 +789,11 @@ a:hover .fa {
   padding-left: 10px;
 }
 .card-header-all .card-header-all-cate .card-header-all-cate-topic a {
+  padding: 3px;
   color: #999;
 }
 .card-header-all .card-header-all-cate .card-header-all-cate-topic a:hover {
+  background-color: #efefef;
   color: #e95420;
 }
 .card-header-all .card-header-all-cate:last-of-type {
@@ -772,9 +832,11 @@ a:hover .fa {
   padding-left: 10px;
 }
 .card-header-all-footer .card-header-all-cate .card-header-all-cate-topic a {
+  padding: 3px;
   color: #999;
 }
 .card-header-all-footer .card-header-all-cate .card-header-all-cate-topic a:hover {
+  background-color: #efefef;
   color: #e95420;
 }
 .card-header-all-footer .card-header-all-cate:last-of-type {
@@ -1020,7 +1082,7 @@ a:hover .fa {
   color: #e95420;
 }
 .recommend .header .options .dropdown a {
-  color: #999;
+  color: #fff;
 }
 .recommend .header .options .dropdown a:hover {
   color: #e95420;

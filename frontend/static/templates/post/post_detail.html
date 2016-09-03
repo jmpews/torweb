@@ -67,7 +67,15 @@
                     </div>
                 </div>
                 <div class="post-detail-header cl">
-                    <div class="avatar hidden-xs "><img src="/assets/images/avatar/{{post_detail.user.avatar}}"></div>
+                    <div class="avatar hidden-xs ">
+                        <a class="username" href="/user/{{post_detail.user.id}}">
+                            {% if post_detail.user.avatar %}
+                            <img src="/assets/images/avatar/{{post_detail.user.avatar}}">
+                            {% else %}
+                            <span>{{post_detail.user.username[0].upper()}}</span>
+                            {% end %}
+                        </a>
+                    </div>
                     <div class="post-detail-header-mid">
                         <div class="post-title"><a href="/">{{post_detail.title}}</a></div>
                         <div class="post-info">
@@ -98,7 +106,16 @@
                     <div class="post-reply">
                         {% for i, post_reply in enumerate(post_replys) %}
                         <div class="reply-item" reply_id="{{post_reply.id}}">
-                            <div class="avatar hidden-xs"><img src="/assets/images/avatar/{{post_reply.user.avatar}}"></div>
+                            {% set user = post_reply.user  %}
+                            <div class="avatar hidden-xs ">
+                                <a class="username" href="/user/{{user.id}}">
+                                    {% if user.avatar %}
+                                    <img src="/assets/images/avatar/{{user.avatar}}">
+                                    {% else %}
+                                    <span>{{user.username[0].upper()}}</span>
+                                    {% end %}
+                                </a>
+                            </div>
                             <div class="reply-main clear-xs">
                                 <div class="reply-head">
                                     <span><a class="username" href="/user/{{post_reply.user.id}}">{{post_reply.user.username}}</a></span>

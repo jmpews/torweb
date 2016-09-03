@@ -20,7 +20,7 @@ class User(BaseModel):
     # id = Column(Integer, primary_key=True, autoincrement=True)
     username = CharField(index=True, unique=True, max_length=16)
     nickname = CharField(max_length=16)
-    avatar = CharField(max_length=20)
+    avatar = CharField(max_length=20, null=True)
     theme = CharField(max_length=16, null=True)
     role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
     password = CharField(max_length=32)
@@ -69,8 +69,7 @@ class User(BaseModel):
                         password=password_final,
                         salt=salt, level=level,
                         key=random_str(32),
-                        key_time=the_time,
-                        avatar='/x/x.jpg')
+                        key_time=the_time)
         u.save()
         p = Profile.create(user=u)
         p.save()

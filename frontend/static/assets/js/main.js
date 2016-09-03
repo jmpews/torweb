@@ -218,7 +218,13 @@ function load_emoji_medium() {
         add_action_emoji_char_medium();
     })
 }
-
+function load_font_avatar() {
+    var colors = ['#FF5722', '#CDDC39', '#61C5FF', '#2196F3'];
+   $('.avatar a span').each(function(i, item){
+       var color = colors[Math.floor(Math.random() * colors.length)];
+        $(item).css('background-color', color);
+    });
+}
 function getFriendlyTime(t)
 {
     t = t.replace('-', '/')
@@ -384,4 +390,5 @@ $(document).ready(function () {
     //replate_friendly_time();
     // set_theme();
     change_theme();
+    load_font_avatar();
 });

@@ -71,8 +71,15 @@
             <div class="card-block">
             {% for post in posts %}
             <div class="post-item cl">
-                <div class="avatar hidden-xs">
-                    <a href="#"><img src="/assets/images/avatar/{{post.user.avatar}}" ></a>
+                {% set user = post.user  %}
+                <div class="avatar hidden-xs ">
+                    <a class="username" href="/user/{{user.id}}">
+                        {% if user.avatar %}
+                        <img src="/assets/images/avatar/{{user.avatar}}">
+                        {% else %}
+                        <span>{{user.username[0].upper()}}</span>
+                        {% end %}
+                    </a>
                 </div>
 
                 <div class="item-mid clear-xs">
@@ -81,11 +88,11 @@
                         <span><a class="cate" href="/topic/{{post.topic.str}}">{{post.topic.name}}</a></span>
                         <span class="divider">•</span>
 						<span><a class="username" href="/user/{{post.user.id}}">{{post.user.username}}</a></span>
-                        <span class="divider">•</span>
-                        <span class="friendly-time">{{datetime_delta(post.latest_reply_time)}}</span>
+
                         {% if post.latest_reply_user %}
                         <span class="divider">•</span>
-                        <span><a class="username" href="/user/{{post.latest_reply_user.id}}">{{post.latest_reply_user.nickname}} </a>最后回复</span>
+                        <span><a class="username" href="/user/{{post.latest_reply_user.id}}">{{post.latest_reply_user.nickname}} </a>最后回复于</span>
+                        <span class="friendly-time">{{datetime_delta(post.latest_reply_time)}}</span>
                         {% end %}
                         <span class="divider">•</span>
                         <span>{{post.visit_count}} 浏览</span>

@@ -313,9 +313,22 @@ a:hover {
                         width: 50px;
                     }
                     a {
+                        padding: 5px;
+                        color: $font-color;
+                        &:hover {
+                            color: $link-color;
+                            background-color: #efefef;
+                        }
                     }
                 }
                 .dropdown {
+                    a {
+                        color: $font-color;
+                        &:hover {
+                            color: $link-color;
+                            background: none;
+                        }
+                    }
                     .dropdown-menu {
                         font-size: 13px;
                         min-width: 0;
@@ -442,6 +455,9 @@ a:hover {
         color: $font-color !important;
         a {
             color: $font-color;
+          &:hover {
+            color: $link-color;
+          }
         }
     }
     .divider {
@@ -494,8 +510,19 @@ a:hover {
         position: absolute;
         img {
             width: 40px;
-            border-radius: 10px;
+            border-radius: 40px;
         }
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+
     }
     .item-mid {
         margin-left: 50px;
@@ -518,10 +545,15 @@ a:hover {
             span {
                 .username {
                     color: $important-font-color;
+                    &:hover {
+                      color: $link-color;
+                    }
+
                 }
                 .cate {
+                    padding: 2px;
                     color: $font-color;
-                    background-color: #f5f5f5;
+                    background-color: #efefef;
                 }
             }
             .divider {
@@ -572,6 +604,19 @@ a:hover {
                 position: absolute;
                 top: 0; left: 0; bottom: 0; right: 0;
             }
+            span {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                color: #fff;
+                font-size: 18px;
+                border-radius: 50%;
+                margin: auto;
+                position: absolute;
+                top: 0; left: 0; bottom: 0; right: 0;
+            }
         }
         .post-detail-header-mid {
             position: relative;
@@ -608,7 +653,7 @@ a:hover {
             padding: 2px;
             &:hover {
                 color: $link-color;
-                background-color: #efefef;;
+                background-color: #efefef;
             }
         }
         span {
@@ -637,6 +682,16 @@ a:hover {
         position: absolute;
         img {
             width: 40px;
+        }
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 50%;
         }
     }
     .reply-item {
@@ -828,9 +883,11 @@ a:hover {
         .card-header-all-cate-topic {
             padding-left: 10px;
             a {
+                padding: 3px;
                 color: $font-color;
                 &:hover {
-                    color: $base-color;
+                    background-color: #efefef;
+                    color: $link-color;
                 }
             }
         }
@@ -870,9 +927,11 @@ a:hover {
         .card-header-all-cate-topic {
             padding-left: 10px;
             a {
+                padding: 3px;
                 color: $font-color;
                 &:hover {
-                    color: $base-color;
+                    background-color: #efefef;
+                    color: $link-color;
                 }
             }
         }
@@ -1162,7 +1221,7 @@ a:hover {
         }
         .options .dropdown{
             a {
-                color: $font-color;
+                color: #fff;
                 &:hover {
                     color: $base-color;
                 }

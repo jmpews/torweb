@@ -11,7 +11,7 @@
 /*global tinymce:true */
 
 (function () {
-    var ajaxUrl = '/custor/uploadimg';
+    var ajaxUrl = '/utils/uploadimg';
     var loadingImage = '<img id="loadingImg" src="http://static.cnblogs.com/images/loading.gif" alt="" />';
 
     tinymce.create('tinymce.plugins.PasteUploadPlugin', {
@@ -91,7 +91,7 @@ debugger;
                 var content = ed.getContent();
                 // content = content.replace(loadingImage, '<img src="' + url + '">');
                 // ed.setContent(content);
-				ed.insertContent('<img src="/static/images/' + url + '">');
+				ed.insertContent('<img src="/assets/images/' + url + '">');
                 ed.selection.select(ed.getBody(), true);
                 ed.selection.collapse(false);
 				debugger;

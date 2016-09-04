@@ -33,5 +33,28 @@
 
 {% block scripts %}
 <script type="text/javascript">
+    $('form').on('submit', function (event) {
+        event.preventDefault();
+         $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/login',
+            data: {
+                'username': $('#username').val(),
+                'password': $('#password').val(),
+            },
+            success: function(result, status) {
+                if(result.errorcode == 0) {
+                    var data = result['data'];
+                    $.notify('登陆成功');
+                    window.location.href='/'
+                }
+                else if(result.errorcode != 0) {
+                    $.notify(result.txt);
+                }
+            }
+        })
+        return 1;
+    });
 </script>
 {% end %}

@@ -123,6 +123,15 @@ class User(BaseModel):
         try:
             r = User.get(User.username == username)
         except DoesNotExist:
+            return None
+        else:
+            return r
+
+    @staticmethod
+    def get_by_email(email):
+        try:
+            r = User.get(User.email == email)
+        except DoesNotExist:
             return False
         else:
             return r

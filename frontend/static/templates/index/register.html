@@ -11,13 +11,13 @@
                 <div class="card-block">
                     <form id="register" data-parsley-validate="">
                     <fieldset class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" class="form-control" placeholder="username" id="username" data-parsley-pattern="[0-9a-zA-Z]{6,18}" required>
+                        <label for="username">用户名(仅支持英文和数字)</label>
+                        <input type="text" class="form-control" placeholder="" id="username" data-parsley-pattern="[0-9a-zA-Z]{6,18}" required>
                         <small class="text-muted">我们保证您的信息安全.</small>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="email">邮箱</label>
-                        <input type="email" class="form-control" id="email" placeholder="email" required>
+                        <input type="email" class="form-control" id="email" placeholder="请输入您的邮箱以作为找回工具" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password1">密码</label>

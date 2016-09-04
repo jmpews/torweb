@@ -39,19 +39,17 @@ class UserProfileEditHandler(BaseRequestHandler):
         profile = Profile.get_by_user(user)
         userinfo = {}
         userinfo['username'] = user.username
-        userinfo['website'] = profile.website
-        userinfo['nickname'] = profile.nickname
+        userinfo['weibo'] = profile.weibo
         self.render('user/profile_edit.html', userinfo=userinfo)
 
     @login_required
     def post(self, *args, **kwargs):
-        post_data = get_cleaned_post_data(self, ['nickname', 'website'])
+        post_data = get_cleaned_post_data(self, ['weibo',])
         user = self.current_user
         profile = Profile.get_by_user(user)
-        profile.nickname = post_data['nickname']
-        profile.website = post_data['website']
+        profile.weibo = post_data['weibo']
         profile.save()
-        self.redirect('/user/edit')
+        self.write(json_result(0, {'user': user.username}))
 
 
 class UserAvatarEditHandler(BaseRequestHandler):

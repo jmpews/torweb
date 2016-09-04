@@ -82,6 +82,14 @@ class RegisterHandler(BaseRequestHandler):
 
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['username', 'email', 'password'])
+        if User.get_by_username(username=post_data['username']):
+            self.write(json_result(1, '用户名经存在'))
+            return
+
+        if User.get_by_email(email=post_data['email']):
+            self.write(json_result(1, '邮箱已经存在'))
+            return
+
         user = User.new(username=post_data['username'],
                  email=post_data['email'],
                  password=post_data['password'])
@@ -105,12 +113,10 @@ class LoginHandler(BaseRequestHandler):
         if user:
             self.set_secure_cookie('uuid', user.username)
             result = json_result(0, 'login success!')
-            self.redirect('/')
         else:
             result = json_result(-1, 'login failed!')
-            self.redirect('/login')
             # write as json
-            # self.write(result)
+        self.write(result)
 
 class LogoutHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):

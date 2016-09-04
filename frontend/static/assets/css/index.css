@@ -260,6 +260,9 @@ a:hover .fa {
   position: relative;
   width: 25%;
 }
+.header .header-container .header-nav li.active {
+  box-shadow: inset 0 -3px 0px #e95420;
+}
 .header .header-container .header-nav li a {
   display: block;
   padding: 16px 0 20px;
@@ -270,7 +273,7 @@ a:hover .fa {
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
   background-color: #fff;
-  box-shadow: 0px -3px 2px rgba(0, 0, 0, 0.17);
+  box-shadow: inset 0 -3px 0px #e95420;
 }
 .header .header-container .header-tip {
   line-height: 70px;
@@ -596,6 +599,7 @@ a:hover .fa {
 }
 .post-detail-card .post-function a.post-collected {
   color: #e95420;
+  background-color: #efefef;
 }
 .post-detail-card .post-function a.post-collected .fa {
   color: #e95420;
@@ -926,6 +930,12 @@ a:hover .fa {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   padding-left: 0px;
 }
+.user-profile-trend a {
+  color: #999;
+}
+.user-profile-trend a:hover {
+  color: #e95420;
+}
 .user-profile-trend li {
   color: #999;
 }
@@ -934,6 +944,12 @@ a:hover .fa {
   background-color: #fff;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   padding-left: 0px;
+}
+.user-profile-follow a {
+  color: #999;
+}
+.user-profile-follow a:hover {
+  color: #e95420;
 }
 .user-profile-follow .profile-card-body {
   padding: 10px;
@@ -1075,6 +1091,9 @@ a:hover .fa {
   box-shadow: none;
   background-color: transparent;
 }
+.recommend .header .header-nav li a:hover {
+  background: none;
+}
 .recommend .header a {
   color: #fff;
 }
@@ -1128,7 +1147,7 @@ a:hover .fa {
   height: 100vh;
 }
 .recommend section {
-  background-color: #F1F4F1;
+  background-color: #fff;
 }
 .recommend .section-header {
   color: #666;
@@ -1175,6 +1194,7 @@ a:hover .fa {
   width: 170px;
   height: 170px;
   background-color: #fff;
+  border: 3px solid #e6e6e6;
 }
 .recommend .section-content .ccard .ccard-logo img {
   overflow: auto;

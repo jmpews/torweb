@@ -44,13 +44,13 @@
                     <div class="">
                         <div class="user-profile-card">
                             <div class="profile-card-head">
-                                关注者
+                                Ta关注的人
                             </div>
                             <div class="profile-card-body cl">
                                 {% if follow_who %}
                                 <ul class="list-inline">
                                     {% for who in follow_who %}
-                                    <li><a href="/user/{{who.follower.id}}"><img src="/assets/images/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
+                                    <li><a href="/user/{{who.user.id}}"><img src="/assets/images/avatar/{{who.user.avatar}}"><span>{{who.user.username}}</span></a> </li>
                                     {% end %}
                                 </ul>
                                 {% else %}
@@ -63,13 +63,13 @@
 
                         <div class="user-profile-card">
                             <div class="profile-card-head">
-                                粉丝
+                                关注他的童鞋
                             </div>
                             <div class="profile-card-body cl">
                                 {% if who_follow %}
                                 <ul class="list-inline">
                                     {% for who in who_follow %}
-                                    <li><img src="/assets/images/avatar/{{who.user.avatar}}"><a href="/user/{{who.user.id}}"><span>{{who.user.username}}</span></a> </li>
+                                    <li><img src="/assets/images/avatar/{{who.follower.avatar}}"><a href="/user/{{who.follower.id}}"><span>{{who.follower.username}}</span></a> </li>
                                     {% end %}
                                 </ul>
                                 {% else %}

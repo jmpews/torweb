@@ -287,6 +287,11 @@ a:hover {
                 float: left;
                 position: relative;
                 width: 25%;
+                &.active {
+                    -webkit-box-shadow: inset 0 -3px 0px $link-color;
+                    -moz-box-shadow: inset 0 -3px 0px $link-color;
+                    box-shadow: inset 0 -3px 0px $link-color;
+                }
                 a {
                     display: block;
                     padding: 16px 0 20px;
@@ -298,7 +303,9 @@ a:hover {
 
                 a:focus, a:hover {
                     background-color: #fff;
-                    box-shadow: 0px -3px 2px rgba(0, 0, 0, 0.17);
+                    -webkit-box-shadow: inset 0 -3px 0px $link-color;
+                    -moz-box-shadow: inset 0 -3px 0px $link-color;
+                    box-shadow: inset 0 -3px 0px $link-color;
                 }
             }
         }
@@ -313,9 +320,22 @@ a:hover {
                         width: 50px;
                     }
                     a {
+                        padding: 5px;
+                        color: $font-color;
+                        &:hover {
+                            color: $link-color;
+                            background-color: #efefef;
+                        }
                     }
                 }
                 .dropdown {
+                    a {
+                        color: $font-color;
+                        &:hover {
+                            color: $link-color;
+                            background: none;
+                        }
+                    }
                     .dropdown-menu {
                         font-size: 13px;
                         min-width: 0;
@@ -442,6 +462,9 @@ a:hover {
         color: $font-color !important;
         a {
             color: $font-color;
+          &:hover {
+            color: $link-color;
+          }
         }
     }
     .divider {
@@ -494,8 +517,19 @@ a:hover {
         position: absolute;
         img {
             width: 40px;
-            border-radius: 10px;
+            border-radius: 40px;
         }
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+
     }
     .item-mid {
         margin-left: 50px;
@@ -518,10 +552,15 @@ a:hover {
             span {
                 .username {
                     color: $important-font-color;
+                    &:hover {
+                      color: $link-color;
+                    }
+
                 }
                 .cate {
+                    padding: 2px;
                     color: $font-color;
-                    background-color: #f5f5f5;
+                    background-color: #efefef;
                 }
             }
             .divider {
@@ -572,6 +611,19 @@ a:hover {
                 position: absolute;
                 top: 0; left: 0; bottom: 0; right: 0;
             }
+            span {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                color: #fff;
+                font-size: 18px;
+                border-radius: 50%;
+                margin: auto;
+                position: absolute;
+                top: 0; left: 0; bottom: 0; right: 0;
+            }
         }
         .post-detail-header-mid {
             position: relative;
@@ -608,13 +660,14 @@ a:hover {
             padding: 2px;
             &:hover {
                 color: $link-color;
-                background-color: #efefef;;
+                background-color: #efefef;
             }
         }
         span {
         }
         a.post-collected {
-            color: $base-color;
+            color: $link-color;
+            background-color: #efefef;
             .fa {
                 color: $link-color;
             }
@@ -637,6 +690,16 @@ a:hover {
         position: absolute;
         img {
             width: 40px;
+        }
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 50%;
         }
     }
     .reply-item {
@@ -828,9 +891,11 @@ a:hover {
         .card-header-all-cate-topic {
             padding-left: 10px;
             a {
+                padding: 3px;
                 color: $font-color;
                 &:hover {
-                    color: $base-color;
+                    background-color: #efefef;
+                    color: $link-color;
                 }
             }
         }
@@ -870,9 +935,11 @@ a:hover {
         .card-header-all-cate-topic {
             padding-left: 10px;
             a {
+                padding: 3px;
                 color: $font-color;
                 &:hover {
-                    color: $base-color;
+                    background-color: #efefef;
+                    color: $link-color;
                 }
             }
         }
@@ -980,6 +1047,12 @@ a:hover {
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
     padding-left: 0px;
     // text-align: center;
+    a {
+        color: $font-color;
+        &:hover {
+            color: $link-color;
+        }
+    }
     li {
         color: $font-color;
     }
@@ -990,17 +1063,20 @@ a:hover {
     background-color: #fff;
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
     padding-left: 0px;
+    a {
+        color: $font-color;
+        &:hover {
+            color: $link-color;
+        }
+    }
     // text-align: center;
     .profile-card-body {
         padding: 10px;
-
     }
     li {
         text-align: center;
         color: $font-color;
         float: left;
-        a {
-        }
         span {
             display: block;
             line-height: 1;
@@ -1014,6 +1090,10 @@ a:hover {
 
 // 自定义 card组件
 .user-profile-card {
+    //border-bottom: 1px dashed $link-color;
+    //&:last-of-type {
+    //    border-bottom: none;
+    //}
     .profile-card-head {
         color: $important-font-color;
         font-size: 14px;
@@ -1022,12 +1102,14 @@ a:hover {
         line-height: 40px;
         padding: 5px;
         background-color: #fbfbfb;
+
         //border-top: 1px dashed #d8d6d6;
         //border-bottom: 1px dashed #d8d6d6;
     }
     .profile-card-body {
         padding-left: 10px;
         padding-right: 10px;
+
         li {
             line-height: 30px;
             border-bottom: 1px dashed #d8d6d6;
@@ -1154,6 +1236,10 @@ a:hover {
         border-bottom: none;
         box-shadow: none;
         background-color: transparent;
+        .header-nav li a:hover
+        {
+            background: none;
+        }
         a {
             color: #fff;
             &:hover {
@@ -1162,7 +1248,7 @@ a:hover {
         }
         .options .dropdown{
             a {
-                color: $font-color;
+                color: #fff;
                 &:hover {
                     color: $base-color;
                 }
@@ -1213,7 +1299,8 @@ a:hover {
         height: 100vh;
     }
     section {
-        background-color: #F1F4F1;
+        //background-color: #F1F4F1;
+        background-color: #fff;
     }
     .section-header {
         color: $important-font-color;
@@ -1257,6 +1344,7 @@ a:hover {
                 width: 170px;
                 height: 170px;
                 background-color: #fff;
+                border: 3px solid #e6e6e6;
                 //border: 1px dashed $font-color;
                 img {
                     overflow: auto;

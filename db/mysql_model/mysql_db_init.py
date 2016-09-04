@@ -19,8 +19,8 @@ def create_test_data(db_mysql):
     db_mysql.create_tables([User, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification], safe=True)
 
     logger.debug('add user: [admin:admin], [test:test]')
-    user_admin = User.new(username='admin', nickname='admin', password='admin')
-    user_test = User.new(username='test', nickname='test', password='test')
+    user_admin = User.new(username='admin', email='admin@jmp.com', password='admin')
+    user_test = User.new(username='test', email='test@jmp.com', password='test')
 
     # -------------------- 测试关注功能 ---------------
     logger.debug('add follower: [test]->[admin]')

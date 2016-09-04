@@ -89,8 +89,9 @@ class UserFollowerHandler(BaseRequestHandler):
     '''
     def get(self, user_id, *args, **kwargs):
         user = User.get(User.id == user_id)
-        who_follow = Follower.select().where(Follower.user == user)
-        follow_who = Follower.select().where(Follower.follower == user)
+        who_follow = Follower.select(Follower.follower).where(Follower.user == user)
+        follow_who = Follower.select(Follower.user).where(Follower.follower == user)
+        print(who_follow, follow_who)
         profile = Profile.get_by_user(user)
         is_follow = Follower.is_follow(user, self.current_user)
         self.render('user/profile_follower.html',

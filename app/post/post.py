@@ -17,8 +17,9 @@ class PostDetailHandler(BaseRequestHandler):
         self.render('post/post_detail.html',
                     post_detail=post_detail,
                     post_replys=post_replys,
-                    cache_hot_post=hot_post_cache,
-                    catetopic=topic_category_cache)
+                    is_collect=CollectPost.is_collect(post, self.current_user),
+                    hot_post_cache=hot_post_cache,
+                    topic_category_cache=topic_category_cache)
 
 
 # 添加帖子
@@ -26,7 +27,7 @@ class PostAddHandler(BaseRequestHandler):
     @login_required
     def get(self, *args, **kwargs):
         self.render('post/post_new.html',
-                    catetopic=topic_category_cache)
+                    topic_category_cache=topic_category_cache)
 
     @login_required
     def post(self, *args, **kwargs):
@@ -42,7 +43,7 @@ class PostAddHandler(BaseRequestHandler):
             content=post_data['content'],
             user=self.current_user
         )
-        Notification.new_post(post, self.current_user)
+        Notification.new_post(post)
         self.write(json_result(0, {'post_id': post.id}))
 
 
@@ -62,7 +63,7 @@ class PostReplyAddHandler(BaseRequestHandler):
             content=post_data['content'],
         )
         post.update_latest_reply(postreply)
-        Notification.new_reply(postreply, post, self.current_user)
+        Notification.new_reply(postreply, post)
         self.write(json_result(0, {'post_id': post.id}))
 
 class PostReplyOptHandler(BaseRequestHandler):

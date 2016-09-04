@@ -115,3 +115,14 @@ class CollectPost(BaseModel):
     post = ForeignKeyField(Post, verbose_name="对应帖子")
     user = ForeignKeyField(User, verbose_name="收藏者")
     collect_time = DateTimeField(default=datetime.datetime.now, verbose_name="收藏时间")
+
+    @staticmethod
+    def is_collect(post, user):
+        if not user:
+            return False
+        try:
+            CollectPost.get(CollectPost.post==post, CollectPost.user==user)
+        except DoesNotExist:
+            return False
+        else:
+            return True

@@ -32,8 +32,8 @@ class IndexHandler(BaseRequestHandler):
         pages = get_page_nav(current_page, page_number_limit)
         self.render('index/index.html',
                     posts=posts,
-                    catetopic=topic_category_cache,
-                    cache_hot_post=hot_post_cache,
+                    topic_category_cache=topic_category_cache,
+                    hot_post_cache=hot_post_cache,
                     systatus=system_status_cache,
                     current_topic=None,
                     pages=pages,
@@ -59,14 +59,14 @@ class IndexTopicHandler(BaseRequestHandler):
         else:
             current_page = 1
             posts, page_number_limit = Post.list_by_topic(topic)
-        if not posts:
-            self.redirect("/static/404.html")
-            return
+        # if not posts:
+        #     self.redirect("/static/404.html")
+        #     return
         pages = get_page_nav(current_page, page_number_limit)
-        self.render('index.html',
+        self.render('index/index.html',
                     posts=posts,
-                    catetopic=topic_category_cache,
-                    cache_hot_post=hot_post_cache,
+                    topic_category_cache=topic_category_cache,
+                    hot_post_cache=hot_post_cache,
                     systatus=system_status_cache,
                     current_topic=topic,
                     pages=pages,
@@ -80,6 +80,12 @@ class RegisterHandler(BaseRequestHandler):
         else:
             self.render('index/register.html')
 
+    def post(self, *args, **kwargs):
+        post_data = get_cleaned_post_data(self, ['username', 'email', 'password'])
+        user = User.new(username=post_data['username'],
+                 email=post_data['email'],
+                 password=post_data['password'])
+        self.write(json_result(0,{'username': user.username}))
 
 class LoginHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):

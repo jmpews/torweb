@@ -19,7 +19,8 @@ class User(BaseModel):
 
     # id = Column(Integer, primary_key=True, autoincrement=True)
     username = CharField(index=True, unique=True, max_length=16)
-    nickname = CharField(max_length=16)
+    nickname = CharField(max_length=16, null=True)
+    email = CharField(max_length=32)
     avatar = CharField(max_length=20, null=True)
     theme = CharField(max_length=16, null=True)
     role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
@@ -58,7 +59,7 @@ class User(BaseModel):
 
     # 创建新的用户
     @staticmethod
-    def new(username, nickname, password):
+    def new(username, password, email, nickname=''):
         salt = random_str()
         password_md5 = md5(password.encode('utf-8')).hexdigest()
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
@@ -66,6 +67,7 @@ class User(BaseModel):
         the_time = int(time.time())
         u = User.create(username=username,
                         nickname=nickname,
+                        email=email,
                         password=password_final,
                         salt=salt, level=level,
                         key=random_str(32),

@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 import os
-# config = None
+from settings import development
+config = development
 
 def load_config(c):
     # global config

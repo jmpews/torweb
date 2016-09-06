@@ -257,3 +257,22 @@ class ColorPrint:
     def print(arg):
         print(ColorPrint.OKGREEN + arg + ColorPrint.ENDC)
 
+
+from threading import Thread
+class ThreadWorker(Thread):
+    '''
+    线程Future
+    '''
+
+    def __init__(self, future, func, *args, **kwargs):
+        Thread.__init__(self)
+        self.future =future
+        self.func =func
+        self.args = args
+        self.kwargs = kwargs
+        print('worker init...')
+
+    def run(self):
+        result = self.func(*self.args, **self.kwargs)
+        self.future.set_result(result)
+

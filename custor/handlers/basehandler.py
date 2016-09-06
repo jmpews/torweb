@@ -1,15 +1,38 @@
-from tornado.web import RequestHandler
-
-from custor.utils import set_api_header, json_result
+#encoding:utf-8
+from custor.utils import set_api_header, json_result, ThreadWorker
 from custor.errors import RequestMissArgumentError, PageNotFoundError
 from custor.logger import logger
 
 from settings.config import config
-from custor.logger import logger
 from custor.utils import ColorPrint
 
 from db.mysql_model import db_mysql
 from db.mysql_model.user import User
+
+from tornado.web import RequestHandler
+from tornado.concurrent import Future
+import functools
+import time
+
+
+def run_with_future(*args, **kwargs):
+    '''
+    如何利用future和线程的配合
+    http://jmpews.github.io/posts/tornado-future-ioloop-yield.html
+    :param args:
+    :param kwargs:
+    :return:
+    '''
+    def wraps_func(func):
+        @functools.wraps(func)
+        def wraps_args(*args, **kwargs):
+            future = Future()
+            work = ThreadWorker(future, func, *args, **kwargs)
+            work.start()
+            return future
+        return wraps_args
+    return wraps_func
+
 
 def exception_deal(exceptions):
     '''
@@ -18,9 +41,8 @@ def exception_deal(exceptions):
     :return:
     '''
     def wrapper_func(func):
-        from functools import wraps
         # 保存原函数信息
-        @wraps(func)
+        @functools.wraps(func)
         def wrapper_args(handler, *args, **kwargs):
             try:
                 func(handler, *args, **kwargs)
@@ -35,7 +57,6 @@ def exception_deal(exceptions):
         return wrapper_args
     return wrapper_func
 
-import time
 def timeit(func):
     '''
     计算函数执行时间

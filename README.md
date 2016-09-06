@@ -11,3 +11,15 @@
 
 在`/app/cache.py` 缓存一些需要**面向所有用户使用**的缓存，比如缓存文章分类、热门文章分类、系统状态
 
+### deal with exception 
+
+decorator
+
+def foo():
+    print(hello')
+
+pass
+
+### fast with coroutine
+
+pass

@@ -4,22 +4,12 @@ import json
 import random
 from tornado.web import MissingArgumentError
 from tornado.web import HTTPError
-
+from custor.errors import RequestMissArgumentError
 import functools
 from urllib.parse import urlencode
 import urllib.parse as urlparse
 
 import time, datetime
-
-class RequestArgumentError(Exception):
-    def __init__(self, msg='Unknown', code=233):
-        self.msg = msg
-        self.code = code
-        super(RequestArgumentError, self).__init__(code, msg)
-
-    def __str__(self):
-        return self.msg
-
 
 def random_str(random_length=16):
     str = ''
@@ -76,7 +66,7 @@ def get_cleaned_query_data(handler, args, blank=False):
             if blank:
                 data[k] = None
             else:
-                raise RequestArgumentError('[' + k + '] arg not found')
+                raise RequestMissArgumentError('[' + k + '] arg not found')
     return data
 
 
@@ -92,7 +82,7 @@ def get_cleaned_post_data(handler, args, blank=False):
             if blank:
                 data[k] = None
             else:
-                raise RequestArgumentError('[' + k + '] arg not found')
+                raise RequestMissArgumentError('[' + k + '] arg not found')
     return data
 
 def get_cleaned_json_data(handler, args, blank=False):
@@ -110,7 +100,7 @@ def get_cleaned_json_data(handler, args, blank=False):
         elif not tmp_x and blank:
             data[k] = None
         else:
-            raise RequestArgumentError('[' + k + '] arg not found')
+            raise RequestMissArgumentError('[' + k + '] arg not found')
     return data
 
 
@@ -197,6 +187,7 @@ def get_page_nav(current_page, page_number_limit, page_limit=10):
         pages['cp+2'][1] = current_page+2
     return pages
 
+
 class TimeUtil:
     '''
     时间友好化显示
@@ -251,3 +242,18 @@ class TimeUtil:
             return TimeUtil.get_weekday(t) + ' ' + TimeUtil.datetime_format(t, '%H:%M')
         else:
             return TimeUtil.datetime_format(time, "%Y-%m-%d")
+
+class ColorPrint:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+    @staticmethod
+    def print(arg):
+        print(ColorPrint.OKGREEN + arg + ColorPrint.ENDC)
+

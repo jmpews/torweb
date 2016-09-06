@@ -1,13 +1,21 @@
 # coding:utf-8
 from app.cache import hot_post_cache, system_status_cache, topic_category_cache
-from custor.handlers.basehandler import BaseRequestHandler
+
+from custor.handlers.basehandler import BaseRequestHandler, timeit, exception_deal
 from custor.utils import get_cleaned_post_data, get_cleaned_query_data
 from custor.utils import json_result, get_page_nav
+
 from db.mysql_model.post import Post, PostTopic
 from db.mysql_model.user import User
 
+from custor.errors import RequestMissArgumentError, PageNotFoundError
+
 
 class IndexHandler(BaseRequestHandler):
+
+    @timeit
+    # 也许这个参数有其他用处先留着
+    @exception_deal([RequestMissArgumentError,])
     def get(self, *args, **kwargs):
         # profiling 性能分析
         # from profiling.tracing import TracingProfiler
@@ -20,15 +28,11 @@ class IndexHandler(BaseRequestHandler):
         if current_page:
             current_page = int(current_page)
             if current_page < 1:
-                self.redirect("/static/404.html")
-                return
+                raise PageNotFoundError
             posts, page_number_limit = Post.list_recently(page_number=current_page)
         else:
             current_page = 1
             posts, page_number_limit = Post.list_recently()
-        if not posts:
-            self.redirect("/static/404.html")
-            return
         pages = get_page_nav(current_page, page_number_limit)
         self.render('index/index.html',
                     posts=posts,

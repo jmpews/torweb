@@ -9,7 +9,7 @@ BACKEND_MYSQL = {
     'max_connections': 20,
     'stale_timeout': 300,
     'user': 'root',
-    'password': 'qwaszx',
+    'password': 'root',
     'host': '127.0.0.1',
     'port': 3306
 }

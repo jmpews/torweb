@@ -6,6 +6,31 @@ from os import path
 import tornado.web
 import tornado.ioloop
 from tornado.options import define, options, parse_command_line
+import signal
+import time
+
+def close_server():
+    from custor.logger import logger
+    MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 1
+    deadline = time.time() + MAX_WAIT_SECONDS_BEFORE_SHUTDOWN
+
+    def stop_loop():
+        now = time.time()
+        io_loop = tornado.ioloop.IOLoop.instance()
+        if now < deadline and (io_loop._callbacks or io_loop._timeouts):
+            io_loop.add_timeout(now + 1, stop_loop)
+        else:
+            io_loop.stop()
+            logger.info('...Shutdown...')
+    stop_loop()
+    logger.info("...close_httpserver():ready...")
+
+
+# handle signal
+def server_shutdown_handler(sig, frame):
+    from custor.logger import logger
+    logger.warning('...Caught signal: %s', sig)
+    tornado.ioloop.IOLoop.instance().add_callback(close_server)
 
 def runserver():
     # define("port", default=8888, help="run on the given port", type=int)
@@ -44,6 +69,10 @@ def runserver():
         cookie_secret=config.COOKIE_SECRET,
     )
 
+
+    # added signal callback to interrupt app
+    signal.signal(signal.SIGINT, server_shutdown_handler)
+    signal.signal(signal.SIGTERM, server_shutdown_handler)
 
     application.listen(config.PORT)
     from custor.logger import logger

@@ -15,7 +15,7 @@ import functools
 import time
 
 
-def run_with_future(*args, **kwargs):
+def run_with_thread_future(*args, **kwargs):
     '''
     如何利用future和线程的配合
     http://jmpews.github.io/posts/tornado-future-ioloop-yield.html

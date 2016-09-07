@@ -22,6 +22,7 @@
         </div>
     </div>
     <section>
+        <canvas id="canvas-basic" class="color-bg"></canvas>
         <div class="section-header">
             值得推荐的软件
         </div>
@@ -108,7 +109,23 @@ Shadowsocks分为服务器端和客户端。在使用之前，需要先将服务
 {% end %}
 
 {% block scripts %}
+<script src="/assets/js/granim.min.js"></script>
 <script>
+var granimInstance = new Granim({
+    element: '#canvas-basic',
+    name: 'basic-gradient',
+    direction: 'left-right',
+    opacity: [1, 1],
+    isPausedWhenNotInView: true,
+    states : {
+      "default-state": {
+          gradients: [
+				['#B3FFAB', '#12FFF7'],
+{#				['#ADD100', '#7B920A'],#}
+				['#1A2980', '#26D0CE']
+          ]
+    }
+}});
     $(document).click(function() {
         if ($(".intro").is(":hidden")) {
             return;

@@ -209,7 +209,9 @@ a:hover .fa {
   box-shadow: 0 2px 10px #dadbdc;
 }
 .header .header-container {
+  height: 70px;
   margin: 0 30px;
+  line-height: 70px;
 }
 .header .header-container .header-logo {
   position: relative;
@@ -251,7 +253,6 @@ a:hover .fa {
   color: #fff;
 }
 .header .header-container .header-nav {
-  height: 70px;
   width: 100%;
   max-width: 324px;
 }
@@ -265,9 +266,7 @@ a:hover .fa {
 }
 .header .header-container .header-nav li a {
   display: block;
-  padding: 16px 0 20px;
   font-size: 14px;
-  line-height: 30px;
   text-align: center;
   border-top: 4px solid transparent;
 }
@@ -1147,10 +1146,21 @@ a:hover .fa {
   height: 100vh;
 }
 .recommend section {
+  position: relative;
   background-color: #fff;
 }
+.recommend section .color-bg {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 .recommend .section-header {
-  color: #666;
+  color: #fff;
   text-align: center;
   font-size: 30px;
   line-height: 60px;
@@ -1191,12 +1201,13 @@ a:hover .fa {
 }
 .recommend .section-content .ccard .ccard-logo {
   position: relative;
-  width: 170px;
-  height: 170px;
+  width: 100px;
+  height: 100px;
   background-color: #fff;
-  border: 3px solid #e6e6e6;
 }
 .recommend .section-content .ccard .ccard-logo img {
+  width: 80px;
+  height: 80px;
   overflow: auto;
   margin: auto;
   position: absolute;

@@ -310,10 +310,11 @@ a:hover {
             }
         }
         .header-tip {
-            line-height: 70px;
+            //line-height: 70px;
             float: right;
             .options {
                 li {
+                    height:100%;
                     float: left;
                     margin-right: 10px;
                     img {

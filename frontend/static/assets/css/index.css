@@ -276,10 +276,10 @@ a:hover .fa {
   box-shadow: inset 0 -3px 0px #e95420;
 }
 .header .header-container .header-tip {
-  line-height: 70px;
   float: right;
 }
 .header .header-container .header-tip .options li {
+  height: 100%;
   float: left;
   margin-right: 10px;
 }

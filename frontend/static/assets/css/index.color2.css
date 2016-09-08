@@ -6,7 +6,7 @@ body {
   background-color: #f7f7f7;
 }
 body a {
-  color: #000;
+  color: #999;
 }
 body a:hover, body a:focus {
   color: #000;
@@ -31,7 +31,7 @@ body a:hover, body a:focus {
 }
 
 .important-font {
-  color: #000;
+  color: #999;
 }
 
 a.username {
@@ -77,11 +77,7 @@ ul {
   }
 }
 .fa {
-  color: #000;
   padding: 0 3px;
-}
-.fa:hover {
-  color: #000 !important;
 }
 
 .note-toolbar {
@@ -130,12 +126,8 @@ a, a:focus, a:hover {
   outline: none;
 }
 
-a:hover .fa {
-  color: #000 !important;
-}
-
 .tag-success {
-  background-color: #e1e1e1;
+  background-color: #000;
 }
 
 .btn-primary {
@@ -176,15 +168,50 @@ a:hover .fa {
 }
 
 .page-link {
-  color: #000;
+  color: #999;
 }
 
 .page-link:focus, .page-link:hover {
-  color: black;
+  color: #000;
 }
 
 .form-control:focus {
   border-color: #000;
+}
+
+.custom-card.card {
+  border: 1px solid #eaeaea;
+}
+.custom-card.card > .card-header {
+  color: #999;
+  position: relative;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+  padding: 0.5rem 1rem !important;
+}
+.custom-card.card > .card-header a:hover {
+  color: #000;
+}
+.custom-card.card > .card-header .fa {
+  padding-right: 5px;
+}
+.custom-card.card > .card-header:after {
+  content: "";
+  width: 50%;
+  height: 2px;
+  background: #000;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+}
+
+.post-list .card-header a,
+.post-detail .card-header a {
+  margin: 0 3px;
+}
+.post-list .card-header a.active,
+.post-detail .card-header a.active {
+  color: #000;
 }
 
 .card:beforex {
@@ -204,12 +231,16 @@ a:hover .fa {
 .header {
   margin: 0 auto;
   z-index: 999;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 2px 10px #dadbdc;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+}
+.header a {
+  color: #999;
 }
 .header .header-container {
+  height: 70px;
   margin: 0 30px;
+  line-height: 70px;
 }
 .header .header-container .header-logo {
   position: relative;
@@ -217,7 +248,7 @@ a:hover .fa {
   text-align: center;
   font-size: 14px;
   left: -30px;
-  background-color: #000;
+  background-color: #e95420;
   line-height: 40px;
 }
 .header .header-container .header-logo .color {
@@ -251,7 +282,6 @@ a:hover .fa {
   color: #fff;
 }
 .header .header-container .header-nav {
-  height: 70px;
   width: 100%;
   max-width: 324px;
 }
@@ -261,22 +291,27 @@ a:hover .fa {
   width: 25%;
 }
 .header .header-container .header-nav li.active {
-  box-shadow: inset 0 -3px 0px #000;
+  box-shadow: inset 0 -3px 0px #e95420;
 }
 .header .header-container .header-nav li a {
   display: block;
-  padding: 16px 0 20px;
   font-size: 14px;
-  line-height: 30px;
   text-align: center;
   border-top: 4px solid transparent;
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
-  background-color: #fff;
-  box-shadow: inset 0 -3px 0px #000;
+  color: #e95420;
+  background-color: rgba(255, 255, 255, 0.26);
+  box-shadow: inset 0 -3px 0px #e95420;
 }
 .header .header-container .header-tip {
   float: right;
+}
+.header .header-container .header-tip a {
+  color: #999;
+}
+.header .header-container .header-tip a:hover {
+  color: #e95420;
 }
 .header .header-container .header-tip .options li {
   height: 100%;
@@ -286,29 +321,27 @@ a:hover .fa {
 .header .header-container .header-tip .options li img {
   width: 50px;
 }
-.header .header-container .header-tip .options li a {
+.header .header-container .header-tip .options li > a {
   padding: 5px;
-  color: #999;
 }
-.header .header-container .header-tip .options li a:hover {
-  color: #000;
-  background-color: #efefef;
-}
-.header .header-container .header-tip .options .dropdown a {
-  color: #999;
-}
-.header .header-container .header-tip .options .dropdown a:hover {
-  color: #000;
-  background: none;
+.header .header-container .header-tip .options li > a:hover {
+  background-color: rgba(255, 255, 255, 0.26);
 }
 .header .header-container .header-tip .options .dropdown .dropdown-menu {
   font-size: 13px;
   min-width: 0;
   margin: 0px;
 }
-.header .header-container .header-tip .options .dropdown li {
+.header .header-container .header-tip .options .dropdown .dropdown-menu li {
   float: none;
   line-height: normal;
+}
+.header .header-container .header-tip .options .dropdown .dropdown-menu li a {
+  color: #999;
+}
+.header .header-container .header-tip .options .dropdown .dropdown-menu li a:hover {
+  color: #000;
+  background: none;
 }
 
 @media (max-width: 767px) {
@@ -397,14 +430,8 @@ a:hover .fa {
   padding-right: 0px;
 }
 
-.all-cate-card .card-header {
-  color: #999 !important;
-}
 .all-cate-card .card-header a {
   color: #999;
-}
-.all-cate-card .card-header a:hover {
-  color: #000;
 }
 .all-cate-card .divider {
   margin: 0 3px;
@@ -414,14 +441,7 @@ a:hover .fa {
   color: #666 !important;
 }
 .card-header-all-bt .fa {
-  color: #666 !important;
   padding-right: 2px;
-}
-.card-header-all-bt:hover {
-  color: #000 !important;
-}
-.card-header-all-bt:hover .fa {
-  color: #000 !important;
 }
 
 .current-topic {
@@ -442,14 +462,11 @@ a:hover .fa {
 }
 
 .post-item {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eaeaea;
   padding-top: 17px;
   padding-bottom: 7px;
   position: relative;
   min-height: 68px;
-}
-.post-item a:hover {
-  color: #000;
 }
 .post-item .avatar {
   position: absolute;
@@ -503,7 +520,7 @@ a:hover .fa {
   color: #ccc;
 }
 .post-item .item-end {
-  color: #000;
+  color: #666;
   position: absolute;
   right: 0px;
   top: 0px;
@@ -734,34 +751,6 @@ a:hover .fa {
 
 .note-toolbar button {
   height: 30px;
-}
-
-.custom-card.card > .card-header {
-  position: relative;
-  color: #666;
-  background-color: #fff;
-  padding: 0.5rem 1rem !important;
-}
-.custom-card.card > .card-header .fa {
-  padding-right: 5px;
-}
-.custom-card.card > .card-header:after {
-  content: "";
-  width: 50%;
-  height: 1px;
-  background: #000;
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-}
-
-.post-list .card-header a,
-.post-detail .card-header a {
-  margin: 0 3px;
-}
-.post-list .card-header a.active,
-.post-detail .card-header a.active {
-  color: #000;
 }
 
 .card-header-all {
@@ -1140,6 +1129,9 @@ a:hover .fa {
 .recommend .title .sub-title {
   font-size: 14px;
 }
+.recommend #fp-nav ul li a span, .recommend .fp-slidesNav ul li a span {
+  background-color: #000;
+}
 .recommend .recommend-header {
   position: relative;
   background-image: url("/assets/images/bgs/2.jpg");
@@ -1147,10 +1139,22 @@ a:hover .fa {
   height: 100vh;
 }
 .recommend section {
+  position: relative;
   background-color: #fff;
+  height: 100vh;
+}
+.recommend section .color-bg {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 .recommend .section-header {
-  color: #666;
+  color: #fff;
   text-align: center;
   font-size: 30px;
   line-height: 60px;
@@ -1191,12 +1195,13 @@ a:hover .fa {
 }
 .recommend .section-content .ccard .ccard-logo {
   position: relative;
-  width: 170px;
-  height: 170px;
+  width: 100px;
+  height: 100px;
   background-color: #fff;
-  border: 3px solid #e6e6e6;
 }
 .recommend .section-content .ccard .ccard-logo img {
+  width: 80px;
+  height: 80px;
   overflow: auto;
   margin: auto;
   position: absolute;

@@ -1139,6 +1139,9 @@ a:hover .fa {
 .recommend .title .sub-title {
   font-size: 14px;
 }
+.recommend #fp-nav ul li a span, .recommend .fp-slidesNav ul li a span {
+  background-color: #e95420;
+}
 .recommend .recommend-header {
   position: relative;
   background-image: url("/assets/images/bgs/2.jpg");
@@ -1148,6 +1151,7 @@ a:hover .fa {
 .recommend section {
   position: relative;
   background-color: #fff;
+  height: 100vh;
 }
 .recommend section .color-bg {
   position: absolute;

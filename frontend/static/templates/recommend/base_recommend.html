@@ -9,6 +9,7 @@
     <link href="/assets/css/normalize.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bs4_custom.css">
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/jquery.fullpage.min.css" />
     {% if current_user %}
     {% set theme = current_user.get_theme_by_cookie_user(handler) %}
     <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{theme}}.css" />
@@ -100,8 +101,8 @@
 
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
     <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.fullpage.min.js"></script>
     <script src="/assets/js/jquery.cookie.min.js"></script>
-    <script src="/assets/js/parsley.min.js"></script>
     <script src="/assets/i18n/zh_cn.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>

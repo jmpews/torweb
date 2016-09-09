@@ -223,7 +223,6 @@ def timeit(func):
         start = time.clock()
         func(*args, **kwargs)
         end = time.clock()
-        end = time.clock()
         # ColorPrint.print('> Profiler: '+func.__qualname__+'used: '+str((end - start) * 1e6) + 'us')
         ColorPrint.print('> Profiler: '+func.__qualname__+'used: '+str((end - start)) + 'us')
     return wrapper

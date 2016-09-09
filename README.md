@@ -63,7 +63,7 @@ Link: **[jmp](http://sxu.today)**
 │   └── test_thread_future.py
 └── tornado-generator.log # log文件
 ```
-## 使用到的组件
+## 使用到的
 ```
 MySQL, gulp, bower, pycharm, vim
 ```
@@ -71,7 +71,7 @@ MySQL, gulp, bower, pycharm, vim
 ## Tricks
 ### 0. Yield、Future与线程的结合，处理阻塞函数
 
-把tornado的Future、Python里的Yield和线程结合起来，处理阻塞函数。可以查看`tests/test_thread_future.py` 具体例子。
+把tornado的Future、Python里的Yield和线程结合起来，处理阻塞函数。可以查看`tests/test_thread_future.py` ，具体分析可以查看 http://jmpews.github.io/posts/tornado-future-ioloop-yield.html
 
 ```
 from threading import Thread

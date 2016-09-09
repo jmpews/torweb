@@ -35,7 +35,6 @@ class IndexHandler(BaseRequestHandler):
         else:
             current_page = 1
             posts, page_number_limit = Post.list_recently()
-        print(page_number_limit)
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,

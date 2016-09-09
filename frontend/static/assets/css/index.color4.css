@@ -37,6 +37,9 @@ body a:hover, body a:focus {
 .light-font {
   color: #bfbfbf !important;
 }
+.light-font:hover {
+  color: #666 !important;
+}
 
 a.username {
   color: #e95420;
@@ -117,11 +120,11 @@ ul {
 }
 
 .close {
-  color: #fff;
+  color: #e95420;
   opacity: 0.5;
 }
 .close:hover {
-  color: #fff;
+  color: #e95420;
   opacity: 1;
 }
 

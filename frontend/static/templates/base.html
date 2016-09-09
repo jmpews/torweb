@@ -97,12 +97,38 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="loginModal">
+            <div class="card custom-card modal-dialog">
+                <div class="card-header">
+                    登陆
+                </div>
+                <div class="card-block">
+                <form data-parsley-validate="" action="/login" method="post">
+                    <fieldset class="form-group">
+                        <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名" required>
+                        <small class="text-muted">我们保证您的信息安全.</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
+                    </fieldset>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 保持Session记录
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">登陆</button>
+                </form>
+                </div>
+            </div>
+    </div>
 
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
     <script src="/assets/js/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="/assets/js/parsley.min.js"></script>
-    <script src="/assets/i18n/zh_cn.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
     {% block scripts %}{% end %}

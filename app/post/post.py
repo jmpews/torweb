@@ -2,7 +2,7 @@
 from app.cache import system_status_cache, hot_post_cache, topic_category_cache
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.utils import get_cleaned_post_data, get_cleaned_json_data
-from custor.utils import login_required, json_result
+from custor.utils import login_required, json_result, login_required_json
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, PostTopic, CollectPost
 
@@ -67,7 +67,8 @@ class PostReplyAddHandler(BaseRequestHandler):
         self.write(json_result(0, {'post_id': post.id}))
 
 class PostReplyOptHandler(BaseRequestHandler):
-    @login_required
+
+    @login_required_json(-3, 'login failed.')
     def post(self, *args, **kwargs):
         # 这个函数有点意思, 一直做参数安全clean
         json_data = get_cleaned_json_data(self, ['opt', 'data'])

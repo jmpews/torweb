@@ -253,8 +253,8 @@
                    $(e.target).addClass('postreply-supported');
                    $.notify('已支持...');
                }
-               else if(result.errorcode == 1) {
-                   alert(result.txt);
+               else if(result.errorcode == -3) {
+                   $('#loginModal').modal('toggle');
                }
            }
         });
@@ -271,8 +271,8 @@
                    $(e.target).addClass('post-collected');
                    $.notify('已收藏...');
                }
-               else if(result.errorcode == 1) {
-                   alert(result.txt);
+               else if(result.errorcode == -3) {
+                   $('#loginModal').modal('toggle');
                }
            }
         });

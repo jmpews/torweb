@@ -69,6 +69,9 @@ body {
 
 .light-font {
     color: $link-light-color !important;
+    &:hover {
+        color: $important-font-color !important;
+    }
 }
 
 a.username {
@@ -159,10 +162,10 @@ ul {
     }
 }
 .close {
-    color: #fff;
+    color: $link-color;
     opacity: 0.5;
     &:hover {
-        color: #fff;
+        color: $link-color;
         opacity: 1;
     }
 }

@@ -136,6 +136,16 @@ def login_required(method):
 
     return wrapper
 
+def login_required_json(errorcode, result):
+    def wrap_func(method):
+        @functools.wraps(method)
+        def wrapper(self, *args, **kwargs):
+            if not self.current_user:
+                self.write(json_result(errorcode, result))
+                return
+            return method(self, *args, **kwargs)
+        return wrapper
+    return wrap_func
 
 def set_api_header(request):
     '''

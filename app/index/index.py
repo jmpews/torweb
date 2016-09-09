@@ -10,6 +10,8 @@ from db.mysql_model.user import User
 
 from custor.errors import RequestMissArgumentError, PageNotFoundError
 
+from settings.config import config
+
 
 class IndexHandler(BaseRequestHandler):
 
@@ -33,7 +35,8 @@ class IndexHandler(BaseRequestHandler):
         else:
             current_page = 1
             posts, page_number_limit = Post.list_recently()
-        pages = get_page_nav(current_page, page_number_limit)
+        print(page_number_limit)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
                     topic_category_cache=topic_category_cache,
@@ -66,7 +69,7 @@ class IndexTopicHandler(BaseRequestHandler):
         # if not posts:
         #     self.redirect("/static/404.html")
         #     return
-        pages = get_page_nav(current_page, page_number_limit)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
                     topic_category_cache=topic_category_cache,

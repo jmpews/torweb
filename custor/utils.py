@@ -163,7 +163,7 @@ def json_result(error_code, data):
         result = {'errorcode': error_code, 'data': data}
     return json.dumps(result)
 
-def get_page_nav(current_page, page_number_limit, page_limit=10):
+def get_page_nav(current_page, page_number_limit, page_limit):
     '''
     页脚导航
     :param current_page:

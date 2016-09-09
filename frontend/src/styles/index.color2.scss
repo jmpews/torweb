@@ -10,5 +10,25 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: $color2;
+$base-color: #4b89ac;
+
+$logo-color: #34495E;
+$font-color: #999;
+$link-color: #34495E;
+$body-backgroud-color: #f7f7f7;
+$nav-header-background-color: #22313F;
+$nav-header-font-color: #fff;
+$nav-header-font-hover-color: #fff;
+$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
+$border-color: lighten($link-color, 60%);
+$important-link-color: #34495E;
+$important-font-color: #34495E;
+$card-header-background-color: lighten($link-color, 70%);
+$card-header-font-color: #34495E;
+$card-body-background-color: #fff;
+$card-body-font-color: #999;
+$link-hover-color: darken($link-color, 15%);
+$link-light-color:  lighten($link-color, 15%);
+$btn-color: $logo-color;
+$btn-hover-color: $link-hover-color;
 @import "base";

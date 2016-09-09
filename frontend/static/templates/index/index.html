@@ -9,19 +9,19 @@
             <div class="current-topic">
                 <span>{% if current_topic  %}{{current_topic.name}}{% else %}全部分类{% end %}</span>
             </div>
-            <div class="card-header">
-                热门:
-                <a href="/topic/study">学习资料</a>
+            <div class="card-header ">
+                <a href="#_blank" class="light-font">热门: </a>
+                <a href="/topic/study" class="light-font">学习资料</a>
                 <span class="divider">/</span>
-                <a class="active" href="/topic/">考研</a>
+                <a class="active light-font" href="/topic/">考研</a>
                 <span class="divider">/</span>
-                <a href="/topic/movie">电影资源</a>
+                <a href="/topic/movie"  class="light-font">电影资源</a>
                 <span class="divider">/</span>
-                <a href="/topic/notice">校园通知</a>
+                <a href="/topic/notice"  class="light-font">校园通知</a>
                 <span class="divider">/</span>
-                <a href="/topic/photo">摄影</a>
+                <a href="/topic/photo"  class="light-font">摄影</a>
                 <span class="important-divider">|</span>
-                <a class="card-header-all-bt" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
+                <a class="card-header-all-bt important-font" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
             </div>
             <div class="card-header-all">
                 <h3>所有分类</h3>
@@ -56,7 +56,7 @@
                 {% set user = post.user  %}
                 <div class="avatar hidden-xs ">
                     <a class="username" href="/user/{{user.id}}">
-                        {% if user.avatar %}
+                        {% if user.avatar or user.avatar != 'default_avatar.png' %}
                         <img src="/assets/images/avatar/{{user.avatar}}">
                         {% else %}
                         <span>{{user.username[0].upper()}}</span>
@@ -161,7 +161,7 @@
                 </div>
                 <div class="card-block">
                     <p>1. 目前社区上线测试, 欢迎大家提各种意见. </p>
-                    <p>2. 社区已经开源, 传送门. <a target="_blank" href="https://github.com/jmpews/torweb"><i class="fa fa-github" aria-hidden="true"></i>torweb</a></p>
+                    <p>2. 社区已经开源, 传送门. <a target="_blank" class="important-font" href="https://github.com/jmpews/torweb"><i class="fa fa-github" aria-hidden="true"></i>torweb</a></p>
                     <!--{% if not current_user %}-->
                         <!--<p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>-->
                         <!--<div>没有账户? <a href="/register">点击注册</a></div>-->

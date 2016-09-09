@@ -31,7 +31,11 @@ body a:hover, body a:focus {
 }
 
 .important-font {
-  color: #999;
+  color: #446491 !important;
+}
+
+.light-font {
+  color: #698ab9 !important;
 }
 
 a.username {
@@ -181,11 +185,12 @@ a, a:focus, a:hover {
 
 .custom-card.card {
   border: 1px solid #becada;
+  background-color: #fff;
 }
 .custom-card.card > .card-header {
-  color: #4b89ac;
-  position: relative;
   background-color: #fff;
+  color: #446491;
+  position: relative;
   border-bottom: 1px solid #becada;
   padding: 0.5rem 1rem !important;
 }
@@ -261,10 +266,10 @@ a, a:focus, a:hover {
   background-color: #FFBCBC;
 }
 .header .header-container .header-logo .color.color2 {
-  background-color: #000;
+  background-color: #34495E;
 }
 .header .header-container .header-logo .color.color3 {
-  background-color: #2fca7b;
+  background-color: #ace6f6;
 }
 .header .header-container .header-logo .color.color4 {
   background-color: #e95420;
@@ -431,7 +436,7 @@ a, a:focus, a:hover {
 }
 
 .all-cate-card .card-header a {
-  color: #4b89ac;
+  color: #446491;
 }
 .all-cate-card .divider {
   margin: 0 3px;
@@ -662,7 +667,7 @@ a, a:focus, a:hover {
   color: #446491;
 }
 .post-reply .reply-item .reply-head .floor {
-  color: #2fca7b;
+  color: #ace6f6;
 }
 .post-reply .reply-item:last-of-type {
   border-bottom: none;
@@ -760,9 +765,9 @@ a, a:focus, a:hover {
   background-color: #fff;
   z-index: 999;
   padding: 5px;
-  border-left: 1px solid #4b89ac;
-  border-right: 1px solid #4b89ac;
-  border-bottom: 1px solid #4b89ac;
+  border-left: 1px solid #becada;
+  border-right: 1px solid #becada;
+  border-bottom: 1px solid #becada;
 }
 .card-header-all h3 {
   font-size: 14px;
@@ -1079,9 +1084,6 @@ a, a:focus, a:hover {
   border-bottom: none;
   box-shadow: none;
   background-color: transparent;
-}
-.recommend .header .header-nav li a:hover {
-  background: none;
 }
 .recommend .header a {
   color: #fff;

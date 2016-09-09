@@ -14,7 +14,7 @@
     {% set theme = current_user.get_theme_by_cookie_user(handler) %}
     <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{theme}}.css" />
     {% else %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.css" />
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color3.css" />
     {% end %}
 </head>
 <body>
@@ -41,10 +41,10 @@
                     <a href="/recommend">推荐</a>
                 </li>
                 <li>
-                    <a href="#">-</a>
+                    <a href="#"><i class="fa fa-cloud" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                    <a href="#">-</a>
+                    <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
                 </li>
             </ul>
             <div class="header-tip hidden-xs">

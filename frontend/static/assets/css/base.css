@@ -9,7 +9,7 @@ body a {
   color: #999;
 }
 body a:hover, body a:focus {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 
 .divider {
@@ -19,7 +19,7 @@ body a:hover, body a:focus {
 
 .important-divider {
   margin: 0 3px;
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 
 .blur {
@@ -31,11 +31,15 @@ body a:hover, body a:focus {
 }
 
 .important-font {
-  color: #999;
+  color: #666 !important;
+}
+
+.light-font {
+  color: #bfbfbf !important;
 }
 
 a.username {
-  color: #666;
+  color: #FFBCBC;
 }
 
 ul {
@@ -100,8 +104,8 @@ ul {
 }
 
 .alert-info {
-  background-color: #4b89ac;
-  border-color: #4b89ac;
+  background-color: #FFBCBC;
+  border-color: #FFBCBC;
   color: #fff;
   padding-left: 30px;
   text-align: center;
@@ -127,17 +131,17 @@ a, a:focus, a:hover {
 }
 
 .tag-success {
-  background-color: #4b89ac;
+  background-color: #FFBCBC;
 }
 
 .btn-primary {
-  background-color: #4b89ac;
-  border-color: #4b89ac;
+  background-color: #FFBCBC;
+  border-color: #FFBCBC;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff !important;
-  background-color: #345f77;
-  border-color: #345f77;
+  background-color: #ff7070;
+  border-color: #ff7070;
 }
 
 .btn-outline-primary:active:hover,
@@ -153,18 +157,18 @@ a, a:focus, a:hover {
 .btn-primary.active:focus,
 .btn-primary.active.focus {
   color: #fff;
-  background-color: #345f77;
-  border-color: #345f77;
+  background-color: #ff7070;
+  border-color: #ff7070;
 }
 
 .btn-outline-primary {
-  color: #4b89ac;
-  border-color: #4b89ac;
+  color: #FFBCBC;
+  border-color: #FFBCBC;
 }
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
   color: #fff !important;
-  background-color: #4b89ac;
-  border-color: #4b89ac;
+  background-color: #FFBCBC;
+  border-color: #FFBCBC;
 }
 
 .page-link {
@@ -172,25 +176,26 @@ a, a:focus, a:hover {
 }
 
 .page-link:focus, .page-link:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 
 .form-control:focus {
-  border-color: #4b89ac;
+  border-color: #FFBCBC;
 }
 
 .custom-card.card {
   border: 1px solid #eaeaea;
+  background-color: #fff;
 }
 .custom-card.card > .card-header {
-  color: #999;
-  position: relative;
   background-color: #fff;
+  color: #FFBCBC;
+  position: relative;
   border-bottom: 1px solid #eaeaea;
   padding: 0.5rem 1rem !important;
 }
 .custom-card.card > .card-header a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .custom-card.card > .card-header .fa {
   padding-right: 5px;
@@ -199,7 +204,7 @@ a, a:focus, a:hover {
   content: "";
   width: 50%;
   height: 2px;
-  background: #4b89ac;
+  background: #FFBCBC;
   position: absolute;
   left: 0;
   bottom: -1px;
@@ -211,11 +216,11 @@ a, a:focus, a:hover {
 }
 .post-list .card-header a.active,
 .post-detail .card-header a.active {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 
 .card:beforex {
-  background-color: #4b89ac;
+  background-color: #FFBCBC;
   transition: opacity 0.5s ease;
   bottom: 0;
   content: '';
@@ -248,7 +253,7 @@ a, a:focus, a:hover {
   text-align: center;
   font-size: 14px;
   left: -30px;
-  background-color: #e95420;
+  background-color: #FFBCBC;
   line-height: 40px;
 }
 .header .header-container .header-logo .color {
@@ -261,10 +266,10 @@ a, a:focus, a:hover {
   background-color: #FFBCBC;
 }
 .header .header-container .header-logo .color.color2 {
-  background-color: #000;
+  background-color: #34495E;
 }
 .header .header-container .header-logo .color.color3 {
-  background-color: #2fca7b;
+  background-color: #ace6f6;
 }
 .header .header-container .header-logo .color.color4 {
   background-color: #e95420;
@@ -291,7 +296,7 @@ a, a:focus, a:hover {
   width: 25%;
 }
 .header .header-container .header-nav li.active {
-  box-shadow: inset 0 -3px 0px #e95420;
+  box-shadow: inset 0 -3px 0px #FFBCBC;
 }
 .header .header-container .header-nav li a {
   display: block;
@@ -300,9 +305,9 @@ a, a:focus, a:hover {
   border-top: 4px solid transparent;
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
-  color: #e95420;
+  color: #FFBCBC;
   background-color: rgba(255, 255, 255, 0.26);
-  box-shadow: inset 0 -3px 0px #e95420;
+  box-shadow: inset 0 -3px 0px #FFBCBC;
 }
 .header .header-container .header-tip {
   float: right;
@@ -311,7 +316,7 @@ a, a:focus, a:hover {
   color: #999;
 }
 .header .header-container .header-tip a:hover {
-  color: #e95420;
+  color: #FFBCBC;
 }
 .header .header-container .header-tip .options li {
   height: 100%;
@@ -340,7 +345,7 @@ a, a:focus, a:hover {
   color: #999;
 }
 .header .header-container .header-tip .options .dropdown .dropdown-menu li a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
   background: none;
 }
 
@@ -431,21 +436,21 @@ a, a:focus, a:hover {
 }
 
 .all-cate-card .card-header a {
-  color: #999;
+  color: #FFBCBC;
 }
 .all-cate-card .divider {
   margin: 0 3px;
 }
 
 .card-header-all-bt {
-  color: #666 !important;
+  color: #FFBCBC !important;
 }
 .card-header-all-bt .fa {
   padding-right: 2px;
 }
 
 .current-topic {
-  background-color: #4b89ac;
+  background-color: #FFBCBC;
   float: left;
   position: absolute;
   top: 50%;
@@ -498,17 +503,17 @@ a, a:focus, a:hover {
   color: #666;
 }
 .post-item .item-mid .item-title a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
   text-decoration: underline;
 }
 .post-item .item-mid .item-info {
   font-size: 11px;
 }
 .post-item .item-mid .item-info span .username {
-  color: #666;
+  color: #FFBCBC;
 }
 .post-item .item-mid .item-info span .username:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .post-item .item-mid .item-info span .cate {
   padding: 2px;
@@ -520,7 +525,7 @@ a, a:focus, a:hover {
   color: #ccc;
 }
 .post-item .item-end {
-  color: #666;
+  color: #FFBCBC;
   position: absolute;
   right: 0px;
   top: 0px;
@@ -611,15 +616,15 @@ a, a:focus, a:hover {
   padding: 2px;
 }
 .post-detail-card .post-function a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
   background-color: #efefef;
 }
 .post-detail-card .post-function a.post-collected {
-  color: #4b89ac;
+  color: #FFBCBC;
   background-color: #efefef;
 }
 .post-detail-card .post-function a.post-collected .fa {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .post-detail-card .post-function .fa {
   color: #999;
@@ -659,10 +664,10 @@ a, a:focus, a:hover {
   font-size: 11px;
 }
 .post-reply .reply-item .reply-head .username {
-  color: #666;
+  color: #FFBCBC;
 }
 .post-reply .reply-item .reply-head .floor {
-  color: #2fca7b;
+  color: #ace6f6;
 }
 .post-reply .reply-item:last-of-type {
   border-bottom: none;
@@ -676,14 +681,14 @@ a, a:focus, a:hover {
   padding: 2px;
 }
 .post-reply .reply-function a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
   background-color: #efefef;
 }
 .post-reply .reply-function a.postreply-supported {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .post-reply .reply-function a.postreply-supported .fa {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .post-reply .reply-function span {
   padding-right: 2px;
@@ -712,20 +717,20 @@ a, a:focus, a:hover {
   width: 40px;
   height: 30px;
   background-color: #fff;
-  border-right: 1px dashed #4b89ac;
-  border-top: 1px dashed #4b89ac;
-  border-bottom: 1px dashed #4b89ac;
+  border-right: 1px dashed #FFBCBC;
+  border-top: 1px dashed #FFBCBC;
+  border-bottom: 1px dashed #FFBCBC;
 }
 .medium-editor-toolbar .medium-editor-toolbar-actions li button:hover {
-  background-color: #4b89ac;
+  background-color: #FFBCBC;
   color: #fff;
 }
 .medium-editor-toolbar .medium-editor-toolbar-actions li:first-of-type button {
-  border-left: 1px dashed #4b89ac;
+  border-left: 1px dashed #FFBCBC;
 }
 
 .medium-toolbar-arrow-under:after {
-  border: 1px solid #4b89ac;
+  border: 1px solid #FFBCBC;
 }
 
 .content-container form {
@@ -760,9 +765,9 @@ a, a:focus, a:hover {
   background-color: #fff;
   z-index: 999;
   padding: 5px;
-  border-left: 1px solid #4b89ac;
-  border-right: 1px solid #4b89ac;
-  border-bottom: 1px solid #4b89ac;
+  border-left: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 .card-header-all h3 {
   font-size: 14px;
@@ -787,7 +792,7 @@ a, a:focus, a:hover {
 }
 .card-header-all .card-header-all-cate .card-header-all-cate-topic a:hover {
   background-color: #efefef;
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .card-header-all .card-header-all-cate:last-of-type {
   border-bottom: none;
@@ -830,7 +835,7 @@ a, a:focus, a:hover {
 }
 .card-header-all-footer .card-header-all-cate .card-header-all-cate-topic a:hover {
   background-color: #efefef;
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .card-header-all-footer .card-header-all-cate:last-of-type {
   border-bottom: none;
@@ -874,7 +879,7 @@ a, a:focus, a:hover {
   color: #999;
 }
 .post-hot-card li a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 
 .user-profile-html .col-md-9, .user-profile-html .col-md-3 {
@@ -923,7 +928,7 @@ a, a:focus, a:hover {
   color: #999;
 }
 .user-profile-trend a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .user-profile-trend li {
   color: #999;
@@ -938,7 +943,7 @@ a, a:focus, a:hover {
   color: #999;
 }
 .user-profile-follow a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .user-profile-follow .profile-card-body {
   padding: 10px;
@@ -958,7 +963,7 @@ a, a:focus, a:hover {
 }
 
 .user-profile-card .profile-card-head {
-  color: #666;
+  color: #FFBCBC;
   font-size: 14px;
   text-decoration: underline;
   text-align: center;
@@ -1080,20 +1085,17 @@ a, a:focus, a:hover {
   box-shadow: none;
   background-color: transparent;
 }
-.recommend .header .header-nav li a:hover {
-  background: none;
-}
 .recommend .header a {
   color: #fff;
 }
 .recommend .header a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .recommend .header .options .dropdown a {
   color: #fff;
 }
 .recommend .header .options .dropdown a:hover {
-  color: #4b89ac;
+  color: #FFBCBC;
 }
 .recommend .recommend-header .author {
   position: absolute;
@@ -1130,7 +1132,7 @@ a, a:focus, a:hover {
   font-size: 14px;
 }
 .recommend #fp-nav ul li a span, .recommend .fp-slidesNav ul li a span {
-  background-color: #4b89ac;
+  background-color: #FFBCBC;
 }
 .recommend .recommend-header {
   position: relative;
@@ -1167,7 +1169,7 @@ a, a:focus, a:hover {
   left: 50%;
   margin-left: -50px;
   height: 2px;
-  background: #4b89ac;
+  background: #FFBCBC;
   position: absolute;
   bottom: -1px;
 }
@@ -1211,7 +1213,7 @@ a, a:focus, a:hover {
   right: 0;
 }
 .recommend .section-content .ccard .ccard-logo.active {
-  border: 1px solid #7dacc6;
+  border: 1px solid #bfbfbf;
 }
 .recommend .section-content .ccard .ccard-content {
   display: none;

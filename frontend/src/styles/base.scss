@@ -1,8 +1,8 @@
 @charset "UTF-8";
 $color1: #FFBCBC;
 //$color2: #A4EDA4;
-$color2: #000;
-$color3: #2fca7b;
+$color2: #34495E;
+$color3: #ace6f6;
 $color4: #e95420;
 
 $lightpink: #FFBCBC;
@@ -10,11 +10,11 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: #4b89ac !default;
+$base-color: #FFBCBC !default;
 
-$logo-color: #e95420 !default;
+$logo-color: $base-color !default;
 $font-color: #999 !default;
-$link-color: $base-color !default;
+$link-color: $logo-color !default;
 $body-backgroud-color: #f7f7f7 !default;
 $nav-header-background-color: #fff !default;
 $nav-header-font-color: $font-color !default;
@@ -22,12 +22,13 @@ $nav-header-font-hover-color: $logo-color !default;
 $nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
 $border-color: #eaeaea !default;
 $important-font-color: #666 !default;
+$important-link-color: $logo-color !default;
 $card-header-background-color: #fff !default;
-$card-header-font-color: #999 !default;
+$card-header-font-color: $base-color !default;
 $card-body-background-color: #fff !default;
 $card-body-font-color: #999 !default;
 $link-hover-color: darken($link-color, 15%) !default;
-$link-light-color:  lighten($link-color, 15%) !default;
+$link-light-color:  lighten($font-color, 15%) !default;
 $btn-color: $link-color !default;
 $btn-hover-color: $link-hover-color !default;
 
@@ -63,10 +64,15 @@ body {
     filter: blur(5px);
 }
 .important-font {
-    color: $font-color;
+    color: $important-font-color !important;
 }
+
+.light-font {
+    color: $link-light-color !important;
+}
+
 a.username {
-    color: $important-font-color;
+    color: $important-link-color;
 }
 
 ul {
@@ -221,7 +227,9 @@ a:hover {
 .custom-card.card {
     //border: none !important;
     border: 1px solid $border-color;
+    background-color: $card-body-background-color;
     &>.card-header {
+        background-color: $card-header-background-color;
         color: $card-header-font-color;
         a{
             &:hover {
@@ -229,7 +237,6 @@ a:hover {
             }
         }
         position: relative;
-        background-color: $card-header-background-color;
         border-bottom: 1px solid $border-color;
         padding: 0.5rem 1rem !important;
         .fa {
@@ -359,7 +366,7 @@ a:hover {
                 }
 
                 a:focus, a:hover {
-                    color: $logo-color;
+                    color: $nav-header-font-hover-color;
                     background-color: $nav-header-hover-color;
                     -webkit-box-shadow: inset 0 -3px 0px $logo-color;
                     -moz-box-shadow: inset 0 -3px 0px $logo-color;
@@ -532,7 +539,7 @@ a:hover {
     }
 }
 .card-header-all-bt {
-    color: $important-font-color !important;
+    color: $important-link-color !important;
     .fa {
         padding-right: 2px;
     }
@@ -603,7 +610,7 @@ a:hover {
             font-size: 11px;
             span {
                 .username {
-                    color: $important-font-color;
+                    color: $important-link-color;
                     &:hover {
                       color: $link-color;
                     }
@@ -622,7 +629,7 @@ a:hover {
         }
     }
     .item-end {
-        color: $important-font-color;
+        color: $important-link-color;
         position: absolute;
         right: 0px;
         top: 0px;
@@ -764,7 +771,7 @@ a:hover {
         .reply-head {
             font-size: 11px;
             .username {
-                color: $important-font-color;
+                color: $important-link-color;
             }
             .floor {
                 color: $color3;
@@ -891,9 +898,9 @@ a:hover {
     background-color: #fff;
     z-index: 999;
     padding: 5px;
-    border-left: 1px solid $base-color;
-    border-right: 1px solid $base-color;
-    border-bottom: 1px solid $base-color;
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
     h3 {
         font-size: 14px;
         line-height: 30px;
@@ -1114,7 +1121,7 @@ a:hover {
     //    border-bottom: none;
     //}
     .profile-card-head {
-        color: $important-font-color;
+        color: $important-link-color;
         font-size: 14px;
         text-decoration: underline;
         text-align: center;
@@ -1257,7 +1264,7 @@ a:hover {
         background-color: transparent;
         .header-nav li a:hover
         {
-            background: none;
+            //background: none;
         }
         a {
             color: #fff;

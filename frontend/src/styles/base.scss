@@ -210,8 +210,8 @@ a:hover {
     border-color: $btn-color;
     &:hover, &:focus, &:active {
         color: #fff !important;
-        background-color: $btn-color;
-        border-color: $btn-color;
+        background-color: $btn-hover-color;
+        border-color: $btn-hover-color;
     }
 }
 .page-link {

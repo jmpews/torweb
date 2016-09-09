@@ -167,8 +167,8 @@ a, a:focus, a:hover {
 }
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
   color: #fff !important;
-  background-color: #34495E;
-  border-color: #34495E;
+  background-color: #19232d;
+  border-color: #19232d;
 }
 
 .page-link {

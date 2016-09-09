@@ -55,7 +55,8 @@ def runserver():
 
     from custor import uimethods
     ui_build_methods = {
-        'datetime_delta': uimethods.datetime_delta
+        'datetime_delta': uimethods.datetime_delta,
+        'is_default_avatar': uimethods.is_default_avatar
     }
 
     application = tornado.web.Application(

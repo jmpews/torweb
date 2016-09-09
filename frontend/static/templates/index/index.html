@@ -11,15 +11,9 @@
             </div>
             <div class="card-header ">
                 <a href="#_blank" class="light-font">热门: </a>
-                <a href="/topic/study" class="light-font">学习资料</a>
+                <a href="/topic/study-material" class="light-font">学习资料</a>
                 <span class="divider">/</span>
-                <a class="active light-font" href="/topic/">考研</a>
-                <span class="divider">/</span>
-                <a href="/topic/movie"  class="light-font">电影资源</a>
-                <span class="divider">/</span>
-                <a href="/topic/notice"  class="light-font">校园通知</a>
-                <span class="divider">/</span>
-                <a href="/topic/photo"  class="light-font">摄影</a>
+                <a href="/topic/study-competition"  class="light-font">竞赛</a>
                 <span class="important-divider">|</span>
                 <a class="card-header-all-bt important-font" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
             </div>
@@ -56,10 +50,10 @@
                 {% set user = post.user  %}
                 <div class="avatar hidden-xs ">
                     <a class="username" href="/user/{{user.id}}">
-                        {% if user.avatar or user.avatar != 'default_avatar.png' %}
-                        <img src="/assets/images/avatar/{{user.avatar}}">
-                        {% else %}
+                        {% if is_default_avatar(user.avatar) %}
                         <span>{{user.username[0].upper()}}</span>
+                        {% else %}
+                        <img src="/assets/images/avatar/{{user.avatar}}">
                         {% end %}
                     </a>
                 </div>

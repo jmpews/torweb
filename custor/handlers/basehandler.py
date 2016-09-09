@@ -51,6 +51,8 @@ def exception_deal(exceptions):
                     handler.redirect(ex.redirect_url)
                 elif isinstance(ex, RequestMissArgumentError):
                     handler.write(ex.msg)
+                else:
+                    raise ex
                 # for e in exceptions:
                 #     if isinstance(ex, e):
                 #         handler.write('oh, catch exp in the args list...\n')

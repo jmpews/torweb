@@ -46,9 +46,8 @@
                             <div class="profile-card-head" style="border-top: none;">
                                 个人资料
                             </div>
-                            <div class="profile-card-body">
+                            <div class="profile-card-body-list">
                                 <ul class="list-inline">
-                                    <li>{{profile.nickname}}</li>
                                     <li>第{{user.id}}号Member</li>
                                     <li>{{profile.reg_time}}加入</li>
                                 </ul>
@@ -59,7 +58,7 @@
                             <div class="profile-card-head">
                                 发表过的Post
                             </div>
-                            <div class="profile-card-body">
+                            <div class="profile-card-body-list">
                                 {% if posts %}
                                 <ul class="list-inline">
                                     {% for post in posts %}
@@ -78,7 +77,7 @@
                             <div class="profile-card-head">
                                 发表过的评论
                             </div>
-                            <div class="profile-card-body">
+                            <div class="profile-card-body-list">
                                 {% if postreplys %}
                                 <ul class="list-inline">
                                     {% for postreply in postreplys %}
@@ -101,7 +100,7 @@
                             <div class="profile-card-head">
                                 收藏过的Post
                             </div>
-                            <div class="profile-card-body">
+                            <div class="profile-card-body-list">
                                 {% if collectposts %}
                                 <ul class="list-inline">
                                     {% for collectpost in collectposts %}

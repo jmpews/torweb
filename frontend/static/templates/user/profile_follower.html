@@ -69,7 +69,7 @@
                                 {% if who_follow %}
                                 <ul class="list-inline">
                                     {% for who in who_follow %}
-                                    <li><img src="/assets/images/avatar/{{who.follower.avatar}}"><a href="/user/{{who.follower.id}}"><span>{{who.follower.username}}</span></a> </li>
+                                    <li><a href="/user/{{who.follower.id}}"><img src="/assets/images/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
                                     {% end %}
                                 </ul>
                                 {% else %}

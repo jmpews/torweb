@@ -1101,18 +1101,31 @@ a:hover {
     // text-align: center;
     .profile-card-body {
         padding: 10px;
-    }
-    li {
-        text-align: center;
-        color: $font-color;
-        float: left;
-        span {
-            display: block;
-            line-height: 1;
-        }
-        img {
-            display: block;
-            width: 30px;
+        li {
+            text-align: center;
+            padding: 5px;
+            color: $font-color;
+            float: left;
+            border: 1px dashed transparent;
+            &:hover {
+                border: 1px dashed #d8d6d6;
+                span{
+                    padding: 2px;
+                    background-color: #efefef;
+                }
+            }
+            span {
+                display: block;
+                line-height: 1;
+                padding: 2px;
+
+            }
+            img {
+                display: block;
+                width: 40px;
+                border-radius: 50%;
+                margin-bottom: 3px;
+            }
         }
     }
 }
@@ -1135,7 +1148,11 @@ a:hover {
         //border-top: 1px dashed #d8d6d6;
         //border-bottom: 1px dashed #d8d6d6;
     }
-    .profile-card-body {
+    .profile-card-body{
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .profile-card-body-list {
         padding-left: 10px;
         padding-right: 10px;
 
@@ -1178,12 +1195,18 @@ a:hover {
     background-color: white;
     padding: 10px;
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
-    img {
+    img#avatar-cropper {
         max-width: 100%;
         margin: 4px 0px 15px;
         min-height: 100px;
         border: 1px dashed #eee
     }
+    .photo-container { padding-left: 10px; box-sizing: border-box; }
+    .photo-container li{line-height: 0px;}
+    .photo-container .avatar-preview{margin-top: 10px;overflow: hidden;}
+    .photo-container .avatar-preview.col-1{width: 50px; height: 50px;}
+    .photo-container .avatar-preview.col-2{width: 100px; height: 100px;}
+
     .select-avatar {
       position: relative;
       overflow: hidden;

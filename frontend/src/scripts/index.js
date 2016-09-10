@@ -71,7 +71,7 @@ function set_theme() {
 }
 function change_image_preview() {
     $inputFileElm = $(this);
-    var pic = document.getElementById("avatar-preview");
+    var pic = document.getElementById("avatar-cropper");
     var file = document.getElementById("avatar");
     console.log(pic);
     console.log(file);
@@ -116,7 +116,7 @@ function html5Reader(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function(e) {
-        var pic = document.getElementById("avatar-preview");
+        var pic = document.getElementById("avatar-cropper");
         pic.src=this.result;
     }
 }

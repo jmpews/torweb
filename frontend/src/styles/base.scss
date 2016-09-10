@@ -287,6 +287,24 @@ a:hover {
     z-index: 2;
 }
 
+// ---------------------max-width 移动端适配-------------------
+@media (max-width: 767px){
+    .header-container{
+        width: 100%!important;
+        .header-logo {
+            margin: 0 auto;
+            width: 50px;
+            position: absolute;
+            left: 0px !important;
+        }
+        .header-nav {
+            max-width: none;
+            li {
+                width: 25%;
+            }
+        }
+    }
+}
 // ---------------------页面样式-header部分样式-------------------
 .header {
     margin: 0 auto;
@@ -425,24 +443,7 @@ a:hover {
     }
 }
 
-@media (max-width: 767px){
-    .header-container{
-        width: 100%!important;
-        .header-logo {
-            margin: 0 auto;
-            width: 50px;
-            position: absolute;
-            left: 0px !important;
-        }
-        .header-nav {
-            padding-left: 50px;
-            max-width: none;
-            li {
-                width: 25%;
-            }
-        }
-    }
-}
+
 
 
 // ---------------------页面样式-header部分样式-------------------
@@ -479,7 +480,7 @@ a:hover {
             }
         }
         .footer-logo {
-            margin-top: 10px;
+            margin: 10px;
             text-align: center;
         }
     }

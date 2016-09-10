@@ -237,20 +237,21 @@ a, a:focus, a:hover {
 }
 
 @media (max-width: 767px) {
-  .header-container {
+  .header .header-container {
     width: 100% !important;
   }
-  .header-container .header-logo {
-    margin: 0 auto;
-    width: 50px;
-    position: absolute;
+  .header .header-container .header-logo {
+    margin: 0 auto !important;
+    width: 50px !important;
+    position: absolute !important;
     left: 0px !important;
   }
-  .header-container .header-nav {
-    max-width: none;
+  .header .header-container .header-nav {
+    padding-left: 50px !important;
+    max-width: none !important;
   }
-  .header-container .header-nav li {
-    width: 25%;
+  .header .header-container .header-nav li {
+    width: 25% !important;
   }
 }
 .header {

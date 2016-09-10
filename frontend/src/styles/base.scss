@@ -289,18 +289,19 @@ a:hover {
 
 // ---------------------max-width 移动端适配-------------------
 @media (max-width: 767px){
-    .header-container{
-        width: 100%!important;
+    .header .header-container{
+        width: 100% !important;
         .header-logo {
-            margin: 0 auto;
-            width: 50px;
-            position: absolute;
+            margin: 0 auto !important;
+            width: 50px !important;
+            position: absolute !important;
             left: 0px !important;
         }
         .header-nav {
-            max-width: none;
+            padding-left: 50px !important;
+            max-width: none !important;
             li {
-                width: 25%;
+                width: 25% !important;;
             }
         }
     }

@@ -73,6 +73,11 @@ ul {
   clear: both;
 }
 
+.captcha {
+  height: 40px;
+  border: 1px solid #eaeaea;
+}
+
 @media (max-width: 767px) {
   .hidden-xs {
     display: none !important;

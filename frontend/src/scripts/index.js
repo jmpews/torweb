@@ -386,6 +386,7 @@ $('#loginModal [type="submit"]').on('click', function (event) {
         data: {
             'username': $('#loginModal #username').val(),
             'password': $('#loginModal #password').val(),
+            'captcha': $('#loginModal #captcha').val()
         },
         success: function(result, status) {
             if(result.errorcode == 0) {
@@ -393,12 +394,27 @@ $('#loginModal [type="submit"]').on('click', function (event) {
                 $.notify('登陆成功');
                 window.location.reload();
             }
+            else if(result.errorcode == -3) {
+                    $.notify(result.txt);
+                    $('#captcha').val('');
+                }
             else if(result.errorcode != 0) {
                 $.notify(result.txt);
             }
         }
     });
     return 1;
+});
+
+$('.captcha').on('click', function (event) {
+    event.preventDefault();
+    var src = $(event.currentTarget).attr('src');
+    var t = src.indexOf('?');
+    if(t != -1)
+        src = src.substring(0, t);
+    src = src + '?id=' + Math.random(1).toString();
+   $(event.currentTarget).attr('src', src);
+
 });
 
 $(document).click(function() {

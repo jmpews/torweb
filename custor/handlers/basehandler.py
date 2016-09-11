@@ -4,7 +4,7 @@ from custor.errors import RequestMissArgumentError, PageNotFoundError
 from custor.logger import logger
 
 from settings.config import config
-from custor.utils import ColorPrint
+from custor.utils import ColorPrint, get_cleaned_post_data
 
 from db.mysql_model import db_mysql
 from db.mysql_model.user import User
@@ -72,6 +72,19 @@ def timeit(func):
         # ColorPrint.print('> Profiler: '+func.__qualname__+'used: '+str((end - start) * 1e6) + 'us')
         ColorPrint.print('> Profiler: ['+func.__qualname__+'] used: '+str((end - start)) + 'us')
     return wrapper
+
+def check_captcha(errorcode, result):
+    def wrap_func(method):
+        @functools.wraps(method)
+        def wrapper(self, *args, **kwargs):
+            captcha_cookie = self.get_cookie('captcha', '')
+            captcha = get_cleaned_post_data(self, ['captcha'], blank=True)['captcha']
+            if not captcha or captcha != captcha_cookie:
+                self.write(json_result(errorcode, result))
+                return
+            return method(self, *args, **kwargs)
+        return wrapper
+    return wrap_func
 
 class BaseRequestHandler(RequestHandler):
     '''

@@ -19,6 +19,10 @@
                         <label for="password">密码</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
                     </fieldset>
+                    <fieldset class="form-group">
+                        <img class="captcha" src="/utils/captcha">
+                        <input class="form-control" id="captcha" placeholder="请验证码" required>
+                    </fieldset>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"> 保持Session记录
@@ -42,12 +46,17 @@
             data: {
                 'username': $('#username').val(),
                 'password': $('#password').val(),
+                'captcha': $('#captcha').val()
             },
             success: function(result, status) {
                 if(result.errorcode == 0) {
                     var data = result['data'];
                     $.notify('登陆成功');
                     window.location.href='/'
+                }
+                else if(result.errorcode == -3) {
+                    $.notify(result.txt);
+                    $('#captcha').val('');
                 }
                 else if(result.errorcode != 0) {
                     $.notify(result.txt);

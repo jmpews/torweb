@@ -105,6 +105,10 @@ ul {
     display: table;
     clear: both;
 }
+.captcha {
+    height: 40px;
+    border: 1px solid $border-color;
+}
 
 @media (max-width: 767px){
     // 隐藏元素

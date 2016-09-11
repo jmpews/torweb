@@ -186,10 +186,18 @@ a:hover {
 .tag-success {
     background-color: $link-color;
 }
+.btn-outline-primary {
+    border-color: $btn-hover-color;
+    &:hover, &:focus, &:active {
+        color: #fff !important;
+        background-color: $btn-hover-color;
+        border-color: $btn-hover-color;
+    }
+}
 
 .btn-primary {
-    background-color: $btn-color;
-    border-color: $btn-color;
+    background-color: $btn-hover-color;
+    border-color: $btn-hover-color;
     &:hover, &:focus, &:active {
         color: #fff !important;
         background-color: $btn-hover-color;
@@ -212,15 +220,7 @@ a:hover {
     background-color: $btn-hover-color;
     border-color: $btn-hover-color;
 }
-.btn-outline-primary {
-    color: $btn-color;
-    border-color: $btn-color;
-    &:hover, &:focus, &:active {
-        color: #fff !important;
-        background-color: $btn-hover-color;
-        border-color: $btn-hover-color;
-    }
-}
+
 .page-link {
     color: $font-color;
 }

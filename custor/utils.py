@@ -14,7 +14,7 @@ import time, datetime
 def random_str(random_length=16):
     str = ''
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
-    for i in range(len(chars)):
+    for i in range(random_length):
         str += random.choice(chars)
     return str
 

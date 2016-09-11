@@ -294,10 +294,12 @@ a:hover {
         .header-logo {
             margin: 0 auto !important;
             width: 50px !important;
+            // 这里和padding-left和配合
             position: absolute !important;
             left: 0px !important;
         }
         .header-nav {
+            // 这里和absolute的配合
             padding-left: 50px !important;
             max-width: none !important;
             li {

@@ -2,7 +2,8 @@
 
 from settings.config import config
 from custor.handlers.basehandler import BaseRequestHandler
-from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result, login_required, login_required_json
+from custor.decorators import login_required_json, login_required
+from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, CollectPost
 from db.mysql_model.user import User, Profile, Follower

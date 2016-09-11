@@ -1,90 +1,14 @@
 #encoding:utf-8
-from custor.utils import set_api_header, json_result, ThreadWorker
-from custor.errors import RequestMissArgumentError, PageNotFoundError
+from custor.utils import json_result
+from custor.errors import RequestMissArgumentError
 from custor.logger import logger
 
 from settings.config import config
-from custor.utils import ColorPrint, get_cleaned_post_data
 
 from db.mysql_model import db_mysql
 from db.mysql_model.user import User
 
 from tornado.web import RequestHandler
-from tornado.concurrent import Future
-import functools
-import time
-
-
-def run_with_thread_future(*args, **kwargs):
-    '''
-    如何利用future和线程的配合
-    http://jmpews.github.io/posts/tornado-future-ioloop-yield.html
-    :param args:
-    :param kwargs:
-    :return:
-    '''
-    def wraps_func(func):
-        @functools.wraps(func)
-        def wraps_args(*args, **kwargs):
-            future = Future()
-            work = ThreadWorker(future, func, *args, **kwargs)
-            work.start()
-            return future
-        return wraps_args
-    return wraps_func
-
-
-def exception_deal(exceptions):
-    '''
-    捕获get, post函数异常
-    :param exceptions:
-    :return:
-    '''
-    def wrapper_func(func):
-        # 保存原函数信息
-        @functools.wraps(func)
-        def wrapper_args(handler, *args, **kwargs):
-            try:
-                func(handler, *args, **kwargs)
-            except Exception as ex:
-                if isinstance(ex, PageNotFoundError):
-                    handler.redirect(ex.redirect_url)
-                elif isinstance(ex, RequestMissArgumentError):
-                    handler.write(ex.msg)
-                else:
-                    raise ex
-                # for e in exceptions:
-                #     if isinstance(ex, e):
-                #         handler.write('oh, catch exp in the args list...\n')
-        return wrapper_args
-    return wrapper_func
-
-def timeit(func):
-    '''
-    计算函数执行时间
-    :param func:
-    :return:
-    '''
-    def wrapper(*args, **kwargs):
-        start = time.clock()
-        func(*args, **kwargs)
-        end = time.clock()
-        # ColorPrint.print('> Profiler: '+func.__qualname__+'used: '+str((end - start) * 1e6) + 'us')
-        ColorPrint.print('> Profiler: ['+func.__qualname__+'] used: '+str((end - start)) + 'us')
-    return wrapper
-
-def check_captcha(errorcode, result):
-    def wrap_func(method):
-        @functools.wraps(method)
-        def wrapper(self, *args, **kwargs):
-            captcha_cookie = self.get_cookie('captcha', '')
-            captcha = get_cleaned_post_data(self, ['captcha'], blank=True)['captcha']
-            if not captcha or captcha != captcha_cookie:
-                self.write(json_result(errorcode, result))
-                return
-            return method(self, *args, **kwargs)
-        return wrapper
-    return wrap_func
 
 class BaseRequestHandler(RequestHandler):
     '''

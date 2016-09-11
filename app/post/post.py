@@ -2,7 +2,8 @@
 from app.cache import system_status_cache, hot_post_cache, topic_category_cache
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.utils import get_cleaned_post_data, get_cleaned_json_data
-from custor.utils import login_required, json_result, login_required_json
+from custor.utils import json_result
+from custor.decorators import login_required_json, login_required
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, PostTopic, CollectPost
 

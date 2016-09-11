@@ -18,6 +18,12 @@ def random_str(random_length=16):
         str += random.choice(chars)
     return str
 
+def random_captcha_str(random_length=16):
+    str = ''
+    chars = 'abcdefghjklmnpqrstuvwxyz123456789'
+    for i in range(random_length):
+        str += random.choice(chars)
+    return str
 
 def clean_data(value):
     '''
@@ -105,47 +111,7 @@ def get_cleaned_json_data(handler, args, blank=False):
 
 
 
-def login_required(method):
-    '''
-    登陆 装饰器
-    :param method:
-    :return:
-    '''
-    from tornado.httpclient import HTTPError
-    '''
-    from "tornado.web.authenticated"
-    `self.current_user`是一个@property
-    '''
 
-    @functools.wraps(method)
-    def wrapper(self, *args, **kwargs):
-        if not self.current_user:
-            if self.request.method in ("GET", "HEAD"):
-                url = self.get_login_url()
-                if "?" not in url:
-                    if urlparse.urlsplit(url).scheme:
-                        # if login url is absolute, make next absolute too
-                        next_url = self.request.full_url()
-                    else:
-                        next_url = self.request.uri
-                    url += "?" + urlencode(dict(next=next_url))
-                self.redirect(url)
-                return
-            raise HTTPError(403)
-        return method(self, *args, **kwargs)
-
-    return wrapper
-
-def login_required_json(errorcode, result):
-    def wrap_func(method):
-        @functools.wraps(method)
-        def wrapper(self, *args, **kwargs):
-            if not self.current_user:
-                self.write(json_result(errorcode, result))
-                return
-            return method(self, *args, **kwargs)
-        return wrapper
-    return wrap_func
 
 def set_api_header(request):
     '''

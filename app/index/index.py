@@ -1,7 +1,8 @@
 # coding:utf-8
 from app.cache import hot_post_cache, system_status_cache, topic_category_cache
 
-from custor.handlers.basehandler import BaseRequestHandler, timeit, exception_deal, check_captcha
+from custor.handlers.basehandler import BaseRequestHandler
+from custor.decorators import timeit, exception_deal, check_captcha
 from custor.utils import get_cleaned_post_data, get_cleaned_query_data
 from custor.utils import json_result, get_page_nav
 

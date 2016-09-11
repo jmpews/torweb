@@ -5,7 +5,8 @@ from custor.captcha import image_captcha
 
 from settings.config import config
 from custor.handlers.basehandler import BaseRequestHandler
-from custor.utils import json_result, login_required, random_str
+from custor.utils import json_result, random_captcha_str
+from custor.decorators import login_required
 
 
 class UploadImgHandler(BaseRequestHandler):
@@ -22,7 +23,7 @@ class UploadImgHandler(BaseRequestHandler):
 
 class CaptchaHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
-        captcha_str = random_str(4)
+        captcha_str = random_captcha_str(4)
         captcha_data = image_captcha.generate(captcha_str)
         self.set_header("Content-type",  "image/png")
         # self.set_header('Content-length', len(image))

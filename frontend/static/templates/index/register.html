@@ -27,6 +27,10 @@
                         <label for="password2">重新输入密码</label>
                         <input type="password" class="form-control" id="password2" placeholder="请重新输入密码" data-parsley-equalto="#password1" data-parsley-equalto-message="密码不匹配" required>
                     </fieldset>
+                    <fieldset class="form-group">
+                        <img class="captcha" src="/utils/captcha">
+                        <input class="form-control" id="captcha" placeholder="请验证码" required>
+                    </fieldset>
                     <button type="submit" class="btn btn-primary">注册</button>
                     </form>
                 </div>
@@ -35,6 +39,8 @@
 {% end %}
 
 {% block scripts %}
+<script src="/assets/js/parsley.min.js"></script>
+<script src="/assets/i18n/zh_cn.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
     });

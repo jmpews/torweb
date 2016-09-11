@@ -18,15 +18,14 @@ function monitor_system_status() {
         success: function(data, text) {
             if(data.errorcode == 0) {
                 var data = data.data;
-                console.log(data);
                 $(".cpu-per").html(data['cpu_per']+"%");
                 $(".ram-per").html(data['ram_per']+"%");
                 $(".net-conn").html(data['net_conn']);
                 $(".os-start").html(data['os_start']);
             }
         }
-    })
-    setTimeout(monitor_system_status, 5000);
+    });
+    setTimeout(monitor_system_status, 60000);
 }
 function change_theme() {
     $('.color').on('click', function (e) {
@@ -41,8 +40,8 @@ function change_theme() {
                 if(result.errorcode == 0) {
                     $.notify('主题保存成功');
                 }
-                else if(result.errorcode == 1) {
-                    alert(result.txt);
+                else if(result.errorcode == -3) {
+                   $('#loginModal').modal('toggle');
                 }
             }
         });
@@ -72,7 +71,7 @@ function set_theme() {
 }
 function change_image_preview() {
     $inputFileElm = $(this);
-    var pic = document.getElementById("avatar-preview");
+    var pic = document.getElementById("avatar-cropper");
     var file = document.getElementById("avatar");
     console.log(pic);
     console.log(file);
@@ -117,7 +116,7 @@ function html5Reader(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function(e) {
-        var pic = document.getElementById("avatar-preview");
+        var pic = document.getElementById("avatar-cropper");
         pic.src=this.result;
     }
 }
@@ -377,6 +376,46 @@ replaceLoadingTest = function (filename) {
     });
 };
 
+// 登陆框
+$('#loginModal [type="submit"]').on('click', function (event) {
+    event.preventDefault();
+     $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: '/login',
+        data: {
+            'username': $('#loginModal #username').val(),
+            'password': $('#loginModal #password').val(),
+            'captcha': $('#loginModal #captcha').val()
+        },
+        success: function(result, status) {
+            if(result.errorcode == 0) {
+                var data = result['data'];
+                $.notify('登陆成功');
+                window.location.reload();
+            }
+            else if(result.errorcode == -3) {
+                    $.notify(result.txt);
+                    $('#captcha').val('');
+                }
+            else if(result.errorcode != 0) {
+                $.notify(result.txt);
+            }
+        }
+    });
+    return 1;
+});
+
+$('.captcha').on('click', function (event) {
+    event.preventDefault();
+    var src = $(event.currentTarget).attr('src');
+    var t = src.indexOf('?');
+    if(t != -1)
+        src = src.substring(0, t);
+    src = src + '?id=' + Math.random(1).toString();
+   $(event.currentTarget).attr('src', src);
+
+});
 
 $(document).click(function() {
     if ($("#emoji-list").is(":hidden")) {

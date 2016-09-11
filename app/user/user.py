@@ -2,7 +2,8 @@
 
 from settings.config import config
 from custor.handlers.basehandler import BaseRequestHandler
-from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result, login_required
+from custor.decorators import login_required_json, login_required
+from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, CollectPost
 from db.mysql_model.user import User, Profile, Follower
@@ -104,7 +105,7 @@ class UserOptHandler(BaseRequestHandler):
     跟用户API相关的操作
     和postreplyopthandelr设计的类似，api模式
     '''
-    @login_required
+    @login_required_json(-3, 'login failed.')
     def post(self, *args, **kwargs):
         # 这个函数有点意思, 一直做参数安全clean
         json_data = get_cleaned_json_data(self, ['opt', 'data'])

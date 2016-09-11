@@ -1,6 +1,8 @@
 tornado
-requests
+cryptography==1.5
+PyJWT==1.4.2
 PyMySQL
 peewee
 redis
 pymongo
+Pillow

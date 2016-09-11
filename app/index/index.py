@@ -1,7 +1,8 @@
 # coding:utf-8
 from app.cache import hot_post_cache, system_status_cache, topic_category_cache
 
-from custor.handlers.basehandler import BaseRequestHandler, timeit, exception_deal
+from custor.handlers.basehandler import BaseRequestHandler
+from custor.decorators import timeit, exception_deal, check_captcha
 from custor.utils import get_cleaned_post_data, get_cleaned_query_data
 from custor.utils import json_result, get_page_nav
 
@@ -9,6 +10,8 @@ from db.mysql_model.post import Post, PostTopic
 from db.mysql_model.user import User
 
 from custor.errors import RequestMissArgumentError, PageNotFoundError
+
+from settings.config import config
 
 
 class IndexHandler(BaseRequestHandler):
@@ -33,7 +36,7 @@ class IndexHandler(BaseRequestHandler):
         else:
             current_page = 1
             posts, page_number_limit = Post.list_recently()
-        pages = get_page_nav(current_page, page_number_limit)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
                     topic_category_cache=topic_category_cache,
@@ -66,7 +69,7 @@ class IndexTopicHandler(BaseRequestHandler):
         # if not posts:
         #     self.redirect("/static/404.html")
         #     return
-        pages = get_page_nav(current_page, page_number_limit)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
                     topic_category_cache=topic_category_cache,
@@ -106,6 +109,10 @@ class LoginHandler(BaseRequestHandler):
         else:
             self.render('index/login.html')
 
+    @timeit
+    # 也许这个参数有其他用处先留着
+    @exception_deal([RequestMissArgumentError,])
+    @check_captcha(-4, '验证码错误')
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['username', 'password'])
         # try:

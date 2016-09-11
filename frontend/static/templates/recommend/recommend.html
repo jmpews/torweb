@@ -5,7 +5,8 @@
  </style>
 {% end %}
 {% block content %}
-    <div class="recommend-header">
+<div id="fullpage">
+    <section class="recommend-header section">
         <div class="title-inner">
             <div class="title">
                 <div class="text-center main-title">
@@ -20,8 +21,8 @@
         <div class="author">
             Photo by: Ada阿达
         </div>
-    </div>
-    <section>
+    </section>
+    <section class="section">
         <canvas id="canvas-basic" class="color-bg"></canvas>
         <div class="section-header">
             值得推荐的软件
@@ -106,6 +107,7 @@ Shadowsocks分为服务器端和客户端。在使用之前，需要先将服务
 
         </div>
     </section>
+</div>
 {% end %}
 
 {% block scripts %}
@@ -120,7 +122,7 @@ var granimInstance = new Granim({
     states : {
       "default-state": {
           gradients: [
-				['#B3FFAB', '#12FFF7'],
+{#				['#B3FFAB', '#12FFF7'],#}
 {#				['#ADD100', '#7B920A'],#}
 				['#1A2980', '#26D0CE']
           ]
@@ -147,6 +149,15 @@ var granimInstance = new Granim({
             console.log('show');
             $('.intro').css('display', 'block');
         }
+    });
+
+    $(document).ready(function() {
+        $('').fullpage({
+            scrollBar: true,
+{#            slidesNavigation: true, #}
+            navigation: true,
+			navigationPosition: 'right',
+        });
     });
 
 </script>

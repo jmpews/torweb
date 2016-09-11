@@ -22,6 +22,7 @@
     "summernote": "^0.8.2",
     "medium-editor": "^5.21.1",
     "parsleyjs": "^2.4.4",
-    "bootstrap": "^4.0.0-alpha.3"
+    "bootstrap": "^4.0.0-alpha.3",
+    "fullpage.js": "^2.8.6"
   }
 }

@@ -1,8 +1,8 @@
 @charset "UTF-8";
 $color1: #FFBCBC;
 //$color2: #A4EDA4;
-$color2: #000;
-$color3: #2fca7b;
+$color2: #34495E;
+$color3: #ace6f6;
 $color4: #e95420;
 
 $lightpink: #FFBCBC;
@@ -10,17 +10,27 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: #e95420;
-$link-color: $base-color;
+$base-color: #FFBCBC !default;
+
+$logo-color: $base-color !default;
+$font-color: #999 !default;
+$link-color: $logo-color !default;
+$body-backgroud-color: #f7f7f7 !default;
+$nav-header-background-color: #fff !default;
+$nav-header-font-color: $font-color !default;
+$nav-header-font-hover-color: $logo-color !default;
+$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
+$border-color: #eaeaea !default;
+$important-font-color: #666 !default;
+$important-link-color: $logo-color !default;
+$card-header-background-color: #fff !default;
+$card-header-font-color: $base-color !default;
+$card-body-background-color: #fff !default;
+$card-body-font-color: #999 !default;
 $link-hover-color: darken($link-color, 15%) !default;
-$link-light-color:  lighten($link-color, 15%) !default;
-$btn-color: $link-color;
-$btn-hover-color: $link-hover-color;
-$font-color: #999;
-$important-font-color: #666;
-$base-background-color: #f7f7f7;
-$other-background-color: #e1e1e1;
-$nav-font-color: $font-color;
+$link-light-color:  lighten($font-color, 15%) !default;
+$btn-color: $link-color !default;
+$btn-hover-color: $link-hover-color !default;
 
 
 // ---------------------全局自定义样式---------------------
@@ -30,9 +40,9 @@ body {
     font-size: 13px;
     margin: 0;
     //background-image: url("/assets/images/LPBackground.svg");
-    background-color: $base-background-color;
+    background-color: $body-backgroud-color;
     a {
-        color: $link-color;
+        color: $font-color;
         &:hover, &:focus {
             color: $link-color;
         }
@@ -54,10 +64,18 @@ body {
     filter: blur(5px);
 }
 .important-font {
-    color: $base-color;
+    color: $important-font-color !important;
 }
+
+.light-font {
+    color: $link-light-color !important;
+    &:hover {
+        color: $important-font-color !important;
+    }
+}
+
 a.username {
-    color: $important-font-color;
+    color: $important-link-color;
 }
 
 ul {
@@ -87,6 +105,10 @@ ul {
     display: table;
     clear: both;
 }
+.captcha {
+    height: 40px;
+    border: 1px solid $border-color;
+}
 
 @media (max-width: 767px){
     // 隐藏元素
@@ -101,11 +123,11 @@ ul {
 }
 // ---------------------fa.js-------------------------
 .fa {
-    color: $base-color;
+    //color: $font-color;
     padding: 0 3px;
     //padding-right: 3px;
     &:hover {
-        color: $base-color !important;
+        //color: $link-color;
     }
 }
 
@@ -144,10 +166,10 @@ ul {
     }
 }
 .close {
-    color: #fff;
+    color: $link-color;
     opacity: 0.5;
     &:hover {
-        color: #fff;
+        color: $link-color;
         opacity: 1;
     }
 }
@@ -159,11 +181,19 @@ a, a:focus, a:hover {
 }
 a:hover {
     .fa {
-        color: $base-color !important;
     }
 }
 .tag-success {
-    background-color: $other-background-color;
+    background-color: $link-color;
+}
+.btn-outline-primary {
+    color: $important-font-color;
+    border-color: $btn-color;
+    &:hover, &:focus, &:active {
+        color: #fff !important;
+        background-color: $btn-hover-color;
+        border-color: $btn-hover-color;
+    }
 }
 
 .btn-primary {
@@ -191,23 +221,58 @@ a:hover {
     background-color: $btn-hover-color;
     border-color: $btn-hover-color;
 }
-.btn-outline-primary {
-    color: $btn-color;
-    border-color: $btn-color;
-    &:hover, &:focus, &:active {
-        color: #fff !important;
-        background-color: $btn-color;
-        border-color: $btn-color;
-    }
-}
+
 .page-link {
-    color: $link-color;
+    color: $font-color;
 }
 .page-link:focus, .page-link:hover {
-    color: $link-hover-color;
+    color: $link-color;
 }
 .form-control:focus {
-    border-color: $base-color;
+    border-color: $link-color;
+}
+// card部分样式
+.custom-card.card {
+    //border: none !important;
+    border: 1px solid $border-color;
+    background-color: $card-body-background-color;
+    &>.card-header {
+        background-color: $card-header-background-color;
+        color: $card-header-font-color;
+        a{
+            &:hover {
+                color: $link-color;
+            }
+        }
+        position: relative;
+        border-bottom: 1px solid $border-color;
+        padding: 0.5rem 1rem !important;
+        .fa {
+             padding-right: 5px;
+        }
+    }
+
+    &>.card-header:after {
+        content: "";
+        width: 50%;
+        height: 2px;
+        background: $link-color;
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+    }
+
+}
+
+.post-list .card-header,
+.post-detail .card-header{
+    a {
+        margin: 0 3px;
+
+    }
+    a.active {
+        color: $link-color;
+    }
 }
 // 遮罩层
 .card:beforex {
@@ -227,14 +292,44 @@ a:hover {
     z-index: 2;
 }
 
+// ---------------------max-width 移动端适配-------------------
+@media (max-width: 767px){
+    .header .header-container{
+        width: 100% !important;
+        .header-logo {
+            margin: 0 auto !important;
+            width: 50px !important;
+            // 这里和padding-left和配合
+            position: absolute !important;
+            left: 0px !important;
+        }
+        .header-nav {
+            // 这里和absolute的配合
+            padding-left: 50px !important;
+            max-width: none !important;
+            li {
+                width: 25% !important;;
+            }
+        }
+    }
+}
 // ---------------------页面样式-header部分样式-------------------
 .header {
     margin: 0 auto;
     z-index: 999;
-    background-color: rgba(255,255,255,.8);
-    border-bottom: 1px solid #e5e5e5;
-    box-shadow: 0 2px 10px #dadbdc;
+    background-color: $nav-header-background-color;
+    border-bottom: 1px solid $border-color;
+    //box-shadow: 0 2px 10px $border-color;
     a {
+        color: $nav-header-font-color;
+    }
+    .btn-outline-primary {
+        border-color: $btn-hover-color;
+    }
+
+    .btn-primary {
+        background-color: $btn-hover-color;
+        border-color: $btn-hover-color;
     }
     .header-container {
         height: 70px;
@@ -246,7 +341,7 @@ a:hover {
             text-align: center;
             font-size: 14px;
             left: -30px;
-            background-color: $base-color;
+            background-color: $logo-color;
             line-height: 40px;
             .color {
                 cursor: pointer;
@@ -291,9 +386,9 @@ a:hover {
                 position: relative;
                 width: 25%;
                 &.active {
-                    -webkit-box-shadow: inset 0 -3px 0px $link-color;
-                    -moz-box-shadow: inset 0 -3px 0px $link-color;
-                    box-shadow: inset 0 -3px 0px $link-color;
+                    -webkit-box-shadow: inset 0 -3px 0px $logo-color;
+                    -moz-box-shadow: inset 0 -3px 0px $logo-color;
+                    box-shadow: inset 0 -3px 0px $logo-color;
                 }
                 a {
                     display: block;
@@ -308,10 +403,11 @@ a:hover {
                 }
 
                 a:focus, a:hover {
-                    background-color: #fff;
-                    -webkit-box-shadow: inset 0 -3px 0px $link-color;
-                    -moz-box-shadow: inset 0 -3px 0px $link-color;
-                    box-shadow: inset 0 -3px 0px $link-color;
+                    color: $nav-header-font-hover-color;
+                    background-color: $nav-header-hover-color;
+                    -webkit-box-shadow: inset 0 -3px 0px $logo-color;
+                    -moz-box-shadow: inset 0 -3px 0px $logo-color;
+                    box-shadow: inset 0 -3px 0px $logo-color;
                 }
             }
         }
@@ -319,6 +415,12 @@ a:hover {
             //line-height: 70px;
             float: right;
             //height: 100%;
+            a {
+                  color: $nav-header-font-color;
+                  &:hover {
+                      color: $nav-header-font-hover-color;
+                  }
+              }
             .options {
                 li {
                     height:100%;
@@ -327,31 +429,32 @@ a:hover {
                     img {
                         width: 50px;
                     }
-                    a {
+                    &>a {
                         padding: 5px;
-                        color: $font-color;
                         &:hover {
-                            color: $link-color;
-                            background-color: #efefef;
+                            background-color: $nav-header-hover-color;
+                        }
+                        &:first-of-type {
+                            background: none;
                         }
                     }
                 }
                 .dropdown {
-                    a {
-                        color: $font-color;
-                        &:hover {
-                            color: $link-color;
-                            background: none;
-                        }
-                    }
                     .dropdown-menu {
                         font-size: 13px;
                         min-width: 0;
                         margin: 0px;
-                    }
-                    li {
-                        float: none;
-                        line-height: normal;
+                        li {
+                            float: none;
+                            line-height: normal;
+                            a{
+                                color: $font-color;
+                                &:hover {
+                                    color: $link-color;
+                                    background: none;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -359,24 +462,7 @@ a:hover {
     }
 }
 
-@media (max-width: 767px){
-    .header-container{
-        width: 100%!important;
-        .header-logo {
-            margin: 0 auto;
-            width: 50px;
-            position: absolute;
-            left: 0px !important;
-        }
-        .header-nav {
-            padding-left: 50px;
-            max-width: none;
-            li {
-                width: 25%;
-            }
-        }
-    }
-}
+
 
 
 // ---------------------页面样式-header部分样式-------------------
@@ -413,7 +499,7 @@ a:hover {
             }
         }
         .footer-logo {
-            margin-top: 10px;
+            margin: 10px;
             text-align: center;
         }
     }
@@ -467,33 +553,24 @@ a:hover {
 }
 .all-cate-card {
     .card-header {
-        color: $font-color !important;
-        a {
-            color: $font-color;
-          &:hover {
-            color: $link-color;
-          }
-        }
+      a {
+          color: $card-header-font-color;
+      }
     }
     .divider {
         margin: 0 3px;
     }
 }
 .card-header-all-bt {
-    color: $important-font-color !important;
+    color: $important-link-color !important;
     .fa {
-        color: $important-font-color !important;
         padding-right: 2px;
     }
     &:hover {
-        color: $base-color !important;
-        .fa {
-            color: $base-color !important;
-        }
     }
 }
 .current-topic {
-    background-color: $base-color;
+    background-color: $btn-color;
     float: left;
     position: absolute;
     // 垂直居中
@@ -513,14 +590,11 @@ a:hover {
 
 
 .post-item {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $border-color;
     padding-top: 17px;
     padding-bottom: 7px;
     position: relative;
     min-height: 68px;
-    a:hover {
-        color: $link-color;
-    }
     .avatar {
         position: absolute;
         img {
@@ -559,7 +633,7 @@ a:hover {
             font-size: 11px;
             span {
                 .username {
-                    color: $important-font-color;
+                    color: $important-link-color;
                     &:hover {
                       color: $link-color;
                     }
@@ -578,7 +652,7 @@ a:hover {
         }
     }
     .item-end {
-        color: $base-color;
+        color: $important-link-color;
         position: absolute;
         right: 0px;
         top: 0px;
@@ -686,6 +760,32 @@ a:hover {
     }
     .post-content {
         color: $important-font-color;
+        word-wrap: break-word;
+        word-break: normal;
+        pre {
+            //font-size: 1rem;
+            padding: .66001rem 9.5px 9.5px;
+            line-height: 2rem;
+            background: -webkit-linear-gradient(top,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
+            background: linear-gradient(to bottom,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
+            background-size: 100% 4rem;
+            border: 1px solid #D3DAEA;
+            code {
+                padding: 0;
+                font-size: inherit;
+                color: inherit;
+                white-space: pre-wrap;
+                background-color: transparent;
+                border-radius: 0;
+            }
+        }
+        blockquote p {
+            //font-size: 1rem;
+            margin-bottom: .33999rem;
+            font-style: italic;
+            padding: .66001rem 1rem 1rem;
+            border-left: 3px solid #A0AABF;
+        }
         img {
             max-width: 90%;
         }
@@ -720,7 +820,7 @@ a:hover {
         .reply-head {
             font-size: 11px;
             .username {
-                color: $important-font-color;
+                color: $important-link-color;
             }
             .floor {
                 color: $color3;
@@ -836,40 +936,7 @@ a:hover {
 }
 
 // ---------------------自定义card-header
-.custom-card.card {
-    //border: none !important;
-    &>.card-header {
-        position: relative;
-        color: $important-font-color;
-        background-color: #fff;
-        padding: 0.5rem 1rem !important;
-        .fa {
-             padding-right: 5px;
-        }
-    }
 
-    &>.card-header:after {
-        content: "";
-        width: 50%;
-        height: 1px;
-        background: $base-color;
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-    }
-
-}
-
-.post-list .card-header,
-.post-detail .card-header{
-    a {
-        margin: 0 3px;
-
-    }
-    a.active {
-        color: $link-color;
-    }
-}
 
 // -----------------------------一些自定义组件---------------------------
 // 自定义下拉分类组件
@@ -880,9 +947,9 @@ a:hover {
     background-color: #fff;
     z-index: 999;
     padding: 5px;
-    border-left: 1px solid $base-color;
-    border-right: 1px solid $base-color;
-    border-bottom: 1px solid $base-color;
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
     h3 {
         font-size: 14px;
         line-height: 30px;
@@ -1010,7 +1077,11 @@ a:hover {
 
 // ---------------------页面样式-profile.html-----------------------
 .user-profile-html {
-    .col-md-9, .col-md-3 {
+    .col-md-9 {
+        padding-right: 0px;
+    }
+    .col-md-3 {
+        margin-bottom: 10px;
         padding-right: 0px;
     }
 
@@ -1080,18 +1151,31 @@ a:hover {
     // text-align: center;
     .profile-card-body {
         padding: 10px;
-    }
-    li {
-        text-align: center;
-        color: $font-color;
-        float: left;
-        span {
-            display: block;
-            line-height: 1;
-        }
-        img {
-            display: block;
-            width: 30px;
+        li {
+            text-align: center;
+            padding: 5px;
+            color: $font-color;
+            float: left;
+            border: 1px dashed transparent;
+            &:hover {
+                border: 1px dashed #d8d6d6;
+                span{
+                    padding: 2px;
+                    background-color: #efefef;
+                }
+            }
+            span {
+                display: block;
+                line-height: 1;
+                padding: 2px;
+
+            }
+            img {
+                display: block;
+                width: 40px;
+                border-radius: 50%;
+                margin-bottom: 3px;
+            }
         }
     }
 }
@@ -1103,7 +1187,7 @@ a:hover {
     //    border-bottom: none;
     //}
     .profile-card-head {
-        color: $important-font-color;
+        color: $important-link-color;
         font-size: 14px;
         text-decoration: underline;
         text-align: center;
@@ -1114,7 +1198,11 @@ a:hover {
         //border-top: 1px dashed #d8d6d6;
         //border-bottom: 1px dashed #d8d6d6;
     }
-    .profile-card-body {
+    .profile-card-body{
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .profile-card-body-list {
         padding-left: 10px;
         padding-right: 10px;
 
@@ -1136,7 +1224,11 @@ a:hover {
 
 // ---------------------页面样式-follow.html-----------------------
 .user-profile-follower-html {
-    .col-md-9, .col-md-3 {
+    .col-md-9 {
+        padding-right: 0px;
+    }
+    .col-md-3 {
+        margin-bottom: 10px;
         padding-right: 0px;
     }
 
@@ -1157,12 +1249,18 @@ a:hover {
     background-color: white;
     padding: 10px;
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
-    img {
+    img#avatar-cropper {
         max-width: 100%;
         margin: 4px 0px 15px;
         min-height: 100px;
         border: 1px dashed #eee
     }
+    .photo-container { padding-left: 10px; box-sizing: border-box; }
+    .photo-container li{line-height: 0px;}
+    .photo-container .avatar-preview{margin-top: 10px;overflow: hidden;}
+    .photo-container .avatar-preview.col-1{width: 50px; height: 50px;}
+    .photo-container .avatar-preview.col-2{width: 100px; height: 100px;}
+
     .select-avatar {
       position: relative;
       overflow: hidden;
@@ -1246,7 +1344,7 @@ a:hover {
         background-color: transparent;
         .header-nav li a:hover
         {
-            background: none;
+            //background: none;
         }
         a {
             color: #fff;
@@ -1300,6 +1398,9 @@ a:hover {
             font-size: 14px;
         }
     }
+    #fp-nav ul li a span, .fp-slidesNav ul li a span {
+        background-color: $link-color;
+    }
     .recommend-header {
         position: relative;
         background-image: url('/assets/images/bgs/2.jpg');
@@ -1310,6 +1411,7 @@ a:hover {
         //background-color: #F1F4F1;
         position: relative;
         background-color: #fff;
+        height: 100vh;
         .color-bg {
             position: absolute;
             display: block;

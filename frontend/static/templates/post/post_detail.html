@@ -11,17 +11,15 @@
     <div class="content-container container post-detail-html">
         <div class="col-md-9">
             <div class="card all-cate-card post-detail-card custom-card">
-                <div class="card-header">
-                    热门:
-                    <a href="/topic/study">学习资料</a> /
-                    <a class="active" href="/topic/">考研</a> /
-                    <a href="/topic/movie">电影资源</a> /
-                    <a href="/topic/notice">校园通知</a> /
-                    <a href="/topic/photo">摄影</a>
-                    <span class="important-divider">|</span>
-                    <a class="card-header-all-bt" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
-                </div>
-                <div class="card-header-all">
+            <div class="card-header ">
+                <a href="#_blank" class="light-font">热门: </a>
+                <a href="/topic/study-material" class="light-font">学习资料</a>
+                <span class="divider">/</span>
+                <a href="/topic/study-competition"  class="light-font">竞赛</a>
+                <span class="important-divider">|</span>
+                <a class="card-header-all-bt important-font" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
+            </div>
+            <div class="card-header-all">
                 <h3>所有分类</h3>
                 <div class="hd">
                     <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
@@ -47,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
                 <div class="post-detail-header cl">
                     <div class="avatar hidden-xs ">
                         <a class="username" href="/user/{{post_detail.user.id}}">
@@ -58,7 +56,7 @@
                             {% end %}
                         </a>
                     </div>
-                    <div class="post-detail-header-mid">
+                    <div class="post-detail-header-mid clear-xs">
                         <div class="post-title"><a href="/">{{post_detail.title}}</a></div>
                         <div class="post-info">
                             <span><a class="username" href="/user/{{post_detail.user.id}}">{{post_detail.user.username}}</a></span>
@@ -255,8 +253,8 @@
                    $(e.target).addClass('postreply-supported');
                    $.notify('已支持...');
                }
-               else if(result.errorcode == 1) {
-                   alert(result.txt);
+               else if(result.errorcode == -3) {
+                   $('#loginModal').modal('toggle');
                }
            }
         });
@@ -273,8 +271,8 @@
                    $(e.target).addClass('post-collected');
                    $.notify('已收藏...');
                }
-               else if(result.errorcode == 1) {
-                   alert(result.txt);
+               else if(result.errorcode == -3) {
+                   $('#loginModal').modal('toggle');
                }
            }
         });

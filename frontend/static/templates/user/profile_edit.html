@@ -7,7 +7,13 @@
         <div class="content-container container user-profile-edit-html">
             <div class="col-md-3">
                 <div class="user-avatar-edit">
-                    <img id="avatar-preview"src="/assets/images/avatar/{{current_user.avatar}}">
+                    <div class="select-avatar">
+                        <img id="avatar-cropper"src="/assets/images/avatar/{{current_user.avatar}}">
+                    </div>
+        <ul class="photo-container">
+            <li class="avatar-preview col-2"></li>
+            <li class="avatar-preview col-1"></li>
+        </ul>
                     <!-- custom upload button -->
                     <button class="btn btn-outline-primary btn-sm select-avatar">
                         <input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择
@@ -61,15 +67,16 @@
 <script src="/assets/js/cropper.min.js"></script>
 <script type="text/javascript">
 
-$('#avatar-preview').cropper({
+$('#avatar-cropper').cropper({
     viewMode: 2,
     aspectRatio: 1 / 1,
     checkImageOrigin: true,
+    preview: '.avatar-preview',
 });
 
 $('.upload-avatar').on('click', function(e){
     e.preventDefault();
-    var avatar64 = $('#avatar-preview').cropper('getCroppedCanvas', {width: 100, height: 100}).toDataURL()
+    var avatar64 = $('#avatar-cropper').cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL();
     $.ajax({
        type: 'post',
        dataType: 'json',
@@ -106,7 +113,7 @@ $('.upload-avatar').on('click', function(e){
                     $.notify(result.txt);
                 }
             }
-        })
+        });
         return 1;
     });
 </script>

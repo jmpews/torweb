@@ -249,6 +249,38 @@ def get_theme_by_cookie_user(self, handler):
 <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{theme}}.css" />
     ...
 ```
+
+### 6. 验证码模块,以及验证码装饰器
+
+```
+class CaptchaHandler(BaseRequestHandler):
+    def get(self, *args, **kwargs):
+        captcha_str = random_captcha_str(4)
+        captcha_data = image_captcha.generate(captcha_str)
+        self.set_header("Content-type",  "image/png")
+        # self.set_header('Content-length', len(image))
+        self.set_cookie('captcha', captcha_str)
+        self.write(captcha_data.getvalue())
+        
+def check_captcha(errorcode, result):
+    """
+    检查验证码 注意装饰器顺序
+    :param errorcode:
+    :param result:
+    :return:
+    """
+    def wrap_func(method):
+        @functools.wraps(method)
+        def wrapper(self, *args, **kwargs):
+            captcha_cookie = self.get_cookie('captcha', '')
+            captcha = get_cleaned_post_data(self, ['captcha'], blank=True)['captcha']
+            if not captcha or captcha != captcha_cookie:
+                self.write(json_result(errorcode, result))
+                return
+            return method(self, *args, **kwargs)
+        return wrapper
+    return wrap_func
+```
 ## Features
 ### 1. 文件组织方面
 ```

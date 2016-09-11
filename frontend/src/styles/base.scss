@@ -187,7 +187,7 @@ a:hover {
     background-color: $link-color;
 }
 .btn-outline-primary {
-    border-color: $btn-hover-color;
+    border-color: $btn-color;
     &:hover, &:focus, &:active {
         color: #fff !important;
         background-color: $btn-hover-color;
@@ -196,8 +196,8 @@ a:hover {
 }
 
 .btn-primary {
-    background-color: $btn-hover-color;
-    border-color: $btn-hover-color;
+    background-color: $btn-color;
+    border-color: $btn-color;
     &:hover, &:focus, &:active {
         color: #fff !important;
         background-color: $btn-hover-color;
@@ -321,6 +321,14 @@ a:hover {
     //box-shadow: 0 2px 10px $border-color;
     a {
         color: $nav-header-font-color;
+    }
+    .btn-outline-primary {
+        border-color: $btn-hover-color;
+    }
+
+    .btn-primary {
+        background-color: $btn-hover-color;
+        border-color: $btn-hover-color;
     }
     .header-container {
         height: 70px;

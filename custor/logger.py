@@ -29,7 +29,7 @@ class Logger:
     def info(self, message):
         self.logger.info(message)
 
-    def war(self, message):
+    def warn(self, message):
         self.logger.warn(message)
 
     def error(self, message):

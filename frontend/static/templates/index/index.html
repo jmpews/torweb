@@ -206,8 +206,10 @@
 <script src="/assets/i18n/zh_cn.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        monitor_system_status()
+{#        monitor_system_status()#}
+        get_websocket_url(start_system_monitor_websocket);
         show_hide_cate_nav();
     });
+
 </script>
 {% end %}

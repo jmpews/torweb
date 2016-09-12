@@ -417,6 +417,69 @@ $('.captcha').on('click', function (event) {
 
 });
 
+// 获取url中的域名地址
+function extractDomain(url) {
+    var domain;
+    //find & remove protocol (http, ftp, etc.) and get domain
+    if (url.indexOf("://") > -1) {
+        domain = url.split('/')[2];
+    }
+    else {
+        domain = url.split('/')[0];
+    }
+
+    //find & remove port number
+    // domain = domain.split(':')[0];
+
+    return domain;
+}
+
+// 获取websocket_server 的url
+function get_websocket_url(callback) {
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/api/websocketurl',
+        success: function (result) {
+            if(result.errorcode == 0) {
+                var url = result.data.url;
+                if (url == '.')
+                    url = extractDomain(window.location.href);
+                callback(url);
+                console.log('get websocket url success. and start websocket.');
+            }
+            else if(result.errorcode != 0) {
+                console.log('get websocket url error.')
+            }
+        }
+    })
+}
+
+// 启动系统状态参数监控的websocket服务
+function start_system_monitor_websocket(url) {
+     var  wsServer = 'ws://' + url + '/api/systemstatuswebsocket';
+     var  websocket = new WebSocket(wsServer);
+     websocket.onopen = function (evt) { onOpen(evt) };
+     websocket.onclose = function (evt) { onClose(evt) };
+     websocket.onmessage = function (evt) { onMessage(evt) };
+     websocket.onerror = function (evt) { onError(evt) };
+     function onOpen(evt) {
+        console.log("Connected to WebSocket server.");
+     }
+     function onClose(evt) {
+        console.log("Disconnected");
+     }
+     function onMessage(evt) {
+        var data = JSON.parse(evt.data).data;
+        $(".cpu-per").html(data['cpu_per']+"%");
+        $(".ram-per").html(data['ram_per']+"%");
+        $(".net-conn").html(data['net_conn']);
+        $(".os-start").html(data['os_start']);
+     }
+     function onError(evt) {
+        console.log('Error occured: ' + evt.data);
+     }
+}
 $(document).click(function() {
     if ($("#emoji-list").is(":hidden")) {
         return;

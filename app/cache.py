@@ -1,6 +1,8 @@
 # coding:utf-8
 from custor.logger import logger
+
 from db.mysql_model.post import PostCategory, PostTopic, Post
+
 
 # 缓存一些cache
 topic_category_cache = {'categorys': [], 'topics': []}
@@ -71,6 +73,9 @@ def update_system_status_cache():
                     self.systatus[1] = s2
                     self.systatus[2] = s3
                     self.systatus[3] = s4
+                    logger.debug('push 2 clients system_status.')
+                    from app.api.api import SystemStatusWebsocketHandler
+                    SystemStatusWebsocketHandler.write2all(self.systatus)
                 except KeyboardInterrupt:
                     break
 

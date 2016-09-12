@@ -21,6 +21,17 @@ class WebSocketURLHandler(BaseRequestHandler):
     def get(self, *args, **kwargs):
         self.write(json_result(0, {'url': '.'}))
 
+
+# 注意配置nginx
+# proxy_http_version 1.1;
+# proxy_redirect off;
+# proxy_pass_header Server;
+# proxy_set_header Host $http_host;
+# proxy_set_header Upgrade $http_upgrade;
+# proxy_set_header Connection "upgrade";
+# proxy_set_header X-Real-IP $remote_addr;
+# proxy_set_header X-Scheme $scheme;
+# proxy_pass http://torweb;
 class SystemStatusWebsocketHandler(tornado.websocket.WebSocketHandler):
     """
     使用websocket推送系统状态

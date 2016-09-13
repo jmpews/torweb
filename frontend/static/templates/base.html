@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/bs4_custom.css">
+    <link href="/assets/css/normalize.min.css" rel="stylesheet">
+{#    <link rel="stylesheet" href="/assets/css/bs4_custom.css">#}
     {% block styles %}{% end %}
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     {% if current_user %}
@@ -47,13 +47,15 @@
                     <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
                 </li>
             </ul>
-            <div class="header-tip">
+            <div class="header-tip float-right">
                 {% if not current_user %}
+                <!-- 未登录 -->
                 <div class="btn-group" style="">
                     <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
                     <a class="btn btn-sm btn-primary" style="color:#fff;"role="button" href="/register">注册</a>
                 </div>
                 {% else %}
+                <!-- 登陆 -->
                 <ul class="options list-inline cl">
                     <li class="dropdown">
                         <a href="#blank" id="user-avatar">

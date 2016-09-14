@@ -1,0 +1,91 @@
+{% extends "./base.html" %}
+
+{% block title %}Tornado.Post.Detail{% end %}
+
+{% block styles %}
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript">
+</script>
+{% end %}
+
+{% block content %}
+    <div class="content-container container">
+        <div class="side">
+            <div class="card custom-card">
+                <div class="card-header">
+                    分类
+                </div>
+                <div class="card-block">
+                    <ul class="">
+                        <li><a href="">Tornado源码分析</a></li>
+                        <li><a href="">Greenlet源码分析</a></li>
+                        <li><a href="">后端高性能编程</a></li>
+                    </ul>
+                </div>
+                <div class="card-header">
+                    标签
+                </div>
+                <div class="post-label card-block">
+                    <ul class="list-inline">
+                        <li><a href="">Tornado源码分析</a></li>
+                        <li><a href="">Greenlet源码分析</a></li>
+                        <li><a href="">后端高性能编程</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="post-list">
+                {% for post in posts %}
+                <div class="post-item">
+                    <div class="post-title"><a href="/blog/{{ post.id }}">{{ post.title }}</a></div>
+                    <div class="post-info">
+                        <span class="post-info-time">{{ post.create_time }}</span>
+                    </div>
+                    <div class="post-summary">
+                        {{ post.content[:100] }}
+                    </div>
+                    <div class="post-function">
+                        <span class="post-function-read-more">Read More</span>
+                    </div>
+                </div>
+                {% end %}
+                <div class="post-item">
+                    <div class="post-title">正则表达式备忘录</div>
+                    <div class="post-info">
+                        <span class="post-info-time">Sep 13, 2016</span>
+                    </div>
+                    <div class="post-summary">
+                        JavaScript 创建正则表达式有两种方式：
+                        使用正则表达式字面量：var re = /abc/;
+                        调用 RegExp 对象的构造函数：var re = new RegExp("abc");
+                        什么时候使用构造函数？
+
+                        当正则表达式的模式会变发生改变，或者需要从其他地方得到时（例如用户输入），适合使用构造函数的方式。
+                    </div>
+                    <div class="post-function">
+                        <span class="post-function-read-more">Read More</span>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <div class="post-title">正则表达式备忘录</div>
+                    <div class="post-info">
+                        <span class="post-info-time">Sep 13, 2016</span>
+                    </div>
+                    <div class="post-summary">
+                        JavaScript 创建正则表达式有两种方式：
+                        使用正则表达式字面量：var re = /abc/;
+                        调用 RegExp 对象的构造函数：var re = new RegExp("abc");
+                        什么时候使用构造函数？
+
+                        当正则表达式的模式会变发生改变，或者需要从其他地方得到时（例如用户输入），适合使用构造函数的方式。
+                    </div>
+                    <div class="post-function">
+                        <span class="post-function-read-more">Read More</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% end %}

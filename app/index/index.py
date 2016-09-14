@@ -4,7 +4,7 @@ from app.cache import hot_post_cache, system_status_cache, topic_category_cache
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.decorators import timeit, exception_deal, check_captcha
 from custor.utils import get_cleaned_post_data, get_cleaned_query_data
-from custor.utils import json_result, get_page_nav
+from custor.utils import json_result, get_page_nav, get_page_number
 
 from db.mysql_model.post import Post, PostTopic
 from db.mysql_model.user import User
@@ -28,15 +28,10 @@ class IndexHandler(BaseRequestHandler):
         # profiler.start()
 
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
-        if current_page:
-            current_page = int(current_page)
-            if current_page < 1:
-                raise PageNotFoundError
-            posts, page_number_limit = Post.list_recently(page_number=current_page)
-        else:
-            current_page = 1
-            posts, page_number_limit = Post.list_recently()
+        current_page = get_page_number(current_page)
+        posts, page_number_limit = Post.list_recently(page_number=current_page)
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+
         self.render('index/index.html',
                     posts=posts,
                     topic_category_cache=topic_category_cache,

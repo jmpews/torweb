@@ -4,7 +4,8 @@ import json
 import random
 from tornado.web import MissingArgumentError
 from tornado.web import HTTPError
-from custor.errors import RequestMissArgumentError
+from custor.errors import RequestMissArgumentError, PageNotFoundError
+
 import functools
 from urllib.parse import urlencode
 import urllib.parse as urlparse
@@ -63,6 +64,8 @@ def get_cleaned_query_data_http_error(handler, *args):
 def get_cleaned_query_data(handler, args, blank=False):
     '''
     这个是自定义异常的，然后到get/post去catch然后异常处理，不如raise HTTPError来的通用.
+
+    这个也可以做成装饰器
     '''
     data = {}
     for k in args:
@@ -79,6 +82,8 @@ def get_cleaned_query_data(handler, args, blank=False):
 def get_cleaned_post_data(handler, args, blank=False):
     '''
     同上
+
+    这个也可以做成装饰器
     '''
     data = {}
     for k in args:
@@ -94,6 +99,8 @@ def get_cleaned_post_data(handler, args, blank=False):
 def get_cleaned_json_data(handler, args, blank=False):
     '''
     同上
+
+    这个也可以做成装饰器
     '''
     tmp = json.loads(handler.request.body.decode())
     data = {}
@@ -163,6 +170,13 @@ def get_page_nav(current_page, page_number_limit, page_limit):
         pages['cp+2'][1] = current_page+2
     return pages
 
+def get_page_number(current_page):
+    if current_page:
+        current_page = int(current_page)
+        if current_page < 1:
+            raise PageNotFoundError
+        return current_page
+    return 1
 
 class TimeUtil:
     '''

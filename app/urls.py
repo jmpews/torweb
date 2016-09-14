@@ -6,6 +6,7 @@ import app.post.urls
 import app.recommend.urls
 import app.user.urls
 import app.utils.urls
+import app.blog.urls
 
 urlpattern = ()
 
@@ -15,5 +16,6 @@ urlpattern += app.post.urls.urlpattern
 urlpattern += app.recommend.urls.urlpattern
 urlpattern += app.user.urls.urlpattern
 urlpattern += app.utils.urls.urlpattern
+urlpattern += app.blog.urls.urlpattern
 
 

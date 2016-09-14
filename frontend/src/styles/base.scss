@@ -14,23 +14,29 @@ $base-color: #FFBCBC !default;
 
 $logo-color: $base-color !default;
 $font-color: #999 !default;
-$link-color: $logo-color !default;
-$body-backgroud-color: #f7f7f7 !default;
-$nav-header-background-color: #fff !default;
-$nav-header-font-color: $font-color !default;
-$nav-header-font-hover-color: $logo-color !default;
-$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
 $border-color: #eaeaea !default;
-$important-font-color: #666 !default;
-$important-link-color: $logo-color !default;
-$card-header-background-color: #fff !default;
-$card-header-font-color: $base-color !default;
-$card-body-background-color: #fff !default;
-$card-body-font-color: #999 !default;
+$body-backgroud-color: #f7f7f7 !default;
+$gray-background-color: #efefef;
+
+$link-color: $logo-color !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-light-color:  lighten($font-color, 15%) !default;
 $btn-color: $link-color !default;
 $btn-hover-color: $link-hover-color !default;
+
+$important-font-color: #666 !default;
+$important-link-color: $logo-color !default;
+
+$nav-header-background-color: #fff !default;
+$nav-header-font-color: $font-color !default;
+$nav-header-font-hover-color: $logo-color !default;
+$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
+
+$card-header-background-color: #fff !default;
+$card-header-font-color: $base-color !default;
+$card-body-background-color: #fff !default;
+$card-body-font-color: #999 !default;
+
 
 
 // ---------------------全局自定义样式---------------------
@@ -54,7 +60,39 @@ body {
         }
     }
 }
+// ---------------------页面样式-content部分样式-------------------
+.content-container {
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-top: 7px;
+    // .content-header-del {
+    //     padding: 10px 0px 0;
+    //     margin-bottom: 10px;
+    //     border-bottom: 1px solid #ddd;
+    //     span {
+    //         font-size: 20px;
+    //     }
+    //     .nav {
+    //         float: right;
+    //     }
+    // }
 
+}
+
+@media (min-width: 1200px) {
+    .content-container {
+        max-width: none;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+@media (min-width: 1450px) {
+    .content-container {
+        max-width: none;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
 // 分隔符
 .divider {
     margin: 0 3px;
@@ -638,16 +676,7 @@ label {
     border-color: $link-color;
 }
 
-.post-list .card-header,
-.post-detail .card-header{
-    a {
-        margin: 0 3px;
 
-    }
-    a.active {
-        color: $link-color;
-    }
-}
 // 遮罩层
 .card:beforex {
     background-color: $base-color;
@@ -775,6 +804,7 @@ $header-height: 70px;
                     box-shadow: inset 0 -3px 0px $logo-color;
                 }
                 a {
+                    // 什么时候使用block? 全部充满parent
                     display: block;
                     font-size: 14px;
                     text-align: center;
@@ -884,53 +914,20 @@ $header-height: 70px;
         }
     }
 }
+// ---------------------集合性效果-----------------------
 
-// ---------------------页面样式-content部分样式-------------------
-.content-container {
-    margin: 0 auto;
-    margin-top: 30px;
-    padding-top: 7px;
-    // .content-header-del {
-    //     padding: 10px 0px 0;
-    //     margin-bottom: 10px;
-    //     border-bottom: 1px solid #ddd;
-    //     span {
-    //         font-size: 20px;
-    //     }
-    //     .nav {
-    //         float: right;
-    //     }
-    // }
+.post-list .card-header,
+.post-detail .card-header{
+    a {
+        margin: 0 3px;
 
-}
-
-@media (min-width: 1200px) {
-    .content-container {
-        max-width: none;
-        padding-left: 5%;
-        padding-right: 5%;
+    }
+    a.active {
+        color: $link-color;
     }
 }
-@media (min-width: 1450px) {
-    .content-container {
-        max-width: none;
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-}
-// ---------------------页面样式-index.html-----------------------
 
-.index-html {
-    .col-md-9 {
-        padding-right: 0px;
-        .card-block {
-            padding: 0 1.25rem;
-        }
-    }
-    .col-md-3 {
-        padding-right: 0px;
-    }
-}
+// 分类下拉card
 .all-cate-card {
     .card-header {
       a {
@@ -949,6 +946,21 @@ $header-height: 70px;
     &:hover {
     }
 }
+// ---------------------页面样式-index.html-----------------------
+
+.index-html {
+    .col-md-9 {
+        padding-right: 0px;
+        .card-block {
+            padding: 0 1.25rem;
+        }
+    }
+    .col-md-3 {
+        padding-right: 0px;
+    }
+}
+
+// 左侧当前主题
 .current-topic {
     background-color: $btn-color;
     float: left;
@@ -968,14 +980,14 @@ $header-height: 70px;
     }
 }
 
-
+// --------------------- post-item -----------------------
 .post-item {
     border-bottom: 1px solid $border-color;
     padding-top: 17px;
     padding-bottom: 7px;
     position: relative;
     //height: 70px;
-    .avatar {
+    .post-avatar {
         display: inline-block;
         float: left;
         max-width: 10%;
@@ -996,7 +1008,7 @@ $header-height: 70px;
         }
 
     }
-    .item-mid {
+    .post-item-mid {
         display: inline-block;
         float: left;
         max-width: 80%;
@@ -1007,7 +1019,6 @@ $header-height: 70px;
             margin-bottom: 7px;
             word-wrap: break-word;
             a{
-                //color: $link-color;
                 color: $important-font-color;
                 &:hover {
                     color: $link-color;
@@ -1015,21 +1026,12 @@ $header-height: 70px;
                 }
             }
         }
-        .item-info {
+        .post-item-info {
             font-size: 11px;
-            span {
-                .username {
-                    color: $important-link-color;
-                    &:hover {
-                      color: $link-color;
-                    }
-
-                }
-                .cate {
-                    padding: 2px;
-                    color: $font-color;
-                    background-color: #efefef;
-                }
+            .post-category {
+                padding: 2px;
+                color: $font-color;
+                background-color: #efefef;
             }
             .divider {
                 margin: 0 3px;
@@ -1037,7 +1039,7 @@ $header-height: 70px;
             }
         }
     }
-    .item-end {
+    .post-item-end {
         display: inline-block;
         float: right;
         max-width: 10%;

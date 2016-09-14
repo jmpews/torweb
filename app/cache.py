@@ -24,8 +24,8 @@ def update_topic_category_cache():
         for i in range(len(topics)):
             tmp.append(topics[i])
         topic_category_cache['topics'].append(tmp)
-        tmp = []
     topics = PostTopic.select().where(PostTopic.category == None)
+    tmp = []
     for i in range(len(topics)):
         tmp.append(topics[i])
     topic_category_cache['topics'].append(tmp)

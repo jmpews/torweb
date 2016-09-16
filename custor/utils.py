@@ -167,7 +167,7 @@ def get_page_nav(current_page, page_number_limit, page_limit):
     if (current_page)*page_limit < page_number_limit:
         pages['cp+1'] = current_page+1
     if (current_page+1)*page_limit < page_number_limit:
-        pages['cp+2'][1] = current_page+2
+        pages['cp+2'] = current_page+2
     return pages
 
 def get_page_number(current_page):

@@ -19,7 +19,7 @@ $link-color: $logo-color !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-light-color:  lighten($font-color, 15%) !default;
 $btn-color: $link-color !default;
-$btn-hover-color: $link-hover-color !default;
+$btn-hover-color: $link-color !default;
 
 $important-font-color: #666 !default;
 $important-link-color: $logo-color !default;
@@ -126,6 +126,7 @@ body {
 ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 .list-inline {
@@ -307,6 +308,52 @@ a:hover {
 }
 
 // ----
+
+form {
+    fieldset {
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    label {
+        display: inline-block;
+        margin-bottom: .5rem;
+    }
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.25;
+        color: #55595c;
+        background-color: #fff;
+        background-image: none;
+        background-clip: padding-box;
+        border: 1px solid $border-color;
+        border-radius: 0.1rem;
+    }
+
+    .form-control:focus {
+        color: #55595c;
+        background-color: #fff;
+        border-color: $link-color;
+        outline: none;
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #eceeef;
+        opacity: 1;
+    }
+    .form-control:disabled {
+        cursor: not-allowed;
+    }
+
+}
+// ----
 .pagination {
     display: inline-block;
     padding-left: 0;
@@ -390,6 +437,7 @@ a:hover {
         color: #fff !important;
         background-color: $btn-hover-color;
         border-color: $btn-hover-color;
+        outline: none;
     }
 }
 
@@ -401,6 +449,7 @@ a:hover {
         color: #fff !important;
         background-color: $btn-hover-color;
         border-color: $btn-hover-color;
+        outline: none;
     }
 }
 
@@ -800,6 +849,8 @@ $header-height: 70px;
 // 同行的方式, float: right, 但是是parent的第一个元素
 .content {
     margin-right: 300px;
+    padding: 10px 20px;
+    background-color: #fff;
 }
 
 .side {
@@ -812,7 +863,7 @@ $header-height: 70px;
             a {
                 display: block;
                 padding: 3px;
-                border-bottom: 1px solid $border-color;
+                border-bottom: 1px solid $link-color;
                 &:hover {
                     background-color: $gray-background-color;
                 }
@@ -863,5 +914,40 @@ $header-height: 70px;
     }
     .post-content {
         padding: 10px;
+    }
+}
+
+// post-opt
+.post-opt {
+    .side {
+        float: left;
+        width: 280px;
+        margin-left: 0px;
+        .card-header .btn {
+            color: #fff;
+            font-size: inherit;
+            padding:2px 4px;
+            background-color: $link-color;
+            &:hover {
+                background-color: $link-hover-color;
+            }
+        }
+        .post-list {
+            li {
+                line-height: 30px;
+                .btn {
+                    font-size: inherit;
+                    padding:2px 4px;
+                    border-bottom: 1px solid $link-color;
+                    &:hover {
+                        background-color: $gray-background-color;
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        margin-right: 0px;
+        margin-left: 300px;
     }
 }

@@ -5,4 +5,5 @@ PyMySQL
 peewee
 redis
 pymongo
+markdown2
 Pillow

@@ -1,0 +1,166 @@
+{% extends "./base.html" %}
+
+{% block title %}Tornado.Post.Detail{% end %}
+
+{% block styles %}
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript">
+</script>
+{% end %}
+
+{% block content %}
+    <div class="content-container container post-opt">
+        <div class="side">
+            <div class="card custom-card">
+                <div class="card-header cl">
+                    Post列表
+{#                    <span class="divider">|</span>#}
+                    <a class="btn float-right post-opt-add">添加</a>
+                </div>
+                <div class="card-block">
+                    <ul class="post-list">
+                        {% for post in posts %}
+                        <li post="{{ post.id }}">
+                            <a href="#blank">{{ post.title }}</a>
+                            <a class="btn post-opt-del">删除</a>
+                            <span class="divider">|</span>
+                            <a class="btn post-opt-modify">编辑</a>
+                        </li>
+                        {% end %}
+                        <li>
+                            <a href="#blank">Greenlet源码分析</a>
+                            <a class="btn post-opt-del">删除</a>
+                            <span class="divider">|</span>
+                            <a class="btn post-opt-modify">编辑</a>
+                        </li>
+                        <li>
+                            <a href="#blank">Greenlet源码分析</a>
+                            <a class="btn post-opt-del">删除</a>
+                            <span class="divider">|</span>
+                            <a class="btn post-opt-modify">编辑</a>
+                        </li>
+                        <li>
+                            <a href="#blank">Greenlet源码分析</a>
+                            <a class="btn post-opt-del">删除</a>
+                            <span class="divider">|</span>
+                            <a class="btn post-opt-modify">编辑</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-header">
+                    标签
+                </div>
+                <div class="post-label card-block">
+                    <ul class="list-inline">
+                        <li><a href="">Tornado源码分析</a></li>
+                        <li><a href="">Greenlet源码分析</a></li>
+                        <li><a href="">后端高性能编程</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="post-edit">
+                <form data-parsley-validate="" action="/login" method="post">
+                    <fieldset class="form-group">
+                        <label for="title">标题</label>
+                        <input class="form-control" id="title" name="title" required>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="category">类别</label>
+                        <input class="form-control" id="category" name="category" required>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="labels">标签</label>
+                        <input class="form-control" id="labels" name="labels" required>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="content">内容</label>
+                        <textarea class="form-control" id="content" rows="5" required> </textarea>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+{% end %}
+
+{% block scripts %}
+<script type="text/javascript">
+    // 修改post
+    $('.post-opt-modify').on('click', function (e) {
+        var post_id = $(e.currentTarget).parent().attr('post');
+        // 设置form要更新的post_id
+        $('form').attr('post_id', post_id);
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/blog/opt',
+            data: JSON.stringify({
+                'opt': 'get-post',
+                'data': {
+                    'post': post_id
+                }
+            }),
+            success: function(result, status) {
+                if(result.errorcode == 0) {
+                    var data = result['data'];
+                    $('#title').val(data.title);
+                    $('#category').val(data.category);
+                    $('#labels').val(data.labels);
+                    $('#content').val(data.content);
+                }
+                else {
+                    alert(result.txt)
+                }
+            }
+        });
+    });
+    // 设置form为空
+    $('.post-opt-add').on('click', function () {
+        $('form').attr('post_id', '-1');
+        $('#title').val('');
+        $('#category').val('');
+        $('#labels').val('');
+        $('#content').val('');
+    });
+
+    $('form').on('submit', function (event) {
+        var post_id = $('form').attr('post_id');
+        var opt = '';
+        if(post_id != '-1') {
+            opt = 'update-post';
+        }
+        else {
+            opt = 'create-post';
+        }
+        event.preventDefault();
+         $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/blog/opt',
+            data: JSON.stringify({
+                'opt': opt,
+                'data': {
+                    'post': post_id,
+                    'title': $('#title').val(),
+                    'category': $('#category').val(),
+                    'labels': $('#labels').val(),
+                    'content': $('#content').val()
+                }
+            }),
+            success: function(result, status) {
+                if(result.errorcode == 0) {
+                    alert('success');
+                }
+                else {
+                    alert(result.txt)
+                }
+            }
+        });
+        return 1;
+    });
+</script>
+{% end %}

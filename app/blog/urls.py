@@ -2,7 +2,8 @@
 
 from app.blog.blog import  (
     BlogIndexHandler,
-    BlogPostDetailHandler
+    BlogPostDetailHandler,
+    BlogPostOptHandler
 )
 
 urlprefix = r''
@@ -10,4 +11,5 @@ urlprefix = r''
 urlpattern = (
     (r'/blog', BlogIndexHandler),
     (r'/blog/(\d+)', BlogPostDetailHandler),
+    (r'/blog/opt', BlogPostOptHandler),
 )

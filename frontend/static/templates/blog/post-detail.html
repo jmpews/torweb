@@ -4,6 +4,7 @@
 
 {% block styles %}
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/highlight.js/9.6.0/styles/magula.min.css" rel="stylesheet">
 <script type="text/javascript">
 </script>
 {% end %}
@@ -36,22 +37,20 @@
         </div>
         <div class="content">
             <div class="post-detail">
-                <div class="post-title">正则表达式备忘录[{{ post.title }}]</div>
+                <div class="post-title">{{ post.title }}</div>
                 <div class="post-info">
-                    <span class="post-info-time">Sep 13, 2016[{{ post.create_time }}]</span>
+                    <span class="post-info-time">{{ post.create_time }}</span>
                     <span class="divider">/</span>
-                    <span class="post-category">分类: <a href="">Tornado[{{ post.category.name }}]</a> </span>
+                    <span class="post-category">分类: <a href="">{{ post.category.name }}</a> </span>
                 </div>
                 <div class="post-content">
-                    [{{ post.content }}]
-                    JavaScript 创建正则表达式有两种方式：
-                    使用正则表达式字面量：var re = /abc/;
-                    调用 RegExp 对象的构造函数：var re = new RegExp("abc");
-                    什么时候使用构造函数？
-
-                    当正则表达式的模式会变发生改变，或者需要从其他地方得到时（例如用户输入），适合使用构造函数的方式。
+                    {% raw post.content_html %}
                 </div>
             </div>
         </div>
     </div>
+{% end %}
+{% block scripts %}
+<script src="//cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>
 {% end %}

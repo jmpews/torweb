@@ -209,23 +209,20 @@ a, a:focus, a:hover {
   background-color: #446491;
 }
 
-fieldset {
+form fieldset {
   min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
 }
-
-.form-group {
+form .form-group {
   margin-bottom: 1rem;
 }
-
-label {
+form label {
   display: inline-block;
   margin-bottom: .5rem;
 }
-
-.form-control {
+form .form-control {
   display: block;
   width: 100%;
   padding: 0.5rem 0.75rem;
@@ -238,45 +235,17 @@ label {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.1rem;
 }
-
-.form-control::-ms-expand {
-  background-color: transparent;
-  border: 0;
-}
-
-.form-control:focus {
+form .form-control:focus {
   color: #55595c;
   background-color: #fff;
   border-color: #66afe9;
   outline: none;
 }
-
-.form-control::-webkit-input-placeholder {
-  color: #999;
-  opacity: 1;
-}
-
-.form-control::-moz-placeholder {
-  color: #999;
-  opacity: 1;
-}
-
-.form-control:-ms-input-placeholder {
-  color: #999;
-  opacity: 1;
-}
-
-.form-control::placeholder {
-  color: #999;
-  opacity: 1;
-}
-
-.form-control:disabled, .form-control[readonly] {
+form .form-control:disabled, form .form-control[readonly] {
   background-color: #eceeef;
   opacity: 1;
 }
-
-.form-control:disabled {
+form .form-control:disabled {
   cursor: not-allowed;
 }
 
@@ -460,6 +429,7 @@ label {
   color: #fff !important;
   background-color: #2c405d;
   border-color: #2c405d;
+  outline: none;
 }
 
 .btn-outline-primary:active:hover,

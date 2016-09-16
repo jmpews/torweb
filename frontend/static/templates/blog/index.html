@@ -17,7 +17,9 @@
                 </div>
                 <div class="card-block">
                     <ul class="">
-                        <li><a href="">Tornado源码分析</a></li>
+                        {% for cate in categorys %}
+                        <li><a href="">{{ cate.name }}</a></li>
+                        {% end %}
                         <li><a href="">Greenlet源码分析</a></li>
                         <li><a href="">后端高性能编程</a></li>
                     </ul>
@@ -27,7 +29,9 @@
                 </div>
                 <div class="post-label card-block">
                     <ul class="list-inline">
-                        <li><a href="">Tornado源码分析</a></li>
+                        {% for label in labels %}
+                        <li><a href="">{{ label.name }}</a></li>
+                        {% end %}
                         <li><a href="">Greenlet源码分析</a></li>
                         <li><a href="">后端高性能编程</a></li>
                     </ul>
@@ -85,6 +89,36 @@
                     </div>
                 </div>
             </div>
+            <nav style="text-align:center">
+                <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1'] if pages['cp-1'] else pages['cp']}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <!-- 这里如果换成列表存放数据，这里直接使用for就可以了，但是字典表意更明确一点 -->
+                {% if pages['cp-2'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-2']}}">{{pages['cp-2']}}</a></li>
+                {% end %}
+                {% if pages['cp-1'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1']}}">{{pages['cp-1']}}</a></li>
+                {% end %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp']}}">{{pages['cp']}}</a></li>
+                {% if pages['cp+1'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1']}}">{{pages['cp+1']}}</a></li>
+                {% end %}
+                {% if pages['cp+2'] %}
+                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+2']}}">{{pages['cp+2']}}</a></li>
+                {% end %}
+                <li class="page-item">
+                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1'] if pages['cp+1'] else pages['cp']}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
         </div>
 
     </div>

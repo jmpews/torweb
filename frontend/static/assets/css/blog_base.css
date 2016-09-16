@@ -69,6 +69,7 @@ body a:hover, body a:focus {
 ul {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .list-inline {
@@ -234,6 +235,46 @@ a, a:focus, a:hover {
   border-color: #ddd #ddd transparent;
 }
 
+form fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+form .form-group {
+  margin-bottom: 1rem;
+}
+form label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+form .form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #55595c;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #eaeaea;
+  border-radius: 0.1rem;
+}
+form .form-control:focus {
+  color: #55595c;
+  background-color: #fff;
+  border-color: #e95420;
+  outline: none;
+}
+form .form-control:disabled, form .form-control[readonly] {
+  background-color: #eceeef;
+  opacity: 1;
+}
+form .form-control:disabled {
+  cursor: not-allowed;
+}
+
 .pagination {
   display: inline-block;
   padding-left: 0;
@@ -319,8 +360,9 @@ a, a:focus, a:hover {
 }
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
   color: #fff !important;
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
+  outline: none;
 }
 
 .btn-primary {
@@ -330,8 +372,9 @@ a, a:focus, a:hover {
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff !important;
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
+  outline: none;
 }
 
 .btn-outline-primary:active:hover,
@@ -347,8 +390,8 @@ a, a:focus, a:hover {
 .btn-primary.active:focus,
 .btn-primary.active.focus {
   color: #fff;
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
 }
 
 .dropdown-menu {
@@ -525,11 +568,11 @@ a, a:focus, a:hover {
   color: #34495E;
 }
 .header .btn-outline-primary {
-  border-color: #ac3911;
+  border-color: #e95420;
 }
 .header .btn-primary {
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
 }
 .header .header-container {
   height: 70px;
@@ -685,6 +728,8 @@ a, a:focus, a:hover {
 
 .content {
   margin-right: 300px;
+  padding: 10px 20px;
+  background-color: #fff;
 }
 
 .side {
@@ -698,7 +743,7 @@ a, a:focus, a:hover {
 .side .post-label ul.list-inline li a {
   display: block;
   padding: 3px;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #e95420;
 }
 .side .post-label ul.list-inline li a:hover {
   background-color: #efefef;
@@ -743,4 +788,34 @@ a, a:focus, a:hover {
 }
 .post-detail .post-content {
   padding: 10px;
+}
+
+.post-opt .side {
+  float: left;
+  width: 280px;
+  margin-left: 0px;
+}
+.post-opt .side .card-header .btn {
+  color: #fff;
+  font-size: inherit;
+  padding: 2px 4px;
+  background-color: #e95420;
+}
+.post-opt .side .card-header .btn:hover {
+  background-color: #ac3911;
+}
+.post-opt .side .post-list li {
+  line-height: 30px;
+}
+.post-opt .side .post-list li .btn {
+  font-size: inherit;
+  padding: 2px 4px;
+  border-bottom: 1px solid #e95420;
+}
+.post-opt .side .post-list li .btn:hover {
+  background-color: #efefef;
+}
+.post-opt .content {
+  margin-right: 0px;
+  margin-left: 300px;
 }

@@ -62,7 +62,7 @@ class BlogIndexCategoryHandler(BaseRequestHandler):
                     labels=labels,
                     categorys=categorys,
                     pages=pages,
-                    pages_prefix_url = '/blog/categoray/'+category_name+'?page=')
+                    pages_prefix_url = '/blog/category/'+category_name+'?page=')
 
 class BlogIndexLabelHandler(BaseRequestHandler):
     def get(self, label_name, *args, **kwargs):

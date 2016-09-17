@@ -703,7 +703,7 @@ form .form-control:disabled {
   float: right;
 }
 .header .header-container .header-tip a {
-  color: #999;
+  color: #FFBCBC;
 }
 .header .header-container .header-tip a:hover {
   color: #FFBCBC;

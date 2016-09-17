@@ -754,7 +754,7 @@ $header-height: 70px;
             float: right;
             // 未登录
             a {
-                  color: $nav-header-font-color;
+                  color: $link-color;
                   &:hover {
                       color: $nav-header-font-hover-color;
                   }
@@ -845,11 +845,21 @@ $header-height: 70px;
         }
     }
 }
-// --------------------- 页面架构 -------------------
+// --------------------- Blog页面架构 -------------------
 // 同行的方式, float: right, 但是是parent的第一个元素
+@media (max-width: 767px){
+    .content {
+        margin-right: 0px !important;
+    }
+    .side {
+        //display: none !important;
+        width: inherit !important;
+        margin-left: 0px !important;
+    }
+}
 .content {
     margin-right: 300px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: #fff;
 }
 
@@ -896,7 +906,9 @@ $header-height: 70px;
 
         }
         .post-function {
-            color: $link-color;
+            a {
+                color: $link-color;
+            }
         }
     }
 }

@@ -648,7 +648,7 @@ form .form-control:disabled {
   float: right;
 }
 .header .header-container .header-tip a {
-  color: #34495E;
+  color: #e95420;
 }
 .header .header-container .header-tip a:hover {
   color: #e95420;
@@ -726,9 +726,19 @@ form .form-control:disabled {
   text-align: center;
 }
 
+@media (max-width: 767px) {
+  .content {
+    margin-right: 0px !important;
+  }
+
+  .side {
+    width: inherit !important;
+    margin-left: 0px !important;
+  }
+}
 .content {
   margin-right: 300px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: #fff;
 }
 
@@ -771,7 +781,7 @@ form .form-control:disabled {
 .post-list .post-item .post-summary {
   margin-bottom: 5px;
 }
-.post-list .post-item .post-function {
+.post-list .post-item .post-function a {
   color: #e95420;
 }
 

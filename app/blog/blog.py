@@ -13,6 +13,8 @@ class BlogIndexHandler(BaseRequestHandler):
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
         current_page = get_page_number(current_page)
         posts, page_number_limit = BlogPost.list_recently(page_number=current_page)
+        for post in posts:
+            post.labels = BlogPostLabel.get_post_label(post)
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         categorys = BlogPostCategory.select()
         labels = BlogPostLabel.select().where(BlogPostLabel.is_del == False)
@@ -23,13 +25,53 @@ class BlogIndexHandler(BaseRequestHandler):
                     pages=pages,
                     pages_prefix_url = '/blog?page=')
 
+class BlogIndexCategoryHandler(BaseRequestHandler):
+    def get(self, category_name, *args, **kwargs):
+        try:
+            category = BlogPostCategory.get(BlogPostCategory.name == category_name)
+        except BlogPostCategory.DoesNotExist:
+            self.redirect("/static/404.html")
+            return
+        current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
+        current_page = get_page_number(current_page)
+        posts, page_number_limit = BlogPost.list_by_category(category, page_number=current_page)
+        for post in posts:
+            post.labels = BlogPostLabel.get_post_label(post)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+        categorys = BlogPostCategory.select()
+        labels = BlogPostLabel.select().where(BlogPostLabel.is_del == False)
+        self.render('blog/index.html',
+                    posts=posts,
+                    labels=labels,
+                    categorys=categorys,
+                    pages=pages,
+                    pages_prefix_url = '/blog/categoray/'+category_name+'?page=')
+
+class BlogIndexLabelHandler(BaseRequestHandler):
+    def get(self, label_name, *args, **kwargs):
+        current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
+        current_page = get_page_number(current_page)
+        posts, page_number_limit = BlogPost.list_by_label(label_name, page_number=current_page)
+        for post in posts:
+            post.labels = BlogPostLabel.get_post_label(post)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+        categorys = BlogPostCategory.select()
+        labels = BlogPostLabel.select().where(BlogPostLabel.is_del == False)
+        self.render('blog/index.html',
+                    posts=posts,
+                    labels=labels,
+                    categorys=categorys,
+                    pages=pages,
+                    pages_prefix_url = '/blog/label/'+ label_name+'?page=')
+
 class BlogPostDetailHandler(BaseRequestHandler):
     def get(self, post_id, *args, **kwargs):
 
         post = BlogPost.get(BlogPost.id == post_id)
         # post.content_html = markdowner.convert(post.content)
         post.content_html = markdown.markdown(post.content, extensions=['markdown.extensions.fenced_code', ])
-
+        post.category_name = post.category.name
+        post.labels  = BlogPostLabel.get_post_label(post)
         self.render('blog/post-detail.html',
                     post=post)
 

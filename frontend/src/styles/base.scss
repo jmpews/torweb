@@ -808,7 +808,7 @@ $header-height: 70px;
             float: right;
             // 未登录
             a {
-                  color: $nav-header-font-color;
+                  color: $link-color;
                   &:hover {
                       color: $nav-header-font-hover-color;
                   }

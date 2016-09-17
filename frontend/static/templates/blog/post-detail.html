@@ -18,9 +18,7 @@
                 </div>
                 <div class="card-block">
                     <ul class="">
-                        <li><a href="">Tornado源码分析</a></li>
-                        <li><a href="">Greenlet源码分析</a></li>
-                        <li><a href="">后端高性能编程</a></li>
+                        <li><a href="">{{ post.category_name }}</a></li>
                     </ul>
                 </div>
                 <div class="card-header">
@@ -28,9 +26,9 @@
                 </div>
                 <div class="post-label card-block">
                     <ul class="list-inline">
-                        <li><a href="">Tornado源码分析</a></li>
-                        <li><a href="">Greenlet源码分析</a></li>
-                        <li><a href="">后端高性能编程</a></li>
+                        {% for label in post.labels.split(',') %}
+                        <li><a href="">{{ label }}</a></li>
+                        {% end %}
                     </ul>
                 </div>
             </div>

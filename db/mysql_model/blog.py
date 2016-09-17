@@ -43,9 +43,9 @@ class BlogPost(BaseModel):
 
 
     @staticmethod
-    def list_by_topic(category, page_limit=config.default_page_limit, page_number=1):
+    def list_by_category(category, page_limit=config.default_page_limit, page_number=1):
         """
-        根据分类获取当前分类的最近主题
+        根据分类获取当前分类
         :param category: 当前分类
         :param page_limit:
         :param page_number:
@@ -53,6 +53,23 @@ class BlogPost(BaseModel):
         """
         page_number_limit = BlogPost.select().where(BlogPost.category == category).order_by(BlogPost.create_time).count()
         posts = BlogPost.select().where(BlogPost.category == category, BlogPost.is_del == False).order_by(BlogPost.create_time).paginate(page_number, page_limit)
+        return posts, page_number_limit
+
+
+    @staticmethod
+    def list_by_label(label_name, page_limit=config.default_page_limit, page_number=1):
+        """
+        根据标签获取当前
+        :param label: 当前标签
+        :param page_limit:
+        :param page_number:
+        :return:
+        """
+        page_number_limit = BlogPostLabel.select().where(BlogPostLabel.name == label_name).count()
+        labels = BlogPostLabel.select(BlogPostLabel.post).where(BlogPostLabel.name == label_name, BlogPostLabel.is_del == False).paginate(page_number, page_limit)
+        posts = []
+        for label in labels:
+            posts.append(label.post)
         return posts, page_number_limit
 
 class BlogPostLabel(BaseModel):

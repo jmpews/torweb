@@ -730,10 +730,15 @@ form .form-control:disabled {
   .content {
     margin-right: 0px !important;
   }
+  .content .post-detail {
+    padding: 0px !important;
+  }
 
   .side {
+    display: none !important;
     width: inherit !important;
     margin-left: 0px !important;
+    float: none !important;
   }
 }
 .content {
@@ -753,10 +758,11 @@ form .form-control:disabled {
 .side .post-label ul.list-inline li a {
   display: block;
   padding: 3px;
-  border-bottom: 1px solid #e95420;
+  border-bottom: 1px solid #8a8a8a;
 }
 .side .post-label ul.list-inline li a:hover {
   background-color: #efefef;
+  border-bottom: 1px solid #e95420;
 }
 
 .post-list {
@@ -783,6 +789,9 @@ form .form-control:disabled {
 }
 .post-list .post-item .post-function a {
   color: #e95420;
+  border-left: 2px solid #e95420;
+  padding-left: 4px;
+  font-weight: 300;
 }
 
 .post-detail {
@@ -796,8 +805,24 @@ form .form-control:disabled {
   margin-bottom: 5px;
   text-align: center;
 }
-.post-detail .post-content {
+
+.post-content {
   padding: 10px;
+  color: #666;
+  word-wrap: break-word;
+  word-break: normal;
+}
+.post-content blockquote {
+  margin: 0 20px;
+}
+.post-content blockquote p {
+  margin-bottom: .33999rem;
+  font-style: italic;
+  padding: .66001rem 1rem 1rem;
+  border-left: 3px solid #A0AABF;
+}
+.post-content img {
+  max-width: 90%;
 }
 
 .post-opt .side {

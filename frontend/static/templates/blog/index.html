@@ -15,10 +15,10 @@
                 <div class="card-header">
                     分类
                 </div>
-                <div class="card-block">
+                <div class="post-category card-block">
                     <ul class="">
                         {% for cate in categorys %}
-                        <li><a href="/blog/category/{{ cate.name }}">{{ cate.name }}</a></li>
+                        <li><a href="/blog/category/{{ cate.name }}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ cate.name }} ({{ cate.count }})</a></li>
                         {% end %}
                     </ul>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="post-label card-block">
                     <ul class="list-inline">
                         {% for label in labels %}
-                        <li><a href="/blog/label/{{ label.name }}">{{ label.name }}</a></li>
+                        <li><a href="/blog/label/{{ label.name }}">{{ label.name }} ({{ label.count }})</a></li>
                         {% end %}
                     </ul>
                 </div>

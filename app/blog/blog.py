@@ -5,6 +5,7 @@ from settings.config import config
 
 from db.mysql_model.blog import BlogPostCategory, BlogPostLabel, BlogPost
 import markdown
+from peewee import *
 # from markdown2 import Markdown
 # markdowner = Markdown(extras=['fenced-code-blocks', 'code-friendly'])
 
@@ -16,8 +17,16 @@ class BlogIndexHandler(BaseRequestHandler):
         for post in posts:
             post.labels = BlogPostLabel.get_post_label(post)
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
-        categorys = BlogPostCategory.select()
-        labels = BlogPostLabel.select().where(BlogPostLabel.is_del == False)
+
+        # 使用到联合、分组等查询
+        # select category_id, blogpostcategory.name, count(blogpost.id) from blogpost inner join blogpostcategory on blogpost.category_id=blogpostcategory.id group by category_id;
+        categorys = BlogPost.select(BlogPostCategory.name, fn.COUNT(BlogPost.id).alias('count'))\
+            .join(BlogPostCategory, on=(BlogPostCategory.id == BlogPost.category))\
+            .group_by(BlogPost.category)
+        for category in categorys:
+            category.name = category.category.name
+
+        labels = BlogPostLabel.select(BlogPostLabel.name, fn.COUNT(BlogPostLabel.post).alias('count')).where(BlogPostLabel.is_del == False).group_by(BlogPostLabel.name)
         self.render('blog/index.html',
                     posts=posts,
                     labels=labels,
@@ -38,8 +47,16 @@ class BlogIndexCategoryHandler(BaseRequestHandler):
         for post in posts:
             post.labels = BlogPostLabel.get_post_label(post)
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
-        categorys = BlogPostCategory.select()
-        labels = BlogPostLabel.select().where(BlogPostLabel.is_del == False)
+
+        # 使用到联合、分组等查询
+        # select category_id, blogpostcategory.name, count(blogpost.id) from blogpost inner join blogpostcategory on blogpost.category_id=blogpostcategory.id group by category_id;
+        categorys = BlogPost.select(BlogPostCategory.name, fn.COUNT(BlogPost.id).alias('count'))\
+            .join(BlogPostCategory, on=(BlogPostCategory.id == BlogPost.category))\
+            .group_by(BlogPost.category)
+        for category in categorys:
+            category.name = category.category.name
+
+        labels = BlogPostLabel.select(BlogPostLabel.name, fn.COUNT(BlogPostLabel.post).alias('count')).where(BlogPostLabel.is_del == False).group_by(BlogPostLabel.name)
         self.render('blog/index.html',
                     posts=posts,
                     labels=labels,

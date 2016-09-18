@@ -426,7 +426,7 @@ form .form-control:disabled {
   border-color: #446491;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  color: #fff !important;
+  color: #fff;
   background-color: #2c405d;
   border-color: #2c405d;
   outline: none;
@@ -703,7 +703,7 @@ form .form-control:disabled {
   float: right;
 }
 .header .header-container .header-tip a {
-  color: #446491;
+  color: #fff;
 }
 .header .header-container .header-tip a:hover {
   color: #ace6f6;

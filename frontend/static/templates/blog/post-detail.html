@@ -4,7 +4,7 @@
 
 {% block styles %}
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
-<link href="//cdn.bootcss.com/highlight.js/9.6.0/styles/magula.min.css" rel="stylesheet">
+<link href="/assets/css/magula.min.css" rel="stylesheet">
 <script type="text/javascript">
 </script>
 {% end %}
@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-block">
                     <ul class="">
-                        <li><a href="">{{ post.category_name }}</a></li>
+                        <li><a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a></li>
                     </ul>
                 </div>
                 <div class="card-header">
@@ -27,7 +27,7 @@
                 <div class="post-label card-block">
                     <ul class="list-inline">
                         {% for label in post.labels.split(',') %}
-                        <li><a href="">{{ label }}</a></li>
+                        <li><a href="/blog/label/{{ label }}">{{ label }}</a></li>
                         {% end %}
                     </ul>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="post-info">
                     <span class="post-info-time">{{ post.create_time }}</span>
                     <span class="divider">/</span>
-                    <span class="post-category">分类: <a href="">{{ post.category.name }}</a> </span>
+                    <span class="post-category">分类: <a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a> </span>
                 </div>
                 <div class="post-content">
                     {% raw post.content_html %}
@@ -49,6 +49,6 @@
     </div>
 {% end %}
 {% block scripts %}
-<script src="//cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js"></script>
+<script src="/assets/js/highlight.min.js"></script>
 <script >hljs.initHighlightingOnLoad();</script>
 {% end %}

@@ -499,7 +499,7 @@ form {
     background-color: $btn-color;
     border-color: $btn-color;
     &:hover, &:focus, &:active {
-        color: #fff !important;
+        color: #fff;
         background-color: $btn-hover-color;
         border-color: $btn-hover-color;
         outline: none;
@@ -808,7 +808,7 @@ $header-height: 70px;
             float: right;
             // 未登录
             a {
-                  color: $link-color;
+                  color: $nav-header-font-color;
                   &:hover {
                       color: $nav-header-font-hover-color;
                   }

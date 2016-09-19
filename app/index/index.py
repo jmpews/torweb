@@ -34,7 +34,6 @@ class IndexHandler(BaseRequestHandler):
         current_page = get_page_number(current_page)
         posts, page_number_limit = Post.list_recently(page_number=current_page)
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
-
         self.render('index/index.html',
                     posts=posts,
                     topic_category_cache=topic_category_cache,

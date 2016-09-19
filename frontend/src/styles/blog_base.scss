@@ -13,7 +13,7 @@ $font-color: #34495E !default;
 $border-color: #eaeaea !default;
 $body-background-color: #f7f7f7 !default;
 $gray-font-color: #8a8a8a !default;
-$gray-background-color: #efefef;
+$gray-background-color: #efefef !default;
 
 $link-color: $logo-color !default;
 $link-hover-color: darken($link-color, 15%) !default;
@@ -21,7 +21,7 @@ $link-light-color:  lighten($font-color, 15%) !default;
 $btn-color: $link-color !default;
 $btn-hover-color: $link-color !default;
 
-$important-font-color: #666 !default;
+$important-font-color: #222 !default;
 $important-link-color: $logo-color !default;
 
 $nav-header-background-color: #fff !default;
@@ -48,7 +48,7 @@ body {
     line-height: 1.5;
     margin: 0;
     //background-image: url("/assets/images/LPBackground.svg");
-    background-color: $body-background-color;
+    background-color: #fff;
     a {
         color: $font-color;
         &:hover, &:focus {
@@ -77,15 +77,15 @@ body {
 @media (min-width: 1200px) {
     .content-container {
         max-width: none;
-        padding-left: 5%;
-        padding-right: 5%;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
     }
 }
 @media (min-width: 1450px) {
     .content-container {
         max-width: none;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 10% !important;
+        padding-right: 10% !important;
     }
 }
 
@@ -538,7 +538,7 @@ form {
         background-color: $card-header-background-color;
         color: $card-header-font-color;
         position: relative;
-        border-bottom: 1px solid $border-color;
+        //border-bottom: 1px solid $border-color;
         padding: 0.5rem 1rem !important;
         a{
             &:hover {
@@ -655,7 +655,7 @@ $header-height: 70px;
     margin: 0 auto;
     z-index: 999;
     background-color: $nav-header-background-color;
-    border-bottom: 1px solid $border-color;
+    //border-bottom: 1px solid $border-color;
     //box-shadow: 0 2px 10px $border-color;
 
     a {
@@ -723,31 +723,29 @@ $header-height: 70px;
                 position: relative;
                 text-align: center;
                 width: 25%;
-                &.active {
+                &.active, &:hover {
                     // 下划线
                     -webkit-box-shadow: inset 0 -3px 0px $logo-color;
                     -moz-box-shadow: inset 0 -3px 0px $logo-color;
                     box-shadow: inset 0 -3px 0px $logo-color;
-                }
-                &:hover {
-                    background-color: $nav-header-hover-color;
-                    -webkit-box-shadow: inset 0 -3px 0px $logo-color;
-                    -moz-box-shadow: inset 0 -3px 0px $logo-color;
-                    box-shadow: inset 0 -3px 0px $logo-color;
+                    a {
+                        color: $nav-header-font-hover-color;
+                    }
                 }
                 a {
                     display: block;
                     font-size: 14px;
                     text-align: center;
                     border-top: 4px solid transparent;
+                    &:focus, &:hover {
+                        color: $nav-header-font-hover-color;
+                    }
                     //-webkit-box-shadow: inset 0 -3px 0px $link-color;
                     //-moz-box-shadow: inset 0 -3px 0px $link-color;
                     //box-shadow: inset 0 -3px 0px $link-color;
                 }
 
-                a:focus, a:hover {
-                    color: $nav-header-font-hover-color;
-                }
+
             }
         }
         .header-tip {
@@ -870,12 +868,25 @@ $header-height: 70px;
 .side {
     float: right;
     width: 280px;
-    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid $border-color;
     .post-category {
+        a {
+            color: $gray-font-color;
+            &:hover {
+                color: $link-color;
+            }
+        }
         ul li {
         }
     }
     .post-label {
+        a {
+            color: $gray-font-color;
+            &:hover {
+                color: $link-color;
+            }
+        }
         ul.list-inline li {
             margin: 3px;
             a {
@@ -904,14 +915,22 @@ $header-height: 70px;
             margin: 0px;
             font-weight: 400;
             font-size: 26px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         .post-info {
-            margin-bottom: 5px;
+            font-size: 11px;
+            margin-bottom: 10px;
             color: $gray-font-color;
+            .post-info-label span {
+                color: $important-font-color;
+                &:first-of-type {
+                    color: $gray-font-color;
+                }
+            }
         }
         .post-summary {
-            margin-bottom: 5px;
+            color: $gray-font-color;
+            margin-bottom: 10px;
 
         }
         .post-function {
@@ -934,6 +953,9 @@ $header-height: 70px;
         font-weight: 400;
         font-size: 26px;
         margin-bottom: 5px;
+        text-align: center;
+    }
+    .post-info {
         text-align: center;
     }
     .post-content {

@@ -49,10 +49,19 @@ class SystemStatusWebsocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         if self not in SystemStatusWebsocketHandler.clients:
             SystemStatusWebsocketHandler.clients.append(self)
+            SystemStatusWebsocketHandler.write2(self, system_status_cache)
 
     def on_close(self):
         if self in SystemStatusWebsocketHandler.clients:
             SystemStatusWebsocketHandler.clients.remove(self)
+
+    @staticmethod
+    def write2(client, system_status_cache):
+        client.write_message(json_result(0, {
+            'cpu_per': system_status_cache[0],
+            'ram_per': system_status_cache[1],
+            'net_conn': system_status_cache[2],
+            'os_start': system_status_cache[3]}))
 
     @classmethod
     def write2all(cls, system_status_cache):

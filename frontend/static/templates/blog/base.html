@@ -37,39 +37,12 @@
                 </li>
                 <li class="active">
                     <!-- <a href="/blog"><i class="fa fa-cloud" aria-hidden="true"></i></a> -->
-                    <a href="/blog">官方博客</a>
+                    <a href="/blog"><i class="fa fa-cloud" aria-hidden="true"></i></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
                 </li>
             </ul>
-            <div class="header-tip float-right">
-                {% if not current_user %}
-                <!-- 未登录 -->
-                <div class="btn-group" style="">
-                    <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
-                    <a class="btn btn-sm btn-primary" style="color:#fff;"role="button" href="/register">注册</a>
-                </div>
-                {% else %}
-                <!-- 登陆 -->
-                <ul class="options list-inline cl">
-                    <!--
-                    <li class="dropdown">
-                        <a href="#blank" id="user-avatar">
-                            <img src="/assets/images/avatar/{{current_user.avatar}}">
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="user-avatar">
-                            <li class="dropdown-item"><a href="/user/{{current_user.id}}">个人中心</a></li>
-                            <li class="dropdown-item"><a href="/user/edit">账号设置</a></li>
-                            <li class="dropdown-item"><a href="/logout">退出</a></li>
-                        </ul>
-                    </li>
-                    -->
-                    <li><a href="/user/notification">消息</a></li>
-                    <li><a href="/post/add">新主题</a></li>
-                </ul>
-                {% end %}
-            </div>
         </div>
     </div>
     {% block content %}{% end %}

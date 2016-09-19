@@ -60,7 +60,6 @@ def update_system_status_cache():
             import psutil, datetime, time
             while True:
                 try:
-                    time.sleep(30)
                     s1 = psutil.cpu_percent()
                     s2 = psutil.virtual_memory()[2]
                     try:
@@ -75,6 +74,7 @@ def update_system_status_cache():
                     logger.debug('push 2 clients system_status.')
                     from app.api.api import SystemStatusWebsocketHandler
                     SystemStatusWebsocketHandler.write2all(self.systatus)
+                    time.sleep(30)
                 except KeyboardInterrupt:
                     break
 

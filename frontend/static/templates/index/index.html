@@ -48,7 +48,7 @@
             {% for post in posts %}
             <div class="post-item cl">
                 {% set user = post.user  %}
-                <div class="avatar hidden-xs ">
+                <div class="post-avatar hidden-xs ">
                     <a class="username" href="/user/{{user.id}}">
                         {% if is_default_avatar(user.avatar) %}
                         <span>{{user.username[0].upper()}}</span>
@@ -58,10 +58,10 @@
                     </a>
                 </div>
 
-                <div class="item-mid clear-xs">
+                <div class="post-item-mid clear-xs">
                     <div class="item-title"><a href="/post/{{post.id}}">{{post.title}}</a></div>
                     <div class="item-info">
-                        <span><a class="cate" href="/topic/{{post.topic.str}}">{{post.topic.name}}</a></span>
+                        <span><a class="post-category" href="/topic/{{post.topic.str}}">{{post.topic.name}}</a></span>
                         <span class="divider">•</span>
 						<span><a class="username" href="/user/{{post.user.id}}">{{post.user.username}}</a></span>
 
@@ -74,7 +74,7 @@
                         <span>{{post.visit_count}} 浏览</span>
                     </div>
                 </div>
-                <div class="item-end hidden-xs">
+                <div class="post-item-end hidden-xs">
                     <span><i class="fa fa-commenting-o" aria-hidden="true"></i>{{post.reply_count}}</span>
                 </div>
 
@@ -206,8 +206,10 @@
 <script src="/assets/i18n/zh_cn.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        monitor_system_status()
+{#        monitor_system_status()#}
+        get_websocket_url(start_system_monitor_websocket);
         show_hide_cate_nav();
     });
+
 </script>
 {% end %}

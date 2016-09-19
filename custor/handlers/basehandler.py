@@ -11,19 +11,17 @@ from db.mysql_model.user import User
 from tornado.web import RequestHandler
 
 class BaseRequestHandler(RequestHandler):
-    '''
-    Peewee-Request-Hook-Connect
-    '''
-
+    """
+    基础handler
+    """
     def prepare(self):
+        '''
+        peewee的连接池, request-hook(请求前连接)
+        :return:
+        '''
         db_mysql.connect()
         return super(BaseRequestHandler, self).prepare()
 
-    '''
-    重写了异常处理
-    '''
-
-    # @exception_deal([RequestMissArgumentError,])
     def get(self, *args, **kwargs):
         # try:
         super(BaseRequestHandler, self).get(*args, **kwargs)
@@ -31,6 +29,12 @@ class BaseRequestHandler(RequestHandler):
         #     logger.error(e)
 
     def write_error(self, status_code, **kwargs):
+        """
+        默认错误处理函数
+        :param status_code:
+        :param kwargs:
+        :return:
+        """
         if 'exc_info' in kwargs:
             # 参数缺失异常
             if isinstance(kwargs['exc_info'][1], RequestMissArgumentError):
@@ -43,22 +47,22 @@ class BaseRequestHandler(RequestHandler):
         if not config.DEBUG:
             self.redirect("/static/500.html")
 
-    '''
-    获取当前用户
-    '''
-
     def get_current_user(self):
+        '''
+        获取当前用户
+        :return:
+        '''
         username = self.get_secure_cookie('uuid')
         if not username:
             return None
         user = User.get_by_username(username)
         return user
 
-    '''
-    Peewee-Request-Hook-Close
-    '''
-
     def on_finish(self):
+        '''
+        peewee的request-hook(请求完成后关闭)
+        :return:
+        '''
         if not db_mysql.is_closed():
             db_mysql.close()
         return super(BaseRequestHandler, self).on_finish()

@@ -1,17 +1,19 @@
 # coding:utf-8
 
-import json
-import random
-from tornado.web import MissingArgumentError
-from tornado.web import HTTPError
-from custor.errors import RequestMissArgumentError
-import functools
-from urllib.parse import urlencode
-import urllib.parse as urlparse
+from tornado.web import MissingArgumentError, HTTPError
 
+from custor.errors import RequestMissArgumentError, PageNotFoundError
+
+import random
+import json
 import time, datetime
 
 def random_str(random_length=16):
+    '''
+    生成随机字符串
+    :param random_length:
+    :return:
+    '''
     str = ''
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
     for i in range(random_length):
@@ -19,6 +21,11 @@ def random_str(random_length=16):
     return str
 
 def random_captcha_str(random_length=16):
+    '''
+    生成随机验证码字符串,这里需要排除易混淆的字符
+    :param random_length:
+    :return:
+    '''
     str = ''
     chars = 'abcdefghjklmnpqrstuvwxyz123456789'
     for i in range(random_length):
@@ -63,6 +70,8 @@ def get_cleaned_query_data_http_error(handler, *args):
 def get_cleaned_query_data(handler, args, blank=False):
     '''
     这个是自定义异常的，然后到get/post去catch然后异常处理，不如raise HTTPError来的通用.
+
+    这个也可以做成装饰器
     '''
     data = {}
     for k in args:
@@ -79,6 +88,8 @@ def get_cleaned_query_data(handler, args, blank=False):
 def get_cleaned_post_data(handler, args, blank=False):
     '''
     同上
+
+    这个也可以做成装饰器
     '''
     data = {}
     for k in args:
@@ -94,6 +105,8 @@ def get_cleaned_post_data(handler, args, blank=False):
 def get_cleaned_json_data(handler, args, blank=False):
     '''
     同上
+
+    这个也可以做成装饰器
     '''
     tmp = json.loads(handler.request.body.decode())
     data = {}
@@ -160,9 +173,16 @@ def get_page_nav(current_page, page_number_limit, page_limit):
     if (current_page)*page_limit < page_number_limit:
         pages['cp+1'] = current_page+1
     if (current_page+1)*page_limit < page_number_limit:
-        pages['cp+2'][1] = current_page+2
+        pages['cp+2'] = current_page+2
     return pages
 
+def get_page_number(current_page):
+    if current_page:
+        current_page = int(current_page)
+        if current_page < 1:
+            raise PageNotFoundError
+        return current_page
+    return 1
 
 class TimeUtil:
     '''
@@ -220,6 +240,9 @@ class TimeUtil:
             return TimeUtil.datetime_format(time, "%Y-%m-%d")
 
 class ColorPrint:
+    '''
+    彩色打印
+    '''
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'

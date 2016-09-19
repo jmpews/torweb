@@ -543,4 +543,8 @@ def login_required(method):
     return wrapper
 ```
 
+#### 添加websocket的相关实现
 
+参考链接:
+
+https://www.zhihu.com/question/20215561

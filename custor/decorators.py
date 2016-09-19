@@ -1,11 +1,12 @@
 #encoding:utf-8
 
-from custor.utils import ColorPrint, get_cleaned_post_data
-from custor.utils import set_api_header, json_result, ThreadWorker
+from custor.utils import ColorPrint, get_cleaned_post_data, json_result, ThreadWorker
 from custor.errors import RequestMissArgumentError, PageNotFoundError
 
 from tornado.concurrent import Future
+
 import functools
+import urllib.parse
 import time
 
 def run_with_thread_future(*args, **kwargs):
@@ -88,27 +89,25 @@ def check_captcha(errorcode, result):
 def login_required(method):
     '''
     登陆 装饰器
+
+    from "tornado.web.authenticated"
+    `self.current_user`是一个@property
     :param method:
     :return:
     '''
     from tornado.httpclient import HTTPError
-    '''
-    from "tornado.web.authenticated"
-    `self.current_user`是一个@property
-    '''
-
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         if not self.current_user:
             if self.request.method in ("GET", "HEAD"):
                 url = self.get_login_url()
                 if "?" not in url:
-                    if urlparse.urlsplit(url).scheme:
+                    if urllib.parse.urlsplit(url).scheme:
                         # if login url is absolute, make next absolute too
                         next_url = self.request.full_url()
                     else:
                         next_url = self.request.uri
-                    url += "?" + urlencode(dict(next=next_url))
+                    url += "?" + urllib.parse.urlencode(dict(next=next_url))
                 self.redirect(url)
                 return
             raise HTTPError(403)
@@ -117,6 +116,12 @@ def login_required(method):
     return wrapper
 
 def login_required_json(errorcode, result):
+    """
+    同上, 错误返回json_result结果
+    :param errorcode:
+    :param result:
+    :return:
+    """
     def wrap_func(method):
         @functools.wraps(method)
         def wrapper(self, *args, **kwargs):

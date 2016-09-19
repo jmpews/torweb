@@ -11,7 +11,7 @@ sys_status = [0, 0, 0, 0]
 log_path = '/var/tmp/'
 avatar_upload_path = './frontend/static/assets/images/avatar/'
 common_upload_path = './frontend/static/assets/images/'
-default_page_limit = 3
+default_page_limit = 7
 default_avatar = 'default_doubi.png'
 
 static_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')

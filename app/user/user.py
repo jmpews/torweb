@@ -10,9 +10,9 @@ from db.mysql_model.user import User, Profile, Follower
 
 
 class UserProfileHandler(BaseRequestHandler):
-    '''
+    """
     用户资料页面
-    '''
+    """
     def get(self, user_id, *args, **kwargs):
         user = User.get(User.id == user_id)
         profile = Profile.get_by_user(user)
@@ -21,7 +21,6 @@ class UserProfileHandler(BaseRequestHandler):
         collectposts = CollectPost.select().where(CollectPost.user == user).limit(10)
         # 是否显示关注
         is_follow = Follower.is_follow(user, self.current_user)
-
         self.render('user/profile.html',
                     user=user,
                     profile=profile,
@@ -31,9 +30,9 @@ class UserProfileHandler(BaseRequestHandler):
                     collectposts=collectposts)
 
 class UserProfileEditHandler(BaseRequestHandler):
-    '''
+    """
     用户资料编辑页面
-    '''
+    """
     @login_required
     def get(self, *args, **kwargs):
         user = self.current_user
@@ -54,12 +53,13 @@ class UserProfileEditHandler(BaseRequestHandler):
 
 
 class UserAvatarEditHandler(BaseRequestHandler):
-    '''
+    """
     用户头像编辑处理
-    '''
+    """
     @login_required
     def post(self, *args, **kwargs):
         user = self.current_user
+        # 上传的文件
         avatar = self.request.files['avatar'][0]
         avatar_file_name = user.username + '.' + avatar['filename'].split('.')[-1]
         avatar_file = open(config.avatar_upload_path + avatar_file_name, 'wb')
@@ -69,9 +69,9 @@ class UserAvatarEditHandler(BaseRequestHandler):
         self.redirect('/user/edit')
 
 class UserNotificationHandler(BaseRequestHandler):
-    ''''
+    """
     用户消息通知页面
-    '''
+    """
     @login_required
     def get(self, *args, **kwargs):
         user = self.current_user
@@ -83,9 +83,9 @@ class UserNotificationHandler(BaseRequestHandler):
                     )
 
 class UserFollowerHandler(BaseRequestHandler):
-    '''
+    """
     用户关注与粉丝页面
-    '''
+    """
     def get(self, user_id, *args, **kwargs):
         user = User.get(User.id == user_id)
         who_follow = Follower.select(Follower.follower).where(Follower.user == user)
@@ -101,16 +101,16 @@ class UserFollowerHandler(BaseRequestHandler):
                     is_follow=is_follow)
 
 class UserOptHandler(BaseRequestHandler):
-    '''
+    """
     跟用户API相关的操作
     和postreplyopthandelr设计的类似，api模式
-    '''
+    """
     @login_required_json(-3, 'login failed.')
     def post(self, *args, **kwargs):
-        # 这个函数有点意思, 一直做参数安全clean
         json_data = get_cleaned_json_data(self, ['opt', 'data'])
         data = json_data['data']
         opt = json_data['opt']
+        # 关注用户
         if opt == 'follow-user':
             try:
                 user = User.get(User.id == data['user'])
@@ -119,6 +119,7 @@ class UserOptHandler(BaseRequestHandler):
                 return
             Follower.create(user=user, follower=self.current_user)
             self.write(json_result(0, 'success'))
+        # 取关用户
         elif opt == 'unfollow-user':
             try:
                 user = User.get(User.id == data['user'])
@@ -132,6 +133,7 @@ class UserOptHandler(BaseRequestHandler):
                 return
             f.delete_instance()
             self.write(json_result(0, 'success'))
+        # 更新头像
         elif opt == 'update-avatar':
             import base64
             avatar = base64.b64decode(data['avatar'])
@@ -142,6 +144,7 @@ class UserOptHandler(BaseRequestHandler):
             user.avatar = avatar_file_name
             user.save()
             self.write(json_result(0, 'success'))
+        # 更新社区主题
         elif opt == 'update-theme':
             user = self.current_user
             user.theme = data['theme']

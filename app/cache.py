@@ -1,5 +1,6 @@
 # coding:utf-8
 from custor.logger import logger
+
 from db.mysql_model.post import PostCategory, PostTopic, Post
 
 # 缓存一些cache
@@ -22,8 +23,8 @@ def update_topic_category_cache():
         for i in range(len(topics)):
             tmp.append(topics[i])
         topic_category_cache['topics'].append(tmp)
-        tmp = []
     topics = PostTopic.select().where(PostTopic.category == None)
+    tmp = []
     for i in range(len(topics)):
         tmp.append(topics[i])
     topic_category_cache['topics'].append(tmp)
@@ -59,7 +60,6 @@ def update_system_status_cache():
             import psutil, datetime, time
             while True:
                 try:
-                    time.sleep(30)
                     s1 = psutil.cpu_percent()
                     s2 = psutil.virtual_memory()[2]
                     try:
@@ -71,6 +71,10 @@ def update_system_status_cache():
                     self.systatus[1] = s2
                     self.systatus[2] = s3
                     self.systatus[3] = s4
+                    logger.debug('push 2 clients system_status.')
+                    from app.api.api import SystemStatusWebsocketHandler
+                    SystemStatusWebsocketHandler.write2all(self.systatus)
+                    time.sleep(30)
                 except KeyboardInterrupt:
                     break
 

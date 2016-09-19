@@ -1,0 +1,54 @@
+{% extends "./base.html" %}
+
+{% block title %}Tornado.Post.Detail{% end %}
+
+{% block styles %}
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/css/magula.min.css" rel="stylesheet">
+<script type="text/javascript">
+</script>
+{% end %}
+
+{% block content %}
+    <div class="content-container container">
+        <div class="side">
+            <div class="card custom-card">
+                <div class="card-header">
+                    分类
+                </div>
+                <div class="post-category card-block">
+                    <ul class="">
+                        <li><a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a></li>
+                    </ul>
+                </div>
+                <div class="card-header">
+                    标签
+                </div>
+                <div class="post-label card-block">
+                    <ul class="list-inline">
+                        {% for label in post.labels.split(',') %}
+                        <li><a href="/blog/label/{{ label }}">{{ label }}</a></li>
+                        {% end %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="post-detail">
+                <div class="post-title">{{ post.title }}</div>
+                <div class="post-info">
+                    <span class="post-info-time">{{ post.create_time }}</span>
+                    <span class="divider">/</span>
+                    <span class="post-category">分类: <a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a> </span>
+                </div>
+                <div class="post-content">
+                    {% raw post.content_html %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% end %}
+{% block scripts %}
+<script src="/assets/js/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+{% end %}

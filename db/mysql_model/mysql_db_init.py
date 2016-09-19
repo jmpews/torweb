@@ -13,10 +13,11 @@ def create_test_data(db_mysql):
     from db.mysql_model.user import User, Profile, Follower
     from db.mysql_model.post import Post, PostReply, PostCategory, PostTopic, CollectPost
     from db.mysql_model.common import Notification
+    from db.mysql_model.blog import BlogPost, BlogPostLabel, BlogPostCategory
     logger.debug("DataBase is not exist, so create test data.")
 
     # -------------------- 建表 ---------------
-    db_mysql.create_tables([User, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification], safe=True)
+    db_mysql.create_tables([User, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification, BlogPostCategory, BlogPost, BlogPostLabel], safe=True)
 
     logger.debug('add user: [admin:admin], [test:test]')
     user_admin = User.new(username='admin', email='admin@jmp.com', password='admin')
@@ -91,12 +92,27 @@ def create_test_data(db_mysql):
     post.update_latest_reply(postreply)
 
 
-def mysql_db_init(db_mysql):
-    if not mysqldb.execute_sql("select * from information_schema.schemata where schema_name = '{0}'".format(config.BACKEND_MYSQL['database'])).fetchone():
-        mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci".format(config.BACKEND_MYSQL['database']))
-        create_test_data(db_mysql)
+    # ---------------- 测试Blog --------------
+    logger.debug('add blogpost: [tornado]')
+    bpc0 = BlogPostCategory.create(name='Tornado', str='Tornado')
+    bp0 = BlogPost.create(title='Tornado', category=bpc0, content='Tornado content')
+    BlogPostLabel.add_post_label('python,tornado', bp0)
 
+
+
+def mysql_db_init(db_mysql):
+    if not mysqldb.execute_sql("select * from information_schema.schemata where schema_name = '{0}';".format(config.BACKEND_MYSQL['database'])).fetchone():
+        mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
+    else:
+        mysqldb.execute_sql("drop database torweb")
+        mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
+
+    # create_test_data(db_mysql)
+    logger.debug('load db from db/torweb.sql.')
+    import os
+    os.system(' mysql -u{0} -p{1} {2} <'.format(config.BACKEND_MYSQL['user'], config.BACKEND_MYSQL['password'], config.BACKEND_MYSQL['database'])+os.getcwd()+'/db/torweb.sql')
     mysqldb.close()
+
 import html
 tmp_post = '''
 <pre><code>

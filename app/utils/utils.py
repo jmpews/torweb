@@ -1,15 +1,17 @@
-# coding:utf-8
+#coding:utf-8
 import uuid
 
 from custor.captcha import image_captcha
-
-from settings.config import config
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.utils import json_result, random_captcha_str
 from custor.decorators import login_required
 
+from settings.config import config
 
 class UploadImgHandler(BaseRequestHandler):
+    """
+    上传文件处理
+    """
     @login_required
     def post(self, *args, **kwargs):
         img_name = str(uuid.uuid1())
@@ -22,6 +24,9 @@ class UploadImgHandler(BaseRequestHandler):
         self.write(json_result(0, {'image': img_name}))
 
 class CaptchaHandler(BaseRequestHandler):
+    """
+    验证码生成
+    """
     def get(self, *args, **kwargs):
         captcha_str = random_captcha_str(4)
         captcha_data = image_captcha.generate(captcha_str)

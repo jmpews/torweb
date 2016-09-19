@@ -1,10 +1,17 @@
 #encoding: utf-8
 
+"""
+自定义的异常
+"""
+
 class BaseException(Exception):
     def deal_with(self):
         pass
 
 class RequestMissArgumentError(BaseException):
+    """
+    参数确实异常
+    """
     def __init__(self, msg='Unknown', code=233):
         self.msg = msg
         self.code = code
@@ -14,6 +21,9 @@ class RequestMissArgumentError(BaseException):
         return self.msg
 
 class PageNotFoundError(BaseException):
+    """
+    没有找到该页异常
+    """
     def __init__(self, redirect_url='/static/404.html', code=233):
         self.redirect_url = redirect_url
         self.code = code

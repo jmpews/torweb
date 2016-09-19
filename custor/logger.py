@@ -4,9 +4,9 @@ from settings.config import config
 
 
 class Logger:
-    '''
+    """
     自定义log
-    '''
+    """
     def __init__(self, log_path, level=logging.DEBUG):
         self.logger = logging.getLogger(log_path)
         out_format = logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s')

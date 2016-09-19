@@ -1,15 +1,16 @@
-# coding:utf-8
+#coding:utf-8
 
 from app.cache import system_status_cache
+
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.utils import json_result
 
 import tornado.websocket
 
 class SystemStatusHandler(BaseRequestHandler):
-    '''
-    返回系统状态缓存
-    '''
+    """
+    ajax请求系统状态
+    """
     def get(self, *args, **kwargs):
         self.write(json_result(0, {
             'cpu_per': system_status_cache[0],
@@ -18,9 +19,11 @@ class SystemStatusHandler(BaseRequestHandler):
             'os_start': system_status_cache[3]}))
 
 class WebSocketURLHandler(BaseRequestHandler):
+    """
+    获取websocket_url(因为js在简历websocket server时必须制定绝对的地址,可控性差)
+    """
     def get(self, *args, **kwargs):
         self.write(json_result(0, {'url': '.'}))
-
 
 # 注意配置nginx
 # proxy_http_version 1.1;
@@ -53,6 +56,11 @@ class SystemStatusWebsocketHandler(tornado.websocket.WebSocketHandler):
 
     @classmethod
     def write2all(cls, system_status_cache):
+        '''
+        推送给所有用户
+        :param system_status_cache:
+        :return:
+        '''
         for client in cls.clients:
             client.write_message(json_result(0, {
             'cpu_per': system_status_cache[0],

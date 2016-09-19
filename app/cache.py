@@ -3,7 +3,6 @@ from custor.logger import logger
 
 from db.mysql_model.post import PostCategory, PostTopic, Post
 
-
 # 缓存一些cache
 topic_category_cache = {'categorys': [], 'topics': []}
 hot_post_cache = {'reply': [], 'visit': []}

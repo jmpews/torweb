@@ -1,12 +1,14 @@
 # coding:utf-8
 from app.cache import system_status_cache, hot_post_cache, topic_category_cache
+
 from custor.handlers.basehandler import BaseRequestHandler
-from custor.utils import get_cleaned_post_data, get_cleaned_json_data
-from custor.utils import json_result
+from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result
 from custor.decorators import login_required_json, login_required
+
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, PostTopic, CollectPost
 
+# 换种注释方式
 
 # 帖子详情
 class PostDetailHandler(BaseRequestHandler):
@@ -25,6 +27,7 @@ class PostDetailHandler(BaseRequestHandler):
 
 # 添加帖子
 class PostAddHandler(BaseRequestHandler):
+
     @login_required
     def get(self, *args, **kwargs):
         self.render('post/post_new.html',
@@ -44,12 +47,14 @@ class PostAddHandler(BaseRequestHandler):
             content=post_data['content'],
             user=self.current_user
         )
+        #添加通知, 通知给其他关注的用户
         Notification.new_post(post)
         self.write(json_result(0, {'post_id': post.id}))
 
 
 # 添加回复
 class PostReplyAddHandler(BaseRequestHandler):
+
     @login_required
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['post', 'content'])
@@ -67,14 +72,15 @@ class PostReplyAddHandler(BaseRequestHandler):
         Notification.new_reply(postreply, post)
         self.write(json_result(0, {'post_id': post.id}))
 
+# 帖子相关操作, 类似API的方式, 需要有opt,data参数(统一格式)
 class PostReplyOptHandler(BaseRequestHandler):
 
-    @login_required_json(-3, 'login failed.')
+    @login_required_json(-3, 'login failed.') # 要求登录, 否则返回(错误码, 错误信息)
     def post(self, *args, **kwargs):
-        # 这个函数有点意思, 一直做参数安全clean
         json_data = get_cleaned_json_data(self, ['opt', 'data'])
         data = json_data['data']
         opt = json_data['opt']
+        # 支持某个回复
         if opt == 'support-postreply':
             try:
                 postreply = PostReply.get(PostReply.id == data['postreply'])
@@ -83,11 +89,13 @@ class PostReplyOptHandler(BaseRequestHandler):
                 return
             postreply.up_like()
             self.write(json_result(0, 'success'))
+        # 收藏该主题
         elif opt == 'collect-post':
             try:
                 post = Post.get(Post.id == data['post'])
             except:
                 self.write(json_result(1, '请输入正确的Post'))
+                return
             CollectPost.create(post=post, user=self.current_user)
             self.write(json_result(0, 'success'))
         else:

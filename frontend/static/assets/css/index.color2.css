@@ -26,15 +26,15 @@ body a:hover, body a:focus {
 @media (min-width: 1200px) {
   .content-container {
     max-width: none;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
   }
 }
 @media (min-width: 1450px) {
   .content-container {
     max-width: none;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 10% !important;
+    padding-right: 10% !important;
   }
 }
 .divider {

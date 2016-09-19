@@ -15,10 +15,13 @@ from settings.config import config
 
 
 class IndexHandler(BaseRequestHandler):
-
+    """
+    社区首页
+    """
+    # 时间消耗装饰器
     @timeit
-    # 也许这个参数有其他用处先留着
-    @exception_deal([RequestMissArgumentError,])
+    # 异常捕获装饰器
+    @exception_deal([RequestMissArgumentError,]) # 也许这个参数有其他用处先留着
     def get(self, *args, **kwargs):
         # profiling 性能分析
         # from profiling.tracing import TracingProfiler
@@ -40,11 +43,15 @@ class IndexHandler(BaseRequestHandler):
                     current_topic=None,
                     pages=pages,
                     pages_prefix_url='/?page=')
+
         # profiler.stop()
         # profiler.run_viewer()
 
 
 class IndexTopicHandler(BaseRequestHandler):
+    """
+    带分类的首页
+    """
     def get(self, topic_id, *args, **kwargs):
         try:
             topic = PostTopic.get(PostTopic.str == topic_id)
@@ -61,9 +68,6 @@ class IndexTopicHandler(BaseRequestHandler):
         else:
             current_page = 1
             posts, page_number_limit = Post.list_by_topic(topic)
-        # if not posts:
-        #     self.redirect("/static/404.html")
-        #     return
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
@@ -76,6 +80,9 @@ class IndexTopicHandler(BaseRequestHandler):
 
 
 class RegisterHandler(BaseRequestHandler):
+    """
+    用户注册操作
+    """
     def get(self, *args, **kwargs):
         if self.current_user:
             self.redirect('/')
@@ -98,6 +105,9 @@ class RegisterHandler(BaseRequestHandler):
         self.write(json_result(0,{'username': user.username}))
 
 class LoginHandler(BaseRequestHandler):
+    """
+    用户登陆
+    """
     def get(self, *args, **kwargs):
         if self.current_user:
             self.redirect('/')
@@ -105,26 +115,22 @@ class LoginHandler(BaseRequestHandler):
             self.render('index/login.html')
 
     @timeit
-    # 也许这个参数有其他用处先留着
-    @exception_deal([RequestMissArgumentError,])
-    @check_captcha(-4, '验证码错误')
+    @exception_deal([RequestMissArgumentError,]) # 也许这个参数有其他用处先留着
+    @check_captcha(-4, '验证码错误') # 检查验证码,返回(错误码, 错误信息)
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['username', 'password'])
-        # try:
-        #    post_data=get_cleaned_post_data(self,['username','password'])
-        # except RequestArgumentError as e:
-        #    self.write(json_result(e.code,e.msg))
-        #    return
         user = User.auth(post_data['username'], post_data['password'])
         if user:
             self.set_secure_cookie('uuid', user.username)
             result = json_result(0, 'login success!')
         else:
             result = json_result(-1, 'login failed!')
-            # write as json
         self.write(result)
 
 class LogoutHandler(BaseRequestHandler):
+    """
+    用户登出
+    """
     def get(self, *args, **kwargs):
         if self.current_user:
             self.clear_cookie('uuid')

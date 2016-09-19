@@ -1,18 +1,19 @@
 # coding:utf-8
 
-import json
-import random
-from tornado.web import MissingArgumentError
-from tornado.web import HTTPError
+from tornado.web import MissingArgumentError, HTTPError
+
 from custor.errors import RequestMissArgumentError, PageNotFoundError
 
-import functools
-from urllib.parse import urlencode
-import urllib.parse as urlparse
-
+import random
+import json
 import time, datetime
 
 def random_str(random_length=16):
+    '''
+    生成随机字符串
+    :param random_length:
+    :return:
+    '''
     str = ''
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
     for i in range(random_length):
@@ -20,6 +21,11 @@ def random_str(random_length=16):
     return str
 
 def random_captcha_str(random_length=16):
+    '''
+    生成随机验证码字符串,这里需要排除易混淆的字符
+    :param random_length:
+    :return:
+    '''
     str = ''
     chars = 'abcdefghjklmnpqrstuvwxyz123456789'
     for i in range(random_length):
@@ -234,6 +240,9 @@ class TimeUtil:
             return TimeUtil.datetime_format(time, "%Y-%m-%d")
 
 class ColorPrint:
+    '''
+    彩色打印
+    '''
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'

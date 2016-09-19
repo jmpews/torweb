@@ -61,6 +61,7 @@ body {
     }
 }
 // ---------------------页面样式-content部分样式-------------------
+
 .content-container {
     margin: 0 auto;
     margin-top: 30px;
@@ -82,15 +83,15 @@ body {
 @media (min-width: 1200px) {
     .content-container {
         max-width: none;
-        padding-left: 5%;
-        padding-right: 5%;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
     }
 }
 @media (min-width: 1450px) {
     .content-container {
         max-width: none;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 10% !important;
+        padding-right: 10% !important;
     }
 }
 // 分隔符

@@ -2,6 +2,7 @@
 import tornado.web
 import asyncio
 import tornado.httpclient
+from tornado.web import HTTPError
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.utils import json_result, get_cleaned_query_data, ColorPrint
 from custor.logger import logger
@@ -18,6 +19,9 @@ import time
 
 SERVICE = 'token-service'
 ISSUER = 'registry-token-issuer'
+
+# /v2/_catalog的授权
+SCOPE_CATALOG = {"type":"registry","name":"catalog","actions":["*"]}
 TOKEN_EXPIRATION = 300
 
 # 生成token所需要的key
@@ -63,130 +67,8 @@ class Key(object):
 # 生成key
 key = Key(private_key_path='./private_key.pem')
 
-class DockerRegistryAuth:
-    def __init__(self,private_key_path, scopes='::',service=SERVICE, account='', issuer=ISSUER, token_expires=300):
-        self.account = account
-        self.issuer = issuer
-        self.scopes = scopes
-        self.access = self.get_access_by_scopes(scopes)
-        self.service = service
-        self.private_key_path = private_key_path
-        self.token_expires = token_expires
-
-    @property
-    def private_key(self):
-        if getattr(self, '_private_key_content', None):
-            return self._private_key_content
-
-        with open(self.private_key_path, 'rb') as fp:
-            setattr(self, '_private_key_content', fp.read())
-            return self._private_key_content
-
-    @property
-    def public_key(self):
-        private_key = load_pem_private_key(
-                self.private_key,
-                password=None,
-                backend=default_backend()
-        )
-        _public_key = private_key.public_key()
-        return _public_key
 
 
-    def check_service(self, service):
-        return self.service == service
-
-    def get_token(self):
-        now = int(time.time())
-        claim = {
-            'iss': self.issuer,
-            'sub': self.account,
-            'aud': self.service,
-            'exp': now + self.token_expires,
-            'nbf': now,
-            'iat': now,
-            'jti': base64.b64encode(os.urandom(1024)).decode(),
-            'access': self.access
-        }
-
-        headers = {
-            'kid': self.get_kid().decode()
-        }
-        # import pdb;pdb.set_trace()
-        token = jwt.encode(claim, self.private_key.decode(), algorithm='RS256', headers=headers).decode()
-        return {
-            'token': token,
-            'issued_at': now,
-            'expires_in': now + self.token_expires
-        }
-
-    def get_kid(self):
-        der_public_key = self.public_key.public_bytes(Encoding.DER, PublicFormat.SubjectPublicKeyInfo)
-
-        sha256 = hashlib.sha256(der_public_key)
-        base32_payload = base64.b32encode(sha256.digest()[:30])  # 240bits / 8
-        return b":".join(
-            [base32_payload[i:i + 4] for i in range(0, 48, 4)]
-        )
-
-    def get_login_info(self, authorization):
-        if not authorization:
-            return None
-        auth_info = authorization
-        if authorization.startswith('Basic'):
-            auth_info = authorization[5:]
-
-        user_info = base64.b64decode(auth_info)
-        self.username, self.password = user_info.split(':')
-        return {
-            'username': self.username,
-            'password': self.password,
-        }
-
-    def get_access_by_scopes(self, scopes):
-        print(scopes)
-        scopes = [scopes,]
-        access = list()
-        if not scopes:
-            return access
-        for scope in scopes:
-            type_, name, actions = scope.split(':')
-            if actions == '':
-                actions = []
-            else:
-                actions = actions.split(',')
-            access.append({
-                'type': type_,
-                'name': name,
-                'actions': actions
-            })
-
-        return access
-
-    @staticmethod
-    def unauthorized401(handler, access, message=None, code=None):
-        detail = list()
-        for scope in access:
-            for action in scope['actions']:
-                detail.append({
-                    "Action": action,
-                    "Name": scope['name'],
-                    "Type": scope['type']
-                })
-        data = {
-            "errors": [
-                {
-                    "code": code or "UNAUTHORIZED",
-                    "detail": detail,
-                    "message": message or "access to the requested resource is not authorized"
-                }
-            ]
-        }
-        handler.set_status(401)
-        handler.set_header('Content-Type', 'application/json; charset=utf-8')
-        handler.set_header('Docker-Distribution-Api-Version', 'registry/2.0')
-        handler.set_header('Www-Authenticate', 'Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"')
-        handler.write(json.dumps(data), 401)
 
 class DockerToken():
     def __init__(self, service, scopes, subject=''):
@@ -208,6 +90,7 @@ class DockerToken():
 
     def get_access_by_scopes(self, scopes):
         access = list()
+        access.append(SCOPE_CATALOG)
         if not scopes:
             return access
         scopes = [scopes, ]
@@ -222,12 +105,12 @@ class DockerToken():
                 'name': name,
                 'actions': actions
             })
-
         return access
 
     def get_token(self, key):
         now = int(time.time())
-
+        access = self.get_access_by_scopes(self.scopes)
+        print(access)
         claim = {
             'iss': self.issuer,
             'sub': self.subject,
@@ -236,7 +119,7 @@ class DockerToken():
             'nbf': now,
             'iat': now,
             'jti': base64.b64encode(os.urandom(1024)).decode(),
-            'access': self.get_access_by_scopes(self.scopes)
+            'access': access
         }
 
         headers = {
@@ -244,7 +127,6 @@ class DockerToken():
         }
 
         token = jwt.encode(claim, key.private_key.decode(), algorithm='RS256', headers=headers).decode()
-
         return {
             'token': token,
             'issued_at': now,
@@ -268,8 +150,24 @@ def get_login_info(authorization):
     return username, password
 
 
-def unauthorized401(handler, access, message=None, code=None):
+def get_access_by_scopes(scopes):
+    access = list()
+    if not scopes:
+        return access
+    scopes = [scopes,]
+    for scope in scopes:
+        type_, name, actions = scope.split(':')
+        access.append({
+            'type': type_,
+            'name': name,
+            'actions': actions.split(',')
+        })
+
+    return access
+
+def unauthorized401(handler, scope, message=None, code=None):
     detail = list()
+    access = get_access_by_scopes(scope)
     for scope in access:
         for action in scope['actions']:
             detail.append({
@@ -280,7 +178,7 @@ def unauthorized401(handler, access, message=None, code=None):
     data = {
         "errors": [
             {
-                "code": code or "UNAUTHORIZED",
+                "code": code or "jmpews-error-code",
                 "detail": detail,
                 "message": message or "access to the requested resource is not authorized"
             }
@@ -289,9 +187,8 @@ def unauthorized401(handler, access, message=None, code=None):
     handler.set_status(401)
     handler.set_header('Content-Type', 'application/json; charset=utf-8')
     handler.set_header('Docker-Distribution-Api-Version', 'registry/2.0')
-    handler.set_header('Www-Authenticate',
-                       'Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"')
-    handler.write(json.dumps(data), 401)
+    handler.set_header('Www-Authenticate','Bearer realm="https://127.0.0.1:9000/registryauth/auth",service="token-service",scope="{0}"'.format(scope))
+    handler.write(json.dumps(data))
 
 class RegistryAuthHandler(BaseRequestHandler):
     """
@@ -324,4 +221,79 @@ class RegistryAuthHandler(BaseRequestHandler):
         )
         res = token.get_token(key=key)
         self.write(json.dumps({'token': res['token']}))
+        # unauthorized401(self, scopes)
+        # HTTPError(404)
         return
+
+class RegistryHandler(BaseRequestHandler):
+    def get(self, *args, **kwargs):
+        import requests
+        token = DockerToken(
+            service=SERVICE,
+            scopes=None,
+            subject=''
+        )
+        res = token.get_token(key=key)
+        s = requests.Session()
+        # print(res['token'])
+        s.headers.update({'Authorization': 'Bearer ' + res['token']})
+        resp = s.get('http://127.0.0.1:5000/v2/_catalog')
+        print(resp.json())
+        self.write(resp.text)
+
+
+from custor.handlers.basehandler import BaseRequestHandler
+from custor.decorators import timeit, exception_deal
+from custor.utils import get_cleaned_query_data
+from custor.utils import get_page_nav, get_page_number
+from custor.errors import RequestMissArgumentError, PageNotFoundError
+from settings.config import config
+from db.mysql_model.post import Post
+from app.cache import hot_post_cache, system_status_cache, topic_category_cache
+
+def get_catalog():
+    import requests
+    token = DockerToken(
+        service=SERVICE,
+        scopes=None,
+        subject=''
+    )
+    res = token.get_token(key=key)
+    s = requests.Session()
+    # print(res['token'])
+    s.headers.update({'Authorization': 'Bearer ' + res['token']})
+    resp = s.get('http://127.0.0.1:5000/v2/_catalog')
+    r = resp.json()
+    return r['repositories']
+
+
+class IndexHandler(BaseRequestHandler):
+    """
+    社区首页
+    """
+    # 时间消耗装饰器
+    @timeit
+    # 异常捕获装饰器
+    @exception_deal([RequestMissArgumentError,]) # 也许这个参数有其他用处先留着
+    def get(self, *args, **kwargs):
+        # profiling 性能分析
+        # from profiling.tracing import TracingProfiler
+        #
+        # # profile your program.
+        # profiler = TracingProfiler()
+        # profiler.start()
+
+        current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
+        current_page = get_page_number(current_page)
+        posts, page_number_limit = Post.list_recently(page_number=current_page)
+        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+        repositories = get_catalog()
+        self.render('registry/index.html',
+                    posts=posts,
+                    topic_category_cache=topic_category_cache,
+                    hot_post_cache=hot_post_cache,
+                    systatus=system_status_cache,
+                    current_topic=None,
+                    pages=pages,
+                    repositories=repositories,
+                    pages_prefix_url='/?page=')

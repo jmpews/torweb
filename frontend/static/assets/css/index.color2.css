@@ -1010,14 +1010,14 @@ form .form-control:disabled {
   word-wrap: break-word;
   word-break: normal;
 }
-.post-detail-card .post-content pre {
+.post-detail-card .post-content prex {
   padding: .66001rem 9.5px 9.5px;
   line-height: 2rem;
   background: linear-gradient(to bottom, #fff 0, #fff 0.75rem, #f5f7fa 0.75rem, #f5f7fa 2.75rem, #fff 2.75rem, #fff 4rem);
   background-size: 100% 4rem;
   border: 1px solid #D3DAEA;
 }
-.post-detail-card .post-content pre code {
+.post-detail-card .post-content prex code {
   padding: 0;
   font-size: inherit;
   color: inherit;

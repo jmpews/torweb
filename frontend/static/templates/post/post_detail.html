@@ -5,6 +5,7 @@
 <!-- <link rel="stylesheet" href="/assets/css/summernote.css"> -->
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
 <link href="/assets/css/medium-editor.min.css" rel="stylesheet">
+<link href="/assets/css/magula.min.css" rel="stylesheet">
 {% end %}
 
 {% block content %}
@@ -186,6 +187,8 @@
 
 {% block scripts %}
 <script src="/assets/js/medium-editor.min.js"></script>
+<script src="/assets/js/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
     $(document).ready(function () {
     var post='{{post_detail.id}}';
@@ -276,7 +279,7 @@
                }
            }
         });
-    })
+    });
     show_hide_cate_nav();
     show_hide_emoji_list_medium();
     load_emoji_medium();

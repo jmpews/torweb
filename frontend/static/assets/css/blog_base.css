@@ -4,6 +4,7 @@ html {
 
 body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
+  font-weight: 300;
   color: #34495E;
   font-size: 13px;
   line-height: 1.5;
@@ -172,7 +173,7 @@ img {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.1;
   color: inherit;
   margin-top: 0;
@@ -353,7 +354,7 @@ form .form-control:disabled {
 }
 
 .btn-outline-primary {
-  color: #222;
+  color: #e95420;
   border-color: #e95420;
   background-image: none;
   background-color: transparent;
@@ -456,6 +457,7 @@ form .form-control:disabled {
   background-color: #fff;
 }
 .card .card-header {
+  font-weight: 400;
   background-color: #fff;
   color: #e95420;
   position: relative;
@@ -612,6 +614,7 @@ form .form-control:disabled {
   padding-right: 15px;
   padding-left: 15px;
   color: #fff;
+  font-weight: 400;
 }
 .header .header-container .header-logo a:hover {
   color: #fff;
@@ -630,7 +633,8 @@ form .form-control:disabled {
   box-shadow: inset 0 -3px 0px #e95420;
 }
 .header .header-container .header-nav li.active a, .header .header-container .header-nav li:hover a {
-  color: #e95420;
+  font-weight: 400;
+  color: #fff;
 }
 .header .header-container .header-nav li a {
   display: block;
@@ -639,7 +643,7 @@ form .form-control:disabled {
   border-top: 4px solid transparent;
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
-  color: #e95420;
+  color: #fff;
 }
 .header .header-container .header-tip {
   float: right;
@@ -648,7 +652,7 @@ form .form-control:disabled {
   color: #e95420;
 }
 .header .header-container .header-tip a:hover {
-  color: #e95420;
+  color: #fff;
 }
 .header .header-container .header-tip .options li {
   float: left;

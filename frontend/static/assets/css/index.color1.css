@@ -4,6 +4,7 @@ html {
 
 body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
+  font-weight: 300;
   color: #999;
   font-size: 13px;
   line-height: 1.5;
@@ -194,7 +195,7 @@ img {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.1;
   color: inherit;
   margin-top: 0;
@@ -409,15 +410,15 @@ form .form-control:disabled {
 }
 
 .btn-outline-primary {
-  color: #666;
+  color: #FFBCBC;
   border-color: #FFBCBC;
   background-image: none;
   background-color: transparent;
 }
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
   color: #fff !important;
-  background-color: #ff7070;
-  border-color: #ff7070;
+  background-color: #FFBCBC;
+  border-color: #FFBCBC;
 }
 
 .btn-primary {
@@ -511,6 +512,7 @@ form .form-control:disabled {
   background-color: #fff;
 }
 .card .card-header {
+  font-weight: 400;
   background-color: #fff;
   color: #FFBCBC;
   position: relative;
@@ -669,6 +671,7 @@ form .form-control:disabled {
   padding-right: 15px;
   padding-left: 15px;
   color: #fff;
+  font-weight: 400;
 }
 .header .header-container .header-logo a:hover {
   color: #fff;
@@ -686,6 +689,10 @@ form .form-control:disabled {
 .header .header-container .header-nav li.active {
   box-shadow: inset 0 -3px 0px #FFBCBC;
 }
+.header .header-container .header-nav li.active a {
+  font-weight: 400;
+  color: #fff;
+}
 .header .header-container .header-nav li:hover {
   background-color: rgba(255, 255, 255, 0.26);
   box-shadow: inset 0 -3px 0px #FFBCBC;
@@ -697,16 +704,20 @@ form .form-control:disabled {
   border-top: 4px solid transparent;
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
-  color: #FFBCBC;
+  color: #fff;
 }
 .header .header-container .header-tip {
   float: right;
+}
+.header .header-container .header-tip #user-avatar img {
+  border-radius: 50%;
 }
 .header .header-container .header-tip a {
   color: #999;
 }
 .header .header-container .header-tip a:hover {
-  color: #FFBCBC;
+  font-weight: 400;
+  color: #fff;
 }
 .header .header-container .header-tip .options li {
   float: left;
@@ -864,6 +875,7 @@ form .form-control:disabled {
 }
 .post-item .post-item-mid .item-title {
   font-size: 16px;
+  font-weight: 400;
   margin-bottom: 7px;
   word-wrap: break-word;
 }

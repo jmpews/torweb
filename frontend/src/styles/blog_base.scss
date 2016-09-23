@@ -26,7 +26,7 @@ $important-link-color: $logo-color !default;
 
 $nav-header-background-color: #fff !default;
 $nav-header-font-color: $font-color !default;
-$nav-header-font-hover-color: $logo-color !default;
+$nav-header-font-hover-color: #fff !default;
 $nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
 
 $card-header-background-color: #fff !default;
@@ -43,6 +43,7 @@ html {
 
 body {
     font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
+    font-weight: 300;
     color: $font-color;
     font-size: 13px;
     line-height: 1.5;
@@ -246,7 +247,7 @@ img {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-bottom: 0.5rem;
     font-family: inherit;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.1;
     color: inherit;
     margin-top: 0;
@@ -429,14 +430,14 @@ form {
     border-radius: 0.1rem;
 }
 .btn-outline-primary {
-    color: $important-font-color;
+    color: $link-color;
     border-color: $btn-color;
     background-image: none;
     background-color: transparent;
     &:hover, &:focus, &:active {
         color: #fff !important;
-        background-color: $btn-hover-color;
-        border-color: $btn-hover-color;
+        background-color: $btn-color;
+        border-color: $btn-color;
         outline: none;
     }
 }
@@ -535,6 +536,7 @@ form {
     border-top: none;
     background-color: $card-body-background-color;
     .card-header {
+        font-weight: 400;
         background-color: $card-header-background-color;
         color: $card-header-font-color;
         position: relative;
@@ -710,6 +712,7 @@ $header-height: 70px;
                 padding-right: 15px;
                 padding-left: 15px;
                 color: #fff;
+                font-weight: 400;
                 &:hover {
                     color: #fff;
                 }
@@ -729,6 +732,7 @@ $header-height: 70px;
                     -moz-box-shadow: inset 0 -3px 0px $logo-color;
                     box-shadow: inset 0 -3px 0px $logo-color;
                     a {
+                        font-weight: 400;
                         color: $nav-header-font-hover-color;
                     }
                 }

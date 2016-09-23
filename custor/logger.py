@@ -13,7 +13,7 @@ class Logger:
 
         file_log_handler = logging.FileHandler(log_path)
         file_log_handler.setFormatter(out_format)
-        # file_log_handler.setLevel(level)
+        file_log_handler.setLevel(level)
 
         steam_log_handler = logging.StreamHandler(sys.stdout)
         steam_log_handler.setFormatter(out_format)

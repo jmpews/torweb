@@ -759,7 +759,7 @@ form .form-control:disabled {
 
 .banner {
   border: 10px solid #fff;
-  padding-left: 15px;
+  margin-left: 15px;
   margin-bottom: 20px;
   background-position: 50%;
   background-size: cover;

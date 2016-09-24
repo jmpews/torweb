@@ -19,6 +19,7 @@ BACKEND_REDIS = ('localhost', 6379, 0)
 STATIC_PATH = (
     (r'/avatar/(.*)', {'path': 'frontend/static/assets/'}),
     (r'/assets/lib/(.*)', {'path': 'frontend/lib/'}),
-    (r'/assets/(.*)', {'path':'frontend/static/assets/'})
+    (r'/assets/(.*)', {'path':'frontend/static/assets/'}),
+    (r'/dashboard/(.*)', {'path':'frontend/static/templates/dashboard/'})
 )
 

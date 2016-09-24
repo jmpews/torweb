@@ -77,9 +77,6 @@ ul {
   padding-left: 0;
   list-style: none;
 }
-.list-inline li {
-  float: left;
-}
 
 .float-right {
   float: right;
@@ -758,6 +755,19 @@ form .form-control:disabled {
 .header .header-container .header-tip .options .dropdown .dropdown-menu li a:hover {
   color: #446491;
   background: none;
+}
+
+.banner {
+  border: 10px solid #fff;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.banner .bg img {
+  width: 100%;
 }
 
 .footer {

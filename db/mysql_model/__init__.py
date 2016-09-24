@@ -20,4 +20,4 @@ class BaseModel(Model):
     class Meta:
         database = db_mysql
 
-mysql_db_init(db_mysql)
+# mysql_db_init(db_mysql)

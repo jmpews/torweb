@@ -18,7 +18,7 @@ $border-color: #eaeaea !default;
 $body-backgroud-color: #f7f7f7 !default;
 $gray-background-color: #efefef;
 
-$link-color: $logo-color !default;
+$link-color: $base-color !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-light-color:  lighten($font-color, 15%) !default;
 $btn-color: $link-color !default;
@@ -47,7 +47,7 @@ html {
 
 body {
     font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
-    font-weight: 300;
+    font-weight: 400;
     color: $font-color;
     font-size: 13px;
     line-height: 1.5;
@@ -774,7 +774,7 @@ $header-height: 70px;
         }
         .header-nav {
             width: 100%;
-            max-width: 324px;
+            max-width: 450px;
             li {
                 float: left;
                 position: relative;
@@ -799,7 +799,7 @@ $header-height: 70px;
                 a {
                     // 什么时候使用block? 全部充满parent
                     display: block;
-                    font-size: 14px;
+                    font-size: 15px;
                     text-align: center;
                     border-top: 4px solid transparent;
                     //-webkit-box-shadow: inset 0 -3px 0px $link-color;
@@ -1023,10 +1023,10 @@ $header-height: 70px;
                 }
             }
         }
-        .post-item-info {
-            font-size: 11px;
+        .item-info {
+            font-size: 12px;
             .post-category {
-                padding: 2px;
+                padding: 3px;
                 color: $font-color;
                 background-color: #efefef;
             }

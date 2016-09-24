@@ -4,7 +4,7 @@ html {
 
 body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
-  font-weight: 300;
+  font-weight: 400;
   color: #999;
   font-size: 13px;
   line-height: 1.5;
@@ -678,7 +678,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-nav {
   width: 100%;
-  max-width: 324px;
+  max-width: 450px;
 }
 .header .header-container .header-nav li {
   float: left;
@@ -699,7 +699,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-nav li a {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   text-align: center;
   border-top: 4px solid transparent;
 }
@@ -886,15 +886,15 @@ form .form-control:disabled {
   color: #FFBCBC;
   text-decoration: underline;
 }
-.post-item .post-item-mid .post-item-info {
-  font-size: 11px;
+.post-item .post-item-mid .item-info {
+  font-size: 12px;
 }
-.post-item .post-item-mid .post-item-info .post-category {
-  padding: 2px;
+.post-item .post-item-mid .item-info .post-category {
+  padding: 3px;
   color: #999;
   background-color: #efefef;
 }
-.post-item .post-item-mid .post-item-info .divider {
+.post-item .post-item-mid .item-info .divider {
   margin: 0 3px;
   color: #ccc;
 }

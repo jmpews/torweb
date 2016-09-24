@@ -4,7 +4,7 @@ html {
 
 body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
-  font-weight: 300;
+  font-weight: 400;
   color: #999;
   font-size: 13px;
   line-height: 1.5;
@@ -101,7 +101,7 @@ ul {
 
 .captcha {
   height: 40px;
-  border: 1px solid #becada;
+  border: 1px solid #f5f5f5;
 }
 
 @media (max-width: 767px) {
@@ -508,7 +508,7 @@ form .form-control:disabled {
   display: block;
   margin-bottom: 0.75rem;
   border-radius: 0.1rem;
-  border: 1px solid #becada;
+  border: 1px solid #f5f5f5;
   background-color: #fff;
 }
 .card .card-header {
@@ -516,7 +516,7 @@ form .form-control:disabled {
   background-color: #fff;
   color: #446491;
   position: relative;
-  border-bottom: 1px solid #becada;
+  border-bottom: 1px solid #f5f5f5;
   padding: 0.5rem 1rem !important;
 }
 .card .card-header a:hover {
@@ -619,7 +619,7 @@ form .form-control:disabled {
   margin: 0 auto;
   z-index: 999;
   background-color: #446491;
-  border-bottom: 1px solid #becada;
+  border-bottom: 1px solid #f5f5f5;
 }
 .header a {
   color: #fff;
@@ -678,7 +678,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-nav {
   width: 100%;
-  max-width: 324px;
+  max-width: 450px;
 }
 .header .header-container .header-nav li {
   float: left;
@@ -699,7 +699,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-nav li a {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   text-align: center;
   border-top: 4px solid transparent;
 }
@@ -843,7 +843,7 @@ form .form-control:disabled {
 }
 
 .post-item {
-  border-bottom: 1px solid #becada;
+  border-bottom: 1px solid #f5f5f5;
   padding-top: 17px;
   padding-bottom: 7px;
   position: relative;
@@ -886,15 +886,15 @@ form .form-control:disabled {
   color: #446491;
   text-decoration: underline;
 }
-.post-item .post-item-mid .post-item-info {
-  font-size: 11px;
+.post-item .post-item-mid .item-info {
+  font-size: 12px;
 }
-.post-item .post-item-mid .post-item-info .post-category {
-  padding: 2px;
+.post-item .post-item-mid .item-info .post-category {
+  padding: 3px;
   color: #999;
   background-color: #efefef;
 }
-.post-item .post-item-mid .post-item-info .divider {
+.post-item .post-item-mid .item-info .divider {
   margin: 0 3px;
   color: #ccc;
 }
@@ -1164,9 +1164,9 @@ form .form-control:disabled {
   background-color: #fff;
   z-index: 999;
   padding: 5px;
-  border-left: 1px solid #becada;
-  border-right: 1px solid #becada;
-  border-bottom: 1px solid #becada;
+  border-left: 1px solid #f5f5f5;
+  border-right: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
 }
 .card-header-all h3 {
   font-size: 14px;

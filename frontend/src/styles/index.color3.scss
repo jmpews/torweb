@@ -12,15 +12,20 @@ $bg1: #e1e1e1;
 
 $base-color: #4b89ac;
 
+//#2fca7b;
 $logo-color: #ace6f6;
+
 $font-color: #999;
 $link-color: #446491;
+$important-link-color: $logo-color;
 $body-backgroud-color: #f7f7f7;
 $nav-header-background-color: #446491;
 $nav-header-font-color: #fff;
 $nav-header-font-hover-color: $logo-color;
 $nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
-$border-color: #becada;
+
+$border-color: #f5f5f5;
+
 $important-font-color: #446491;
 $important-link-color: #446491;
 $card-header-background-color: #fff;

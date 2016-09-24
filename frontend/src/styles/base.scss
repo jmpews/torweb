@@ -16,6 +16,7 @@ $logo-color: $base-color !default;
 $font-color: #999 !default;
 $border-color: #eaeaea !default;
 $body-backgroud-color: #f7f7f7 !default;
+$gray-font-color: #8a8a8a !default;
 $gray-background-color: #efefef;
 
 $link-color: $base-color !default;
@@ -132,11 +133,15 @@ body {
 ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 .list-inline {
     padding-left: 0;
     list-style: none;
+    li {
+        float: left;
+    }
 }
 
 .float-right {
@@ -802,6 +807,7 @@ $header-height: 70px;
                     font-size: 15px;
                     text-align: center;
                     border-top: 4px solid transparent;
+                    color: $nav-header-font-color;
                     //-webkit-box-shadow: inset 0 -3px 0px $link-color;
                     //-moz-box-shadow: inset 0 -3px 0px $link-color;
                     //box-shadow: inset 0 -3px 0px $link-color;
@@ -834,6 +840,7 @@ $header-height: 70px;
                     text-align: center;
                     img {
                         width: 50px;
+                        border-radius: 50%;
                     }
                     &>a {
                         padding: 5px;
@@ -1102,7 +1109,7 @@ $header-height: 70px;
             max-width: 500px;
             margin: 0;
             a {
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: 500;
                 line-height: 30px;
                 color: $important-font-color;

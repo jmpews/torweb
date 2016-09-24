@@ -70,11 +70,15 @@ body a:hover, body a:focus {
 ul {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .list-inline {
   padding-left: 0;
   list-style: none;
+}
+.list-inline li {
+  float: left;
 }
 
 .float-right {
@@ -702,6 +706,7 @@ form .form-control:disabled {
   font-size: 15px;
   text-align: center;
   border-top: 4px solid transparent;
+  color: #999;
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
   color: #fff;
@@ -727,6 +732,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-tip .options li img {
   width: 50px;
+  border-radius: 50%;
 }
 .header .header-container .header-tip .options li > a {
   padding: 5px;
@@ -969,7 +975,7 @@ form .form-control:disabled {
   margin: 0;
 }
 .post-detail-card .post-detail-header .post-title a {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   line-height: 30px;
   color: #666;

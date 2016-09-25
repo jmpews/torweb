@@ -506,17 +506,17 @@ function chat_init(data) {
             var s = "<li class='chat-self cl'><img class='avatar' src='/assets/images/avatar/"+data['me_avatar']+"'><div class='chat-text'>"+chatlog[i][1]+"</div></li>";
         $(chatcontent).append(s)
     }
-    $('.container-chat').show();
+    $('.chat-container').show();
 }
 $(document).click(function(e) {
-    $(".container-chat").on("click", function(e){
+    $(".chat-container").on("click", function(e){
         e.stopPropagation();
     });
-    if ($('.container-chat').is(":hidden")) {
+    if ($('.chat-container').is(":hidden")) {
         return;
     }
     else {
-        $(".container-chat").hide();
+        $(".chat-container").hide();
     }
 
     if ($("#emoji-list").is(":hidden")) {

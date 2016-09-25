@@ -905,7 +905,7 @@ $header-height: 70px;
 $char-border-color: #ededed;
 
 @media (max-width: 767px){
-    .container-chat {
+    .chat-container {
         padding-left: 5px;
         padding-right: 5px;
         width: 100% !important;
@@ -914,7 +914,7 @@ $char-border-color: #ededed;
         }
     }
 }
-.container-chat {
+.chat-container {
     display: none;
     width: 25%;
     position: fixed;
@@ -1058,15 +1058,23 @@ $char-border-color: #ededed;
             padding: 0 1.25rem;
         }
     }
+
     .col-md-3 {
         //padding-right: 0px;
     }
+
+	&.content-container {
+		padding-left: 25px
+	}
 }
 
 // ------------左侧当前主题
 $current-topic-width: 21px;
-.index-html .all-cate-card {
-    margin-left: $current-topic-width !important;
+
+@media (max-width: 767px){
+	.index-html .all-cate-card {
+		margin-left: $current-topic-width !important;
+	}
 }
 //.index-html .col-md-9 { padding-left: $current-topic-width !important;}
 //.index-html .banner { margin-left: $current-topic-width !important;}

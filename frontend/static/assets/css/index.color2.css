@@ -785,16 +785,16 @@ form .form-control:disabled {
 }
 
 @media (max-width: 767px) {
-  .container-chat {
+  .chat-container {
     padding-left: 5px;
     padding-right: 5px;
     width: 100% !important;
   }
-  .container-chat .chat {
+  .chat-container .chat {
     width: 100% !important;
   }
 }
-.container-chat {
+.chat-container {
   display: none;
   width: 25%;
   position: fixed;
@@ -924,11 +924,15 @@ form .form-control:disabled {
 .index-html .col-md-9 .card-block {
   padding: 0 1.25rem;
 }
-
-.index-html .all-cate-card {
-  margin-left: 21px !important;
+.index-html.content-container {
+  padding-left: 25px;
 }
 
+@media (max-width: 767px) {
+  .index-html .all-cate-card {
+    margin-left: 21px !important;
+  }
+}
 .current-topic {
   background-color: #34495E;
   float: left;

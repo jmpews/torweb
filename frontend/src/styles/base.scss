@@ -81,7 +81,16 @@ body {
     // }
 
 }
-
+@media (max-width: 767px){
+    .content-container {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+    .col-md-9, .col-md-3 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
 @media (min-width: 1200px) {
     .content-container {
         max-width: none;
@@ -876,7 +885,6 @@ $header-height: 70px;
 // ---------------------banner部分样式-------------------
 .banner {
     border: 10px solid #fff;
-    margin-left: 15px;
     margin-bottom: 20px;
     background-position: 50%;
     background-size: cover;
@@ -940,7 +948,7 @@ $header-height: 70px;
     }
 }
 
-// 分类下拉card
+// ------------------分类下拉card
 .all-cate-card {
     .card-header {
       a {
@@ -973,7 +981,9 @@ $header-height: 70px;
     }
 }
 
-// 左侧当前主题
+// ------------左侧当前主题
+$current-topic-width: 21px;
+.all-cate-card { margin-left: $current-topic-width }
 .current-topic {
     background-color: $btn-color;
     float: left;
@@ -981,15 +991,30 @@ $header-height: 70px;
     // 垂直居中
     top: 50%;
     transform: translate(0,-50%);
-    left: -21px;
-    width: 21px;
+    left: 0-$current-topic-width;
+    // 文字竖排显示,强制宽度
+    width: $current-topic-width;
+    min-height: 70px;
     span {
-        // 文字竖排显示
-        padding-left: 5px;
+        // 1. 面向所有类型居中,必须设置父类的高度
+        //position: absolute;
+        //left: 50%;
+        //top: 50%;
+        //transform: translate(-50%, -50%);
+
+        // 2. 文字居中
+        position: absolute;
+        display: block;
+        text-align: center;
+        top: 50%;
+        transform: translate(0, -50%);
+
+        //padding-left: 5px;
         color: #fff;
         font-size: 11px;
-        letter-spacing: 11px;
-        display: block;
+        //writing-mode: vertical-lr;
+        //word-wrap: break-word;
+        //display: block;
     }
 }
 

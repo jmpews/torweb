@@ -67,7 +67,6 @@ def runserver():
         ui_methods=ui_build_methods,
         default_handler_class=ErrorHandler,
         debug=config.DEBUG,
-        static_path=config.static_path,
         template_path=config.TEMPLATE_PATH,
         login_url=config.LOGIN_URL,
         cookie_secret=config.COOKIE_SECRET,

@@ -27,6 +27,7 @@
                         {% else %}
                             <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="0" role="button">关注</a>
                         {% end %}
+                            <a class="btn btn-sm btn-outline-primary" href="#blank" other="{{user.id}}" role="button">私信</a>
                         </div>
                     {% end %}
                 </div>
@@ -124,7 +125,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var user_id = {{user.id}};
-        monitor_system_status()
+        monitor_system_status();
+
+        // 初始化聊天
+        $('a[other]').on('click', function (e) {
+            get_chat_log($(e.currentTarget).attr('other'));
+        });
         $('.follow-user').on('mouseover', function(e){
             if($(e.target).attr('is_follow') == '1') {
                 $(e.target).html('取消关注');

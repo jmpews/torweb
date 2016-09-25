@@ -647,6 +647,11 @@ form {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.col-md-9 {
+    padding-left: 0px
+}
+
 @media (min-width: 768px) {
     .col-md-9 {
         float: left;
@@ -896,6 +901,83 @@ $header-height: 70px;
         }
     }
 }
+// ---------------------chat部分样式-------------------
+$char-border-color: #ededed;
+
+@media (max-width: 767px){
+    .container-chat {
+        padding-left: 5px;
+        padding-right: 5px;
+        width: 100% !important;
+        .chat {
+            width: 100% !important;
+        }
+    }
+}
+.container-chat {
+    display: none;
+    width: 25%;
+    position: fixed;
+    right: 5px;
+    bottom: 0;
+}
+.chat {
+    background: #fff;
+    border: 1px solid $char-border-color;
+    min-width: 300px;
+    .chat-header {
+        text-align: center;
+        border-bottom: 1px solid $char-border-color;
+        padding: 5px;
+    }
+    .chat-content {
+        li {
+            padding-bottom: 5px;
+            margin-top: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .avatar {
+            width: 30px;
+            height: 30px;
+        }
+        .chat-other {
+            border-bottom: 1px solid $char-border-color;
+            img {
+                float: left;
+            }
+            .chat-text {
+                text-align: left;
+                margin-left: 35px;
+            }
+        ;
+        }
+        .chat-self {
+            border-bottom: 1px solid $char-border-color;
+            img {
+                float: right;
+            }
+            .chat-text {
+                text-align: right;
+                margin-right: 35px;
+            }
+        }
+    }
+    .chat-footer {
+        padding: 10px;
+        background-color: #f7f7f7;
+        textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .form-group {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+    }
+}
 // ---------------------footer部分样式-------------------
 .footer {
     background-color: white;
@@ -977,13 +1059,14 @@ $header-height: 70px;
         }
     }
     .col-md-3 {
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 }
 
 // ------------左侧当前主题
 $current-topic-width: 21px;
-.all-cate-card { margin-left: $current-topic-width }
+.index-html .col-md-9 { padding-left: $current-topic-width }
+.index-html .banner { margin-left: $current-topic-width }
 .current-topic {
     background-color: $btn-color;
     float: left;
@@ -1511,7 +1594,7 @@ $current-topic-width: 21px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 
 }
@@ -1658,7 +1741,7 @@ $current-topic-width: 21px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 
 }
@@ -1669,7 +1752,7 @@ $current-topic-width: 21px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 }
 
@@ -1736,7 +1819,7 @@ $current-topic-width: 21px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 }
 // ---------------------------emoji表情-----------------------

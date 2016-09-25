@@ -567,6 +567,10 @@ form .form-control:disabled {
   padding-left: 15px;
 }
 
+.col-md-9 {
+  padding-left: 0px;
+}
+
 @media (min-width: 768px) {
   .col-md-9 {
     float: left;
@@ -780,6 +784,79 @@ form .form-control:disabled {
   width: 100%;
 }
 
+@media (max-width: 767px) {
+  .container-chat {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100% !important;
+  }
+  .container-chat .chat {
+    width: 100% !important;
+  }
+}
+.container-chat {
+  display: none;
+  width: 25%;
+  position: fixed;
+  right: 5px;
+  bottom: 0;
+}
+
+.chat {
+  background: #fff;
+  border: 1px solid #ededed;
+  min-width: 300px;
+}
+.chat .chat-header {
+  text-align: center;
+  border-bottom: 1px solid #ededed;
+  padding: 5px;
+}
+.chat .chat-content li {
+  padding-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.chat .chat-content .avatar {
+  width: 30px;
+  height: 30px;
+}
+.chat .chat-content .chat-other {
+  border-bottom: 1px solid #ededed;
+}
+.chat .chat-content .chat-other img {
+  float: left;
+}
+.chat .chat-content .chat-other .chat-text {
+  text-align: left;
+  margin-left: 35px;
+}
+.chat .chat-content .chat-self {
+  border-bottom: 1px solid #ededed;
+}
+.chat .chat-content .chat-self img {
+  float: right;
+}
+.chat .chat-content .chat-self .chat-text {
+  text-align: right;
+  margin-right: 35px;
+}
+.chat .chat-footer {
+  padding: 10px;
+  background-color: #f7f7f7;
+}
+.chat .chat-footer textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.chat .chat-footer .form-group {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 .footer {
   background-color: white;
   margin-top: 20px;
@@ -847,11 +924,12 @@ form .form-control:disabled {
 .index-html .col-md-9 .card-block {
   padding: 0 1.25rem;
 }
-.index-html .col-md-3 {
-  padding-right: 0px;
+
+.index-html .col-md-9 {
+  padding-left: 21px;
 }
 
-.all-cate-card {
+.index-html .banner {
   margin-left: 21px;
 }
 
@@ -1319,7 +1397,6 @@ form .form-control:disabled {
 }
 .user-profile-html .col-md-3 {
   margin-bottom: 10px;
-  padding-right: 0px;
 }
 
 .user-profile-widget {
@@ -1443,7 +1520,6 @@ form .form-control:disabled {
 }
 .user-profile-follower-html .col-md-3 {
   margin-bottom: 10px;
-  padding-right: 0px;
 }
 
 .user-profile-edit-html .col-md-9 {
@@ -1451,7 +1527,6 @@ form .form-control:disabled {
 }
 .user-profile-edit-html .col-md-3 {
   margin-bottom: 10px;
-  padding-right: 0px;
 }
 
 .user-avatar-edit {
@@ -1527,7 +1602,6 @@ form .form-control:disabled {
 }
 .user-profile-notification-html .col-md-3 {
   margin-bottom: 10px;
-  padding-right: 0px;
 }
 
 .emoji {

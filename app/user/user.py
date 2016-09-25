@@ -4,9 +4,10 @@ from settings.config import config
 from custor.handlers.basehandler import BaseRequestHandler
 from custor.decorators import login_required_json, login_required
 from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result
+
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, CollectPost
-from db.mysql_model.user import User, Profile, Follower
+from db.mysql_model.user import User, Profile, Follower, ChatLog
 
 
 class UserProfileHandler(BaseRequestHandler):
@@ -150,6 +151,13 @@ class UserOptHandler(BaseRequestHandler):
             user.theme = data['theme']
             user.save()
             self.write(json_result(0, 'success'))
+
+        elif opt == 'realtime-chat':
+            user = self.current_user
+            other_id = data['other']
+            other = User.get(User.id == other_id)
+            result = ChatLog.get_chat_log(user, other)
+            self.write(json_result(0, result))
         else:
             self.write(json_result(1, 'opt不支持'))
 

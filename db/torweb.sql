@@ -100,6 +100,37 @@ INSERT INTO `blogpostlabel` VALUES (62,'引用计数',46,0),(63,'tornado',47,0),
 UNLOCK TABLES;
 
 --
+-- Table structure for table `chatlog`
+--
+
+DROP TABLE IF EXISTS `chatlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chatlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `me_id` int(11) NOT NULL,
+  `other_id` int(11) NOT NULL,
+  `content` longtext NOT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `chatlog_me_id` (`me_id`),
+  KEY `chatlog_other_id` (`other_id`),
+  CONSTRAINT `chatlog_ibfk_1` FOREIGN KEY (`me_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `chatlog_ibfk_2` FOREIGN KEY (`other_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chatlog`
+--
+
+LOCK TABLES `chatlog` WRITE;
+/*!40000 ALTER TABLE `chatlog` DISABLE KEYS */;
+INSERT INTO `chatlog` VALUES (1,1,2,'self>other','2016-09-25 22:34:56'),(2,2,1,'other>self','2016-09-25 22:34:56');
+/*!40000 ALTER TABLE `chatlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `collectpost`
 --
 
@@ -401,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-17 23:21:34
+-- Dump completed on 2016-09-26  0:40:38

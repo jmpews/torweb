@@ -925,12 +925,8 @@ form .form-control:disabled {
   padding: 0 1.25rem;
 }
 
-.index-html .col-md-9 {
-  padding-left: 21px;
-}
-
-.index-html .banner {
-  margin-left: 21px;
+.index-html .all-cate-card {
+  margin-left: 21px !important;
 }
 
 .current-topic {

@@ -1065,8 +1065,11 @@ $char-border-color: #ededed;
 
 // ------------左侧当前主题
 $current-topic-width: 21px;
-.index-html .col-md-9 { padding-left: $current-topic-width }
-.index-html .banner { margin-left: $current-topic-width }
+.index-html .all-cate-card {
+    margin-left: $current-topic-width !important;
+}
+//.index-html .col-md-9 { padding-left: $current-topic-width !important;}
+//.index-html .banner { margin-left: $current-topic-width !important;}
 .current-topic {
     background-color: $btn-color;
     float: left;

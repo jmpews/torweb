@@ -16,9 +16,10 @@ $logo-color: $base-color !default;
 $font-color: #999 !default;
 $border-color: #eaeaea !default;
 $body-backgroud-color: #f7f7f7 !default;
+$gray-font-color: #8a8a8a !default;
 $gray-background-color: #efefef;
 
-$link-color: $logo-color !default;
+$link-color: $base-color !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-light-color:  lighten($font-color, 15%) !default;
 $btn-color: $link-color !default;
@@ -29,7 +30,7 @@ $important-link-color: $logo-color !default;
 
 $nav-header-background-color: #fff !default;
 $nav-header-font-color: $font-color !default;
-$nav-header-font-hover-color: $logo-color !default;
+$nav-header-font-hover-color: #fff !default;
 $nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
 
 $card-header-background-color: #fff !default;
@@ -47,6 +48,7 @@ html {
 
 body {
     font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
+    font-weight: 400;
     color: $font-color;
     font-size: 13px;
     line-height: 1.5;
@@ -79,7 +81,16 @@ body {
     // }
 
 }
-
+@media (max-width: 767px){
+    .content-container {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+    .col-md-9, .col-md-3 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
 @media (min-width: 1200px) {
     .content-container {
         max-width: none;
@@ -131,6 +142,7 @@ body {
 ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 .list-inline {
@@ -272,7 +284,7 @@ img {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-bottom: 0.5rem;
     font-family: inherit;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.1;
     color: inherit;
     margin-top: 0;
@@ -484,14 +496,14 @@ form {
     border-radius: 0.1rem;
 }
 .btn-outline-primary {
-    color: $important-font-color;
+    color: $link-color;
     border-color: $btn-color;
     background-image: none;
     background-color: transparent;
     &:hover, &:focus, &:active {
         color: #fff !important;
-        background-color: $btn-hover-color;
-        border-color: $btn-hover-color;
+        background-color: $btn-color;
+        border-color: $btn-color;
     }
 }
 
@@ -588,6 +600,7 @@ form {
     border: 1px solid $border-color;
     background-color: $card-body-background-color;
     .card-header {
+        font-weight: 400;
         background-color: $card-header-background-color;
         color: $card-header-font-color;
         position: relative;
@@ -634,6 +647,11 @@ form {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.col-md-9 {
+    padding-left: 0px
+}
+
 @media (min-width: 768px) {
     .col-md-9 {
         float: left;
@@ -702,7 +720,7 @@ form {
         }
     }
 }
-// ---------------------页面样式-header部分样式-------------------
+// ---------------------header部分样式-------------------
 $header-height: 70px;
 
 .header {
@@ -764,6 +782,7 @@ $header-height: 70px;
                 padding-right: 15px;
                 padding-left: 15px;
                 color: #fff;
+                font-weight: 400;
                 &:hover {
                     color: #fff;
                 }
@@ -771,7 +790,7 @@ $header-height: 70px;
         }
         .header-nav {
             width: 100%;
-            max-width: 324px;
+            max-width: 450px;
             li {
                 float: left;
                 position: relative;
@@ -782,6 +801,10 @@ $header-height: 70px;
                     -webkit-box-shadow: inset 0 -3px 0px $logo-color;
                     -moz-box-shadow: inset 0 -3px 0px $logo-color;
                     box-shadow: inset 0 -3px 0px $logo-color;
+                    a {
+                        font-weight: 400;
+                        color: $nav-header-font-hover-color;
+                    }
                 }
                 &:hover {
                     background-color: $nav-header-hover-color;
@@ -792,25 +815,29 @@ $header-height: 70px;
                 a {
                     // 什么时候使用block? 全部充满parent
                     display: block;
-                    font-size: 14px;
+                    font-size: 15px;
                     text-align: center;
                     border-top: 4px solid transparent;
+                    color: $nav-header-font-color;
                     //-webkit-box-shadow: inset 0 -3px 0px $link-color;
                     //-moz-box-shadow: inset 0 -3px 0px $link-color;
                     //box-shadow: inset 0 -3px 0px $link-color;
-                }
-
-                a:focus, a:hover {
-                    color: $nav-header-font-hover-color;
+                    &:focus, &:hover{
+                        color: $nav-header-font-hover-color;
+                    }
                 }
             }
         }
         .header-tip {
             float: right;
+            #user-avatar img{
+                border-radius: 50%;
+            }
             // 未登录
             a {
                   color: $nav-header-font-color;
                   &:hover {
+                      font-weight: 400;
                       color: $nav-header-font-hover-color;
                   }
               }
@@ -824,6 +851,7 @@ $header-height: 70px;
                     text-align: center;
                     img {
                         width: 50px;
+                        border-radius: 50%;
                     }
                     &>a {
                         padding: 5px;
@@ -859,9 +887,98 @@ $header-height: 70px;
 }
 
 
+// ---------------------banner部分样式-------------------
+.banner {
+    border: 10px solid #fff;
+    margin-bottom: 20px;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 2px;
+    cursor: pointer;
+    .bg {
+        img {
+            width: 100%;
+        }
+    }
+}
+// ---------------------chat部分样式-------------------
+$char-border-color: #ededed;
 
-
-// ---------------------页面样式-header部分样式-------------------
+@media (max-width: 767px){
+    .chat-container {
+        padding-left: 5px;
+        padding-right: 5px;
+        width: 100% !important;
+        .chat {
+            width: 100% !important;
+        }
+    }
+}
+.chat-container {
+    display: none;
+    width: 25%;
+    position: fixed;
+    right: 5px;
+    bottom: 0;
+}
+.chat {
+    background: #fff;
+    border: 1px solid $char-border-color;
+    min-width: 300px;
+    .chat-header {
+        text-align: center;
+        border-bottom: 1px solid $char-border-color;
+        padding: 5px;
+    }
+    .chat-content {
+        li {
+            padding-bottom: 5px;
+            margin-top: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .avatar {
+            width: 30px;
+            height: 30px;
+        }
+        .chat-other {
+            border-bottom: 1px solid $char-border-color;
+            img {
+                float: left;
+            }
+            .chat-text {
+                text-align: left;
+                margin-left: 35px;
+            }
+        ;
+        }
+        .chat-self {
+            border-bottom: 1px solid $char-border-color;
+            img {
+                float: right;
+            }
+            .chat-text {
+                text-align: right;
+                margin-right: 35px;
+            }
+        }
+    }
+    .chat-footer {
+        padding: 10px;
+        background-color: #f7f7f7;
+        textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .form-group {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+    }
+}
+// ---------------------footer部分样式-------------------
 .footer {
     background-color: white;
     margin-top:20px;
@@ -913,7 +1030,7 @@ $header-height: 70px;
     }
 }
 
-// 分类下拉card
+// ------------------分类下拉card
 .all-cate-card {
     .card-header {
       a {
@@ -941,12 +1058,26 @@ $header-height: 70px;
             padding: 0 1.25rem;
         }
     }
+
     .col-md-3 {
-        padding-right: 0px;
+        //padding-right: 0px;
     }
+
+	&.content-container {
+		padding-left: 25px
+	}
 }
 
-// 左侧当前主题
+// ------------左侧当前主题
+$current-topic-width: 21px;
+
+@media (max-width: 767px){
+	.index-html .all-cate-card {
+		margin-left: $current-topic-width !important;
+	}
+}
+//.index-html .col-md-9 { padding-left: $current-topic-width !important;}
+//.index-html .banner { margin-left: $current-topic-width !important;}
 .current-topic {
     background-color: $btn-color;
     float: left;
@@ -954,15 +1085,30 @@ $header-height: 70px;
     // 垂直居中
     top: 50%;
     transform: translate(0,-50%);
-    left: -21px;
-    width: 21px;
+    left: 0-$current-topic-width;
+    // 文字竖排显示,强制宽度
+    width: $current-topic-width;
+    min-height: 70px;
     span {
-        // 文字竖排显示
-        padding-left: 5px;
+        // 1. 面向所有类型居中,必须设置父类的高度
+        //position: absolute;
+        //left: 50%;
+        //top: 50%;
+        //transform: translate(-50%, -50%);
+
+        // 2. 文字居中
+        position: absolute;
+        display: block;
+        text-align: center;
+        top: 50%;
+        transform: translate(0, -50%);
+
+        //padding-left: 5px;
         color: #fff;
         font-size: 11px;
-        letter-spacing: 11px;
-        display: block;
+        //writing-mode: vertical-lr;
+        //word-wrap: break-word;
+        //display: block;
     }
 }
 
@@ -1002,6 +1148,7 @@ $header-height: 70px;
         //margin-right: 40px;
         .item-title {
             font-size: 16px;
+            font-weight: 400;
             margin-bottom: 7px;
             word-wrap: break-word;
             a{
@@ -1012,10 +1159,10 @@ $header-height: 70px;
                 }
             }
         }
-        .post-item-info {
-            font-size: 11px;
+        .item-info {
+            font-size: 12px;
             .post-category {
-                padding: 2px;
+                padding: 3px;
                 color: $font-color;
                 background-color: #efefef;
             }
@@ -1091,7 +1238,7 @@ $header-height: 70px;
             max-width: 500px;
             margin: 0;
             a {
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: 500;
                 line-height: 30px;
                 color: $important-font-color;
@@ -1138,7 +1285,7 @@ $header-height: 70px;
         color: $important-font-color;
         word-wrap: break-word;
         word-break: normal;
-        pre {
+        prex {
             //font-size: 1rem;
             padding: .66001rem 9.5px 9.5px;
             line-height: 2rem;
@@ -1458,7 +1605,7 @@ $header-height: 70px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 
 }
@@ -1605,7 +1752,7 @@ $header-height: 70px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 
 }
@@ -1616,7 +1763,7 @@ $header-height: 70px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 }
 
@@ -1683,7 +1830,7 @@ $header-height: 70px;
     }
     .col-md-3 {
         margin-bottom: 10px;
-        padding-right: 0px;
+        //padding-right: 0px;
     }
 }
 // ---------------------------emoji表情-----------------------

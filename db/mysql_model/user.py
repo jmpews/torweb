@@ -4,7 +4,7 @@ from hashlib import md5
 from db.mysql_model import BaseModel
 from settings.config import config
 from peewee import *
-from custor.utils import random_str
+from custor.utils import random_str, TimeUtil
 
 
 class USER_LEVEL:
@@ -192,5 +192,28 @@ class Follower(BaseModel):
         return is_follow
 
 
+class ChatLog(BaseModel):
+    me = ForeignKeyField(User, related_name='who-send')
+    other = ForeignKeyField(User, related_name='send-who')
+    content = TextField(verbose_name='chat-content')
+    time = DateTimeField(default=datetime.datetime.now)
 
-
+    @staticmethod
+    def get_chat_log(me, other):
+        '''
+        获取双方对话的聊天记录
+        :param self:
+        :param other:
+        :return:
+        '''
+        result = {'me':'', 'other':'', 'logs':[]}
+        result['me'] = me.username
+        result['other'] = other.username
+        result['me_avatar'] = me.avatar
+        result['other_avatar'] = other.avatar
+        # import pdb;pdb.set_trace()
+        chatlogs = (ChatLog.select().where((ChatLog.me == me & ChatLog.other == other) | (ChatLog.me == other & ChatLog.other == me)).order_by(ChatLog.time).limit(10))
+        for cl in chatlogs:
+            d = '>' if cl.me==me else '<'
+            result['logs'].append([d, cl.content, TimeUtil.datetime_delta(cl.time)])
+        return result

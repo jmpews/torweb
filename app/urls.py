@@ -8,6 +8,7 @@ import app.user.urls
 import app.utils.urls
 import app.registryauth.urls
 import app.blog.urls
+import app.dashboard.urls
 
 urlpattern = ()
 
@@ -19,5 +20,7 @@ urlpattern += app.user.urls.urlpattern
 urlpattern += app.utils.urls.urlpattern
 urlpattern += app.registryauth.urls.urlpattern
 urlpattern += app.blog.urls.urlpattern
+urlpattern += app.dashboard.urls.urlpattern
+
 
 

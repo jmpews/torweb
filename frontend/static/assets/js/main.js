@@ -10,6 +10,7 @@ $(document).on('mouseout', '.dropdown', function ()
     $(this).find(".dropdown-menu").hide()
 });
 
+// ajax定时轮训系统状态
 function monitor_system_status() {
     $.ajax({
         type: 'get',
@@ -27,6 +28,8 @@ function monitor_system_status() {
     });
     setTimeout(monitor_system_status, 60000);
 }
+
+// 修改系统主题
 function change_theme() {
     $('.color').on('click', function (e) {
         var color = $(e.target).attr('color');
@@ -69,6 +72,8 @@ function set_theme() {
         $('#theme').attr('href', '/assets/css/index.'+theme+'.css');
     }
 }
+
+// 图片预览
 function change_image_preview() {
     $inputFileElm = $(this);
     var pic = document.getElementById("avatar-cropper");
@@ -111,6 +116,7 @@ function change_image_preview() {
     $inputFileElm.val("");
 }
 
+// html5读取文件内容
 function html5Reader(file) {
     var file = file.files[0];
     var reader = new FileReader();
@@ -121,6 +127,7 @@ function html5Reader(file) {
     }
 }
 
+// 显示、隐藏所有分类
 function show_hide_cate_nav() {
     // 解决进去时下拉菜单显示
     $(".card-header-all-bt, .card-header:after").mouseenter(function(e){
@@ -133,6 +140,7 @@ function show_hide_cate_nav() {
     });
 }
 
+// 显示隐藏所有分类(post-new页面)
 function post_new_show_hide_cate() {
     $(".post-new-html #topic").on('click', function(e){
         $(".card-header-all").css('display','block');
@@ -143,48 +151,19 @@ function post_new_show_hide_cate() {
     });
 }
 
+//显示隐藏emoji
 function show_hide_emoji_list() {
-    $("#emoji-btn").on('mousedown', function(e){
+    $("#emoji-btn").on('mousedown', function (e) {
         $('#summernote').summernote('saveRange');
-         }).on('click',function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            $("#emoji-list").css('display', 'block');
+    }).on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#emoji-list").css('display', 'block');
     });
 }
-function add_action_emoji_img_summernote() {
-    $('#emoji-list img.emoji').on('click', function(ei){
-        var e = $('#summernote');
-        e.summernote('restoreRange');
-        e.summernote('insertImage', ei.target.src, function($image){
-            $image.addClass('emoji');
-            $image.css('width', '20px');
-        });
-    });
-};
 
-function add_action_emoji_char_summernote() {
-    $('#emoji-list li.emoji').on('click', function(ei){
-        var e = $('#summernote');
-        e.summernote('restoreRange');
-         var t = $('<span class="emoji">'+window.emojiJSON[ei.target.attributes['em'].value].char+'</span>');
-         e.summernote('insertNode', t[0]);
-    });
-};
 // 两种方式处理emoji
 //  一种借助图片的方式，一种借助字符的方式
-function load_emoji_summernote() {
-    var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
-    for (var i=0; i<emojiArray.length; i++) {
-        $("#emoji-list").append('<img class="emoji" src="/assets/images/emoji/basic/'+emojiArray[i]+'.png">')
-    }
-    add_action_emoji_img_summernote();
-    $.getJSON('/assets/images/emoji/emojis.json', function(data){
-        window.emojiJSON=data;
-        $("#emoji-list").append('<li class="emoji" em="heart">'+emojiJSON.heart.char+'</li>');
-        add_action_emoji_char_summernote();
-    })
-}
 function show_hide_emoji_list_medium() {
     $("#emoji-btn").on('click',function(e){
             e.preventDefault();
@@ -204,7 +183,8 @@ function add_action_emoji_char_medium() {
         var e = $('#mediumeditor');
         e.append('<span class="emoji">'+window.emojiJSON[ei.target.attributes['em'].value].char+'</span>')
     });
-};
+}
+
 function load_emoji_medium() {
     var emojiArray=['smile', 'blush', 'grin', 'heart_eyes', 'relaxed', 'sweat_smile', 'joy', 'flushed', 'confused', 'unamused', 'sob', 'cold_sweat', 'sweat', 'scream', 'sleepy', 'mask']
     for (var i=0; i<emojiArray.length; i++) {
@@ -224,14 +204,16 @@ function load_font_avatar() {
         $(item).css('background-color', color);
     });
 }
+
+//友好设置系统时间
 function getFriendlyTime(t)
 {
     t = t.replace('-', '/');
     t = t.replace('-', '/');
     console.log(t);
     if(!t) return 'biu...';
-    var diff = Date.now() - Date.parse(t); 
-    var seconds = 1000, minutes = 1000 * 60, hours = 1000 * 60 * 60, days = 1000 * 60 * 60 * 24, weeks = 1000 * 60 * 60 * 24 * 7, months = 1000 * 60 * 60 * 24 * 30, year = 1000 * 60 * 60 * 24 * 365; 
+    var diff = Date.now() - Date.parse(t);
+    var seconds = 1000, minutes = 1000 * 60, hours = 1000 * 60 * 60, days = 1000 * 60 * 60 * 24, weeks = 1000 * 60 * 60 * 24 * 7, months = 1000 * 60 * 60 * 24 * 30, year = 1000 * 60 * 60 * 24 * 365;
     if(diff < 2 * minutes) return "A moment ago";
     if(diff < hours) return Math.floor(diff/minutes) + " mins ago";
     if(diff < days) return (Math.floor(diff/hours)==1)?"an hour ago":Math.floor(diff/hours) + " hrs ago";
@@ -406,6 +388,7 @@ $('#loginModal [type="submit"]').on('click', function (event) {
     return 1;
 });
 
+// 验证码点击刷新
 $('.captcha').on('click', function (event) {
     event.preventDefault();
     var src = $(event.currentTarget).attr('src');
@@ -480,7 +463,62 @@ function start_system_monitor_websocket(url) {
         console.log('Error occured: ' + evt.data);
      }
 }
-$(document).click(function() {
+
+// 聊天初始化
+function get_chat_log(other_id) {
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: '/useropt',
+        data: JSON.stringify({
+            'opt': 'realtime-chat',
+            'data': {'other': other_id}
+        }),
+        success: function(result, status) {
+            if(result.errorcode == 0) {
+                var data = result['data'];
+                console.log(data);
+                chat_init(data);
+            }
+            else if(result.errorcode == -3) {
+                $.notify(result.txt);
+                return false;
+                }
+            else if(result.errorcode != 0) {
+                $.notify(result.txt);
+                return false;
+            }
+        }
+    });
+}
+
+// 
+function chat_init(data) {
+    if(!data)
+        return;
+    $('.chat .chat-header').html('chat 2 ' + data['me']);
+    var chatlog = data['logs'];
+    var chatcontent = $('.chat .chat-content ul');
+    for(var i = 0; i < chatlog.length; i++) {
+        if (chatlog[i][0] == '>')
+            var s = "<li class='chat-other cl'><img class='avatar' src='/assets/images/avatar/"+data['other_avatar']+"'><div class='chat-text'>"+chatlog[i][1]+"</div></li>";
+        else
+            var s = "<li class='chat-self cl'><img class='avatar' src='/assets/images/avatar/"+data['me_avatar']+"'><div class='chat-text'>"+chatlog[i][1]+"</div></li>";
+        $(chatcontent).append(s)
+    }
+    $('.chat-container').show();
+}
+$(document).click(function(e) {
+    $(".chat-container").on("click", function(e){
+        e.stopPropagation();
+    });
+    if ($('.chat-container').is(":hidden")) {
+        return;
+    }
+    else {
+        $(".chat-container").hide();
+    }
+
     if ($("#emoji-list").is(":hidden")) {
         return;
     }
@@ -488,6 +526,7 @@ $(document).click(function() {
         $("#emoji-list").hide();
     }
 });
+
 $(document).ready(function () {
     //replate_friendly_time();
     // set_theme();

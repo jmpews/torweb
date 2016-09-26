@@ -9,6 +9,7 @@ from db.mysql_model import db_mysql
 from db.mysql_model.user import User
 
 from tornado.web import RequestHandler
+from tornado.websocket import WebSocketHandler
 
 class BaseRequestHandler(RequestHandler):
     """
@@ -67,6 +68,21 @@ class BaseRequestHandler(RequestHandler):
             db_mysql.close()
         return super(BaseRequestHandler, self).on_finish()
 
+
+class BaseWebsocketHandler(WebSocketHandler):
+    """
+    基础handler
+    """
+    def get_current_user(self):
+        '''
+        获取当前用户
+        :return:
+        '''
+        username = self.get_secure_cookie('uuid')
+        if not username:
+            return None
+        user = User.get_by_username(username)
+        return user
 
 class ErrorHandler(BaseRequestHandler):
     '''

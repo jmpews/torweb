@@ -46,7 +46,7 @@ class SystemStatusWebsocketHandler(tornado.websocket.WebSocketHandler):
     def check_origin(self, origin):
         return True
 
-    def open(self):
+    def open(self, *args, **kwargs):
         if self not in SystemStatusWebsocketHandler.clients:
             SystemStatusWebsocketHandler.clients.append(self)
             SystemStatusWebsocketHandler.write2(self, system_status_cache)

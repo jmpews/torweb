@@ -237,22 +237,26 @@ a.username {
     background-color: $base-color;
     border-color: $base-color;
     color: #fff;
-    padding-left: 30px;
     text-align: center;
-    max-width: 300px;
     opacity: 0.7;
+    padding: 10px;
+    width: 25%;
+    top: 80px !important;
     &:hover {
         opacity: 1;
     }
-}
-.close {
-    color: $link-color;
-    opacity: 0.5;
-    &:hover {
+    .close {
+        cursor: pointer;
+        float: right;
         color: $link-color;
-        opacity: 1;
+        opacity: 0.5;
+        &:hover {
+            color: $link-color;
+            opacity: 1;
+        }
     }
 }
+
 
 // ---------------------bootstrap.css----------------------------
 
@@ -909,6 +913,7 @@ $char-border-color: #ededed;
         padding-left: 5px;
         padding-right: 5px;
         width: 100% !important;
+        min-width: 400px;
         .chat {
             width: 100% !important;
         }
@@ -924,7 +929,6 @@ $char-border-color: #ededed;
 .chat {
     background: #fff;
     border: 1px solid $char-border-color;
-    min-width: 300px;
     .chat-header {
         text-align: center;
         border-bottom: 1px solid $char-border-color;

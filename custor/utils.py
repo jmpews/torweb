@@ -122,9 +122,25 @@ def get_cleaned_json_data(handler, args, blank=False):
             raise RequestMissArgumentError('[' + k + '] arg not found')
     return data
 
+def get_cleaned_json_data_websocket(message, args, blank=False):
+    '''
+    同上
 
-
-
+    这个也可以做成装饰器
+    '''
+    tmp = json.loads(message)
+    data = {}
+    for k in args:
+        tmp_x = tmp
+        for t in k.split('.'):
+            tmp_x = tmp_x.get(t)
+        if tmp_x:
+            data[k] = tmp_x
+        elif not tmp_x and blank:
+            data[k] = None
+        else:
+            raise RequestMissArgumentError('[' + k + '] arg not found')
+    return data
 
 def set_api_header(request):
     '''

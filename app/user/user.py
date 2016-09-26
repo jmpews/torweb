@@ -93,7 +93,6 @@ class UserFollowerHandler(BaseRequestHandler):
         user = User.get(User.id == user_id)
         who_follow = Follower.select(Follower.follower).where(Follower.user == user)
         follow_who = Follower.select(Follower.user).where(Follower.follower == user)
-        print(who_follow, follow_who)
         profile = Profile.get_by_user(user)
         is_follow = Follower.is_follow(user, self.current_user)
         self.render('user/profile_follower.html',
@@ -194,8 +193,6 @@ class WebsocketChatHandler(BaseWebsocketHandler):
     @ppeewwee
     def open(self, *args, **kwargs):
 
-        # 一定要放在前面
-        # super(WebsocketChatHandler, self).open(*args, **kwargs)
         user = self.current_user
         if user.username not in WebsocketChatHandler.clients.keys():
             WebsocketChatHandler.clients[user.username] = self
@@ -208,8 +205,6 @@ class WebsocketChatHandler(BaseWebsocketHandler):
             WebsocketChatHandler.clients.pop(user.username)
         else:
             logger.debug("[{0}] not in Websocket.clients, but close.".format(user.username))
-        # 一定要放在后面
-        # super(WebsocketChatHandler, self).on_close()
 
     @staticmethod
     def is_online(username):

@@ -1,9 +1,11 @@
 # coding:utf-8
-
+import tornado.websocket
 from settings.config import config
-from custor.handlers.basehandler import BaseRequestHandler
-from custor.decorators import login_required_json, login_required
-from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result
+
+from custor.handlers.basehandler import BaseRequestHandler, BaseWebsocketHandler
+from custor.decorators import login_required_json, login_required, ppeewwee
+from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result, get_cleaned_json_data_websocket
+from custor.logger import logger
 
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, CollectPost
@@ -111,6 +113,7 @@ class UserOptHandler(BaseRequestHandler):
         json_data = get_cleaned_json_data(self, ['opt', 'data'])
         data = json_data['data']
         opt = json_data['opt']
+
         # 关注用户
         if opt == 'follow-user':
             try:
@@ -120,6 +123,7 @@ class UserOptHandler(BaseRequestHandler):
                 return
             Follower.create(user=user, follower=self.current_user)
             self.write(json_result(0, 'success'))
+
         # 取关用户
         elif opt == 'unfollow-user':
             try:
@@ -134,6 +138,7 @@ class UserOptHandler(BaseRequestHandler):
                 return
             f.delete_instance()
             self.write(json_result(0, 'success'))
+
         # 更新头像
         elif opt == 'update-avatar':
             import base64
@@ -145,6 +150,7 @@ class UserOptHandler(BaseRequestHandler):
             user.avatar = avatar_file_name
             user.save()
             self.write(json_result(0, 'success'))
+
         # 更新社区主题
         elif opt == 'update-theme':
             user = self.current_user
@@ -152,12 +158,86 @@ class UserOptHandler(BaseRequestHandler):
             user.save()
             self.write(json_result(0, 'success'))
 
+        # 获取聊天记录
         elif opt == 'realtime-chat':
             user = self.current_user
             other_id = data['other']
             other = User.get(User.id == other_id)
             result = ChatLog.get_chat_log(user, other)
             self.write(json_result(0, result))
+
+        # 发送消息
+        elif opt == 'chat-to' :
+            user = self.current_user
+            other_id = data['other']
+            other = User.get(User.id == other_id)
+            content = data['content']
+            ChatLog.create(me=user, other=other, content=content)
+            self.write(json_result(0, 'success'))
         else:
             self.write(json_result(1, 'opt不支持'))
+
+
+class WebsocketChatHandler(BaseWebsocketHandler):
+    """
+    使用websocket的实时聊天
+
+    websocket real-time-chat
+    """
+
+    # redis ?
+    clients = {}
+
+    def check_origin(self, origin):
+        return True
+
+    @ppeewwee
+    def open(self, *args, **kwargs):
+
+        # 一定要放在前面
+        # super(WebsocketChatHandler, self).open(*args, **kwargs)
+        user = self.current_user
+        if user.username not in WebsocketChatHandler.clients.keys():
+            WebsocketChatHandler.clients[user.username] = self
+
+    @ppeewwee
+    def on_close(self):
+        user = self.current_user
+
+        if user.username in WebsocketChatHandler.clients.keys():
+            WebsocketChatHandler.clients.pop(user.username)
+        else:
+            logger.debug("[{0}] not in Websocket.clients, but close.".format(user.username))
+        # 一定要放在后面
+        # super(WebsocketChatHandler, self).on_close()
+
+    @staticmethod
+    def is_online(username):
+        w = WebsocketChatHandler.clients.get(username, False)
+        return w
+
+    @ppeewwee
+    def on_message(self, message):
+        json_data = get_cleaned_json_data_websocket(message, ['opt', 'data'])
+        data = json_data['data']
+        opt = json_data['opt']
+        if opt == 'chat-to':
+            user = self.current_user
+            other_id = data['other']
+            other = User.get(User.id == other_id)
+            content = data['content']
+            ChatLog.create(me=user, other=other, content=content)
+
+            #push to [other]
+            other_websocket = WebsocketChatHandler.is_online(other.username)
+            # import pdb;pdb.set_trace()
+            if other_websocket:
+                other_websocket.write_message(json_result(0, {'message': content}))
+                self.write_message(json_result(1, 'success.'))
+            else:
+                self.write_message(json_result(2, 'success.'))
+
+        else:
+            self.write_message(json_result(-1, 'not support opt.'))
+
 

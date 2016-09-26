@@ -126,11 +126,25 @@
     $(document).ready(function () {
         var user_id = {{user.id}};
         monitor_system_status();
+        get_websocket_url(start_chat_websocket);
 
         // 初始化聊天
         $('a[other]').on('click', function (e) {
             get_chat_log($(e.currentTarget).attr('other'));
         });
+
+        // 发送聊天
+        $(".chat [type='submit']").on('click', function (e) {
+            e.preventDefault();
+            var other_id = $('a[other]').attr('other');
+            var content = $('.chat textarea').val();
+            chat_websocket.send(JSON.stringify({
+                'opt': 'chat-to',
+                'data': {'other': other_id, 'content': content}
+            }));
+            $('.chat textarea').val('');
+        });
+
         $('.follow-user').on('mouseover', function(e){
             if($(e.target).attr('is_follow') == '1') {
                 $(e.target).html('取消关注');

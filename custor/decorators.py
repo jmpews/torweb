@@ -3,6 +3,8 @@
 from custor.utils import ColorPrint, get_cleaned_post_data, json_result, ThreadWorker
 from custor.errors import RequestMissArgumentError, PageNotFoundError
 
+from db.mysql_model import db_mysql
+
 from tornado.concurrent import Future
 
 import functools
@@ -131,3 +133,17 @@ def login_required_json(errorcode, result):
             return method(self, *args, **kwargs)
         return wrapper
     return wrap_func
+
+def ppeewwee(func):
+    '''
+    peewee的db hook
+    :param func:
+    :return:
+    '''
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        db_mysql.connect()
+        func(*args, **kwargs)
+        if not db_mysql.is_closed():
+            db_mysql.close()
+    return wrapper

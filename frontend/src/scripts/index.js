@@ -441,11 +441,11 @@ function get_websocket_url(callback) {
 // 启动系统状态参数监控的websocket服务
 function start_system_monitor_websocket(url) {
      var  wsServer = 'ws://' + url + '/api/systemstatuswebsocket';
-     var  websocket = new WebSocket(wsServer);
-     websocket.onopen = function (evt) { onOpen(evt) };
-     websocket.onclose = function (evt) { onClose(evt) };
-     websocket.onmessage = function (evt) { onMessage(evt) };
-     websocket.onerror = function (evt) { onError(evt) };
+     sys_websocket = new WebSocket(wsServer);
+     sys_websocket.onopen = function (evt) { onOpen(evt) };
+     sys_websocket.onclose = function (evt) { onClose(evt) };
+     sys_websocket.onmessage = function (evt) { onMessage(evt) };
+     sys_websocket.onerror = function (evt) { onError(evt) };
      function onOpen(evt) {
         console.log("Connected to WebSocket server.");
      }
@@ -464,7 +464,44 @@ function start_system_monitor_websocket(url) {
      }
 }
 
-// 聊天初始化
+// 启动聊天的websocket
+function start_chat_websocket(url) {
+     var  wsServer = 'ws://' + url + '/user/chatwebsocket';
+     chat_websocket = new WebSocket(wsServer);
+     chat_websocket.onopen = function (evt) { onOpen(evt) };
+     chat_websocket.onclose = function (evt) { onClose(evt) };
+     chat_websocket.onmessage = function (evt) { onMessage(evt) };
+     chat_websocket.onerror = function (evt) { onError(evt) };
+     function onOpen(evt) {
+        console.log("Connected to WebSocket server.");
+     }
+     function onClose(evt) {
+        console.log("Disconnected");
+     }
+     function onMessage(evt) {
+         var result = JSON.parse(evt.data);
+         console.log(result);
+         if(result.errorcode == 0) {
+             var data = JSON.parse(evt.data).data;
+             var s = "<li class='chat-other cl'><img class='avatar' src='/assets/images/avatar/"+'test.jpg'+"'><div class='chat-text'>"+data['message']+"</div></li>";
+             $('.chat .chat-content ul').append(s);
+         }
+         else if(result.errorcode == 1){
+             $.notify('发送成功.')
+         }
+         else if(result.errorcode == 2){
+             $.notify('未在线,等待上线回复.')
+         }
+         else if(result.errorcode != 0)
+            alert(result.txt);
+
+     }
+     function onError(evt) {
+        console.log('Error occured: ' + evt.data);
+     }
+}
+
+// 获取聊天记录
 function get_chat_log(other_id) {
     $.ajax({
         type: 'post',
@@ -492,7 +529,7 @@ function get_chat_log(other_id) {
     });
 }
 
-// 
+// 聊天初始化
 function chat_init(data) {
     if(!data)
         return;
@@ -508,6 +545,7 @@ function chat_init(data) {
     }
     $('.chat-container').show();
 }
+
 $(document).click(function(e) {
     $(".chat-container").on("click", function(e){
         e.stopPropagation();

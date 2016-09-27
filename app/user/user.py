@@ -4,7 +4,7 @@ from settings.config import config
 
 from custor.handlers.basehandler import BaseRequestHandler, BaseWebsocketHandler
 from custor.decorators import login_required_json, login_required, ppeewwee
-from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result, get_cleaned_json_data_websocket
+from custor.utils import get_cleaned_post_data, get_cleaned_json_data, json_result, get_cleaned_json_data_websocket, TimeUtil
 from custor.logger import logger
 
 from db.mysql_model.common import Notification
@@ -23,13 +23,16 @@ class UserProfileHandler(BaseRequestHandler):
         postreplys = PostReply.select().where(PostReply.user == user).limit(10)
         collectposts = CollectPost.select().where(CollectPost.user == user).limit(10)
         # 是否显示关注
-        is_follow = Follower.is_follow(user, self.current_user)
+        is_follow = True if Follower.is_follow(user, self.current_user) else False
+        is_online = True if WebsocketChatHandler.is_online(user.username) else False
+        print(WebsocketChatHandler.is_online(user.username))
         self.render('user/profile.html',
                     user=user,
                     profile=profile,
                     posts=posts,
                     postreplys=postreplys,
                     is_follow=is_follow,
+                    is_online=is_online,
                     collectposts=collectposts)
 
 class UserProfileEditHandler(BaseRequestHandler):
@@ -221,18 +224,18 @@ class WebsocketChatHandler(BaseWebsocketHandler):
             other_id = data['other']
             other = User.get(User.id == other_id)
             content = data['content']
-            ChatLog.create(me=user, other=other, content=content)
+            cl = ChatLog.create(me=user, other=other, content=content)
 
             #push to [other]
             other_websocket = WebsocketChatHandler.is_online(other.username)
             # import pdb;pdb.set_trace()
             if other_websocket:
-                other_websocket.write_message(json_result(0, {'message': content}))
-                self.write_message(json_result(1, 'success.'))
+                # <
+                other_websocket.write_message(json_result(0, {'user_id': user.id, 'data': ['<', cl.content, TimeUtil.datetime_delta(cl.time)]}))
+                # >
+                self.write_message(json_result(1, {'user_id': other.id, 'data': ['>', cl.content, TimeUtil.datetime_delta(cl.time)]}))
             else:
                 self.write_message(json_result(2, 'success.'))
 
         else:
             self.write_message(json_result(-1, 'not support opt.'))
-
-

@@ -446,12 +446,15 @@ function start_system_monitor_websocket(url) {
      sys_websocket.onclose = function (evt) { onClose(evt) };
      sys_websocket.onmessage = function (evt) { onMessage(evt) };
      sys_websocket.onerror = function (evt) { onError(evt) };
+
      function onOpen(evt) {
         console.log("Connected to WebSocket server.");
      }
+
      function onClose(evt) {
         console.log("Disconnected");
      }
+
      function onMessage(evt) {
         var data = JSON.parse(evt.data).data;
         $(".cpu-per").html(data['cpu_per']+"%");
@@ -459,6 +462,7 @@ function start_system_monitor_websocket(url) {
         $(".net-conn").html(data['net_conn']);
         $(".os-start").html(data['os_start']);
      }
+
      function onError(evt) {
         console.log('Error occured: ' + evt.data);
      }
@@ -472,25 +476,56 @@ function start_chat_websocket(url) {
      chat_websocket.onclose = function (evt) { onClose(evt) };
      chat_websocket.onmessage = function (evt) { onMessage(evt) };
      chat_websocket.onerror = function (evt) { onError(evt) };
+
      function onOpen(evt) {
         console.log("Connected to WebSocket server.");
+        window.sessionStorage.setItem('current_other', '');
      }
+
      function onClose(evt) {
         console.log("Disconnected");
      }
+
      function onMessage(evt) {
          var result = JSON.parse(evt.data);
          console.log(result);
+         // 某人发送过来的信息
          if(result.errorcode == 0) {
+             // data = {'user_id': 2, 'data': ['>', 'test, '2015/09/26']}
              var data = JSON.parse(evt.data).data;
-             var s = "<li class='chat-other cl'><img class='avatar' src='/assets/images/avatar/"+'test.jpg'+"'><div class='chat-text'>"+data['message']+"</div></li>";
-             $('.chat .chat-content ul').append(s);
+             var user_id = data.user_id;
+
+             // var s = "<li class='chat-other, cl'><img class='avatar' src='/assets/images/avatar/" + cache_user_data.other_avatar + "'><div class='chat-text'>"+content+"</div></li>";
+             // $('.chat .chat-content ul').append(s);
+
+            //cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
+            var cache_user_data = window.sessionStorage.getItem(data.user_id);
+            console.log('r', data, cache_user_data);
+            if(cache_user_data) {
+                cache_chat_log(data, chat_init);
+            }
+            else {
+                get_chat_log(user_id, chat_init);
+            }
          }
-         else if(result.errorcode == 1){
-             $.notify('发送成功.')
+         // 返回发送成功
+         else if(result.errorcode == 1) {
+             // data = {'me_id': 2, 'data': ['>', 'test, '2015/09/26']}
+             var data = JSON.parse(evt.data).data;
+             var user_id = data.user_id;
+             var cache_user_data = window.sessionStorage.getItem(data.user_id);
+             console.log('s', data, cache_user_data);
+             if(cache_user_data) {
+                 cache_chat_log(data, chat_init);
+             }
+             else {
+                 get_chat_log(user_id, chat_init);
+             }
          }
          else if(result.errorcode == 2){
              $.notify('未在线,等待上线回复.')
+         }
+         else if(result.errorcode == 3){
          }
          else if(result.errorcode != 0)
             alert(result.txt);
@@ -501,8 +536,19 @@ function start_chat_websocket(url) {
      }
 }
 
+// 缓存聊天记录
+function cache_chat_log(data, callback) {
+     // data = {'user_id': 2, 'data': ['>', 'test, '2015/09/26']}
+     var cache_user_data = window.sessionStorage.getItem(data.user_id);
+     //cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
+     cache_user_data = JSON.parse(cache_user_data);
+     cache_user_data.logs.push(data.data)
+     window.sessionStorage.setItem(data.user_id, JSON.stringify(cache_user_data));
+     callback(cache_user_data);
+}
+
 // 获取聊天记录
-function get_chat_log(other_id) {
+function get_chat_log(other_id, callback) {
     $.ajax({
         type: 'post',
         dataType: 'json',
@@ -514,8 +560,10 @@ function get_chat_log(other_id) {
         success: function(result, status) {
             if(result.errorcode == 0) {
                 var data = result['data'];
-                console.log(data);
-                chat_init(data);
+                // data = {me_avatar: "admin.png", me: "admin", other_avatar: "default_doubi.png", other: "test", logs: Array[6]}]
+                // 最初始的缓存
+                window.sessionStorage.setItem(other_id, JSON.stringify(data));
+                callback(data);
             }
             else if(result.errorcode == -3) {
                 $.notify(result.txt);
@@ -531,13 +579,17 @@ function get_chat_log(other_id) {
 
 // 聊天初始化
 function chat_init(data) {
+    console.log(data);
     if(!data)
         return;
     $('.chat .chat-header').html('chat 2 ' + data['me']);
+    $('.chat .chat-header').attr('other_avatar', data['other_avatar']);
+    $('.chat .chat-header').attr('me_avatar', data['me_avatar']);
     var chatlog = data['logs'];
     var chatcontent = $('.chat .chat-content ul');
+    $(chatcontent).html('');
     for(var i = 0; i < chatlog.length; i++) {
-        if (chatlog[i][0] == '>')
+        if (chatlog[i][0] == "<")
             var s = "<li class='chat-other cl'><img class='avatar' src='/assets/images/avatar/"+data['other_avatar']+"'><div class='chat-text'>"+chatlog[i][1]+"</div></li>";
         else
             var s = "<li class='chat-self cl'><img class='avatar' src='/assets/images/avatar/"+data['me_avatar']+"'><div class='chat-text'>"+chatlog[i][1]+"</div></li>";

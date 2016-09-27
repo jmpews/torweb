@@ -206,14 +206,16 @@ class ChatLog(BaseModel):
         :param other:
         :return:
         '''
-        result = {'me':'', 'other':'', 'logs':[]}
+        result = {'me': '', 'other': '', 'logs': []}
         result['me'] = me.username
         result['other'] = other.username
         result['me_avatar'] = me.avatar
         result['other_avatar'] = other.avatar
         # import pdb;pdb.set_trace()
-        chatlogs = (ChatLog.select().where((ChatLog.me == me & ChatLog.other == other) | (ChatLog.me == other & ChatLog.other == me)).order_by(ChatLog.time).limit(10))
+
+        # () 注意需要全包
+        chatlogs = (ChatLog.select().where(((ChatLog.me == me) & (ChatLog.other == other)) | ((ChatLog.me == other) & (ChatLog.other == me))).order_by(ChatLog.time).limit(10))
         for cl in chatlogs:
-            d = '>' if cl.me==me else '<'
+            d = '>' if cl.me == me else '<'
             result['logs'].append([d, cl.content, TimeUtil.datetime_delta(cl.time)])
         return result

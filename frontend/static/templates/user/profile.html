@@ -19,8 +19,13 @@
                         <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.reg_time)}}</span></dd>
                         <dt class="col-xs-6">上次登录时间:</dt>
                         <dd class="col-xs-6"><span class="friendly-time">{{datetime_delta(profile.last_login_time)}}</span></dd>
+
+						{% if user.id != current_user.id %}
+                        <dt class="col-xs-6">当前状态:</dt>
+                        <dd class="col-xs-6"><span class="">{{'在线' if is_online else '离线'}}</span></dd>
+						{% end %}
                     </dl>
-                    {% if is_follow != None %}
+                    {% if current_user and user.id != current_user.id %}
                         <div class="text-center">
                         {% if is_follow %}
                             <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="1" role="button">已关注</a>
@@ -49,7 +54,7 @@
                             </div>
                             <div class="profile-card-body-list">
                                 <ul class="list-inline">
-                                    <li>第{{user.id}}位Sxuer</li>
+                                    <li>第{{user.id}}位sxuer</li>
                                     <li>{{profile.reg_time}}加入</li>
                                 </ul>
                             </div>
@@ -130,7 +135,7 @@
 
         // 初始化聊天
         $('a[other]').on('click', function (e) {
-            get_chat_log($(e.currentTarget).attr('other'));
+            get_chat_log($(e.currentTarget).attr('other'), chat_init);
         });
 
         // 发送聊天
@@ -142,6 +147,8 @@
                 'opt': 'chat-to',
                 'data': {'other': other_id, 'content': content}
             }));
+			var me_avatar = $('.chat .chat-header').attr('me_avatar');
+             var s = "<li class='me-other cl'><img class='avatar' src='/assets/images/avatar/" + me_avatar + "'><div class='chat-text'>" + content + "</div></li>";
             $('.chat textarea').val('');
         });
 

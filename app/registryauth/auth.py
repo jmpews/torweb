@@ -68,8 +68,6 @@ class Key(object):
 key = Key(private_key_path='./private_key.pem')
 
 
-
-
 class DockerToken():
     def __init__(self, service, scopes, subject=''):
         self.issuer = ISSUER

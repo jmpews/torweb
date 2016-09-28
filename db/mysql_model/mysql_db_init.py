@@ -14,92 +14,72 @@ def create_test_data(db_mysql):
     from db.mysql_model.post import Post, PostReply, PostCategory, PostTopic, CollectPost
     from db.mysql_model.common import Notification
     from db.mysql_model.blog import BlogPost, BlogPostLabel, BlogPostCategory
+
     logger.debug("DataBase is not exist, so create test data.")
 
     # -------------------- 建表 ---------------
     db_mysql.create_tables([User, ChatLog, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification, BlogPostCategory, BlogPost, BlogPostLabel], safe=True)
-
-    logger.debug('add user: [admin:admin], [test:test]')
     user_admin = User.new(username='admin', email='admin@jmp.com', password='admin')
     user_test = User.new(username='test', email='test@jmp.com', password='test')
 
     # -------------------- 测试关注功能 ---------------
-    logger.debug('add follower: [test]->[admin]')
     Follower.create(user=user_admin, follower=user_test)
 
     # -------------------- 测试分类功能 --------------
-    logger.debug('add postcategory and posttopic:')
     logger.debug('''
     版块分类
-    专业:
-        计算机
-    学习:
-        学习资料、考研资料、家教、竞赛
+    docker:
+        docker文章
+    registry:
+        registry文章、私有hub、images分享, dockerfile分享
 
-    生活:
-        共享账号、电影资源、常用软件、电脑故障
-
-    爱好:
-        摄影、健身
-
-    未分类:
-        校园通知、讨论
+    docker集群:
+        docker集群文章
     ''')
 
-    postcategory0 = PostCategory.create(name='学习', str='study')
-    postcategory1 = PostCategory.create(name='专业', str='major')
-    postcategory2 = PostCategory.create(name='生活', str='live')
-    postcategory3 = PostCategory.create(name='爱好', str='hobby')
+    postcategory0 = PostCategory.create(name='docker', str='docker')
+    postcategory1 = PostCategory.create(name='registry', str='registry')
+    postcategory2 = PostCategory.create(name='docker集群', str='docker-cluster')
 
-    posttopic0 = PostTopic.create(category=postcategory0, name='学习资料', str='study-material')
-    posttopic1 = PostTopic.create(category=postcategory0, name='考研资料', str='study-advance-material')
-    posttopic2 = PostTopic.create(category=postcategory0, name='竞赛', str='study-competition')
-    posttopic3 = PostTopic.create(category=postcategory0, name='请教', str='study-advice')
+    posttopic0 = PostTopic.create(category=postcategory0, name='docker文章', str='docker-article')
 
-    posttopic4 = PostTopic.create(category=postcategory1, name='计算机', str='major-computer')
+    posttopic1 = PostTopic.create(category=postcategory1, name='registry文章', str='registry-article')
+    posttopic2 = PostTopic.create(category=postcategory1, name='私有hub', str='private-hub')
+    posttopic3 = PostTopic.create(category=postcategory1, name='image分享', str='image-share')
+    posttopic4 = PostTopic.create(category=postcategory1, name='dockerfile分享', str='dockerfile-share')
 
-    posttopic5 = PostTopic.create(category=postcategory2, name='电影资源', str='live-movie')
-    posttopic6 = PostTopic.create(category=postcategory2, name='共享账号', str='live-account')
-    posttopic7 = PostTopic.create(category=postcategory2, name='电脑故障', str='live-computer-repair')
-
-    posttopic8 = PostTopic.create(category=postcategory3, name='摄影', str='hobby-photography')
-    posttopic9 = PostTopic.create(category=postcategory3, name='健身', str='hobby-fitness')
+    posttopic5 = PostTopic.create(category=postcategory2, name='docker集群文章', str='docker-cluster-article')
 
     posttopic10 = PostTopic.create(name='通知', str='notice')
     posttopic11 = PostTopic.create(name='讨论', str='discussion')
 
 
     # ---------------- 测试新文章 --------------
-    logger.debug('add post: [SICP换零钱(递归转尾递归)]')
     post = Post.create(
         topic=posttopic0,
-        title='SICP换零钱(递归转尾递归)',
+        title='test',
         content=tmp_post,
         user=user_admin
     )
 
     # ---------------- 测试通知 --------------
-    logger.debug('add notice: [admin]->[admin\'s followers]')
     Notification.new_post(post)
 
     # ------------测试新回复--------------
-    logger.debug('add postreply: [test]->[admin]')
     postreply = PostReply.create(
             post=post,
             user=user_test,
-            content='迭代需要重复利用递归产生的冗余数据'
+            content='test'
     )
     post.update_latest_reply(postreply)
 
 
     # ---------------- 测试Blog --------------
-    logger.debug('add blogpost: [tornado]')
     bpc0 = BlogPostCategory.create(name='Tornado', str='Tornado')
     bp0 = BlogPost.create(title='Tornado', category=bpc0, content='Tornado content')
     BlogPostLabel.add_post_label('python,tornado', bp0)
 
-    # ---------------- 测试Blog --------------
-    logger.debug('add chatlog: [>, <]')
+    # ---------------- 测试chat --------------
     chat_log_0 = ChatLog.create(me=user_admin, other=user_test, content='self>other')
     chat_log_0 = ChatLog.create(me=user_test, other=user_admin, content='other>self')
 
@@ -110,13 +90,13 @@ def mysql_db_init(db_mysql):
         mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
     else:
         pass
-        # mysqldb.execute_sql("drop database torweb")
-        # mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
+        mysqldb.execute_sql("drop database torweb")
+        mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
 
-    # create_test_data(db_mysql)
-    logger.debug('load db from db/torweb.sql.')
-    import os
-    os.system(' mysql -u{0} -p{1} {2} <'.format(config.BACKEND_MYSQL['user'], config.BACKEND_MYSQL['password'], config.BACKEND_MYSQL['database'])+os.getcwd()+'/db/torweb.sql')
+    create_test_data(db_mysql)
+    # logger.debug('load db from db/torweb.sql.')
+    # import os
+    # os.system(' mysql -u{0} -p{1} {2} <'.format(config.BACKEND_MYSQL['user'], config.BACKEND_MYSQL['password'], config.BACKEND_MYSQL['database'])+os.getcwd()+'/db/torweb.sql')
     mysqldb.close()
 
 import html

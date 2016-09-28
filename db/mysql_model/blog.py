@@ -37,8 +37,8 @@ class BlogPost(BaseModel):
         :param page_number: 当前页
         :return:
         """
-        page_number_limit = BlogPost.select().order_by(BlogPost.create_time).count()
-        posts = BlogPost.select().where(BlogPost.is_del == False).order_by(BlogPost.create_time).paginate(page_number, page_limit)
+        page_number_limit = BlogPost.select().order_by(BlogPost.create_time.desc()).count()
+        posts = BlogPost.select().where(BlogPost.is_del == False).order_by(BlogPost.create_time.desc()).paginate(page_number, page_limit)
         return posts, page_number_limit
 
 
@@ -51,8 +51,8 @@ class BlogPost(BaseModel):
         :param page_number:
         :return:
         """
-        page_number_limit = BlogPost.select().where(BlogPost.category == category).order_by(BlogPost.create_time).count()
-        posts = BlogPost.select().where(BlogPost.category == category, BlogPost.is_del == False).order_by(BlogPost.create_time).paginate(page_number, page_limit)
+        page_number_limit = BlogPost.select().where(BlogPost.category == category).order_by(BlogPost.create_time.desc()).count()
+        posts = BlogPost.select().where(BlogPost.category == category, BlogPost.is_del == False).order_by(BlogPost.create_time.desc()).paginate(page_number, page_limit)
         return posts, page_number_limit
 
 

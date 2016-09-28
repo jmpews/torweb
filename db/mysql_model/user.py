@@ -214,7 +214,7 @@ class ChatLog(BaseModel):
         # import pdb;pdb.set_trace()
 
         # () 注意需要全包
-        chatlogs = (ChatLog.select().where(((ChatLog.me == me) & (ChatLog.other == other)) | ((ChatLog.me == other) & (ChatLog.other == me))).order_by(ChatLog.time).limit(10))
+        chatlogs = (ChatLog.select().where(((ChatLog.me == me) & (ChatLog.other == other)) | ((ChatLog.me == other) & (ChatLog.other == me))).order_by(ChatLog.time.desc()).limit(10))
         for cl in chatlogs:
             d = '>' if cl.me == me else '<'
             result['logs'].append([d, cl.content, TimeUtil.datetime_delta(cl.time)])

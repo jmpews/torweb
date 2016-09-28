@@ -2,6 +2,16 @@ import sys, os
 import os.path
 sys.path.append(os.path.dirname(sys.path[0]))
 
+from settings.config import config
+from peewee import Model, MySQLDatabase
+from custor.logger import logger
+
+mysqldb = MySQLDatabase('',
+                        user=config.BACKEND_MYSQL['user'],
+                        password=config.BACKEND_MYSQL['password'],
+                        host=config.BACKEND_MYSQL['host'],
+                        port=config.BACKEND_MYSQL['port'])
+
 from db.mysql_model.blog import BlogPostCategory, BlogPostLabel, BlogPost
 md_path = '/Users/jmpews/Desktop/articles'
 
@@ -58,4 +68,11 @@ def get_files(root_path):
                 convert_md_2_post(md_info)
 
 if __name__ == '__main__':
+    t = BlogPostLabel.delete()
+    t.execute()
+    t = BlogPost.delete()
+    t.execute()
+    t = BlogPostCategory.delete()
+    t.execute()
+
     get_files(md_path)

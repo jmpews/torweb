@@ -830,6 +830,7 @@ form .form-control:disabled {
   font-size: 26px;
   margin-bottom: 5px;
   text-align: center;
+  color: #e95420;
 }
 .post-detail .post-info {
   text-align: center;

@@ -20,7 +20,8 @@ STATIC_PATH = (
     (r'/static/(.*)', {'path': 'frontend/static/templates/static/'}),
     (r'/avatar/(.*)', {'path': 'frontend/static/assets/'}),
     (r'/assets/lib/(.*)', {'path': 'frontend/lib/'}),
-    (r'/assets/(.*)', {'path':'frontend/static/assets/'}),
-    (r'/dashboard/(.*)', {'path':'frontend/static/templates/dashboard/'})
+    (r'/assets/(.*)', {'path': 'frontend/static/assets/'}),
+    (r'/blog/images/(.*)', {'path': 'frontend/static/templates/blog/images/'}),
+    (r'/dashboard/(.*)', {'path': 'frontend/static/templates/dashboard/'})
 )
 

@@ -3,7 +3,7 @@ import os.path
 sys.path.append(os.path.dirname(sys.path[0]))
 
 from db.mysql_model.blog import BlogPostCategory, BlogPostLabel, BlogPost
-md_path = '/Users/jmpews/Desktop/jmp2blog/content/articles'
+md_path = '/Users/jmpews/Desktop/articles'
 
 def check_md_format(file_path):
     fd = open(file_path)

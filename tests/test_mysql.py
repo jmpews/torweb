@@ -126,5 +126,5 @@ test.test
 
 if __name__ == '__main__':
     from db.mysql_model import db_mysql
-    db_name = '/db/torweb.sql'
+    db_name = '/db/torweb.docker.sql'
     mysql_db_init(db_mysql, db_name)

@@ -86,7 +86,6 @@ class BlogPostLabel(BaseModel):
         :return:
         """
         for label in labels.split(','):
-            print(label)
             try:
                 blogpostlabel = BlogPostLabel.get(BlogPostLabel.name == label, BlogPostLabel.post == post)
                 blogpostlabel.is_del = False

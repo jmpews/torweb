@@ -68,14 +68,14 @@ body a:hover, body a:focus {
 }
 
 .important-font {
-  color: #446491 !important;
+  color: #666 !important;
 }
 
 .light-font {
   color: #698ab9 !important;
 }
 .light-font:hover {
-  color: #446491 !important;
+  color: #666 !important;
 }
 
 ul {
@@ -528,7 +528,7 @@ form .form-control:disabled {
 .card .card-header {
   font-weight: 400;
   background-color: #fff;
-  color: #446491;
+  color: #666;
   position: relative;
   border-bottom: 1px solid #f5f5f5;
   padding: 0.5rem 1rem !important;
@@ -907,7 +907,7 @@ form .form-control:disabled {
 }
 
 .all-cate-card .card-header a {
-  color: #446491;
+  color: #666;
 }
 .all-cate-card .divider {
   margin: 0 3px;
@@ -993,7 +993,7 @@ form .form-control:disabled {
   word-wrap: break-word;
 }
 .post-item .post-item-mid .item-title a {
-  color: #446491;
+  color: #666;
 }
 .post-item .post-item-mid .item-title a:hover {
   color: #446491;
@@ -1085,14 +1085,14 @@ form .form-control:disabled {
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
-  color: #446491;
+  color: #666;
 }
 .post-detail-card .post-detail-header .post-info {
   font-size: 11px;
   margin-bottom: 5px;
 }
 .post-detail-card .post-detail-header .post-info .username {
-  color: #446491;
+  color: #666;
 }
 .post-detail-card .post-function {
   padding-bottom: 5px;
@@ -1119,7 +1119,7 @@ form .form-control:disabled {
   color: #999;
 }
 .post-detail-card .post-content {
-  color: #446491;
+  color: #666;
   word-wrap: break-word;
   word-break: normal;
 }
@@ -1285,7 +1285,7 @@ form .form-control:disabled {
   font-size: 14px;
   line-height: 30px;
   border-bottom: 1px solid #e8e8e8;
-  color: #446491;
+  color: #666;
 }
 .card-header-all .card-header-all-cate {
   padding: 5px 0;
@@ -1293,7 +1293,7 @@ form .form-control:disabled {
 }
 .card-header-all .card-header-all-cate h4 {
   font-size: 13px;
-  color: #446491;
+  color: #666;
 }
 .card-header-all .card-header-all-cate .card-header-all-cate-topic {
   padding-left: 10px;
@@ -1328,7 +1328,7 @@ form .form-control:disabled {
   font-size: 14px;
   line-height: 30px;
   border-bottom: 1px dashed #e8e8e8;
-  color: #446491;
+  color: #666;
 }
 .card-header-all-footer .card-header-all-cate {
   padding: 5px 0;
@@ -1336,7 +1336,7 @@ form .form-control:disabled {
 }
 .card-header-all-footer .card-header-all-cate h4 {
   font-size: 13px;
-  color: #446491;
+  color: #666;
 }
 .card-header-all-footer .card-header-all-cate .card-header-all-cate-topic {
   padding-left: 10px;

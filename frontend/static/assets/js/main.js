@@ -489,36 +489,39 @@ function start_chat_websocket(url) {
      function onMessage(evt) {
          var result = JSON.parse(evt.data);
          console.log(result);
-         // 某人发送过来的信息
+         // 接受发送过来信息
          if(result.errorcode == 0) {
              // data = {'user_id': 2, 'data': ['>', 'test, '2015/09/26']}
              var data = JSON.parse(evt.data).data;
+             // 发送者user_id
              var user_id = data.user_id;
 
-             // var s = "<li class='chat-other, cl'><img class='avatar' src='/assets/images/avatar/" + cache_user_data.other_avatar + "'><div class='chat-text'>"+content+"</div></li>";
-             // $('.chat .chat-content ul').append(s);
-
             //cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
+             // 需要缓存这个数据
             var cache_user_data = window.sessionStorage.getItem(data.user_id);
-            console.log('r', data, cache_user_data);
             if(cache_user_data) {
+                // 如果有缓存数据直接从从缓存数据中取
                 cache_chat_log(data, chat_init);
             }
             else {
+                // 如果不存在缓存数据，重新从服务端拉取
                 get_chat_log(user_id, chat_init);
             }
          }
-         // 返回发送成功
+         // 返回发送成功的信息
          else if(result.errorcode == 1) {
              // data = {'me_id': 2, 'data': ['>', 'test, '2015/09/26']}
              var data = JSON.parse(evt.data).data;
+             // 发送者user_id
              var user_id = data.user_id;
+             // 需要缓存这个数据
              var cache_user_data = window.sessionStorage.getItem(data.user_id);
-             console.log('s', data, cache_user_data);
              if(cache_user_data) {
-                 cache_chat_log(data, chat_init);
+                // 如果有缓存数据直接从从缓存数据中取
+                cache_chat_log(data, chat_init);
              }
              else {
+                // 如果不存在缓存数据，重新从服务端拉取
                  get_chat_log(user_id, chat_init);
              }
          }
@@ -538,9 +541,10 @@ function start_chat_websocket(url) {
 
 // 缓存聊天记录
 function cache_chat_log(data, callback) {
-     // data = {'user_id': 2, 'data': ['>', 'test, '2015/09/26']}
+    // cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
+    // 字符串缓存 -> 格式化为json -> 把新的聊天记录push到data.logs -> 重新格式化字符串保存到缓存中
+    // 然后把数据json格式化成字符串保存到sessionStorage
      var cache_user_data = window.sessionStorage.getItem(data.user_id);
-     //cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
      cache_user_data = JSON.parse(cache_user_data);
      cache_user_data.logs.push(data.data)
      window.sessionStorage.setItem(data.user_id, JSON.stringify(cache_user_data));
@@ -548,6 +552,7 @@ function cache_chat_log(data, callback) {
 }
 
 // 获取聊天记录
+// 如果没有缓存或者没有启用localStorage，那么需要重新从服务器获取聊天记录
 function get_chat_log(other_id, callback) {
     $.ajax({
         type: 'post',
@@ -561,7 +566,7 @@ function get_chat_log(other_id, callback) {
             if(result.errorcode == 0) {
                 var data = result['data'];
                 // data = {me_avatar: "admin.png", me: "admin", other_avatar: "default_doubi.png", other: "test", logs: Array[6]}]
-                // 最初始的缓存
+                // 设置最初始的缓存
                 window.sessionStorage.setItem(other_id, JSON.stringify(data));
                 callback(data);
             }
@@ -577,7 +582,7 @@ function get_chat_log(other_id, callback) {
     });
 }
 
-// 聊天初始化
+// 把聊天记录格式到组件
 function chat_init(data) {
     console.log(data);
     if(!data)

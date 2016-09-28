@@ -154,7 +154,7 @@ class User(BaseModel):
         if self.theme:
             handler.set_cookie('theme', self.theme)
             return '.' + self.theme
-        return ''
+        return '.color3'
 
 
 

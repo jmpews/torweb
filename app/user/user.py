@@ -221,14 +221,14 @@ class WebsocketChatHandler(BaseWebsocketHandler):
         opt = json_data['opt']
         if opt == 'chat-to':
             user = self.current_user
+            # 目标用户
             other_id = data['other']
             other = User.get(User.id == other_id)
             content = data['content']
             cl = ChatLog.create(me=user, other=other, content=content)
 
-            #push to [other]
+            # push to [other]
             other_websocket = WebsocketChatHandler.is_online(other.username)
-            # import pdb;pdb.set_trace()
             if other_websocket:
                 # <
                 other_websocket.write_message(json_result(0, {'user_id': user.id, 'data': ['<', cl.content, TimeUtil.datetime_delta(cl.time)]}))

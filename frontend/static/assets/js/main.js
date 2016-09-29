@@ -498,8 +498,8 @@ function start_chat_websocket(url) {
 
             //cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
              // 需要缓存这个数据
-            var cache_user_data = window.sessionStorage.getItem(data.user_id);
-            if(cache_user_data) {
+            var user_data_cache = window.sessionStorage.getItem(data.user_id);
+            if(user_data_cache) {
                 // 如果有缓存数据直接从从缓存数据中取
                 cache_chat_log(data, chat_init);
             }
@@ -510,13 +510,14 @@ function start_chat_websocket(url) {
          }
          // 返回发送成功的信息
          else if(result.errorcode == 1) {
-             // data = {'me_id': 2, 'data': ['>', 'test, '2015/09/26']}
+             // data = {'user_id': 2, 'data': ['>', 'test, '2015/09/26']}
              var data = JSON.parse(evt.data).data;
+              window.sessionStorage.setItem('current_other', data.user_id);
              // 发送者user_id
              var user_id = data.user_id;
              // 需要缓存这个数据
-             var cache_user_data = window.sessionStorage.getItem(data.user_id);
-             if(cache_user_data) {
+             var user_data_cache = window.sessionStorage.getItem(data.user_id);
+             if(user_data_cache) {
                 // 如果有缓存数据直接从从缓存数据中取
                 cache_chat_log(data, chat_init);
              }
@@ -525,10 +526,30 @@ function start_chat_websocket(url) {
                  get_chat_log(user_id, chat_init);
              }
          }
-         else if(result.errorcode == 2){
-             $.notify('未在线,等待上线回复.')
+         // 获取未读消息
+         // 这里需要需要更新两个记录一个是
+         else if(result.errorcode == 2) {
+             var history_log_cache = [];
+
+             var all_logs = JSON.parse(evt.data).data;
+             for(var other_id in all_logs) {
+                 var user_data = all_logs[other_id];
+
+                 cache_chat_user(user_data);
+
+                 var user_data = {'other_name': user_data.other, 'other_avatar': user_data.other_avatar, 'unreads': user_data.logs.length};
+                 history_log_cache.push(user_data);
+
+                 // cache_user_list.push(cache_user_data);
+             }
+             window.sessionStorage.setItem('history_log_cache', JSON.stringify(history_log_cache));
+             //更新用户列表
+             update_user_list(history_log_cache);
          }
          else if(result.errorcode == 3){
+             $.notify('未在线,等待上线回复.')
+         }
+         else if(result.errorcode == 4){
          }
          else if(result.errorcode != 0)
             alert(result.txt);
@@ -538,17 +559,60 @@ function start_chat_websocket(url) {
         console.log('Error occured: ' + evt.data);
      }
 }
+function sessionStorage_set(key, value) {
+    window.sessionStorage.setItem(key, JSON.stringify((value)));
+}
+function sessionStorage_get(key) {
+    var r = window.sessionStorage.getItem(key);
+    return r;
 
-// 缓存聊天记录
+}
+
+// 缓存一条聊天信息
 function cache_chat_log(data, callback) {
     // cache_user_data = {me_avatar: "admin.png", me_name: "admin", other_avatar: "default_doubi.png", other_name: "test", logs: Array[6]}
     // 字符串缓存 -> 格式化为json -> 把新的聊天记录push到data.logs -> 重新格式化字符串保存到缓存中
     // 然后把数据json格式化成字符串保存到sessionStorage
      var cache_user_data = window.sessionStorage.getItem(data.user_id);
      cache_user_data = JSON.parse(cache_user_data);
-     cache_user_data.logs.push(data.data)
+     cache_user_data.logs.push(data.data);
      window.sessionStorage.setItem(data.user_id, JSON.stringify(cache_user_data));
+
+     // 更新用户列表
+     cache_chat_user(cache_user_data);
      callback(cache_user_data);
+}
+
+// 把用户放到缓存列表中
+function cache_chat_user(user_data) {
+    var user_list_cache = window.sessionStorage.getItem('user_list_cache');
+    if(user_list_cache) {
+        user_list_cache = JSON.parse(user_list_cache);
+    }
+    else {
+        user_list_cache = [];
+    }
+    // 判断当前用户是否已经存在cache_user_list
+    for(var i = 0; i < user_list_cache.length; i++) {
+        if(user_list_cache[i].other_name == user_data.other) {
+            user_list_cache[i].unreads = 0;
+            window.sessionStorage.setItem('user_list_cache', JSON.stringify(user_list_cache));
+            update_user_list(user_list_cache);
+            return;
+        }
+    }
+    var user_data = {'other_name': user_data.other, 'other_avatar': user_data.other_avatar, 'unreads': user_data.logs.length};
+    user_list_cache.push(user_data);
+    window.sessionStorage.setItem('user_list_cache', JSON.stringify(user_list_cache));
+    update_user_list(user_list_cache);
+}
+
+// 更新用户列表
+function update_user_list(user_list_cache) {
+    $('.chat-user-all').html('');
+    for(var i = user_list_cache.length-1; i >= 0; i--) {
+        $('.chat-user-all').append("<div class='chat-user'>*"+ user_list_cache[i].other_name+"-"+ user_list_cache[i].unreads +"*</div>")
+    }
 }
 
 // 获取聊天记录
@@ -564,11 +628,13 @@ function get_chat_log(other_id, callback) {
         }),
         success: function(result, status) {
             if(result.errorcode == 0) {
-                var data = result['data'];
+                var user_data = result['data'];
                 // data = {me_avatar: "admin.png", me: "admin", other_avatar: "default_doubi.png", other: "test", logs: Array[6]}]
                 // 设置最初始的缓存
-                window.sessionStorage.setItem(other_id, JSON.stringify(data));
-                callback(data);
+                window.sessionStorage.setItem(user_data['other_id'], JSON.stringify(user_data));
+                // 更新用户列表
+                cache_chat_user(user_data);
+                callback(user_data);
             }
             else if(result.errorcode == -3) {
                 $.notify(result.txt);
@@ -584,12 +650,12 @@ function get_chat_log(other_id, callback) {
 
 // 把聊天记录格式到组件
 function chat_init(data) {
-    console.log(data);
     if(!data)
         return;
-    $('.chat .chat-header').html('chat 2 ' + data['me']);
+    $('.chat .chat-title').html('chat 2 ' + data['me']);
     $('.chat .chat-header').attr('other_avatar', data['other_avatar']);
     $('.chat .chat-header').attr('me_avatar', data['me_avatar']);
+    $('.chat .chat-header').attr('other', data['other_id']);
     var chatlog = data['logs'];
     var chatcontent = $('.chat .chat-content ul');
     $(chatcontent).html('');
@@ -604,14 +670,12 @@ function chat_init(data) {
 }
 
 $(document).click(function(e) {
-    $(".chat-container").on("click", function(e){
-        e.stopPropagation();
-    });
+
     if ($('.chat-container').is(":hidden")) {
         return;
     }
     else {
-        $(".chat-container").hide();
+        // $(".chat-container").hide();
     }
 
     if ($("#emoji-list").is(":hidden")) {
@@ -623,6 +687,9 @@ $(document).click(function(e) {
 });
 
 $(document).ready(function () {
+    $(".chat-close").on("click", function(e){
+        $(".chat-container").hide();
+    });
     //replate_friendly_time();
     // set_theme();
     change_theme();

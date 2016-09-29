@@ -197,8 +197,9 @@ class WebsocketChatHandler(BaseWebsocketHandler):
     def open(self, *args, **kwargs):
 
         user = self.current_user
-        if user.username not in WebsocketChatHandler.clients.keys():
+        if user and  user.username not in WebsocketChatHandler.clients.keys():
             WebsocketChatHandler.clients[user.username] = self
+            self.write_message(json_result(2,ChatLog.get_not_read_log(user)))
 
     @ppeewwee
     def on_close(self):

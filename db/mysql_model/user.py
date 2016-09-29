@@ -193,9 +193,15 @@ class Follower(BaseModel):
 
 
 class ChatLog(BaseModel):
+    """
+    A,B,C 都给D发送消息。 D有三种状态。 1. D在线 2. D不在线 3。 断线后重新连接
+
+    对于D,需要针对这三种情况做处理
+    """
     me = ForeignKeyField(User, related_name='who-send')
     other = ForeignKeyField(User, related_name='send-who')
     content = TextField(verbose_name='chat-content')
+    is_read = BooleanField(default=False)
     time = DateTimeField(default=datetime.datetime.now)
 
     @staticmethod
@@ -209,13 +215,35 @@ class ChatLog(BaseModel):
         result = {'me': '', 'other': '', 'logs': []}
         result['me'] = me.username
         result['other'] = other.username
+        result['other_id'] = other.id
         result['me_avatar'] = me.avatar
         result['other_avatar'] = other.avatar
         # import pdb;pdb.set_trace()
 
         # () 注意需要全包
-        chatlogs = (ChatLog.select().where(((ChatLog.me == me) & (ChatLog.other == other)) | ((ChatLog.me == other) & (ChatLog.other == me))).order_by(ChatLog.time.desc()).limit(10))
-        for cl in chatlogs:
+        chat_logs = (ChatLog.select().where(((ChatLog.me == me) & (ChatLog.other == other)) | ((ChatLog.me == other) & (ChatLog.other == me))).order_by(ChatLog.time).limit(10))
+        for cl in chat_logs:
             d = '>' if cl.me == me else '<'
             result['logs'].append([d, cl.content, TimeUtil.datetime_delta(cl.time)])
         return result
+
+    @staticmethod
+    def get_not_read_log(me):
+        '''
+        获取所有未读的消息(都是发送给我的)
+        :param me:
+        :return:
+        '''
+        all_logs = {}
+        all_not_read_logs = ChatLog.select().where(ChatLog.other == me, ChatLog.is_read == False).order_by(ChatLog.time)
+        for log in all_not_read_logs:
+            other = log.me
+            if other.id not in all_logs.keys():
+                all_logs[other.id]={}
+                all_logs[other.id]['other'] = other.username
+                all_logs[other.id]['other_avatar'] = other.avatar
+                all_logs[other.id]['logs'] = []
+            all_logs[other.id]['logs'].append(['<', log.content, TimeUtil.datetime_delta(log.time)])
+        print(all_logs)
+        return all_logs
+

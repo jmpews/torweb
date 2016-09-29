@@ -135,13 +135,24 @@
 
         // 初始化聊天
         $('a[other]').on('click', function (e) {
-            get_chat_log($(e.currentTarget).attr('other'), chat_init);
+            var user_id = $(e.currentTarget).attr('other');
+            window.sessionStorage.setItem('current_other', user_id);
+             // 需要缓存这个数据
+             var cache_user_data = window.sessionStorage.getItem(user_id);
+             if(cache_user_data) {
+                // 如果有缓存数据直接从从缓存数据中取
+                 chat_init(JSON.parse(cache_user_data));
+             }
+             else {
+                // 如果不存在缓存数据，重新从服务端拉取
+                 get_chat_log(user_id, chat_init);
+             }
         });
 
         // 发送聊天
         $(".chat [type='submit']").on('click', function (e) {
             e.preventDefault();
-            var other_id = $('a[other]').attr('other');
+            var other_id = $('.chat-header').attr('other');
             var content = $('.chat textarea').val();
             chat_websocket.send(JSON.stringify({
                 'opt': 'chat-to',

@@ -49,8 +49,8 @@ class Post(BaseModel):
 
     @staticmethod
     def list_recently(page_limit=config.default_page_limit, page_number=1):
-        page_number_limit = Post.select().order_by(Post.latest_reply_time).count()
-        posts = Post.select().order_by(Post.latest_reply_time).paginate(page_number, page_limit)
+        page_number_limit = Post.select().order_by(Post.latest_reply_time.desc()).count()
+        posts = Post.select().order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         # result = []
         # for post in posts:
         #     result.append({
@@ -69,8 +69,8 @@ class Post(BaseModel):
 
     @staticmethod
     def list_by_topic(topic, page_limit=config.default_page_limit, page_number=1):
-        page_number_limit = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time).count()
-        posts = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time).paginate(page_number, page_limit)
+        page_number_limit = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time.desc()).count()
+        posts = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         return posts, page_number_limit
 
     def detail(self):

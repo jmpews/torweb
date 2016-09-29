@@ -3,6 +3,7 @@ PyMySQL
 peewee
 markdown
 Pillow
+psutil
 # cryptography==1.5
 # PyJWT==1.4.2
 # redis

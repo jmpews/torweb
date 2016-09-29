@@ -3,12 +3,24 @@
 基于tornado并且有很多trick用法的社区，增加一些个人的定制工具类、基础handler等，具备基本社区功能，如：富文本编辑、头像处理等.
 
 Link: **[jmp](http://sxu.today)**
+
 ## 安装&使用
-1. 安装依赖`pip install -r requirements.txt`
 
-2. 修改`settings/common.py`和`settings/development.py`配置信息。
+完整安装过程 `docs/full-install.md`
 
-3. `python app.py` (自动创建数据库，以及 测试数据)
+```
+# py3环境
+source ~/virtualenv/python3.5.2/bin/active
+git pull https://github.com/jmpews/torweb.git
+# 依赖包
+pip install -r requirements.txt
+# 修改配置文件
+vim settings/develoment.py
+# 导入测试数据
+python tests/test_mysql.py
+# 启动服务
+python app.py
+```
 
 ## 组织架构
 ```

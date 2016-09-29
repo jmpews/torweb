@@ -3,6 +3,8 @@
 
 提供Docker-Registry的token-auth-server
 
+---
+
 基于tornado并且有很多trick用法的社区，增加一些个人的定制工具类、基础handler等，具备基本社区功能，如：富文本编辑、头像处理等.
 
 ## 安装&使用

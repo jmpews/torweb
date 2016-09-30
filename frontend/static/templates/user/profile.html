@@ -136,30 +136,16 @@
         // 初始化聊天
         $('a[other]').on('click', function (e) {
             var user_id = $(e.currentTarget).attr('other');
-            window.sessionStorage.setItem('current_other', user_id);
-             // 需要缓存这个数据
-             var cache_user_data = window.sessionStorage.getItem(user_id);
-             if(cache_user_data) {
-                // 如果有缓存数据直接从从缓存数据中取
-                 chat_init(JSON.parse(cache_user_data));
-             }
-             else {
-                // 如果不存在缓存数据，重新从服务端拉取
-                 get_chat_log(user_id, chat_init);
-             }
+            set_current_user(user_id);
+            send_socket_message('recent_chat_message', {'user_id': user_id})
         });
 
         // 发送聊天
         $(".chat [type='submit']").on('click', function (e) {
             e.preventDefault();
-            var other_id = $('.chat-header').attr('other');
+            var other_id = $('.chat-header').attr('other_id');
             var content = $('.chat textarea').val();
-            chat_websocket.send(JSON.stringify({
-                'opt': 'chat-to',
-                'data': {'other': other_id, 'content': content}
-            }));
-			var me_avatar = $('.chat .chat-header').attr('me_avatar');
-             var s = "<li class='me-other cl'><img class='avatar' src='/assets/images/avatar/" + me_avatar + "'><div class='chat-text'>" + content + "</div></li>";
+            send_socket_message('send_message', {'user_id': other_id, 'content': content});
             $('.chat textarea').val('');
         });
 

@@ -9,7 +9,7 @@ from custor.logger import logger
 
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, CollectPost
-from db.mysql_model.user import User, Profile, Follower, ChatLog
+from db.mysql_model.user import User, Profile, Follower, ChatMessage
 
 
 class UserProfileHandler(BaseRequestHandler):
@@ -25,7 +25,6 @@ class UserProfileHandler(BaseRequestHandler):
         # 是否显示关注
         is_follow = True if Follower.is_follow(user, self.current_user) else False
         is_online = True if WebsocketChatHandler.is_online(user.username) else False
-        print(WebsocketChatHandler.is_online(user.username))
         self.render('user/profile.html',
                     user=user,
                     profile=profile,
@@ -165,7 +164,7 @@ class UserOptHandler(BaseRequestHandler):
             user = self.current_user
             other_id = data['other']
             other = User.get(User.id == other_id)
-            result = ChatLog.get_chat_log(user, other)
+            result = ChatMessage.get_recent_chat_message(user, other)
             self.write(json_result(0, result))
 
         # 发送消息
@@ -174,7 +173,7 @@ class UserOptHandler(BaseRequestHandler):
             other_id = data['other']
             other = User.get(User.id == other_id)
             content = data['content']
-            ChatLog.create(me=user, other=other, content=content)
+            ChatMessage.create(me=user, other=other, content=content)
             self.write(json_result(0, 'success'))
         else:
             self.write(json_result(1, 'opt不支持'))
@@ -195,11 +194,10 @@ class WebsocketChatHandler(BaseWebsocketHandler):
 
     @ppeewwee
     def open(self, *args, **kwargs):
-
         user = self.current_user
         if user and  user.username not in WebsocketChatHandler.clients.keys():
             WebsocketChatHandler.clients[user.username] = self
-            self.write_message(json_result(2,ChatLog.get_not_read_log(user)))
+            # self.write_message(json_result(2,ChatMessage.get_not_read_log(user)))
 
     @ppeewwee
     def on_close(self):
@@ -220,23 +218,30 @@ class WebsocketChatHandler(BaseWebsocketHandler):
         json_data = get_cleaned_json_data_websocket(message, ['opt', 'data'])
         data = json_data['data']
         opt = json_data['opt']
-        if opt == 'chat-to':
-            user = self.current_user
-            # 目标用户
-            other_id = data['other']
+
+        if opt == 'update_recent_user_list':
+            current_user_list = ChatMessage.get_recent_user_list(self.current_user)
+            current_user_list['code'] = 'update_recent_user_list'
+            self.write_message(json_result(0,current_user_list))
+
+        elif opt == 'send_message':
+            other_id = data['user_id']
             other = User.get(User.id == other_id)
             content = data['content']
-            cl = ChatLog.create(me=user, other=other, content=content)
-
-            # push to [other]
+            cl = ChatMessage.create(sender=self.current_user, receiver=other, content=content)
             other_websocket = WebsocketChatHandler.is_online(other.username)
-            if other_websocket:
-                # <
-                other_websocket.write_message(json_result(0, {'user_id': user.id, 'data': ['<', cl.content, TimeUtil.datetime_delta(cl.time)]}))
-                # >
-                self.write_message(json_result(1, {'user_id': other.id, 'data': ['>', cl.content, TimeUtil.datetime_delta(cl.time)]}))
-            else:
-                self.write_message(json_result(2, 'success.'))
+            self.write_message(json_result(0, {'code': 'receive_message',
+                                                      'other_id': other.id,
+                                                      'msg': ['>', cl.content, TimeUtil.datetime_delta(cl.time)]}))
 
-        else:
-            self.write_message(json_result(-1, 'not support opt.'))
+            other_websocket.write_message(json_result(0, {'code': 'receive_message',
+                                                      'other_id': self.current_user.id,
+                                                      'msg': ['<', cl.content, TimeUtil.datetime_delta(cl.time)]}))
+        elif opt == 'recent_chat_message':
+            other_id = data['user_id']
+            other = User.get(User.id == other_id)
+
+            recent_message = ChatMessage.get_recent_chat_message(self.current_user, other)
+            recent_message['code'] = 'recent_chat_message'
+            self.write_message(json_result(0,recent_message))
+

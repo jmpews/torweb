@@ -846,6 +846,7 @@ form .form-control:disabled {
   width: 60px;
 }
 .chat .chat-content .chat-user-all .chat-user {
+  cursor: pointer;
   width: 50px;
   height: 50px;
 }

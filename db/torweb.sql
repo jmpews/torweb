@@ -100,34 +100,35 @@ INSERT INTO `blogpostlabel` VALUES (118,'python',87,0),(119,' django',87,0),(120
 UNLOCK TABLES;
 
 --
--- Table structure for table `chatlog`
+-- Table structure for table `chatmessage`
 --
 
-DROP TABLE IF EXISTS `chatlog`;
+DROP TABLE IF EXISTS `chatmessage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `chatlog` (
+CREATE TABLE `chatmessage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `me_id` int(11) NOT NULL,
-  `other_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
+  `is_read` tinyint(1) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `chatlog_me_id` (`me_id`),
-  KEY `chatlog_other_id` (`other_id`),
-  CONSTRAINT `chatlog_ibfk_1` FOREIGN KEY (`me_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `chatlog_ibfk_2` FOREIGN KEY (`other_id`) REFERENCES `user` (`id`)
+  KEY `chatmessage_sender_id` (`sender_id`),
+  KEY `chatmessage_receiver_id` (`receiver_id`),
+  CONSTRAINT `chatmessage_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `chatmessage_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `chatlog`
+-- Dumping data for table `chatmessage`
 --
 
-LOCK TABLES `chatlog` WRITE;
-/*!40000 ALTER TABLE `chatlog` DISABLE KEYS */;
-INSERT INTO `chatlog` VALUES (1,1,2,'self>other','2016-09-25 22:34:56'),(2,2,1,'other>self','2016-09-25 22:34:56');
-/*!40000 ALTER TABLE `chatlog` ENABLE KEYS */;
+LOCK TABLES `chatmessage` WRITE;
+/*!40000 ALTER TABLE `chatmessage` DISABLE KEYS */;
+INSERT INTO `chatmessage` VALUES (1,1,2,'self>other',0,'2016-09-30 15:28:28'),(2,2,1,'other>self',0,'2016-09-30 15:28:28');
+/*!40000 ALTER TABLE `chatmessage` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -432,4 +433,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-28  1:35:03
+-- Dump completed on 2016-09-30 15:30:13

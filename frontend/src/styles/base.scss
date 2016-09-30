@@ -969,20 +969,56 @@ $char-border-color: #ededed;
         bottom: 120px;
         z-index: 2147483601;
         width: 100%;
+
         .chat-user-all {
             position: absolute;
-            width: 60px;
+            width: 50px;
+
+            .chat-userx {
+                cursor: pointer;
+                width: 50px;
+                img {
+                    width: 40px;
+                }
+            }
+
+
             .chat-user {
                 cursor: pointer;
                 width: 50px;
-                height: 50px;
+                text-align: center;
+                padding: 5px;
+                color: $font-color;
+                float: left;
+                border: 1px dashed transparent;
+                border-bottom: 1px solid $border-color;
+                &:hover {
+                    border: 1px dashed #d8d6d6;
+                    span{
+                        padding: 2px;
+                        background-color: #efefef;
+                    }
+                }
+                span {
+                    display: block;
+                    line-height: 1;
+                    padding: 2px;
+
+                }
+                img {
+                    display: block;
+                    width: 40px;
+                    border-radius: 50%;
+                    margin-bottom: 3px;
+                }
             }
         }
         ul {
-            margin-left: 60px;
+            margin-left: 50px;
             height: 100%;
             overflow-y: scroll;
             overflow-x: hidden;
+            border-left: 1px solid $border-color;
         }
         li {
             padding-bottom: 5px;
@@ -996,6 +1032,7 @@ $char-border-color: #ededed;
         .avatar {
             width: 30px;
             height: 30px;
+            border-radius: 50%;
         }
         .chat-other {
             border-bottom: 1px solid $char-border-color;

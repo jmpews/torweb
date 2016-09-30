@@ -843,18 +843,49 @@ form .form-control:disabled {
 }
 .chat .chat-content .chat-user-all {
   position: absolute;
-  width: 60px;
+  width: 50px;
+}
+.chat .chat-content .chat-user-all .chat-userx {
+  cursor: pointer;
+  width: 50px;
+}
+.chat .chat-content .chat-user-all .chat-userx img {
+  width: 40px;
 }
 .chat .chat-content .chat-user-all .chat-user {
   cursor: pointer;
   width: 50px;
-  height: 50px;
+  text-align: center;
+  padding: 5px;
+  color: #999;
+  float: left;
+  border: 1px dashed transparent;
+  border-bottom: 1px solid #dae2ea;
+}
+.chat .chat-content .chat-user-all .chat-user:hover {
+  border: 1px dashed #d8d6d6;
+}
+.chat .chat-content .chat-user-all .chat-user:hover span {
+  padding: 2px;
+  background-color: #efefef;
+}
+.chat .chat-content .chat-user-all .chat-user span {
+  display: block;
+  line-height: 1;
+  padding: 2px;
+}
+.chat .chat-content .chat-user-all .chat-user img {
+  display: block;
+  width: 40px;
+  border-radius: 50%;
+  margin-bottom: 3px;
 }
 .chat .chat-content ul {
-  margin-left: 60px;
+  margin-left: 50px;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  border-left: 1px solid #dae2ea;
 }
 .chat .chat-content li {
   padding-bottom: 5px;
@@ -868,6 +899,7 @@ form .form-control:disabled {
 .chat .chat-content .avatar {
   width: 30px;
   height: 30px;
+  border-radius: 50%;
 }
 .chat .chat-content .chat-other {
   border-bottom: 1px solid #ededed;

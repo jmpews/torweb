@@ -563,7 +563,7 @@ function generate_chat_user_list() {
     for (var user_id in recent_user_list) {
         if (user_id == 'code')
             continue;
-        $('.chat-user-all').append("<div class='chat-user' other='" + recent_user_list[user_id].other_id + "'>*" + recent_user_list[user_id].other_name + "*</div>")
+        $('.chat-user-all').append("<div class='chat-user' other='" + recent_user_list[user_id].other_id + "'><img class='chat-user-avatar' src='/assets/images/avatar/"+ recent_user_list[user_id].other_avatar +"'><span class='chat-user-name'>" + recent_user_list[user_id].other_name + "</span></div>")
     }
     $('.chat-user').on('click', function (e) {
         console.log('chat-user');

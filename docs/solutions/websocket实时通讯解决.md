@@ -1,6 +1,6 @@
 ## websocket实时通讯解决
 ### 简介:
-![](/torweb/docs/solutions/media/14753098438629/14753102755668.jpg)
+![](/docs/solutions/media/14753098438629/14753102755668.jpg)
 
 采用websocket实现，具有历史消息记录、未读消息、最近联系等功能.
 ### html层

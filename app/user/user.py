@@ -224,6 +224,11 @@ class WebsocketChatHandler(BaseWebsocketHandler):
             current_user_list['code'] = 'update_recent_user_list'
             self.write_message(json_result(0,current_user_list))
 
+        elif opt == 'update_recent_user_list_and_open':
+            current_user_list = ChatMessage.get_recent_user_list(self.current_user)
+            current_user_list['code'] = 'update_recent_user_list_and_open'
+            self.write_message(json_result(0,current_user_list))
+
         elif opt == 'send_message':
             other_id = data['user_id']
             other = User.get(User.id == other_id)

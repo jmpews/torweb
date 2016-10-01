@@ -246,10 +246,14 @@ class ChatMessage(BaseModel):
         :return:
         '''
         recent_user_list = {}
+
+        user_id_list = []
+        recent_user_list['user_id_list'] = user_id_list
         recent_message = ChatMessage.select().where(ChatMessage.receiver == current_user, ChatMessage.is_read == False).order_by(ChatMessage.time)
         for msg in recent_message:
             sender = msg.sender
             if sender.id not in recent_user_list.keys():
+                user_id_list.append(sender.id)
                 recent_user_list[sender.id]={}
                 recent_user_list[sender.id]['other_name'] = sender.username
                 recent_user_list[sender.id]['other_id'] = sender.id
@@ -257,5 +261,6 @@ class ChatMessage(BaseModel):
                 recent_user_list[sender.id]['msg'] = []
             recent_user_list[sender.id]['msg'].append(['<', msg.content, TimeUtil.datetime_delta(msg.time)])
             recent_user_list[sender.id]['update_time'] = str(msg.time)
+        recent_user_list['user_id_list'] = user_id_list
         return recent_user_list
 

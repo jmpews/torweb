@@ -7,26 +7,26 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/assets/css/normalize.min.css" rel="stylesheet">
-{#    <link rel="stylesheet" href="/assets/css/bs4_custom.css">#}
+    {#    <link rel="stylesheet" href="/assets/css/bs4_custom.css">#}
     {% block styles %}{% end %}
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     {% if current_user %}
     {% set theme = current_user.get_theme_by_cookie_user(handler) %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{theme}}.css" />
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{ theme }}.css"/>
     {% else %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color3.css" />
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color3.css"/>
     {% end %}
 </head>
 <body>
-    <div class="header cl">
-        <div class="header-container clear-xs cl">
-            <div class="header-logo float-left">
-                <a href="/">Jmp</a>
-                {% if current_user %}
-                <div class="theme" user="{{current_user.id}}">
+<div class="header cl">
+    <div class="header-container clear-xs cl">
+        <div class="header-logo float-left">
+            <a href="/">Jmp</a>
+            {% if current_user %}
+            <div class="theme" user="{{ current_user.id }}">
                 {% else %}
                 <div class="theme" user="">
-                {% end %}
+                    {% end %}
                     <span class="color color1" color="color1"></span>
                     <span class="color color2" color="color2"></span>
                     <span class="color color3" color="color3"></span>
@@ -53,17 +53,18 @@
                 <!-- 未登录 -->
                 <div class="btn-group" style="">
                     <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
-                    <a class="btn btn-sm btn-primary" style="color:#fff;"role="button" href="/register">注册</a>
+                    <a class="btn btn-sm btn-primary" style="color:#fff;" role="button" href="/register">注册</a>
                 </div>
                 {% else %}
                 <!-- 登陆 -->
                 <ul class="options list-inline cl">
                     <li class="dropdown">
                         <a href="#blank" id="user-avatar">
-                            <img src="/assets/images/avatar/{{current_user.avatar}}">
+                            <img src="/assets/images/avatar/{{ current_user.avatar }}">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="user-avatar">
-                            <li class="dropdown-item"><a href="/user/{{current_user.id}}">个人中心</a></li>
+                            <li class="dropdown-item real-time-chat"><a href="#blank">实时通讯</a></li>
+                            <li class="dropdown-item"><a href="/user/{{ current_user.id }}">个人中心</a></li>
                             <li class="dropdown-item"><a href="/user/edit">账号设置</a></li>
                             <li class="dropdown-item"><a href="/logout">退出</a></li>
                         </ul>
@@ -100,25 +101,28 @@
                 <span class="divider">/</span>
                 <span>2016</span>
                 <span class="divider">/</span>
-                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
             </div>
         </div>
     </div>
     <div class="modal fade" id="loginModal">
-            <div class="card custom-card modal-dialog">
-                <div class="card-header">
-                    登陆
-                </div>
-                <div class="card-block">
+        <div class="card custom-card modal-dialog">
+            <div class="card-header">
+                登陆
+            </div>
+            <div class="card-block">
                 <form data-parsley-validate="" action="/login" method="post">
                     <fieldset class="form-group">
                         <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名" required>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名"
+                               required>
                         <small class="text-muted">我们保证您的信息安全.</small>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"
+                               required>
                     </fieldset>
                     <fieldset class="form-group">
                         <img class="captcha" src="/utils/captcha">
@@ -131,48 +135,45 @@
                     </div>
                     <button type="submit" class="btn btn-primary">登陆</button>
                 </form>
-                </div>
             </div>
+        </div>
     </div>
     <div class="chat-container">
-    <div class="chat">
-        <div class="chat-header">
-            <a href="#blank" class="chat-title">Chat 2 'jmpews'</a> <a href="#blank" class="chat-close">X</a>
-        </div>
-        <div class="chat-content">
-            <div class="chat-user-all">
-                <div class="chat-user">
-                    test
-                </div>
-                 <div class="chat-user">
-                     test
-                </div>
-                 <div class="chat-user">
-                     test
-                </div>
+        <div class="chat">
+            <!-- 标题 -->
+            <div class="chat-header">
+                <a href="#blank" class="chat-title">Chat 2 'jmpews'</a> <a href="#blank" class="chat-close">X</a>
             </div>
-            <ul>
-                <li class="chat-other cl">
-                    <img class="avatar" src="http://127.0.0.1:9000/assets/images/avatar/default_doubi.png">
-                    <div class="chat-text">
-                        hello jmpews....
+            <div class="chat-content">
+                <div class="chat-user-all">
+                    <!-- 在线用户列表 -->
+                    <div class="chat-user no-recent-user-list">
+                        正在更新...
                     </div>
-                </li>
-                <li class="chat-self cl">
-                    <img class="avatar" src="http://127.0.0.1:9000/assets/images/avatar/default_doubi.png">
-                    <div class="chat-text">
-                        hello jmpews....
-                    </div>
-                </li>
-            </ul>
+                </div>
+                <ul>
+                    <!-- 聊天记录列表列表 -->
+                    <li class="chat-other cl">
+                        <img class="avatar" src="http://127.0.0.1:9000/assets/images/avatar/default_doubi.png">
+                        <div class="chat-text">
+                            hello jmpews....
+                        </div>
+                    </li>
+                    <li class="chat-self cl">
+                        <img class="avatar" src="http://127.0.0.1:9000/assets/images/avatar/default_doubi.png">
+                        <div class="chat-text">
+                            hello jmpews....
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-footer">
+                <form class="form-group row">
+                    <textarea class="form-control" cols="2"></textarea>
+                    <button type="submit" class="btn btn-primary col-sm-2">发送</button>
+                </form>
+            </div>
         </div>
-        <div class="chat-footer">
-            <form class="form-group row">
-                <textarea class="form-control" cols="2"></textarea>
-                <button type="submit" class="btn btn-primary col-sm-2">发送</button>
-            </form>
-        </div>
-    </div>
     </div>
 
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>

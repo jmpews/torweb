@@ -4,112 +4,93 @@
 <link href="/assets/css/cropper.min.css" rel="stylesheet">
 {% end %}
 {% block content %}
-        <div class="content-container container user-profile-edit-html">
-            <div class="col-md-3">
-                <div class="user-avatar-edit">
-                    <div class="select-avatar">
-                        <img id="avatar-cropper"src="/assets/images/avatar/{{current_user.avatar}}">
-                    </div>
-        <ul class="photo-container">
-            <li class="avatar-preview col-2"></li>
-            <li class="avatar-preview col-1"></li>
-        </ul>
-                    <!-- custom upload button -->
-                    <button class="btn btn-outline-primary btn-sm select-avatar">
-                        <input type="file" class="file-input" id="avatar" name="avatar" onchange="change_image_preview()">选择
-                    </button>
-                    <button type="submit" class="btn btn-outline-primary btn-sm upload-avatar">保存</button>
-                </div>
+<div class="content-container container user-profile-edit-html">
+    <div class="col-md-3">
+        <div class="user-avatar-edit">
+            <div class="select-avatar">
+                <img id="avatar-cropper" src="/assets/images/avatar/{{ current_user.avatar }}">
             </div>
-            <div class="col-md-9">
-                <div class="user-profile-edit">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/user/edit">个人设置</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/notification">消息通知</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/follower/{{current_user.id}}">个人关注</a>
-                        </li>
-                    </ul>
-                    <div class="user-profile-edit-body">
-                        <div class="user-profile-card">
-                            <div class="profile-card-head" style="border-top: none;">
-                                个人资料
-                            </div>
-                            <div class="profile-card-body">
+            <ul class="photo-container">
+                <li class="avatar-preview col-2"></li>
+                <li class="avatar-preview col-1"></li>
+            </ul>
+            <!-- custom upload button -->
+            <button class="btn btn-outline-primary btn-sm select-avatar">
+                <input type="file" class="file-input" id="avatar-file" name="avatar" onchange="change_image_preview()">选择
+            </button>
+            <button type="submit" class="btn btn-outline-primary btn-sm upload-avatar">保存</button>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="user-profile-edit">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/user/edit">个人设置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/notification">消息通知</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/follower/{{ current_user.id }}">个人关注</a>
+                </li>
+            </ul>
+            <div class="user-profile-edit-body">
+                <div class="user-profile-card">
+                    <div class="profile-card-head" style="border-top: none;">
+                        个人资料
+                    </div>
+                    <div class="profile-card-body">
 
-                                <form data-parsley-validate="" action="/user/edit" method="post">
-                                <div class="form-group row">
-                                    <label class="col-xs-2 col-form-label" for="weibo">微博</label>
-                                    <div class="col-xs-10">
-                                        <input type="text" class="form-control" placeholder="你的微博" name="weibo" id="weibo" value="{{userinfo['weibo']}}" data-parsley-length="[3, 8]" required>
-                                    </div>
+                        <form data-parsley-validate="" action="/user/edit" method="post">
+                            <div class="form-group row">
+                                <label class="col-xs-2 col-form-label" for="weibo">微博</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" placeholder="你的微博" name="weibo" id="weibo"
+                                           value="{{ userinfo['weibo'] }}" data-parsley-length="[3, 8]" required>
                                 </div>
-
-                                <div class="form-group row">
-                                    <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">保存</button>
-                                    </div>
-                                </div>
-                                </form>
                             </div>
-                        </div>
+
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 {% end %}
 
 {% block scripts %}
 <script src="/assets/js/cropper.min.js"></script>
 <script type="text/javascript">
-
-$('#avatar-cropper').cropper({
-    viewMode: 2,
-    aspectRatio: 1 / 1,
-    checkImageOrigin: true,
-    preview: '.avatar-preview',
-});
-
-$('.upload-avatar').on('click', function(e){
-    e.preventDefault();
-    var avatar64 = $('#avatar-cropper').cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL();
-    $.ajax({
-       type: 'post',
-       dataType: 'json',
-       url: '/useropt',
-       data: JSON.stringify({'opt': 'update-avatar', 'data': {'avatar': avatar64.split(',')[1]}}),
-       success: function(result, status) {
-           if(result.errorcode == 0) {
-               $.notify('头像更换成功');
-               window.location.reload();
-           }
-           else if(result.errorcode == 1) {
-               alert(result.txt);
-           }
-       }
+    // 设置cropper插件
+    $('#avatar-cropper').cropper({
+        viewMode: 2,
+        aspectRatio: 1 / 1,
+        checkImageOrigin: true,
+        preview: '.avatar-preview',
     });
-});
 
     $('form').on('submit', function (event) {
         event.preventDefault();
-         $.ajax({
+        $.ajax({
             type: 'post',
             dataType: 'json',
             url: '/user/edit',
             data: {
                 'weibo': $('#weibo').val()
             },
-            success: function(result, status) {
-                if(result.errorcode == 0) {
+            success: function (result, status) {
+                if (result.errorcode == 0) {
                     var data = result['data'];
                     $.notify('修改资料成功');
-                    window.location.href='/user/edit'
+                    window.location.href = '/user/edit'
                 }
-                else if(result.errorcode != 0) {
+                else if (result.errorcode != 0) {
                     $.notify(result.txt);
                 }
             }

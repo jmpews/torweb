@@ -74,42 +74,40 @@ function set_theme() {
 // 图片预览
 function change_image_preview() {
     $inputFileElm = $(this);
-    var pic = document.getElementById("avatar-cropper");
-    var file = document.getElementById("avatar");
-    console.log(pic);
-    console.log(file);
-    var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
+    var avatar_cropper = document.getElementById("avatar-cropper");
+    var avatar_file = document.getElementById("avatar-file");
+    var ext = avatar_file.value.substring(avatar_file.value.lastIndexOf(".") + 1).toLowerCase();
     // gif在IE浏览器暂时无法显示
     if (ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
         alert("文件必须为图片！");
         return;
     }
-    if (file.size > 1024 * 3000) {
+    if (avatar_file.size > 1024 * 3000) {
         alert("上传图片不要超过3000KB");
         return;
     }
     // IE浏览器
     if (document.all) {
-
-        file.select();
+        avatar_file.select();
         var reallocalpath = document.selection.createRange().text;
         var ie6 = /msie 6/i.test(navigator.userAgent);
         // IE6浏览器设置img的src为本地路径可以直接显示图片
-        if (ie6) pic.src = reallocalpath;
+        if (ie6) avatar_cropper.src = reallocalpath;
         else {
             // 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
-            pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
+            avatar_cropper.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
             // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
-            pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+            avatar_cropper.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
         }
     }
     else {
-        var f = file.files[0];
+        var f = avatar_file.files[0];
         var reader = new FileReader();
         reader.readAsDataURL(f);
         reader.onload = function (e) {
-            pic.src = this.result;
-            $(pic).cropper('reset').cropper('replace', this.result);
+            avatar_cropper.src = e.target.result;
+            // 重新载入croppper
+            $(avatar_cropper).cropper('reset').cropper('replace', e.target.result);
         }
     }
     $inputFileElm.val("");
@@ -117,14 +115,35 @@ function change_image_preview() {
 
 // html5读取文件内容
 function html5Reader(file) {
-    var file = file.files[0];
+    var avatar_file = file.files[0];
     var reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(avatar_file);
     reader.onload = function (e) {
-        var pic = document.getElementById("avatar-cropper");
-        pic.src = this.result;
+        var avatar_cropper = document.getElementById("avatar-cropper");
+        avatar_cropper.src = this.result;
     }
 }
+
+// 上传头像
+$('.upload-avatar').on('click', function (e) {
+    e.preventDefault();
+    var avatar64 = $('#avatar-cropper').cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL();
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: '/useropt',
+        data: JSON.stringify({'opt': 'update-avatar', 'data': {'avatar': avatar64.split(',')[1]}}),
+        success: function (result, status) {
+            if (result.errorcode == 0) {
+                $.notify('头像更换成功');
+                window.location.reload();
+            }
+            else if (result.errorcode == 1) {
+                alert(result.txt);
+            }
+        }
+    });
+});
 
 // 显示、隐藏所有分类
 function show_hide_cate_nav() {
@@ -227,6 +246,7 @@ function replate_friendly_time() {
         $(item).html(getFriendlyTime($(item).html()));
     });
 }
+
 //拖拽、粘贴上传
 var $this;
 var $ajaxUrl = '';
@@ -493,7 +513,7 @@ function start_chat_websocket(url) {
 
     function onOpen(evt) {
         console.log("Connected to WebSocket server.");
-        window.sessionStorage.setItem('recent_user_list', '');
+        // 请求更新 最近用户列表
         send_socket_message('update_recent_user_list', '')
     }
 
@@ -514,6 +534,7 @@ function start_chat_websocket(url) {
     }
 }
 
+// 发送操作码和数据
 function send_socket_message(opt, data) {
     if (data == '')
         data = 'x';
@@ -524,14 +545,13 @@ function send_socket_message(opt, data) {
     chat_websocket.send(message);
 }
 
-function update_current_user_list() {
-    send_socket_message('update_recent_user_list', '');
-}
-
+// 设置当前聊天用户
 function set_current_user(user_id) {
     window.sessionStorage.setItem('current_user_id', user_id);
 
 }
+
+// 判断是否为当前用户
 function is_current_user(user_id) {
     var curent_user_id = window.sessionStorage.getItem('current_user_id');
     if (curent_user_id) {
@@ -541,6 +561,24 @@ function is_current_user(user_id) {
     }
     return false;
 }
+
+// 判断 最近用户列表是否存在
+function is_current_user_list(user_id) {
+    var recent_user_list = window.sessionStorage.getItem('recent_user_list');
+    if (recent_user_list) {
+        recent_user_list = JSON.parse(recent_user_list);
+    }
+    else
+        return false;
+    var user_id_list = recent_user_list.user_id_list;
+    if(user_id_list) {
+        if(user_id_list.indexOf(user_id)!= -1)
+            return true;
+    }
+    return false;
+}
+
+// 把消息添加到消息列表的html中
 function append_message_to_chat_content(message) {
     if (message[0] == "<")
         var s = "<li class='chat-other cl'><img class='avatar' src='/assets/images/avatar/" + $('.chat .chat-header').attr('other_avatar') + "'><div class='chat-text'>" + message[1] + "</div></li>";
@@ -549,6 +587,20 @@ function append_message_to_chat_content(message) {
 
     $('.chat .chat-content ul').append(s);
 }
+function append_tmp_user_to_user_list(other_id, other_name, other_avatar) {
+    $('.chat-user-all').append("<div class='chat-user' other='" + other_id + "'><img class='chat-user-avatar' src='/assets/images/avatar/"+ other_avatar +"'><span class='chat-user-name'>" + other_name + "</span></div>")
+    // 点击用户头像, 初始化,与该用户的聊天记录窗口
+    $('.chat-user').on('click', function (e) {
+        var other_id = $(e.currentTarget).attr('other');
+        set_current_user(other_id);
+        send_socket_message('recent_chat_message', {'user_id': other_id})
+    });
+}
+// 打开聊天页面
+$('.real-time-chat').on('click', function () {
+    $('.no-recent-user-list').show();
+    send_socket_message('update_recent_user_list_and_open', '');
+});
 
 // 更新用户列表
 function generate_chat_user_list() {
@@ -557,24 +609,28 @@ function generate_chat_user_list() {
         recent_user_list = JSON.parse(recent_user_list);
     }
     else {
-        recent_user_list = []
+        send_socket_message('update_recent_user_list', '');
+        return;
     }
     $('.chat-user-all').html('');
-    for (var user_id in recent_user_list) {
-        if (user_id == 'code')
-            continue;
-        $('.chat-user-all').append("<div class='chat-user' other='" + recent_user_list[user_id].other_id + "'><img class='chat-user-avatar' src='/assets/images/avatar/"+ recent_user_list[user_id].other_avatar +"'><span class='chat-user-name'>" + recent_user_list[user_id].other_name + "</span></div>")
+    for (var i = 0; i < recent_user_list.user_id_list.length; i++) {
+        var user_id = recent_user_list.user_id_list[i];
+        var other_id = recent_user_list[user_id].other_id;
+        var other_avatar = recent_user_list[user_id].other_avatar;
+        var other_name = recent_user_list[user_id].other_name;
+        $('.chat-user-all').append("<div class='chat-user' other='" + other_id + "'><img class='chat-user-avatar' src='/assets/images/avatar/"+ other_avatar +"'><span class='chat-user-name'>" + other_name + "</span></div>")
     }
+    // 点击用户头像, 初始化,与该用户的聊天记录窗口
     $('.chat-user').on('click', function (e) {
-        console.log('chat-user');
         var other_id = $(e.currentTarget).attr('other');
         set_current_user(other_id);
         send_socket_message('recent_chat_message', {'user_id': other_id})
     });
 }
 
+// 更新聊天记录窗口
 function generate_chat_content_html(data) {
-    console.log(data);
+    debugger;
     $('.chat .chat-title').html('chat 2 ' + data['other_name']);
     $('.chat .chat-header').attr('other_avatar', data['other_avatar']);
     $('.chat .chat-header').attr('me_avatar', data['me_avatar']);
@@ -587,26 +643,41 @@ function generate_chat_content_html(data) {
         else
             var s = "<li class='chat-self cl'><img class='avatar' src='/assets/images/avatar/" + data['me_avatar'] + "'><div class='chat-text'>" + recent_message[i][1] + "</div></li>";
         $('.chat .chat-content ul').append(s);
-        $('.chat-container').show()
     }
+    $('.chat-container').show()
 }
 
-
+// 根据操作码,处理接收到的消息数据
 function handle_receive_message(data) {
+    // 更细最近用户列表
     if (data.code == 'update_recent_user_list') {
         window.sessionStorage.setItem('recent_user_list', JSON.stringify(data));
         generate_chat_user_list();
     }
+    else if (data.code == 'update_recent_user_list_and_open') {
+        window.sessionStorage.setItem('recent_user_list', JSON.stringify(data));
+        generate_chat_user_list();
+        $('.chat-container').show()
+    }
+    // 处理消息数据
     else if (data.code == 'receive_message') {
+        debugger;
+        // 判断是否为当前用户
         if (!is_current_user(data.other_id)) {
-            update_current_user_list();
+            // 如果不是当前用户更新 用户最近列表的未读消息数
+            send_socket_message('update_recent_user_list', '');
         }
         else {
+            // 如果是当前用户 append到当前聊天内容中
             append_message_to_chat_content(data.msg);
+            generate_chat_user_list();
         }
     }
     else if (data.code == 'recent_chat_message') {
         generate_chat_content_html(data);
+        if(!is_current_user_list(data.other_id)) {
+            append_tmp_user_to_user_list(data.other_id, data.other_name, data.other_avatar);
+        }
     }
 }
 

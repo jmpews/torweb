@@ -119,7 +119,7 @@ def get_cleaned_json_data(handler, args, blank=False):
         elif not tmp_x and blank:
             data[k] = None
         else:
-            raise RequestMissArgumentError('[' + k + '] arg not found')
+            raise RequestMissArgumentError('没有找到 [' + k + '] 参数')
     return data
 
 def get_cleaned_json_data_websocket(message, args, blank=False):
@@ -139,7 +139,7 @@ def get_cleaned_json_data_websocket(message, args, blank=False):
         elif not tmp_x and blank:
             data[k] = None
         else:
-            raise RequestMissArgumentError('[' + k + '] arg not found')
+            raise RequestMissArgumentError('没有找到 [' + k + ']参数')
     return data
 
 def set_api_header(request):

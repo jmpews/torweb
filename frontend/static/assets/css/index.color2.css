@@ -1388,7 +1388,11 @@ form .form-control:disabled {
 }
 .card-header-all .card-header-all-cate h4 {
   font-size: 13px;
+  font-weight: bold;
   color: #34495E;
+}
+.card-header-all .card-header-all-cate h4 .fa {
+  color: tomato;
 }
 .card-header-all .card-header-all-cate .card-header-all-cate-topic {
   padding-left: 10px;
@@ -1431,7 +1435,11 @@ form .form-control:disabled {
 }
 .card-header-all-footer .card-header-all-cate h4 {
   font-size: 13px;
+  font-weight: bold;
   color: #34495E;
+}
+.card-header-all-footer .card-header-all-cate h4 .fa {
+  color: tomato;
 }
 .card-header-all-footer .card-header-all-cate .card-header-all-cate-topic {
   padding-left: 10px;

@@ -1599,7 +1599,11 @@ $current-topic-width: 21px;
         border-bottom: 1px solid #e8e8e8;
         h4 {
             font-size: 13px;
+            font-weight: bold;
             color: $important-font-color;
+            .fa {
+                color: tomato;
+            }
         }
         .card-header-all-cate-topic {
             padding-left: 10px;
@@ -1643,7 +1647,11 @@ $current-topic-width: 21px;
         border-bottom: 1px dashed #e8e8e8;
         h4 {
             font-size: 13px;
+            font-weight: bold;
             color: $important-font-color;
+            .fa {
+                color: tomato;
+            }
         }
         .card-header-all-cate-topic {
             padding-left: 10px;

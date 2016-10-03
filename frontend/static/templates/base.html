@@ -33,7 +33,7 @@
                     <span class="color color4" color="color4"></span>
                 </div>
             </div>
-            <ul class="header-nav float-left list-inline cl">
+            <ul class="header-nav float-left list-inline clear-xs cl">
                 <li class="active">
                     <a href="/">首页 <span class="sr-only">(current)</span></a>
                 </li>
@@ -184,6 +184,13 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
     <script>
+    $(document).on("scroll", function() {
+        if ($(document).scrollTop() > 74) {
+            $(".header").addClass("scroll");
+        } else {
+            $(".header").removeClass("scroll");
+        }
+    });
     </script>
     {% block scripts %}
     {% end %}

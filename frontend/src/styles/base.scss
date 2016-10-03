@@ -732,10 +732,12 @@ $header-logo-height: 40px;
 .header.scroll {
     box-shadow: 0 3px 10px $link-color;
     position: fixed;
-    top: 0;
+    top: -70px;
+    transform: translateY(70px);
+    //top: 0;
     .header-container .header-logo {
         top: ($header-height /2 ) - ($header-logo-height / 2);
-        left: 0px;
+        left: 0;
     }
 }
 
@@ -745,8 +747,8 @@ $header-logo-height: 40px;
     margin: 0 auto;
     z-index: 999;
     background-color: $nav-header-background-color;
+    transition: 0.3s ease-out;
     //border-bottom: 1px solid $border-color;
-
 
     a {
         color: $nav-header-font-color;

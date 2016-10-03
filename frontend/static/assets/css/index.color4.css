@@ -636,11 +636,12 @@ form .form-control:disabled {
 .header.scroll {
   box-shadow: 0 3px 10px #e95420;
   position: fixed;
-  top: 0;
+  top: -70px;
+  transform: translateY(70px);
 }
 .header.scroll .header-container .header-logo {
   top: 15px;
-  left: 0px;
+  left: 0;
 }
 
 .header {
@@ -648,6 +649,7 @@ form .form-control:disabled {
   margin: 0 auto;
   z-index: 999;
   background-color: #fff;
+  transition: 0.3s ease-out;
 }
 .header a {
   color: #999;

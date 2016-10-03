@@ -8,14 +8,21 @@ from settings.config import config
 
 
 class PostCategory(BaseModel):
+    """
+    总分类
+    """
     name = CharField(verbose_name='标题')
-    str = CharField(verbose_name='str', unique=True)
+    str = CharField(unique=True, verbose_name='str')
 
 
 class PostTopic(BaseModel):
+    """
+    分类下的主题
+    """
     category = ForeignKeyField(PostCategory, related_name='topics_category', null=True)
     name = CharField(verbose_name='标题')
-    str = CharField(verbose_name='str', unique=True)
+    str = CharField(unique=True, verbose_name='str')
+    hot = BooleanField(default=False, verbose_name='热门主题')
 
 
 class Post(BaseModel):
@@ -24,31 +31,66 @@ class Post(BaseModel):
     content = TextField(verbose_name="帖子内容")
     user = ForeignKeyField(User, verbose_name="发帖人")
     create_time = DateTimeField(default=datetime.datetime.now, verbose_name="发帖时间")
+
     latest_reply_user = ForeignKeyField(User, null=True, related_name="reply_user", verbose_name="最后回复用户")
     latest_reply_time = DateTimeField(null=True, verbose_name="最近回复时间")
+
     visit_count = IntegerField(default=1, verbose_name="帖子浏览数")
     reply_count = IntegerField(default=0, verbose_name="帖子回复数")
     collect_count = IntegerField(default=0, verbose_name="赞同数")
+
+    top = BooleanField(default=False, verbose_name='置顶')
+    essence = BooleanField(default=False, verbose_name='精华')
 
     def __str__(self):
         return "[%s-%s]" % (self.title, self.user)
 
     def up_collect(self):
+        '''
+        收藏帖子
+        :return:
+        '''
         self.collect_count += 1
         self.save()
 
     def up_visit(self):
+        '''
+        浏览数
+        :return:
+        '''
         self.visit_count += 1
         self.save()
 
     def update_latest_reply(self, postreply):
+        '''
+        更新最近回复
+        :param postreply:
+        :return:
+        '''
         self.latest_reply_user = postreply.user
         self.latest_reply_time = postreply.create_time
         self.reply_count += 1
         self.save()
 
     @staticmethod
+    def list_top():
+        '''
+        获取指定帖子,可以用trick缓存
+        :param self:
+        :return:
+        '''
+        top_posts = Post.select().where(Post.top == True)
+        top_posts_count = top_posts.count()
+        return top_posts, top_posts_count
+
+    @staticmethod
     def list_recently(page_limit=config.default_page_limit, page_number=1):
+        '''
+        列出最近帖子
+        :param page_limit: 每一页帖子数量
+        :param page_number: 当前页
+        :return:
+        '''
         page_number_limit = Post.select().order_by(Post.latest_reply_time.desc()).count()
         posts = Post.select().order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         # result = []
@@ -69,11 +111,22 @@ class Post(BaseModel):
 
     @staticmethod
     def list_by_topic(topic, page_limit=config.default_page_limit, page_number=1):
+        '''
+        列出当前主题下的梯子
+        :param topic: 具体主题
+        :param page_limit: 每一页帖子数量
+        :param page_number: 当前页
+        :return:
+        '''
         page_number_limit = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time.desc()).count()
         posts = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         return posts, page_number_limit
 
     def detail(self):
+        '''
+        获取帖子详情
+        :return:
+        '''
         result = {}
         result['title'] = self.title
         result['content'] = self.content
@@ -89,6 +142,9 @@ class Post(BaseModel):
 
 
 class PostReply(BaseModel):
+    '''
+    回复
+    '''
     post = ForeignKeyField(Post, verbose_name="对应帖子")
     user = ForeignKeyField(User, verbose_name="回复者")
     content = TextField(verbose_name="回复内容")
@@ -99,6 +155,10 @@ class PostReply(BaseModel):
         return "[%s-%s]" % (self.user, self.content)
 
     def up_like(self):
+        '''
+        赞同
+        :return:
+        '''
         self.like_count += 1
         self.save()
 
@@ -112,6 +172,9 @@ class PostReply(BaseModel):
 
 
 class CollectPost(BaseModel):
+    '''
+    收藏帖子
+    '''
     post = ForeignKeyField(Post, verbose_name="对应帖子")
     user = ForeignKeyField(User, verbose_name="收藏者")
     collect_time = DateTimeField(default=datetime.datetime.now, verbose_name="收藏时间")

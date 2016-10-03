@@ -74,14 +74,13 @@
                     <div class="">
                         <div class="post-content">
                             {% raw post_detail.content %}
-                            IDS(intrusion detection system),即入侵检测系统。是一种对网络传输进行即时监视，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于，IDS是一种积极主动的安全防护技术。
                         </div>
                         <div class="post-function">
                             <span>
                                 {% if is_collect %}
-                                <a href="#blank" class="collect-post post-collected"><i class="fa fa-bookmark-o"></i>已收藏</a>
+                                <a href="#blank" class="collect-post post-collected"><i class="fa fa-bookmark-o"></i><span>已收藏</span></a>
                                 {% else %}
-                                <a href="#blank" class="collect-post"><i class="fa fa-bookmark-o"></i>收藏</a>
+                                <a href="#blank" class="collect-post"><i class="fa fa-bookmark-o"></i><span>收藏</span></a>
                                 {% end %}
                             </span>
                             <span class="divider">•</span>
@@ -118,7 +117,7 @@
                                 </div>
                                 <div class="reply-function">
                                     <!-- <span> <a href="/"><i class="fa fa-reply"></i>回复</a></span> -->
-                                    <span><a href="#support" class="support-reply"><i class="fa fa-thumbs-o-up"></i>赞同</a></span>
+                                    <span><a href="#support" class="support-reply"><i class="fa fa-thumbs-o-up"></i><span>赞同</span></a></span>
                                 </div>
                             </div>
                         </div>
@@ -242,19 +241,28 @@
         return 1;
     });
     $('.support-reply').on('click', function(e){
-        reply_id = $(e.target).parents('.reply-item[reply_id]').attr('reply_id')
+        var reply_id = $(e.target).parents('.reply-item[reply_id]').attr('reply_id');
         if(!reply_id)
             $.notify('错误....');
-        console.log(reply_id);
+        var post_data = {'opt': 'support-postreply', 'data': {'postreply': reply_id}};
+        if($(e.currentTarget).hasClass('postreply-collected')) {
+            post_data = {'opt': 'cancle-support-postreply', 'data': {'postreply': reply_id}};
+        }
         $.ajax({
            type: 'post',
            dataType: 'json',
            url: '/postreplyopt',
-           data: JSON.stringify({'opt': 'support-postreply', 'data': {'postreply': reply_id}}),
+           data: JSON.stringify(),
            success: function(result, status) {
                if(result.errorcode == 0) {
-                   $(e.target).addClass('postreply-supported');
-                   $.notify('已支持...');
+                   if($(e.currentTarget).hasClass('postreply-collected')) {
+                       $(e.currentTarget).removeClass('postreply-supported');
+                       $.notify('...');
+                   }
+                   else {
+                       $(e.currentTarget).addClass('postreply-supported');
+                       $.notify('...');
+                   }
                }
                else if(result.errorcode == -3) {
                    $('#loginModal').modal('toggle');
@@ -264,21 +272,44 @@
     });
     $('.collect-post').on('click', function(e){
         e.preventDefault();
+        var post_data = {'opt': 'collect-post', 'data': {'post': post}};
+        if($(e.currentTarget).hasClass('post-collected')) {
+            post_data = {'opt': 'cancle-collect-post', 'data': {'post': post}};
+        }
         $.ajax({
            type: 'post',
            dataType: 'json',
            url: '/postreplyopt',
-           data: JSON.stringify({'opt': 'collect-post', 'data': {'post': post}}),
+           data: JSON.stringify(post_data),
            success: function(result, status) {
                if(result.errorcode == 0) {
-                   $(e.target).addClass('post-collected');
-                   $.notify('已收藏...');
+                   if($(e.currentTarget).hasClass('post-collected')) {
+                       $(e.currentTarget).removeClass('post-collected');
+                       $(e.currentTarget).find('span').html('收藏');
+                       $.notify('取消收藏');
+                   }
+                   else {
+                       $(e.currentTarget).addClass('post-collected');
+                       $(e.currentTarget).find('span').html('已收藏');
+                       $.notify('收藏成功...');
+                   }
                }
                else if(result.errorcode == -3) {
                    $('#loginModal').modal('toggle');
                }
            }
         });
+    }).on('mouseover', function (e) {
+        if($(e.currentTarget).hasClass('post-collected')) {
+            $(e.currentTarget).find('span').html('取消收藏');
+        }
+        else
+            $(e.currentTarget).find('span').html('收藏');
+    }).on('mouseout', function (e) {
+        if($(e.currentTarget).hasClass('post-collected'))
+            $(e.currentTarget).find('span').html('已收藏');
+        else
+            $(e.currentTarget).find('span').html('收藏');
     });
     show_hide_cate_nav();
     show_hide_emoji_list_medium();

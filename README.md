@@ -29,6 +29,14 @@
 * websocket实现的多用户及时通讯
 * 主题切换(通过DB和cookie两种方式以保证快速切换)
 
+### 解决方案
+
+把在写torweb遇到的问题，写成解决方案.
+
+[websocket实时通讯解决.md](/docs/solutions/websocket实时通讯解决.md)
+
+[头像裁剪上传解决方案.md](/docs/solutions/头像裁剪上传解决方案.md)
+
 ## 安装&使用
 
 完整安装过程 `docs/full-install.md`

@@ -98,6 +98,16 @@ class PostReplyOptHandler(BaseRequestHandler):
                 return
             CollectPost.create(post=post, user=self.current_user)
             self.write(json_result(0, 'success'))
+        # 取消收藏该主题
+        elif opt == 'cancle-collect-post':
+            try:
+                post = Post.get(Post.id == data['post'])
+            except:
+                self.write(json_result(1, 'CollectPost不正确'))
+                return
+            collectpost = CollectPost.get(post=post, user=self.current_user)
+            collectpost.delete_instance()
+            self.write(json_result(0, 'success'))
         else:
             self.write(json_result(1, 'opt不支持'))
 

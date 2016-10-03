@@ -31,7 +31,7 @@
                     {% set category = topic_category_cache['categorys'][i] %}
                     {% set topics = topic_category_cache['topics'][i] %}
                     <div class="card-header-all-cate">
-                        <h4>{{category.name}}</h4>
+                        <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{category.name}}</h4>
                         <div class="card-header-all-cate-topic">
                             {% for topic in topics %}
                             <a href="/topic/{{topic.str}}">{{topic.name}}</a>
@@ -40,7 +40,7 @@
                     </div>
                     {% end %}
                     <div class="card-header-all-cate">
-                        <h4>未分类</h4>
+                        <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
                         <div class="card-header-all-cate-topic">
                             {% for topic in topic_category_cache['topics'][-1] %}
                             <a href="/topic/{{topic.str}}">{{topic.name}}</a>
@@ -50,6 +50,44 @@
                 </div>
             </div>
             <div class="card-block">
+
+            <!-- 置顶帖子 -->
+            {% for post in top_posts %}
+            <div class="post-item top-post cl">
+                {% set user = post.user  %}
+                <div class="post-avatar hidden-xs ">
+                    <a class="username" href="/user/{{user.id}}">
+                        {% if is_default_avatar(user.avatar) %}
+                        <span>{{user.username[0].upper()}}</span>
+                        {% else %}
+                        <img src="/assets/images/avatar/{{user.avatar}}">
+                        {% end %}
+                    </a>
+                </div>
+
+                <div class="post-item-mid clear-xs">
+                    <div class="item-title"><a href="/post/{{post.id}}">{{post.title}} <i class="fa fa-hashtag" aria-hidden="true"></i></a></div>
+                    <div class="item-info">
+                        <span><a class="post-category" href="/topic/{{post.topic.str}}">{{post.topic.name}}</a></span>
+                        <span class="divider">•</span>
+						<span><a class="username" href="/user/{{post.user.id}}">{{post.user.username}}</a></span>
+
+                        {% if post.latest_reply_user %}
+                        <span class="divider">•</span>
+                        <span><a class="username" href="/user/{{post.latest_reply_user.id}}">{{post.latest_reply_user.nickname}} </a>最后回复于</span>
+                        <span class="friendly-time">{{datetime_delta(post.latest_reply_time)}}</span>
+                        {% end %}
+                        <span class="divider">•</span>
+                        <span>{{post.visit_count}} 浏览</span>
+                    </div>
+                </div>
+                <div class="post-item-end hidden-xs">
+                    <span><i class="fa fa-commenting-o" aria-hidden="true"></i>{{post.reply_count}}</span>
+                </div>
+            </div>
+            {% end %}
+
+            <!-- 正常帖子 -->
             {% for post in posts %}
             <div class="post-item cl">
                 {% set user = post.user  %}
@@ -82,7 +120,6 @@
                 <div class="post-item-end hidden-xs">
                     <span><i class="fa fa-commenting-o" aria-hidden="true"></i>{{post.reply_count}}</span>
                 </div>
-
             </div>
             {% end %}
             <nav style="text-align:center">
@@ -130,7 +167,7 @@
                         {% set category = topic_category_cache['categorys'][i] %}
                         {% set topics = topic_category_cache['topics'][i] %}
                         <div class="card-header-all-cate">
-                            <h4>{{category.name}}</h4>
+                            <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{category.name}}</h4>
                             <div class="card-header-all-cate-topic">
                             {% for topic in topics %}
                             <a href="/topic/{{topic.str}}">{{topic.name}}</a>
@@ -139,7 +176,7 @@
                         </div>
                         {% end %}
                         <div class="card-header-all-cate">
-                            <h4>未分类</h4>
+                            <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
                             <div class="card-header-all-cate-topic">
                             {% for topic in topic_category_cache['topics'][-1] %}
                             <a href="/topic/{{topic.str}}">{{topic.name}}</a>

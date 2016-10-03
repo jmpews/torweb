@@ -39,11 +39,12 @@
 
 ## TODO列表
 
-handler里设置
+#### 0. handler里设置
 ```
 def get(self, *args, **kwargs):
 	self.success()
 ```
+#### 1. tornado+greenlet+decorators
 
 ## 安装&使用
 

@@ -12,6 +12,14 @@ mysqldb = MySQLDatabase('',
                         host=config.BACKEND_MYSQL['host'],
                         port=config.BACKEND_MYSQL['port'])
 
+def create_table(db_mysql):
+    from db.mysql_model.user import User, Profile, Follower, ChatMessage
+    from db.mysql_model.post import Post, PostReply, PostCategory, PostTopic, CollectPost
+    from db.mysql_model.common import Notification
+    from db.mysql_model.blog import BlogPost, BlogPostLabel, BlogPostCategory
+
+    # -------------------- 建表 ---------------
+    db_mysql.create_tables([User, ChatMessage, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification, BlogPostCategory, BlogPost, BlogPostLabel], safe=True)
 
 def create_test_data(db_mysql):
     from db.mysql_model.user import User, Profile, Follower, ChatMessage
@@ -21,8 +29,8 @@ def create_test_data(db_mysql):
 
     logger.debug("DataBase is not exist, so create test data.")
 
-    # -------------------- 建表 ---------------
-    db_mysql.create_tables([User, ChatMessage, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification, BlogPostCategory, BlogPost, BlogPostLabel], safe=True)
+
+    # -------------------- 测试用户功能 ---------------
     user_admin = User.new(username='admin', email='admin@jmp.com', password='admin')
     user_test = User.new(username='test', email='test@jmp.com', password='test')
 
@@ -105,10 +113,11 @@ def mysql_db_init(db_mysql, db_name):
     if not mysqldb.execute_sql("select * from information_schema.schemata where schema_name = '{0}';".format(config.BACKEND_MYSQL['database'])).fetchone():
         mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
     else:
-        # mysqldb.execute_sql("drop database torweb")
-        # mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
+        mysqldb.execute_sql("drop database torweb")
+        mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
         pass
 
+    create_table(db_mysql)
     # create_test_data(db_mysql)
     logger.debug('load db from {0}.'.format(db_name))
     import os

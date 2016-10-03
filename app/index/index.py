@@ -33,9 +33,11 @@ class IndexHandler(BaseRequestHandler):
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
         current_page = get_page_number(current_page)
         posts, page_number_limit = Post.list_recently(page_number=current_page)
+        top_posts, _ = Post.list_top()
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
+                    top_posts = top_posts,
                     topic_category_cache=topic_category_cache,
                     hot_post_cache=hot_post_cache,
                     systatus=system_status_cache,
@@ -67,9 +69,11 @@ class IndexTopicHandler(BaseRequestHandler):
         else:
             current_page = 1
             posts, page_number_limit = Post.list_by_topic(topic)
+        top_posts, _ = Post.list_top()
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
         self.render('index/index.html',
                     posts=posts,
+                    top_posts=top_posts,
                     topic_category_cache=topic_category_cache,
                     hot_post_cache=hot_post_cache,
                     systatus=system_status_cache,

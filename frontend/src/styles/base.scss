@@ -1217,6 +1217,14 @@ $current-topic-width: 21px;
 }
 
 // --------------------- post-item -----------------------
+// 置顶的帖子
+.top-post.post-item {
+    .item-title {
+        .fa-hashtag {
+            color: tomato;
+        }
+    }
+}
 .post-item {
     border-bottom: 1px solid $border-color;
     padding-top: 17px;
@@ -1370,6 +1378,9 @@ $current-topic-width: 21px;
             &:hover {
                 color: $link-color;
                 background-color: #efefef;
+                .fa {
+                    color: $link-color;
+                }
             }
         }
         span {

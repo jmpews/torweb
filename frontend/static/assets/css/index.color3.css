@@ -1043,6 +1043,10 @@ form .form-control:disabled {
   font-size: 11px;
 }
 
+.top-post.post-item .item-title .fa-hashtag {
+  color: tomato;
+}
+
 .post-item {
   border-bottom: 1px solid #f5f5f5;
   padding-top: 17px;
@@ -1195,6 +1199,9 @@ form .form-control:disabled {
 .post-detail-card .post-function a:hover {
   color: #446491;
   background-color: #efefef;
+}
+.post-detail-card .post-function a:hover .fa {
+  color: #446491;
 }
 .post-detail-card .post-function a.post-collected {
   color: #446491;

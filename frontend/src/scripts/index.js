@@ -227,7 +227,6 @@ function load_font_avatar() {
 function getFriendlyTime(t) {
     t = t.replace('-', '/');
     t = t.replace('-', '/');
-    console.log(t);
     if (!t) return 'biu...';
     var diff = Date.now() - Date.parse(t);
     var seconds = 1000, minutes = 1000 * 60, hours = 1000 * 60 * 60, days = 1000 * 60 * 60 * 24, weeks = 1000 * 60 * 60 * 24 * 7, months = 1000 * 60 * 60 * 24 * 30, year = 1000 * 60 * 60 * 24 * 365;
@@ -630,7 +629,6 @@ function generate_chat_user_list() {
 
 // 更新聊天记录窗口
 function generate_chat_content_html(data) {
-    debugger;
     $('.chat .chat-title').html('chat 2 ' + data['other_name']);
     $('.chat .chat-header').attr('other_avatar', data['other_avatar']);
     $('.chat .chat-header').attr('me_avatar', data['me_avatar']);
@@ -661,7 +659,6 @@ function handle_receive_message(data) {
     }
     // 处理消息数据
     else if (data.code == 'receive_message') {
-        debugger;
         // 判断是否为当前用户
         if (!is_current_user(data.other_id)) {
             // 如果不是当前用户更新 用户最近列表的未读消息数
@@ -694,7 +691,6 @@ function get_message_cache_from_server(user_id, callback) {
         success: function (result, status) {
             if (result.errorcode == 0) {
                 var message_cache = result.data;
-                console.log(message_cache);
                 window.sessionStorage.setItem(user_id, JSON.stringify(message_cache));
                 callback(message_cache);
             }

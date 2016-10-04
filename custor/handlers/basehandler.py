@@ -59,6 +59,33 @@ class BaseRequestHandler(RequestHandler):
         user = User.get_by_username(username)
         return user
 
+    def get_login_url(self):
+        '''
+        获取登陆url
+        :return:
+        '''
+        return config.LOGIN_URL
+
+    def success(self, data, errorcode=0):
+        '''
+        成功返回
+        :param data:
+        :param errorcode:
+        :return:
+        '''
+        self.write(json_result(errorcode,data))
+        self.finish()
+
+    def error(self, data, errorcode=-1):
+        '''
+        失败返回
+        :param data:
+        :param errorcode:
+        :return:
+        '''
+        self.write(json_result(errorcode, data))
+        self.finish()
+
     def on_finish(self):
         '''
         peewee的request-hook(请求完成后关闭)

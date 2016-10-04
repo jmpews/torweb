@@ -2,9 +2,11 @@
 
 ## 介绍
 
-基于tornado并且有很多trick用法的社区，增加一些个人的定制工具类、基础handler等，具备基本社区功能.
+基于tornado并且有很多trick用法的社区.
 
 提供Docker-Registry的token-auth-server
+
+#### Link: **[jmp](http://sxu.today)**
 
 ### 设计到的功能和模块:
 
@@ -29,7 +31,7 @@
 * websocket实现的多用户及时通讯
 * 主题切换(通过DB和cookie两种方式以保证快速切换)
 
-### 解决方案
+## 解决方案
 
 把在写torweb遇到的问题，写成解决方案.
 
@@ -37,9 +39,18 @@
 
 [头像裁剪上传解决方案.md](/docs/solutions/头像裁剪上传解决方案.md)
 
+## TODO列表
+
+#### 0. handler里设置
+```
+def get(self, *args, **kwargs):
+	self.success()
+```
+#### 1. tornado+greenlet+decorators
+
 ## 安装&使用
 
-完整安装过程 `docs/full-install.md`
+完整安装过程 [docs/full-install.md](/docs/full-install.md) (基本不会出错)
 
 ```
 # py3环境

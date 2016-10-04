@@ -667,7 +667,6 @@ function handle_receive_message(data) {
         else {
             // 如果是当前用户 append到当前聊天内容中
             append_message_to_chat_content(data.msg);
-            generate_chat_user_list();
         }
     }
     else if (data.code == 'recent_chat_message') {

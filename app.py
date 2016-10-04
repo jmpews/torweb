@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-from os import path
-
 import tornado.web
 import tornado.ioloop
 from tornado.options import define, options, parse_command_line
 import signal
 import threading
 import time
+
 
 def close_server():
     from custor.logger import logger
@@ -23,7 +22,7 @@ def close_server():
         else:
             io_loop.stop()
             logger.info('...Shutdown...')
-            signal.pthread_kill(threading.current_thread().ident,9)
+            signal.pthread_kill(threading.current_thread().ident, 9)
     stop_loop()
     logger.info("...close_httpserver():ready...")
 
@@ -52,7 +51,7 @@ def runserver():
 
     from custor.handlers.basehandler import ErrorHandler
     from app import urls
-    handlers =()
+    handlers = ()
     handlers += urls.urlpattern
     handlers += tuple((x[0], tornado.web.StaticFileHandler, x[1]) for x in config.STATIC_PATH)
 
@@ -71,7 +70,6 @@ def runserver():
         login_url=config.LOGIN_URL,
         cookie_secret=config.COOKIE_SECRET,
     )
-
 
     # added signal callback to interrupt app
     signal.signal(signal.SIGINT, server_shutdown_handler)

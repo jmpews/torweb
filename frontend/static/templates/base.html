@@ -20,7 +20,7 @@
 <body>
 <div class="header cl">
     <div class="header-container clear-xs cl">
-        <div class="header-logo float-left">
+        <div class="header-logo">
             <a href="/">Jmp</a>
             {% if current_user %}
             <div class="theme" user="{{ current_user.id }}">
@@ -33,7 +33,7 @@
                     <span class="color color4" color="color4"></span>
                 </div>
             </div>
-            <ul class="header-nav float-left list-inline cl">
+            <ul class="header-nav clear-xs cl">
                 <li class="active">
                     <a href="/">首页 <span class="sr-only">(current)</span></a>
                 </li>
@@ -48,7 +48,7 @@
                     <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
                 </li>
             </ul>
-            <div class="header-tip float-right">
+            <div class="header-tip">
                 {% if not current_user %}
                 <!-- 未登录 -->
                 <div class="btn-group" style="">
@@ -184,6 +184,15 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
     <script>
+    $(document).on("scroll", function() {
+        if(window.screen.width > 767) {
+            if ($(document).scrollTop() > 100) {
+                $(".header").addClass("scroll");
+            } else {
+                $(".header").removeClass("scroll");
+            }
+        }
+    });
     </script>
     {% block scripts %}
     {% end %}

@@ -1,3 +1,5 @@
+# coding:utf-8
+
 from settings.config import config
 from peewee import Model
 from playhouse.pool import PooledMySQLDatabase

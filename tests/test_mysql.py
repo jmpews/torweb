@@ -113,7 +113,7 @@ def mysql_db_init(db_mysql, db_name):
     if not mysqldb.execute_sql("select * from information_schema.schemata where schema_name = '{0}';".format(config.BACKEND_MYSQL['database'])).fetchone():
         mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
     else:
-        mysqldb.execute_sql("drop database torweb")
+        mysqldb.execute_sql("drop database {0}".format(config.BACKEND_MYSQL['database']))
         mysqldb.execute_sql("create database {0} default character set utf8 default collate utf8_general_ci;".format(config.BACKEND_MYSQL['database']))
         pass
 

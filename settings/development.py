@@ -2,19 +2,23 @@
 
 from settings.common import *
 
+log_path = '.'
+
 PORT = 9001
 
+SERVER_IP = '192.168.1.108'
+
 BACKEND_MYSQL = {
-    'database': 'torweb',
+    'database': 'tornadodemo',
     'max_connections': 20,
     'stale_timeout': 300,
-    'user': 'root',
-    'password': 'root',
-    'host': '127.0.0.1',
+    'user': 'tornado',
+    'password': 'tornado',
+    'host': '{0}'.format(SERVER_IP),
     'port': 3306
 }
-BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
-BACKEND_REDIS = ('localhost', 6379, 0)
+BACKEND_MONGO = "mongodb://{0}/torweb".format(SERVER_IP)
+BACKEND_REDIS = ('{0}'.format(SERVER_IP), 6379, 0)
 
 STATIC_PATH = (
     (r'/static/(.*)', {'path': 'frontend/static/templates/static/'}),
@@ -24,4 +28,3 @@ STATIC_PATH = (
     (r'/blog/images/(.*)', {'path': 'frontend/static/templates/blog/images/'}),
     (r'/dashboard/(.*)', {'path': 'frontend/static/templates/dashboard/'})
 )
-

@@ -3,3 +3,12 @@
 __pycache__/*
 .idea/*
 *.bak
+
+# pycharm
+.idea/
+
+# virtualenv
+venv/*
+
+# log
+*.log

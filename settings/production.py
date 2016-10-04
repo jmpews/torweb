@@ -2,6 +2,7 @@
 from settings.common import *
 
 
+log_path = '/var/tmp/'
 BACKEND_MYSQL = {
     'database': 'torweb',
     'max_connections': 20,

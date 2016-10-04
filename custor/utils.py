@@ -204,6 +204,11 @@ class TimeUtil:
     '''
     时间友好化显示
     '''
+
+    @staticmethod
+    def get_ago(ago):
+        t = time.time() - ago
+        return datetime.datetime.fromtimestamp(t)
     @staticmethod
     def get_weekday(date):
         week_day_dict = {

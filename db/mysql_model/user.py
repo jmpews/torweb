@@ -241,7 +241,7 @@ class ChatMessage(BaseModel):
     @staticmethod
     def get_recent_user_list(current_user):
         '''
-        获取所有未读的消息(都是发送给我的)
+        获取最近用户列表
         :param me:
         :return:
         '''
@@ -249,18 +249,42 @@ class ChatMessage(BaseModel):
 
         user_id_list = []
         recent_user_list['user_id_list'] = user_id_list
-        recent_message = ChatMessage.select().where(ChatMessage.receiver == current_user, ChatMessage.is_read == False).order_by(ChatMessage.time)
-        for msg in recent_message:
-            sender = msg.sender
-            if sender.id not in recent_user_list.keys():
-                user_id_list.append(sender.id)
-                recent_user_list[sender.id]={}
-                recent_user_list[sender.id]['other_name'] = sender.username
-                recent_user_list[sender.id]['other_id'] = sender.id
-                recent_user_list[sender.id]['other_avatar'] = sender.avatar
-                recent_user_list[sender.id]['msg'] = []
-            recent_user_list[sender.id]['msg'].append(['<', msg.content, TimeUtil.datetime_delta(msg.time)])
-            recent_user_list[sender.id]['update_time'] = str(msg.time)
+
+        # other send to me
+        # recent_message = ChatMessage.select().where(ChatMessage.receiver == current_user, ChatMessage.is_read == False).order_by(ChatMessage.time)
+        # for msg in recent_message:
+        #     sender = msg.sender
+        #     if sender.id not in recent_user_list.keys():
+        #         user_id_list.append(sender.id)
+        #         recent_user_list[sender.id]={}
+        #         recent_user_list[sender.id]['other_name'] = sender.username
+        #         recent_user_list[sender.id]['other_id'] = sender.id
+        #         recent_user_list[sender.id]['other_avatar'] = sender.avatar
+        #         recent_user_list[sender.id]['msg'] = []
+        #     recent_user_list[sender.id]['msg'].append(['<', msg.content, TimeUtil.datetime_delta(msg.time)])
+        #     recent_user_list[sender.id]['update_time'] = str(msg.time)
+
+        one_day_ago = TimeUtil.get_ago(60*60*24*10)
+
+        ol = ChatMessage.select().where(((ChatMessage.sender == current_user) | (ChatMessage.receiver == current_user)) & (ChatMessage.time > one_day_ago)).order_by(ChatMessage.time).group_by(ChatMessage.sender, ChatMessage.receiver).limit(10)
+
+        for u in ol:
+            if u.sender == current_user:
+                other = u.receiver
+            else:
+                other = u.sender
+
+            if other.id in user_id_list:
+                continue
+
+            user_id_list.append(other.id)
+            unread_count = ChatMessage.select().where(ChatMessage.sender == u.sender, ChatMessage.receiver == u.receiver).count()
+
+            recent_user_list[other.id] = {}
+            recent_user_list[other.id]['other_name'] = other.username
+            recent_user_list[other.id]['other_id'] = other.id
+            recent_user_list[other.id]['other_avatar'] = other.avatar
+            recent_user_list[other.id]['unread_count'] = unread_count
         recent_user_list['user_id_list'] = user_id_list
         return recent_user_list
 

@@ -633,11 +633,23 @@ form .form-control:disabled {
     width: 25% !important;
   }
 }
+.header.scroll {
+  box-shadow: 0 3px 10px #34495E;
+  position: fixed;
+  top: -70px;
+  transform: translateY(70px);
+}
+.header.scroll .header-container .header-logo {
+  top: 15px;
+  left: 0;
+}
+
 .header {
+  width: 100%;
   margin: 0 auto;
   z-index: 999;
   background-color: #22313F;
-  border-bottom: 1px solid #dae2ea;
+  transition: 0.3s ease-out;
 }
 .header a {
   color: #fff;
@@ -656,6 +668,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-logo {
   position: relative;
+  float: left;
   top: 50px;
   text-align: center;
   font-size: 14px;
@@ -697,6 +710,8 @@ form .form-control:disabled {
 .header .header-container .header-nav {
   width: 100%;
   max-width: 450px;
+  float: left;
+  list-style: none;
 }
 .header .header-container .header-nav li {
   float: left;

@@ -2,9 +2,9 @@
 
 ## 介绍
 
-基于tornado并且有很多trick用法的社区，增加一些个人的定制工具类、基础handler等，具备基本社区功能.
+基于tornado并且有很多trick用法的社区.
 
-Link: **[jmp](http://sxu.today)**
+#### Link: **[jmp](http://sxu.today)**
 
 ### 设计到的功能和模块:
 
@@ -39,15 +39,16 @@ Link: **[jmp](http://sxu.today)**
 
 ## TODO列表
 
-handler里设置
+#### 0. handler里设置
 ```
 def get(self, *args, **kwargs):
 	self.success()
 ```
+#### 1. tornado+greenlet+decorators
 
 ## 安装&使用
 
-完整安装过程 `docs/full-install.md`
+完整安装过程 [docs/full-install.md](/docs/full-install.md) (基本不会出错)
 
 ```
 # py3环境

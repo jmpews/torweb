@@ -717,7 +717,7 @@ form {
         }
         .header-nav {
             // 这里和absolute的配合
-            margin-left: 50px !important;
+            padding-left: 50px !important;
             max-width: none !important;
             li {
                 width: 25% !important;;
@@ -768,6 +768,7 @@ $header-logo-height: 40px;
         line-height: $header-height;
         .header-logo {
             position: relative;
+            float: left;
             top: $header-height - ($header-logo-height / 2);
             text-align: center;
             font-size: 14px;
@@ -815,6 +816,8 @@ $header-logo-height: 40px;
         .header-nav {
             width: 100%;
             max-width: 450px;
+            float: left;
+            list-style: none;
             li {
                 float: left;
                 position: relative;

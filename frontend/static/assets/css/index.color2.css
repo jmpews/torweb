@@ -626,7 +626,7 @@ form .form-control:disabled {
     left: 0px !important;
   }
   .header .header-container .header-nav {
-    margin-left: 50px !important;
+    padding-left: 50px !important;
     max-width: none !important;
   }
   .header .header-container .header-nav li {
@@ -668,6 +668,7 @@ form .form-control:disabled {
 }
 .header .header-container .header-logo {
   position: relative;
+  float: left;
   top: 50px;
   text-align: center;
   font-size: 14px;
@@ -709,6 +710,8 @@ form .form-control:disabled {
 .header .header-container .header-nav {
   width: 100%;
   max-width: 450px;
+  float: left;
+  list-style: none;
 }
 .header .header-container .header-nav li {
   float: left;

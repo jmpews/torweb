@@ -90,7 +90,27 @@ class RegisterHandler(BaseRequestHandler):
         if self.current_user:
             self.redirect('/')
         else:
-            self.render('index/register.html')
+            # -------------------------------------------------
+            import requests, base64
+            from app.sxuhelp.utils import find_viewstate
+            response = requests.get('http://bkjw.sxu.edu.cn/_data/login.aspx',
+                                    # proxies = {'http': 'http://127.0.0.1:8080'}
+                                    )
+            viewstate = find_viewstate(response.text)
+            self.set_cookie('ViewState', viewstate)
+            sessionid = response.cookies.get('ASP.NET_SessionId')
+            response = requests.get("http://bkjw.sxu.edu.cn/sys/ValidateCode.aspx",
+                                    cookies={'ASP.NET_SessionId': sessionid},
+                                    headers={'Referer': 'http://bkjw.sxu.edu.cn/_data/login.aspx',
+                                             'Host': 'bkjw.sxu.edu.cn'},
+                                    # proxies = {'http': 'http://127.0.0.1:8080'}
+                                    )
+            captcha = ("data:" + response.headers['Content-Type'] + ";" + "base64," + str(
+                base64.b64encode(response.content).decode("utf-8", "ignore")))
+            self.set_cookie('ASP.NET_SessionId', sessionid)
+
+            # -------------------------------------------------
+            self.render('index/register.html', captcha=captcha)
 
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['username', 'email', 'password'])
@@ -101,7 +121,24 @@ class RegisterHandler(BaseRequestHandler):
         if User.get_by_email(email=post_data['email']):
             self.write(json_result(1, '邮箱已经存在'))
             return
+        # -------------------------------------------------
+        import requests, base64
+        from app.sxuhelp.utils import find_viewstate
+        response = requests.get('http://bkjw.sxu.edu.cn/_data/login.aspx',
+                                #proxies = {'http': 'http://127.0.0.1:8080'}
+                                )
+        viewstate = find_viewstate(response.text)
+        self.set_cookie('ViewState', viewstate)
+        sessionid = response.cookies.get('ASP.NET_SessionId')
+        response = requests.get("http://bkjw.sxu.edu.cn/sys/ValidateCode.aspx",
+                                    cookies = {'ASP.NET_SessionId': sessionid},
+                                    headers = {'Referer': 'http://bkjw.sxu.edu.cn/_data/login.aspx', 'Host': 'bkjw.sxu.edu.cn'},
+                                    #proxies = {'http': 'http://127.0.0.1:8080'}
+                                )
+        captcha = ("data:" + response.headers['Content-Type'] + ";" + "base64," + str(base64.b64encode(response.content).decode("utf-8","ignore")))
+        self.set_cookie('ASP.NET_SessionId', sessionid)
 
+        # -------------------------------------------------
         user = User.new(username=post_data['username'],
                  email=post_data['email'],
                  password=post_data['password'])

@@ -28,7 +28,7 @@
                         <input type="password" class="form-control" id="password2" placeholder="请重新输入密码" data-parsley-equalto="#password1" data-parsley-equalto-message="密码不匹配" required>
                     </fieldset>
                     <fieldset class="form-group">
-                        <img class="captcha" src="/utils/captcha">
+                        <img class="captcha" src="{{ captcha }}">
                         <input class="form-control" id="captcha" placeholder="请验证码" required>
                     </fieldset>
                     <button type="submit" class="btn btn-primary">注册</button>

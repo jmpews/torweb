@@ -54,6 +54,7 @@
                 'username': $('#username').val(),
                 'email': $('#email').val(),
                 'password': $('#password1').val(),
+                'captcha': $('#captcha').val()
             },
             success: function(result, status) {
                 if(result.errorcode == 0) {
@@ -62,9 +63,10 @@
                     window.location.href='/login'
                 }
                 else if(result.errorcode == 1) {
+                    alert(result.txt);
                 }
             }
-        })
+        });
         return 1;
     });
 </script>

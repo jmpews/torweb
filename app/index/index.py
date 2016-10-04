@@ -122,27 +122,46 @@ class RegisterHandler(BaseRequestHandler):
             self.write(json_result(1, '邮箱已经存在'))
             return
         # -------------------------------------------------
-        import requests, base64
-        from app.sxuhelp.utils import find_viewstate
-        response = requests.get('http://bkjw.sxu.edu.cn/_data/login.aspx',
-                                #proxies = {'http': 'http://127.0.0.1:8080'}
-                                )
-        viewstate = find_viewstate(response.text)
-        self.set_cookie('ViewState', viewstate)
-        sessionid = response.cookies.get('ASP.NET_SessionId')
-        response = requests.get("http://bkjw.sxu.edu.cn/sys/ValidateCode.aspx",
-                                    cookies = {'ASP.NET_SessionId': sessionid},
-                                    headers = {'Referer': 'http://bkjw.sxu.edu.cn/_data/login.aspx', 'Host': 'bkjw.sxu.edu.cn'},
-                                    #proxies = {'http': 'http://127.0.0.1:8080'}
-                                )
-        captcha = ("data:" + response.headers['Content-Type'] + ";" + "base64," + str(base64.b64encode(response.content).decode("utf-8","ignore")))
-        self.set_cookie('ASP.NET_SessionId', sessionid)
+        import requests
+        from app.sxuhelp.utils import get_encrypt_code
+        #stuid = self.get_body_argument('stuid')
+        #passwd = self.get_body_argument('passwd')
+        post_data = get_cleaned_post_data(self, ['username', 'password', 'captcha'])
+        captcha = post_data['captcha']
+        stuid = '201502401037'
+        # stuid = post_data['username']
+        passwd = '622307'
+        # passwd = post_data['password']
+        passwd_encrpyt, captcha_encrpt = get_encrypt_code(stuid, passwd, captcha)
+        cookies = {'ASP.NET_SessionId': self.get_cookie('ASP.NET_SessionId')}
+        data = {
+            '__VIEWSTATE': self.get_cookie('ViewState'),
+            'pcInfo': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:47.0) Gecko/20100101 Firefox/47.0Intel Mac OS X 10.115.0 (Macintosh) SN:NULL',
+            'txt_asmcdefsddsd': stuid,
+            # 密码密文
+            'dsdsdsdsdxcxdfgfg': passwd_encrpyt,
+            # 验证码
+            'fgfggfdgtyuuyyuuckjg': captcha_encrpt,
+            'Sel_Type': 'STU',
+            'typeName': '学生'
+        }
+
+        response = requests.post('http://bkjw.sxu.edu.cn/_data/login.aspx',
+                                 data = data,
+                                 cookies = cookies,
+                                 headers = {'Host': 'bkjw.sxu.edu.cn', 'Referer': 'http://bkjw.sxu.edu.cn/_data/login.aspx'},
+                                 #proxies = {'http': 'http://127.0.0.1:8080'}
+                             )
+        if '正在加载权限数据' in response.text:
+            self.write(json_result(1, '用户名密码认证成功'))
+            return
+        self.write(json_result(1, '用户名密码认证失败'))
 
         # -------------------------------------------------
-        user = User.new(username=post_data['username'],
-                 email=post_data['email'],
-                 password=post_data['password'])
-        self.write(json_result(0,{'username': user.username}))
+        # user = User.new(username=post_data['username'],
+        #          email=post_data['email'],
+        #          password=post_data['password'])
+        # self.write(json_result(0,{'username': user.username}))
 
 class LoginHandler(BaseRequestHandler):
     """

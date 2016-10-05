@@ -266,7 +266,7 @@ class ChatMessage(BaseModel):
 
         one_day_ago = TimeUtil.get_ago(60*60*24*10)
 
-        ol = ChatMessage.select().where(((ChatMessage.sender == current_user) | (ChatMessage.receiver == current_user)) & (ChatMessage.time > one_day_ago)).order_by(ChatMessage.time).group_by(ChatMessage.sender, ChatMessage.receiver).limit(10)
+        ol = ChatMessage.select(ChatMessage.sender, ChatMessage.receiver).where(((ChatMessage.sender == current_user) | (ChatMessage.receiver == current_user)) & (ChatMessage.time > one_day_ago)).group_by(ChatMessage.sender, ChatMessage.receiver).limit(10)
 
         for u in ol:
             if u.sender == current_user:

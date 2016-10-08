@@ -6,7 +6,7 @@ docker分支是建立在[torweb-master](http://github.com/jmpews/torweb)之上�
 
 主要是与现有的账户系统进行融合. 只允许注册用户进行push.
 
-关于Docker-Reigsty的搭建过程详见[docs/docker-registry-install.md](./docs/docker-registry-install.md)
+关于Docker-Reigsty的搭建过程详见[docs/docker-registry-install.md](docs/docker-registry-install.md)
 
 ## 如何测试该私有Registry
 

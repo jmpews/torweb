@@ -9,10 +9,11 @@ from custor.utils import json_result, get_page_nav, get_page_number
 from db.mysql_model.post import Post, PostTopic
 from db.mysql_model.user import User
 
-from custor.errors import RequestMissArgumentError, PageNotFoundError
+from custor.errors import RequestMissArgumentError
 
 from settings.config import config
 
+from app.registryauth.auth import get_catalog
 
 class IndexHandler(BaseRequestHandler):
     """
@@ -35,6 +36,10 @@ class IndexHandler(BaseRequestHandler):
         posts, page_number_limit = Post.list_recently(page_number=current_page)
         top_posts, _ = Post.list_top()
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+
+        repositories = get_catalog()
+        print(repositories)
+
         self.render('index/index.html',
                     posts=posts,
                     top_posts = top_posts,
@@ -42,6 +47,7 @@ class IndexHandler(BaseRequestHandler):
                     hot_post_cache=hot_post_cache,
                     systatus=system_status_cache,
                     current_topic=None,
+                    repositories=repositories,
                     pages=pages,
                     pages_prefix_url='/?page=')
 

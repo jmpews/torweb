@@ -240,15 +240,6 @@ class RegistryHandler(BaseRequestHandler):
         self.write(resp.text)
 
 
-from custor.handlers.basehandler import BaseRequestHandler
-from custor.decorators import timeit, exception_deal
-from custor.utils import get_cleaned_query_data
-from custor.utils import get_page_nav, get_page_number
-from custor.errors import RequestMissArgumentError, PageNotFoundError
-from settings.config import config
-from db.mysql_model.post import Post
-from app.cache import hot_post_cache, system_status_cache, topic_category_cache
-
 def get_catalog():
     import requests
     token = DockerToken(
@@ -265,33 +256,3 @@ def get_catalog():
     return r['repositories']
 
 
-class IndexHandler(BaseRequestHandler):
-    """
-    社区首页
-    """
-    # 时间消耗装饰器
-    @timeit
-    # 异常捕获装饰器
-    @exception_deal([RequestMissArgumentError,]) # 也许这个参数有其他用处先留着
-    def get(self, *args, **kwargs):
-        # profiling 性能分析
-        # from profiling.tracing import TracingProfiler
-        #
-        # # profile your program.
-        # profiler = TracingProfiler()
-        # profiler.start()
-
-        current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
-        current_page = get_page_number(current_page)
-        posts, page_number_limit = Post.list_recently(page_number=current_page)
-        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
-        repositories = get_catalog()
-        self.render('registry/index.html',
-                    posts=posts,
-                    topic_category_cache=topic_category_cache,
-                    hot_post_cache=hot_post_cache,
-                    systatus=system_status_cache,
-                    current_topic=None,
-                    pages=pages,
-                    repositories=repositories,
-                    pages_prefix_url='/?page=')

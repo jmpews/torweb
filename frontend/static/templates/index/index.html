@@ -220,6 +220,18 @@
                 </div>
             </div>
 
+            <div class="card registry-card custom-card">
+                <div class="card-header">
+                    <i class="fa fa-fire" aria-hidden="true"></i>Images列表
+                </div>
+                <div class="card-block">
+                    <ul class="list-inline">
+                        {% for r in repositories %}
+                        <li>{{ r }}</li>
+                        {% end %}
+                    </ul>
+                </div>
+            </div>
             <div class="card system-status-card custom-card">
                 <div class="card-header">
                     <i class="fa fa-desktop" aria-hidden="true"></i>服务器状态

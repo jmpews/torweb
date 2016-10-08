@@ -4,16 +4,16 @@
 
 docker分支是建立在[torweb-master](http://github.com/jmpews/torweb)之上的私有Registry.
 
-主要是与现有的账户系统进行融合. 只允许注册用户进行push.
+主要是与现有的账户系统进行融合. 提供自定义授权的token-auth机制, 以及对Image的列表和检索.
 
 关于Docker-Reigsty的搭建过程详见[docs/docker-registry-install.md](docs/docker-registry-install.md)
 
 ## 如何测试该私有Registry
 
-由于暂时没有做https相关处理. 随意您需要将该Registry设置为信任的Registry.
+由于暂时没有做https相关处理. 需要将该Registry设置为信任的Registry.
 
 ### OSX-Docker客户端
-在 `Perferences... -> Advanced -> Insecure registryies` 添加 `10.10.0.49`
+在 `Perferences... -> Advanced -> Insecure registryies` 添加 `110.110.10.149`
 
 ### Linux
 
@@ -22,7 +22,7 @@ docker分支是建立在[torweb-master](http://github.com/jmpews/torweb)之上�
 > 3. Close and save the configuration file.Restart your Docker daemon
 > The command you use to restart the daemon depends on your operating system. For example, on Ubuntu, this is usually the service docker stop and service docker start command.
 
-这里把 `DOCKER_OPTS="--insecure-registry myregistrydomain.com:5000"` 改为 `DOCKER_OPTS="--insecure-registry 10.10.0.49"` 进行上述操作
+这里把 `DOCKER_OPTS="--insecure-registry myregistrydomain.com:5000"` 改为 `DOCKER_OPTS="--insecure-registry 110.110.10.149"` 进行上述操作
 
 ---
 

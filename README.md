@@ -74,7 +74,7 @@ def get(self, *args, **kwargs):
 
 ## 安装&使用
 
-完整安装过程 [docs/full-install.md](/docs/full-install.md) (基本不会出错)
+完整安装过程 [docs/full-install.md](docs/full-install.md) (基本不会出错)
 
 ```
 # py3环境

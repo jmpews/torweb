@@ -59,9 +59,9 @@ docker分支是建立在[torweb-master](http://github.com/jmpews/torweb)之上�
 
 把在写torweb遇到的问题，写成解决方案.
 
-[websocket实时通讯解决.md](/docs/solutions/websocket实时通讯解决.md)
+[websocket实时通讯解决.md](docs/solutions/websocket实时通讯解决.md)
 
-[头像裁剪上传解决方案.md](/docs/solutions/头像裁剪上传解决方案.md)
+[头像裁剪上传解决方案.md](docs/solutions/头像裁剪上传解决方案.md)
 
 ## TODO列表
 

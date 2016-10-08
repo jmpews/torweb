@@ -13,7 +13,7 @@ from custor.errors import RequestMissArgumentError
 
 from settings.config import config
 
-from app.registryauth.auth import get_catalog
+from db.mysql_model.registry import RegistryImage
 
 class IndexHandler(BaseRequestHandler):
     """
@@ -37,8 +37,7 @@ class IndexHandler(BaseRequestHandler):
         top_posts, _ = Post.list_top()
         pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
 
-        repositories = get_catalog()
-        print(repositories)
+        images = RegistryImage.select()
 
         self.render('index/index.html',
                     posts=posts,
@@ -47,7 +46,7 @@ class IndexHandler(BaseRequestHandler):
                     hot_post_cache=hot_post_cache,
                     systatus=system_status_cache,
                     current_topic=None,
-                    repositories=repositories,
+                    images =images,
                     pages=pages,
                     pages_prefix_url='/?page=')
 

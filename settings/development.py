@@ -25,3 +25,9 @@ STATIC_PATH = (
     (r'/dashboard/(.*)', {'path': 'frontend/static/templates/dashboard/'})
 )
 
+# docker-registry
+
+TOKEN_EXPIRATION = 300
+SERVICE = 'token-service'
+ISSUER = 'registry-token-issuer'
+private_key_path = './private_key.pem'

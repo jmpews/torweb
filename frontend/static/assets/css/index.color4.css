@@ -1513,6 +1513,24 @@ form .form-control:disabled {
   color: #e95420;
 }
 
+.registry-card li {
+  padding: 3px 0;
+  border-bottom: 1px dashed #eee;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.registry-card li .fa {
+  color: #e95420;
+  border-left: 1px solid #eaeaea;
+}
+.registry-card li a {
+  color: #999;
+}
+.registry-card li a:hover {
+  color: #e95420;
+}
+
 .user-profile-html .col-md-9 {
   padding-right: 0px;
 }

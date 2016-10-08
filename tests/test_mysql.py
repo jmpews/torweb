@@ -17,9 +17,10 @@ def create_table(db_mysql):
     from db.mysql_model.post import Post, PostReply, PostCategory, PostTopic, CollectPost
     from db.mysql_model.common import Notification
     from db.mysql_model.blog import BlogPost, BlogPostLabel, BlogPostCategory
+    from db.mysql_model.registry import RegistryImage
 
     # -------------------- 建表 ---------------
-    db_mysql.create_tables([User, ChatMessage, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification, BlogPostCategory, BlogPost, BlogPostLabel], safe=True)
+    db_mysql.create_tables([User, ChatMessage, PostCategory, PostTopic, Post, PostReply, CollectPost, Profile, Follower, Notification, BlogPostCategory, BlogPost, BlogPostLabel, RegistryImage], safe=True)
 
 def create_test_data(db_mysql):
     from db.mysql_model.user import User, Profile, Follower, ChatMessage
@@ -135,5 +136,5 @@ test.test
 
 if __name__ == '__main__':
     from db.mysql_model import db_mysql
-    db_name = '/db/torweb.docker.sql'
+    db_name = '/db/torweb.sql'
     mysql_db_init(db_mysql, db_name)

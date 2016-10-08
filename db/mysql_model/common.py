@@ -15,7 +15,7 @@ class Notification(BaseModel):
         'new-post': '1',
         'new-reply': '2'
     }
-    user = ForeignKeyField(User, verbose_name="user", related_name="user")
+    user = ForeignKeyField(User, verbose_name="user", related_name="notification_user")
     opt = IntegerField(choices=ROLE, default=1, verbose_name="操作类型")
     msg = CharField(max_length=71)
     extra_user = ForeignKeyField(User, null=True, verbose_name="user", related_name="post")

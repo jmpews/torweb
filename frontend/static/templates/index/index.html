@@ -226,8 +226,12 @@
                 </div>
                 <div class="card-block">
                     <ul class="list-inline">
-                        {% for r in repositories %}
-                        <li>{{ r }}</li>
+                        {% for image in images %}
+                        <li>{{ image.repository }}
+                            <i class="fa fa-tag" aria-hidden="true"></i>
+                            {{ image.tag }}
+                            <i class="fa fa-user-secret" aria-hidden="true"></i>
+                            {{ image.user.username }}</li>
                         {% end %}
                     </ul>
                 </div>

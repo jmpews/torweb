@@ -1741,6 +1741,25 @@ $current-topic-width: 21px;
       }
   }
 }
+.registry-card {
+  li {
+      padding: 3px 0;
+      border-bottom: 1px dashed #eee;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      .fa {
+          color: $link-color;
+          border-left: 1px solid $border-color;
+      }
+      a {
+          color: $font-color;
+          &:hover {
+              color: $link-color;
+          }
+      }
+  }
+}
 .register-card {
 }
 

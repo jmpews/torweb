@@ -731,6 +731,7 @@ form .form-control:disabled {
   box-shadow: inset 0 -3px 0px #e95420;
 }
 .header .header-container .header-nav li a {
+  font-weight: 300;
   display: block;
   font-size: 15px;
   text-align: center;
@@ -1788,6 +1789,7 @@ form .form-control:disabled {
   padding-right: 15px;
 }
 .recommend .title {
+  font-weight: 300;
   width: 150px;
   position: relative;
   top: 50%;
@@ -1825,6 +1827,7 @@ form .form-control:disabled {
   left: 0;
 }
 .recommend .section-header {
+  font-weight: 100;
   color: #fff;
   text-align: center;
   font-size: 30px;
@@ -1868,7 +1871,7 @@ form .form-control:disabled {
   position: relative;
   width: 100px;
   height: 100px;
-  background-color: #fff;
+  background-color: rgba(245, 245, 245, 0.53);
 }
 .recommend .section-content .ccard .ccard-logo img {
   width: 80px;

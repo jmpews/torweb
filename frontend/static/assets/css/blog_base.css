@@ -6,7 +6,7 @@ body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "PingFang SC";
   font-weight: 400;
   color: #999;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   margin: 0;
   background-color: #fff;
@@ -786,7 +786,7 @@ form .form-control:disabled {
 }
 .post-list .post-item {
   border-bottom: 1px solid #eaeaea;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding-bottom: 10px;
 }
 .post-list .post-item .post-title {
@@ -827,8 +827,8 @@ form .form-control:disabled {
 .post-detail .post-title {
   margin: 0px;
   font-weight: 400;
-  font-size: 26px;
-  margin-bottom: 5px;
+  font-size: 36px;
+  margin-bottom: 15px;
   text-align: center;
   color: #e95420;
 }
@@ -837,10 +837,12 @@ form .form-control:disabled {
 }
 
 .post-content {
-  padding: 10px;
-  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
   word-wrap: break-word;
   word-break: normal;
+  padding: 10px;
+  color: #555;
 }
 .post-content blockquote {
   margin: 0 20px;
@@ -850,6 +852,12 @@ form .form-control:disabled {
   font-style: italic;
   padding: .66001rem 1rem 1rem;
   border-left: 3px solid #A0AABF;
+}
+.post-content strong, .post-content b {
+  font-weight: bold;
+}
+.post-content a {
+  color: #e95420;
 }
 .post-content img {
   max-width: 90%;

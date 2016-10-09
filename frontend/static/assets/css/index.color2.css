@@ -1018,10 +1018,17 @@ form .form-control:disabled {
 }
 
 .card-header-all-bt {
-  color: #34495E !important;
+  color: tomato !important;
+  font-weight: bold;
+  border: 1px solid #dae2ea;
+  padding: 3px;
 }
 .card-header-all-bt .fa {
   padding-right: 2px;
+  color: tomato;
+}
+.card-header-all-bt:hover {
+  background-color: rgba(226, 223, 223, 0.62);
 }
 
 .index-html .col-md-9 {

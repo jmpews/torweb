@@ -1170,11 +1170,17 @@ $char-border-color: #ededed;
     }
 }
 .card-header-all-bt {
-    color: $important-link-color !important;
+    color: tomato !important;
+    font-weight: bold;
+    border: 1px solid $border-color;
+    padding: 3px;
     .fa {
         padding-right: 2px;
+        color: tomato;
     }
     &:hover {
+        background-color: rgba(226, 223, 223, 0.62);
+        //border: 1px solid tomato;
     }
 }
 // ---------------------页面样式-index.html-----------------------

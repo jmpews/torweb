@@ -156,6 +156,9 @@ function show_hide_cate_nav() {
         // $('.card-header-all').fadeOut(500);
         $(".card-header-all").css('display', 'none');
     });
+    $('.all-cate-card .card-block').mouseenter(function (e) {
+        $(".card-header-all").css('display', 'none');
+    })
 }
 
 // 显示隐藏所有分类(post-new页面)

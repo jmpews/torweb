@@ -33,9 +33,9 @@
 
 把在写torweb遇到的问题，写成解决方案.
 
-[websocket实时通讯解决.md](/docs/solutions/websocket实时通讯解决.md)
+[websocket实时通讯解决.md](docs/solutions/websocket实时通讯解决.md)
 
-[头像裁剪上传解决方案.md](/docs/solutions/头像裁剪上传解决方案.md)
+[头像裁剪上传解决方案.md](docs/solutions/头像裁剪上传解决方案.md)
 
 ## TODO列表
 
@@ -48,7 +48,7 @@ def get(self, *args, **kwargs):
 
 ## 安装&使用
 
-完整安装过程 [docs/full-install.md](/docs/full-install.md) (基本不会出错)
+完整安装过程 [docs/full-install.md](docs/full-install.md) (基本不会出错)
 
 ```
 # py3环境

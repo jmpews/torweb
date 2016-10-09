@@ -841,6 +841,7 @@ $header-logo-height: 40px;
                 }
                 a {
                     // 什么时候使用block? 全部充满parent
+                    font-weight: 300;
                     display: block;
                     font-size: 15px;
                     text-align: center;
@@ -1169,11 +1170,17 @@ $char-border-color: #ededed;
     }
 }
 .card-header-all-bt {
-    color: $important-link-color !important;
+    color: tomato !important;
+    font-weight: bold;
+    border: 1px solid $border-color;
+    padding: 3px;
     .fa {
         padding-right: 2px;
+        color: tomato;
     }
     &:hover {
+        background-color: rgba(226, 223, 223, 0.62);
+        //border: 1px solid tomato;
     }
 }
 // ---------------------页面样式-index.html-----------------------
@@ -2054,6 +2061,7 @@ $current-topic-width: 21px;
         padding-right: 15px;
     }
     .title {
+        font-weight: 300;
         width: 150px;
         position: relative;
         top: 50%;
@@ -2093,6 +2101,7 @@ $current-topic-width: 21px;
         }
     }
     .section-header {
+        font-weight: 100;
         color: #fff;
         text-align: center;
         font-size: 30px;
@@ -2133,7 +2142,8 @@ $current-topic-width: 21px;
                 position: relative;
                 width: 100px;
                 height: 100px;
-                background-color: #fff;
+                background-color: rgba(245, 245, 245, 0.53);
+                //background-color: #fff;
                 //border: 3px solid #e6e6e6;
                 //border: 1px dashed $font-color;
                 img {

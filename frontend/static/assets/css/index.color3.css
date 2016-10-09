@@ -731,6 +731,7 @@ form .form-control:disabled {
   box-shadow: inset 0 -3px 0px #ace6f6;
 }
 .header .header-container .header-nav li a {
+  font-weight: 300;
   display: block;
   font-size: 15px;
   text-align: center;
@@ -1017,10 +1018,17 @@ form .form-control:disabled {
 }
 
 .card-header-all-bt {
-  color: #446491 !important;
+  color: tomato !important;
+  font-weight: bold;
+  border: 1px solid #f5f5f5;
+  padding: 3px;
 }
 .card-header-all-bt .fa {
   padding-right: 2px;
+  color: tomato;
+}
+.card-header-all-bt:hover {
+  background-color: rgba(226, 223, 223, 0.62);
 }
 
 .index-html .col-md-9 {
@@ -1788,6 +1796,7 @@ form .form-control:disabled {
   padding-right: 15px;
 }
 .recommend .title {
+  font-weight: 300;
   width: 150px;
   position: relative;
   top: 50%;
@@ -1825,6 +1834,7 @@ form .form-control:disabled {
   left: 0;
 }
 .recommend .section-header {
+  font-weight: 100;
   color: #fff;
   text-align: center;
   font-size: 30px;
@@ -1868,7 +1878,7 @@ form .form-control:disabled {
   position: relative;
   width: 100px;
   height: 100px;
-  background-color: #fff;
+  background-color: rgba(245, 245, 245, 0.53);
 }
 .recommend .section-content .ccard .ccard-logo img {
   width: 80px;

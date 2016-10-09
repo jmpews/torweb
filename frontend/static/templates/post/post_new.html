@@ -33,8 +33,7 @@
                                 {% set category = topic_category_cache['categorys'][i] %}
                                 {% set topics = topic_category_cache['topics'][i] %}
                                 <div class="card-header-all-cate">
-                                    <h4>{{category.name}}</h4>
-                                    <div class="card-header-all-cate-topic">
+                                    <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{category.name}}</h4>                                    <div class="card-header-all-cate-topic">
                                         {% for topic in topics %}
                                         <a href="#blank" id="{{topic.str}}">{{topic.name}}</a>
                                         {% end %}
@@ -42,7 +41,7 @@
                                 </div>
                                 {% end %}
                                 <div class="card-header-all-cate">
-                                    <h4>未分类</h4>
+                                    <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
                                     <div class="card-header-all-cate-topic">
                                         {% for topic in topic_category_cache['topics'][-1] %}
                                         <a href="#blank" id="{{topic.str}}">{{topic.name}}</a>

@@ -699,10 +699,11 @@ form .form-control:disabled {
   display: block;
 }
 .header .header-container .header-logo a {
+  font-size: 20px;
   padding-right: 15px;
   padding-left: 15px;
   color: #fff;
-  font-weight: 400;
+  font-weight: 300;
 }
 .header .header-container .header-logo a:hover {
   color: #fff;

@@ -634,7 +634,7 @@ form .form-control:disabled {
   }
 }
 .header.scroll {
-  box-shadow: 0 3px 10px #446491;
+  box-shadow: 0 3px 10px #e4e4e4;
   position: fixed;
   top: -70px;
   transform: translateY(70px);
@@ -650,6 +650,7 @@ form .form-control:disabled {
   z-index: 999;
   background-color: #446491;
   transition: 0.3s ease-out;
+  border-top: 4px solid transparent;
 }
 .header a {
   color: #fff;
@@ -736,7 +737,6 @@ form .form-control:disabled {
   display: block;
   font-size: 15px;
   text-align: center;
-  border-top: 4px solid transparent;
   color: #fff;
 }
 .header .header-container .header-nav li a:focus, .header .header-container .header-nav li a:hover {
@@ -1020,8 +1020,7 @@ form .form-control:disabled {
 
 .card-header-all-bt {
   color: tomato !important;
-  font-weight: bold;
-  border: 1px solid #f5f5f5;
+  border-bottom: 1px solid tomato;
   padding: 3px;
 }
 .card-header-all-bt .fa {
@@ -1519,6 +1518,44 @@ form .form-control:disabled {
 }
 .post-hot-card li a:hover {
   color: #446491;
+}
+
+.profile-card.custom-card .x-header {
+  padding: 10px;
+  color: #446491;
+  border-bottom: 2px solid #446491;
+}
+.profile-card.custom-card .x-header dl dt {
+  margin-right: 10px;
+}
+.profile-card.custom-card .x-header dl dd {
+  line-height: 40px;
+}
+.profile-card.custom-card .x-header img {
+  width: 40px;
+}
+.profile-card.custom-card .x-header ul {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.profile-card.custom-card .x-header ul li {
+  display: block;
+  text-align: center;
+  box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.profile-card.custom-card .x-footer ul li {
+  padding: 5px;
+  text-align: center;
+}
+.profile-card.custom-card .x-footer ul li a:hover {
+  border-bottom: 1px solid #446491;
 }
 
 .user-profile-html .col-md-9 {

@@ -139,7 +139,7 @@ gulp.task('watch', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.run('styles', 'scripts', 'images', 'copy', 'scripts-plugin');
+    gulp.run('styles', 'scripts', 'images', 'copy');
     gulp.run('watch')
 });
 

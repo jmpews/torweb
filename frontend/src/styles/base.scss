@@ -730,7 +730,7 @@ $header-height: 70px;
 $header-logo-height: 40px;
 
 .header.scroll {
-    box-shadow: 0 3px 10px $link-color;
+    box-shadow: 0 3px 10px #e4e4e4;
     position: fixed;
     top: -70px;
     transform: translateY(70px);
@@ -748,6 +748,7 @@ $header-logo-height: 40px;
     z-index: 999;
     background-color: $nav-header-background-color;
     transition: 0.3s ease-out;
+    border-top: 4px solid transparent;
     //border-bottom: 1px solid $border-color;
 
     a {
@@ -846,7 +847,6 @@ $header-logo-height: 40px;
                     display: block;
                     font-size: 15px;
                     text-align: center;
-                    border-top: 4px solid transparent;
                     color: $nav-header-font-color;
                     //-webkit-box-shadow: inset 0 -3px 0px $link-color;
                     //-moz-box-shadow: inset 0 -3px 0px $link-color;
@@ -1172,8 +1172,8 @@ $char-border-color: #ededed;
 }
 .card-header-all-bt {
     color: tomato !important;
-    font-weight: bold;
-    border: 1px solid $border-color;
+    //font-weight: bold;
+    border-bottom: 1px solid tomato;
     padding: 3px;
     .fa {
         padding-right: 2px;
@@ -1750,7 +1750,56 @@ $current-topic-width: 21px;
 }
 .register-card {
 }
+.profile-card.custom-card {
+    .x-header {
+        padding: 10px;
+        color: $link-color;
+        border-bottom: 2px solid $link-color;
+        dl dt {
+            margin-right: 10px;
+        }
+        dl dd {
+            line-height: 40px;
+        }
+        img {
+            width: 40px;
+        }
+        ul {
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: flex;
+            li {
+                display: block;
+                text-align: center;
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                box-flex: 1;
+                -webkit-flex: 1;
+                -moz-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+            }
+        }
+    }
+    .x-footer {
+        ul {
+            li {
+                padding: 5px;
+                text-align: center;
+                a {
+                    &:hover {
+                        border-bottom: 1px solid $link-color;
+                    }
+                }
 
+            }
+        }
+    }
+}
 
 // ---------------------页面样式-profile.html-----------------------
 .user-profile-html {

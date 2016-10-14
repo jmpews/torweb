@@ -191,6 +191,32 @@
 
         <!-- ***侧边栏*** -->
         <div class="col-md-3">
+            {% if current_user %}
+            <div class="card profile-card custom-card">
+                <div class="card-block">
+                    <div class="x-header">
+                        <dl class="cl">
+                            <dt class="float-left">
+                                <img src="/assets/images/avatar/{{ current_user.avatar }}">
+                            </dt>
+                            <dd class="float-left">
+                                <span>{{ current_user.username }}</span>
+                            </dd>
+                        </dl>
+                        <ul>
+                            <li><span>0</span>收藏</li>
+                            <li><span>0</span>发表</li>
+                        </ul>
+                    </div>
+                    <div class="x-footer">
+                        <ul>
+                            <li><a href="">我的收藏</a></li>
+                            <li><a href="">我的发表</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% end %}
             <div class="card notice-card custom-card">
                 <div class="card-header">
                     <i class="fa fa-flag" aria-hidden="true"></i>通知

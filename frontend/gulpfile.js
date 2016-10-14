@@ -109,18 +109,6 @@ gulp.task('styles', function(){
         .pipe(notify({ message: 'Styles task complete' }));
 });
 
-//deal with tinymce-upload
-gulp.task('scripts-plugin', function() {
-    return gulp.src('./src/scripts/plugin.js')
-        .pipe(jshint.reporter('default'))
-        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest(distPath+'/assets/tinymce/plugins/pasteUpload'))
-        .pipe(notify({ message: 'scripts-plugin task complete' }));
-});
-
-
 gulp.task('images', function() {
     return gulp.src('./src/images/**/*')
         .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))

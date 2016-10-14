@@ -550,7 +550,6 @@ function send_socket_message(opt, data) {
 // 设置当前聊天用户
 function set_current_user(user_id) {
     window.sessionStorage.setItem('current_user_id', user_id);
-
 }
 
 // 判断是否为当前用户

@@ -815,10 +815,6 @@ form .form-control:disabled {
     width: 100% !important;
   }
 }
-.chat-container {
-  display: none;
-}
-
 .chat {
   position: fixed;
   right: 0;
@@ -858,18 +854,18 @@ form .form-control:disabled {
   z-index: 2147483601;
   width: 100%;
 }
-.chat .chat-content .chat-user-all {
+.chat .chat-content .user-list {
   position: absolute;
   width: 50px;
 }
-.chat .chat-content .chat-user-all .chat-userx {
+.chat .chat-content .user-list .chat-userx {
   cursor: pointer;
   width: 50px;
 }
-.chat .chat-content .chat-user-all .chat-userx img {
+.chat .chat-content .user-list .chat-userx img {
   width: 40px;
 }
-.chat .chat-content .chat-user-all .chat-user {
+.chat .chat-content .user-list .chat-user {
   cursor: pointer;
   width: 50px;
   text-align: center;
@@ -879,19 +875,19 @@ form .form-control:disabled {
   border: 1px dashed transparent;
   border-bottom: 1px solid #eaeaea;
 }
-.chat .chat-content .chat-user-all .chat-user:hover {
+.chat .chat-content .user-list .chat-user:hover {
   border: 1px dashed #d8d6d6;
 }
-.chat .chat-content .chat-user-all .chat-user:hover span {
+.chat .chat-content .user-list .chat-user:hover span {
   padding: 2px;
   background-color: #efefef;
 }
-.chat .chat-content .chat-user-all .chat-user span {
+.chat .chat-content .user-list .chat-user span {
   display: block;
   line-height: 1;
   padding: 2px;
 }
-.chat .chat-content .chat-user-all .chat-user img {
+.chat .chat-content .user-list .chat-user img {
   display: block;
   width: 40px;
   border-radius: 50%;

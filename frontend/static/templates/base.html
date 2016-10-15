@@ -138,42 +138,7 @@
             </div>
         </div>
     </div>
-    <div class="chat-container">
-        <div class="chat">
-            <!-- 标题 -->
-            <div class="chat-header">
-                <a href="#blank" class="chat-title">Chat 2 'jmpews'</a> <a href="#blank" class="chat-close">X</a>
-            </div>
-            <div class="chat-content">
-                <div class="chat-user-all">
-                    <!-- 在线用户列表 -->
-                    <div class="chat-user no-recent-user-list">
-                        正在更新...
-                    </div>
-                </div>
-                <ul>
-                    <!-- 聊天记录列表列表 -->
-                    <li class="chat-other cl">
-                        <img class="avatar" src="http://127.0.0.1:9000/assets/images/avatar/default_doubi.png">
-                        <div class="chat-text">
-                            hello jmpews....
-                        </div>
-                    </li>
-                    <li class="chat-self cl">
-                        <img class="avatar" src="http://127.0.0.1:9000/assets/images/avatar/default_doubi.png">
-                        <div class="chat-text">
-                            hello jmpews....
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="chat-footer">
-                <form class="form-group row">
-                    <textarea class="form-control" cols="2"></textarea>
-                    <button type="submit" class="btn btn-primary col-sm-2">发送</button>
-                </form>
-            </div>
-        </div>
+    <div class="chat-container" id="chat-container">
     </div>
 
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
@@ -183,6 +148,7 @@
     <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
+    <script src="/assets/js/react/bundle.js"></script>
     <script>
     $(document).on("scroll", function() {
         if(window.screen.width > 767) {

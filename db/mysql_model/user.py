@@ -227,7 +227,6 @@ class ChatMessage(BaseModel):
         for msg in recent_messages:
             d = '>' if msg.sender == current_user else '<'
             result['msg'].append([d, msg.content, TimeUtil.datetime_delta(msg.time)])
-            result['update_time'] = str(msg.time)
         return result
 
     @staticmethod
@@ -250,6 +249,8 @@ class ChatMessage(BaseModel):
         user_id_list = []
         recent_user_list['user_id_list'] = user_id_list
 
+        tmp_recent_user_list = []
+
         # other send to me
         # recent_message = ChatMessage.select().where(ChatMessage.receiver == current_user, ChatMessage.is_read == False).order_by(ChatMessage.time)
         # for msg in recent_message:
@@ -264,7 +265,7 @@ class ChatMessage(BaseModel):
         #     recent_user_list[sender.id]['msg'].append(['<', msg.content, TimeUtil.datetime_delta(msg.time)])
         #     recent_user_list[sender.id]['update_time'] = str(msg.time)
 
-        one_day_ago = TimeUtil.get_ago(60*60*24*10)
+        one_day_ago = TimeUtil.get_ago(60*60*24*10*10)
 
         ol = ChatMessage.select(ChatMessage.sender, ChatMessage.receiver).where(((ChatMessage.sender == current_user) | (ChatMessage.receiver == current_user)) & (ChatMessage.time > one_day_ago)).group_by(ChatMessage.sender, ChatMessage.receiver).limit(10)
 
@@ -284,7 +285,15 @@ class ChatMessage(BaseModel):
             recent_user_list[other.id]['other_name'] = other.username
             recent_user_list[other.id]['other_id'] = other.id
             recent_user_list[other.id]['other_avatar'] = other.avatar
-            recent_user_list[other.id]['unread_count'] = unread_count
+
+            #---
+            tmp_recent_user_list.append({
+                'id': other.id,
+                'avatar': other.avatar,
+                'name': other.username
+            })
+
         recent_user_list['user_id_list'] = user_id_list
-        return recent_user_list
+
+        return tmp_recent_user_list
 

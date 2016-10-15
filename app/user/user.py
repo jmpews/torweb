@@ -220,13 +220,13 @@ class WebsocketChatHandler(BaseWebsocketHandler):
         opt = json_data['opt']
 
         if opt == 'update_recent_user_list':
+            logger.debug('update_recent_user_list...')
             recent_user_list = ChatMessage.get_recent_user_list(self.current_user)
-            recent_user_list['code'] = 'update_recent_user_list'
-            self.write_message(json_result(0,recent_user_list))
+            logger.debug(recent_user_list)
+            self.write_message(json_result(0,{'code': 'recent_user_list', 'data': recent_user_list}))
 
         elif opt == 'update_recent_user_list_and_open':
             recent_user_list = ChatMessage.get_recent_user_list(self.current_user)
-            recent_user_list['code'] = 'update_recent_user_list_and_open'
             self.write_message(json_result(0,recent_user_list))
 
         elif opt == 'send_message':
@@ -234,21 +234,26 @@ class WebsocketChatHandler(BaseWebsocketHandler):
             other = User.get(User.id == other_id)
             content = data['content']
             cl = ChatMessage.create(sender=self.current_user, receiver=other, content=content)
-            self.write_message(json_result(0, {'code': 'receive_message',
-                                                      'other_id': other.id,
-                                                      'msg': ['>', cl.content, TimeUtil.datetime_delta(cl.time)]}))
+            self.write_message(json_result(0, {'code': 'receive_a_message',
+                                               'data': {
+                                                    'id': other.id,
+                                                    'name': other.username,
+                                                    'avatar': other.avatar,
+                                                    'msg': ['>', cl.content, TimeUtil.datetime_delta(cl.time)]}}))
 
             # send to other user
             other_websocket = WebsocketChatHandler.is_online(other.username)
             if other_websocket:
-                other_websocket.write_message(json_result(0, {'code': 'receive_message',
-                                                      'other_id': self.current_user.id,
-                                                      'msg': ['<', cl.content, TimeUtil.datetime_delta(cl.time)]}))
-        elif opt == 'recent_chat_message':
+                other_websocket.write_message(json_result(0, {'code': 'receive_a_message',
+                                                              'data': {
+                                                                'id': self.current_user.id,
+                                                                'avatar': self.current_user.avatar,
+                                                                'name': self.current_user.username,
+                                                                'msg': ['<', cl.content, TimeUtil.datetime_delta(cl.time)]}}))
+        elif opt == 'update_recent_message_list':
             other_id = data['user_id']
             other = User.get(User.id == other_id)
-
             recent_message = ChatMessage.get_recent_chat_message(self.current_user, other)
-            recent_message['code'] = 'recent_chat_message'
-            self.write_message(json_result(0,recent_message))
+            logger.debug(recent_message)
+            self.write_message(json_result(0,{'code': 'recent_message_list', 'data':recent_message}))
 

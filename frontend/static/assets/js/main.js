@@ -495,46 +495,46 @@ function start_system_monitor_websocket(url) {
         console.log('Error occured: ' + evt.data);
     }
 }
-
-// 启动聊天的websocket
-function start_chat_websocket(url) {
-    var wsServer = 'ws://' + url + '/user/chatwebsocket';
-    chat_websocket = new WebSocket(wsServer);
-    chat_websocket.onopen = function (evt) {
-        onOpen(evt)
-    };
-    chat_websocket.onclose = function (evt) {
-        onClose(evt)
-    };
-    chat_websocket.onmessage = function (evt) {
-        onMessage(evt)
-    };
-    chat_websocket.onerror = function (evt) {
-        onError(evt)
-    };
-
-    function onOpen(evt) {
-        console.log("Connected to WebSocket server.");
-        // 请求更新 最近用户列表
-        send_socket_message('update_recent_user_list', '')
-    }
-
-    function onClose(evt) {
-        console.log("Disconnected");
-    }
-
-    function onMessage(evt) {
-        var result = JSON.parse(evt.data);
-        console.log(result);
-        if (result.errorcode == 0) {
-            handle_receive_message(result.data);
-        }
-    }
-
-    function onError(evt) {
-        console.log('Error occured: ' + evt.data);
-    }
-}
+//
+// // 启动聊天的websocket
+// function start_chat_websocket(url) {
+//     var wsServer = 'ws://' + url + '/user/chatwebsocket';
+//     chat_websocket = new WebSocket(wsServer);
+//     chat_websocket.onopen = function (evt) {
+//         onOpen(evt)
+//     };
+//     chat_websocket.onclose = function (evt) {
+//         onClose(evt)
+//     };
+//     chat_websocket.onmessage = function (evt) {
+//         onMessage(evt)
+//     };
+//     chat_websocket.onerror = function (evt) {
+//         onError(evt)
+//     };
+//
+//     function onOpen(evt) {
+//         console.log("Connected to WebSocket server.");
+//         // 请求更新 最近用户列表
+//         send_socket_message('update_recent_user_list', '')
+//     }
+//
+//     function onClose(evt) {
+//         console.log("Disconnected");
+//     }
+//
+//     function onMessage(evt) {
+//         var result = JSON.parse(evt.data);
+//         console.log(result);
+//         if (result.errorcode == 0) {
+//             handle_receive_message(result.data);
+//         }
+//     }
+//
+//     function onError(evt) {
+//         console.log('Error occured: ' + evt.data);
+//     }
+// }
 
 // 发送操作码和数据
 function send_socket_message(opt, data) {

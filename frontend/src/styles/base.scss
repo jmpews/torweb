@@ -946,7 +946,6 @@ $char-border-color: #ededed;
     }
 }
 .chat-container {
-    display: none;
     //width: 25%;
     //position: fixed;
     //right: 5px;
@@ -995,7 +994,7 @@ $char-border-color: #ededed;
         z-index: 2147483601;
         width: 100%;
 
-        .chat-user-all {
+        .user-list {
             position: absolute;
             width: 50px;
 

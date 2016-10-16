@@ -7,16 +7,14 @@ var MessageList = require('../components/messageList.js');
 var UserList = require('../components/userList.js');
 
 import {
-    updateRecentUserList,
-    updateRecentMessageList,
     setCurrentUser
 } from '../actions/index'
+
+import {send_message} from '../utils'
 
 class ChatContainer extends React.Component {
     constructor(props) {
         super(props);
-		this.state = this.props;
-		console.log('ChatContainer-constructor.')
     }
 
     componentDidMount() {
@@ -39,6 +37,8 @@ class ChatContainer extends React.Component {
         // ];
         // dispatch(updateRecentUserList(rm));
     }
+
+
     render() {
         let { state, dispatch, setCurrentUser} = this.props;
         var _this = this;
@@ -62,8 +62,8 @@ class ChatContainer extends React.Component {
                 </div>
                 <div className="chat-footer">
                     <form className="form-group row">
-                        <textarea className="form-control" cols="2">Write Here.</textarea>
-                        <button type="submit" className="btn btn-primary col-sm2">发送</button>
+                        <textarea className="form-control" cols="2" ref="content">Write Here.</textarea>
+                        <button type="submit" className="btn btn-primary col-sm2" onClick={(e) => {e.preventDefault();send_message(current_user.id, _this.refs.content.value.trim())}}>发送</button>
                     </form>
                 </div>
             </div>

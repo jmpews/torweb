@@ -625,6 +625,10 @@ form .form-control:disabled {
     position: absolute !important;
     left: 0px !important;
   }
+  .header .header-container .header-logo a {
+    font-size: 15px !important;
+    padding: 0 !important;
+  }
   .header .header-container .header-nav {
     padding-left: 50px !important;
     max-width: none !important;
@@ -853,6 +857,7 @@ form .form-control:disabled {
   bottom: 120px;
   z-index: 2147483601;
   width: 100%;
+  overflow-y: scroll;
 }
 .chat .chat-content .user-list {
   position: absolute;
@@ -886,6 +891,7 @@ form .form-control:disabled {
   display: block;
   line-height: 1;
   padding: 2px;
+  overflow: hidden;
 }
 .chat .chat-content .user-list .chat-user img {
   display: block;

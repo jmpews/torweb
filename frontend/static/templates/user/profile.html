@@ -134,22 +134,6 @@
         monitor_system_status();
         get_websocket_url(start_chat_websocket);
 
-        // 初始化聊天
-        $('a[other]').on('click', function (e) {
-            var user_id = $(e.currentTarget).attr('other');
-            set_current_user(user_id);
-            send_socket_message('recent_chat_message', {'user_id': user_id})
-        });
-
-        // 发送聊天
-        $(".chat [type='submit']").on('click', function (e) {
-            e.preventDefault();
-            var other_id = $('.chat-header').attr('other_id');
-            var content = $('.chat textarea').val();
-            send_socket_message('send_message', {'user_id': other_id, 'content': content});
-            $('.chat textarea').val('');
-        });
-
         $('.follow-user').on('mouseover', function (e) {
             if ($(e.target).attr('is_follow') == '1') {
                 $(e.target).html('取消关注');

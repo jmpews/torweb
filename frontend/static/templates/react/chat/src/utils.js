@@ -9,6 +9,7 @@ import {
 
 import {
     updateRecentUserList,
+    receiveAMessage,
     updateRecentMessageList,
     setCurrentUser
 } from './actions/index'
@@ -26,8 +27,13 @@ export function send_socket_message(opt, data) {
     chat_websocket.send(message);
 }
 
-function send_message(text) {
-    send_socket_message('send_message', text)
+export function send_message(user_id, text) {
+    console.log('send_message:',user_id, '-', text);
+    if(user_id < 1) {
+        alert('please select a user...');
+        return
+    }
+    send_socket_message('send_message', {'user_id': user_id, 'content': text});
 }
 
 

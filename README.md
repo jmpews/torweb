@@ -11,6 +11,7 @@
 #### 前端部分
 
 * 标准化的前端构建流程(gulp+bower)
+* 基于react的实时通讯解决方案
 * 提供社区类型、展示类型、Blog类型的样式
 * 注释详细的scss(部分组件样式引用bootstrap-v4)
 * emoji支持
@@ -33,9 +34,10 @@
 
 把在写torweb遇到的问题，写成解决方案.
 
-[websocket实时通讯解决.md](docs/solutions/websocket实时通讯解决.md)
-
 [头像裁剪上传解决方案.md](docs/solutions/头像裁剪上传解决方案.md)
+
+[基于react实时通讯解决方案](docs/solutions/react-redux-websocket-chat.md)
+
 
 ## TODO列表
 

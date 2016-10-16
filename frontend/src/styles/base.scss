@@ -714,6 +714,10 @@ form {
             // 这里和padding-left和配合
             position: absolute !important;
             left: 0px !important;
+            a {
+                font-size: 15px !important;
+                padding: 0 !important;
+            }
         }
         .header-nav {
             // 这里和absolute的配合
@@ -993,6 +997,7 @@ $char-border-color: #ededed;
         bottom: 120px;
         z-index: 2147483601;
         width: 100%;
+        overflow-y: scroll;
 
         .user-list {
             position: absolute;
@@ -1027,6 +1032,7 @@ $char-border-color: #ededed;
                     display: block;
                     line-height: 1;
                     padding: 2px;
+                    overflow: hidden;
 
                 }
                 img {

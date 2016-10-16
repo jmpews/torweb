@@ -14,7 +14,7 @@ class MessageList extends React.Component {
           }
           else {
               message_type = 'chat-self cl';
-              img_src = '/assets/images/avatar/' + recent_message.avatar;
+              img_src = '/assets/images/avatar/default_avatar.png';
           }
 
           return (

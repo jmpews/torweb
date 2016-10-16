@@ -18,7 +18,7 @@ class UserList extends React.Component {
             var other_name = user.name;
             return (
                 <div key={index} className="chat-user" data-other={other_id}
-                     onClick={() => setCurrentUser(other_id)}>
+                     onClick={() => setCurrentUser(other_id, other_avatar, other_name)}>
                     <img className="chat-user-avatar" src={other_avatar}/>
                     <span className="chat-user-name">{other_name}</span>
                 </div>

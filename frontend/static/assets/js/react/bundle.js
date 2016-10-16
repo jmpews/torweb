@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e98e31cc8d581ba675b1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0f67a4063c7cf879bdd9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8427,7 +8427,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//---
+	// start websocket server
 	(0, _utils.start_chat_websocket)('127.0.0.1:9000');
 
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -31230,6 +31230,8 @@
 
 	var _index = __webpack_require__(272);
 
+	var _utils = __webpack_require__(274);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31247,11 +31249,7 @@
 	    function ChatContainer(props) {
 	        _classCallCheck(this, ChatContainer);
 
-	        var _this2 = _possibleConstructorReturn(this, (ChatContainer.__proto__ || Object.getPrototypeOf(ChatContainer)).call(this, props));
-
-	        _this2.state = _this2.props;
-	        console.log('ChatContainer-constructor.');
-	        return _this2;
+	        return _possibleConstructorReturn(this, (ChatContainer.__proto__ || Object.getPrototypeOf(ChatContainer)).call(this, props));
 	    }
 
 	    _createClass(ChatContainer, [{
@@ -31323,12 +31321,14 @@
 	                        { className: 'form-group row' },
 	                        _react2.default.createElement(
 	                            'textarea',
-	                            { className: 'form-control', cols: '2' },
+	                            { className: 'form-control', cols: '2', ref: 'content' },
 	                            'Write Here.'
 	                        ),
 	                        _react2.default.createElement(
 	                            'button',
-	                            { type: 'submit', className: 'btn btn-primary col-sm2' },
+	                            { type: 'submit', className: 'btn btn-primary col-sm2', onClick: function onClick(e) {
+	                                    e.preventDefault();(0, _utils.send_message)(current_user.id, _this.refs.content.value.trim());
+	                                } },
 	                            '\u53D1\u9001'
 	                        )
 	                    )
@@ -31514,6 +31514,7 @@
 	});
 	exports.handle_receive_message = undefined;
 	exports.send_socket_message = send_socket_message;
+	exports.send_message = send_message;
 	exports.start_chat_websocket = start_chat_websocket;
 
 	var _globalStore = __webpack_require__(275);
@@ -31534,8 +31535,13 @@
 	    chat_websocket.send(message);
 	}
 
-	function send_message(text) {
-	    send_socket_message('send_message', text);
+	function send_message(user_id, text) {
+	    console.log('send_message:', user_id, '-', text);
+	    if (user_id < 1) {
+	        alert('please select a user...');
+	        return;
+	    }
+	    send_socket_message('send_message', { 'user_id': user_id, 'content': text });
 	}
 
 	// 根据操作码,处理接收到的消息数据
@@ -31576,7 +31582,7 @@
 	            }
 	            // 一条消息
 	            else if (data.code == 'receive_a_message') {
-	                    dispatch(receiveAMessage(data.data));
+	                    dispatch((0, _index.receiveAMessage)(data.data));
 	                }
 	    };
 	};
@@ -31761,6 +31767,7 @@
 
 	var _ActionTypes = __webpack_require__(273);
 
+	// initialState
 	/**
 	 * Created by jmpews on 2016/10/14.
 	 */
@@ -31779,6 +31786,9 @@
 	    recent_user_list: []
 	};
 
+	// action type
+
+
 	var update_recent_message_list = function update_recent_message_list() {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.recent_message_list;
 	    var action = arguments[1];
@@ -31792,6 +31802,8 @@
 	};
 
 	// switch action.type
+	// with immutable to modify and return the copy of store
+	// 通过immutable, 来实现修改和返回store的副本
 	var chat = function chat() {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
@@ -31802,18 +31814,20 @@
 	        case _ActionTypes.RECEIVE_A_MESSAGE:
 	            var message = action.payload;
 	            var x = (0, _immutable.fromJS)(state);
+	            console.log('receieve_a_message:', message);
 	            if (state.current_user.id != message.id) {
 	                var y = x.getIn(['recent_user_list']);
-	                var z = r.push(message);
+	                var z = r.push({ id: message.id, name: message.name, avatar: message.avatar });
 	                return x.setIn(['recent_user_list'], z).toJS();
 	            } else {
 	                var y = x.getIn(['recent_message_list', 'msg']);
-	                var z = y.push(['<', message.contnet]);
+	                var z = y.push(message.msg);
 	                return x.setIn(['recent_message_list', 'msg'], z).toJS();
 	            }
 	        case _ActionTypes.RECENT_USER_LIST:
 	            return (0, _immutable.fromJS)(state).setIn(['recent_user_list'], action.payload).toJS();
 	        case _ActionTypes.SET_CURRENT_USER:
+	            console.log('set_current_user:', action.payload);
 	            return (0, _immutable.fromJS)(state).setIn(['current_user'], action.payload).toJS();
 	        case _ActionTypes.RECENT_MESSAGE_LIST:
 	            return (0, _immutable.fromJS)(state).setIn(['recent_message_list'], update_recent_message_list(state.recent_message_list, action)).toJS();
@@ -36865,7 +36879,7 @@
 	                    img_src = '/assets/images/avatar/' + recent_message.avatar;
 	                } else {
 	                    message_type = 'chat-self cl';
-	                    img_src = '/assets/images/avatar/' + recent_message.avatar;
+	                    img_src = '/assets/images/avatar/default_avatar.png';
 	                }
 
 	                return React.createElement(
@@ -36955,7 +36969,7 @@
 	                    'div',
 	                    { key: index, className: 'chat-user', 'data-other': other_id,
 	                        onClick: function onClick() {
-	                            return setCurrentUser(other_id);
+	                            return setCurrentUser(other_id, other_avatar, other_name);
 	                        } },
 	                    React.createElement('img', { className: 'chat-user-avatar', src: other_avatar }),
 	                    React.createElement(

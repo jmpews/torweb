@@ -213,12 +213,10 @@ class ChatMessage(BaseModel):
         :return:
         '''
         result = {}
-        result['me_name'] = current_user.username
-        result['me_avatar'] = current_user.avatar
-        result['other_name'] = other.username
-        result['other_id'] = other.id
-        result['other_avatar'] = other.avatar
-        result['unread_msg'] = ChatMessage.get_unread_message(current_user, other)
+        result['name'] = other.username
+        result['id'] = other.id
+        result['avatar'] = other.avatar
+        result['msg'] = ChatMessage.get_unread_message(current_user, other)
         result['msg'] = []
         # import pdb;pdb.set_trace()
 

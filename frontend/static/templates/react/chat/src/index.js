@@ -6,7 +6,7 @@ import { store } from './globalStore'
 
 import { start_chat_websocket } from './utils'
 
-//---
+// start websocket server
 start_chat_websocket('127.0.0.1:9000');
 
 render(

@@ -13,6 +13,7 @@ from custor.errors import RequestMissArgumentError, PageNotFoundError
 
 from settings.config import config
 
+from .utils import get_index_info, get_topic_index_info, get_index_user_info
 
 class IndexHandler(BaseRequestHandler):
     """
@@ -29,13 +30,10 @@ class IndexHandler(BaseRequestHandler):
         # # profile your program.
         # profiler = TracingProfiler()
         # profiler.start()
-
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
-        current_page = get_page_number(current_page)
-        posts, page_number_limit = Post.list_recently(page_number=current_page)
-        top_posts, _ = Post.list_top()
-        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+        posts, top_posts, pages = get_index_info(current_page)
         self.render('index/index.html',
+                    index_user_info=get_index_user_info(self.current_user),
                     posts=posts,
                     top_posts = top_posts,
                     topic_category_cache=topic_category_cache,
@@ -54,24 +52,10 @@ class IndexTopicHandler(BaseRequestHandler):
     带分类的首页
     """
     def get(self, topic_id, *args, **kwargs):
-        try:
-            topic = PostTopic.get(PostTopic.str == topic_id)
-        except PostTopic.DoesNotExist:
-            self.redirect("/static/404.html")
-            return
         current_page = get_cleaned_query_data(self, ['page',], blank=True)['page']
-        if current_page:
-            current_page = int(current_page)
-            if current_page < 1:
-                self.redirect("/static/404.html")
-                return
-            posts, page_number_limit = Post.list_by_topic(topic, page_number=current_page)
-        else:
-            current_page = 1
-            posts, page_number_limit = Post.list_by_topic(topic)
-        top_posts, _ = Post.list_top()
-        pages = get_page_nav(current_page, page_number_limit, config.default_page_limit)
+        topic, posts, top_posts, pages = get_topic_index_info(topic_id, current_page)
         self.render('index/index.html',
+                    index_user_info=get_index_user_info(self.current_user),
                     posts=posts,
                     top_posts=top_posts,
                     topic_category_cache=topic_category_cache,

@@ -557,7 +557,8 @@ form {
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid $border-color;
+    border-top: none;
     border-radius: 0.1rem;
     .dropdown-item {
         display: block;
@@ -1791,6 +1792,7 @@ $current-topic-width: 21px;
         }
     }
     .x-footer {
+        margin-top: 20px;
         ul {
             li {
                 padding: 5px;

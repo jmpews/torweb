@@ -204,14 +204,14 @@
                             </dd>
                         </dl>
                         <ul>
-                            <li><span>0</span>收藏</li>
-                            <li><span>0</span>发表</li>
+                            <li><span>{{ index_user_info.get('posts_count') }}</span> 收藏</li>
+                            <li><span>{{ index_user_info.get('collectposts_count') }}</span> 发表</li>
                         </ul>
                     </div>
                     <div class="x-footer">
                         <ul>
-                            <li><a href="">我的收藏</a></li>
-                            <li><a href="">我的发表</a></li>
+                            <li><a href="/user/{{ current_user.id }}">我的收藏</a></li>
+                            <li><a href="/user/{{ current_user.id }}">我的发表</a></li>
                         </ul>
                     </div>
                 </div>

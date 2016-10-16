@@ -157,7 +157,6 @@ class User(BaseModel):
         return '.color3'
 
 
-
 class Profile(BaseModel):
     user = ForeignKeyField(User, related_name='user_profile')
     nickname = CharField(max_length=16, default="")

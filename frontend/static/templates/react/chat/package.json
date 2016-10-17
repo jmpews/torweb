@@ -9,18 +9,20 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "react-scripts": "^0.6.0",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0"
   },
   "scripts": {
 	"start": "node server.js",
     "build": "react-scripts build",
+    "dist": "NODE_ENV=production webpack --progress --colors",
+    "dist": "NODE_ENV=production webpack -p",
     "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",

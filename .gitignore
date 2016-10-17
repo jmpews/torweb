@@ -5,3 +5,4 @@ __pycache__/*
 *.bak
 *.hot-update.json
 *.hot-update.js
+registry/

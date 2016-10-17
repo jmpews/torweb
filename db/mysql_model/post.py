@@ -26,6 +26,10 @@ class PostTopic(BaseModel):
 
 
 class Post(BaseModel):
+    AUTH_READ = 0
+    AUTH_MODIFY = 1
+    AUTH_DELETE = 2
+    AUTH_ALL = 3
     topic = ForeignKeyField(PostTopic, related_name='posts_topic')
     title = CharField(verbose_name="帖子的标题")
     content = TextField(verbose_name="帖子内容")
@@ -44,6 +48,18 @@ class Post(BaseModel):
 
     def __str__(self):
         return "[%s-%s]" % (self.title, self.user)
+
+    def check_auth(self, user):
+        if not user:
+            return 1, 0, 0
+        elif self.user == user:
+            return 1, 1 , 1
+
+    def check_own(self, user):
+        if user and self.user == user:
+            return True
+        else:
+            return False
 
     def up_collect(self):
         '''
@@ -139,6 +155,25 @@ class Post(BaseModel):
         result['reply_count'] = self.reply_count
         result['collect_count'] = self.collect_count
         return result
+
+    @staticmethod
+    def get_detail_and_replys(post_id):
+        try:
+            post = Post.get(Post.id == post_id)
+        except Post.DoesNotExist:
+            return None, None
+        post.up_visit()
+        post_replys = PostReply.list_all(post)
+        return post, post_replys
+
+    @staticmethod
+    def get_detail(post_id):
+        try:
+            post = Post.get(Post.id == post_id)
+        except Post.DoesNotExist:
+            return None
+        return post
+
 
 
 class PostReply(BaseModel):

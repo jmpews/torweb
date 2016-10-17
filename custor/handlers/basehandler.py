@@ -15,6 +15,9 @@ class BaseRequestHandler(RequestHandler):
     """
     基础handler
     """
+    def redirect404(self):
+        self.redirect(config.default_404_url)
+
     def prepare(self):
         '''
         peewee的连接池, request-hook(请求前连接)

@@ -8,26 +8,29 @@ from custor.decorators import login_required_json, login_required
 from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, PostTopic, CollectPost
 
+from .utils import get_post_user_ext
+
+
 # 换种注释方式
 
 # 帖子详情
 class PostDetailHandler(BaseRequestHandler):
     def get(self, post_id, *args, **kwargs):
-        post = Post.get(Post.id == post_id)
-        post.up_visit()
-        post_detail = post
-        post_replys = PostReply.list_all(post)
+        post, post_replys = Post.get_detail_and_replys(post_id)
+        if not post:
+            self.redirect404()
+            return
+        ext = get_post_user_ext(post, self.current_user)
         self.render('post/post_detail.html',
-                    post_detail=post_detail,
+                    post=post,
                     post_replys=post_replys,
-                    is_collect=CollectPost.is_collect(post, self.current_user),
+                    ext=ext,
                     hot_post_cache=hot_post_cache,
                     topic_category_cache=topic_category_cache)
 
 
 # 添加帖子
 class PostAddHandler(BaseRequestHandler):
-
     @login_required
     def get(self, *args, **kwargs):
         self.render('post/post_new.html',
@@ -47,14 +50,46 @@ class PostAddHandler(BaseRequestHandler):
             content=post_data['content'],
             user=self.current_user
         )
-        #添加通知, 通知给其他关注的用户
+        # 添加通知, 通知给其他关注的用户
+        Notification.new_post(post)
+        self.write(json_result(0, {'post_id': post.id}))
+
+
+# 修改帖子
+class PostModifyHandler(BaseRequestHandler):
+    def get(self, post_id, *args, **kwargs):
+        post = Post.get_detail(post_id)
+        self.render('post/post_modify.html',
+                    post=post,
+                    topic_category_cache=topic_category_cache)
+
+    @login_required
+    def post(self, *args, **kwargs):
+        post_data = get_cleaned_post_data(self, ['post', 'title', 'content', 'topic'])
+        try:
+            post = Post.get(Post.id == post_data['post'])
+        except Post.DoesNotExist:
+            self.write(json_result(1, '请选择正确主题'))
+            return
+
+        try:
+            topic = PostTopic.get(PostTopic.str == post_data['topic'])
+        except PostTopic.DoesNotExist:
+            self.write(json_result(1, '请选择正确主题'))
+            return
+
+        post.topic = topic
+        post.title = post_data['title']
+        post.content = post_data['content']
+        post.save()
+
+        # 添加通知, 通知给其他关注的用户
         Notification.new_post(post)
         self.write(json_result(0, {'post_id': post.id}))
 
 
 # 添加回复
 class PostReplyAddHandler(BaseRequestHandler):
-
     @login_required
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['post', 'content'])
@@ -72,10 +107,10 @@ class PostReplyAddHandler(BaseRequestHandler):
         Notification.new_reply(postreply, post)
         self.write(json_result(0, {'post_id': post.id}))
 
+
 # 帖子相关操作, 类似API的方式, 需要有opt,data参数(统一格式)
 class PostReplyOptHandler(BaseRequestHandler):
-
-    @login_required_json(-3, 'login failed.') # 要求登录, 否则返回(错误码, 错误信息)
+    @login_required_json(-3, 'login failed.')  # 要求登录, 否则返回(错误码, 错误信息)
     def post(self, *args, **kwargs):
         json_data = get_cleaned_json_data(self, ['opt', 'data'])
         data = json_data['data']
@@ -110,4 +145,3 @@ class PostReplyOptHandler(BaseRequestHandler):
             self.write(json_result(0, 'success'))
         else:
             self.write(json_result(1, 'opt不支持'))
-

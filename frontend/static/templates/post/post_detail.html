@@ -9,14 +9,14 @@
 {% end %}
 
 {% block content %}
-    <div class="content-container container post-detail-html">
-        <div class="col-md-9">
-            <div class="card all-cate-card post-detail-card custom-card">
+<div class="content-container container post-detail-html">
+    <div class="col-md-9">
+        <div class="card all-cate-card post-detail-card custom-card" id="post-id" post-id="{{ post.id }}">
             <div class="card-header ">
                 <a href="#_blank" class="light-font">热门: </a>
                 <a href="/topic/study-material" class="light-font">学习资料</a>
                 <span class="divider">/</span>
-                <a href="/topic/study-competition"  class="light-font">竞赛</a>
+                <a href="/topic/study-competition" class="light-font">竞赛</a>
                 <span class="important-divider">|</span>
                 <a class="card-header-all-bt important-font" href="/"><i class="fa fa-bars" aria-hidden="true"></i>全部分类</a>
             </div>
@@ -29,110 +29,119 @@
                     {% set category = topic_category_cache['categorys'][i] %}
                     {% set topics = topic_category_cache['topics'][i] %}
                     <div class="card-header-all-cate">
-                        <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{category.name}}</h4>
+                        <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{ category.name }}</h4>
                         <div class="card-header-all-cate-topic">
-                        {% for topic in topics %}
-                        <a href="/topic/{{topic.str}}">{{topic.name}}</a>
-                        {% end %}
+                            {% for topic in topics %}
+                            <a href="/topic/{{ topic.str }}">{{ topic.name }}</a>
+                            {% end %}
                         </div>
                     </div>
                     {% end %}
                     <div class="card-header-all-cate">
                         <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
                         <div class="card-header-all-cate-topic">
-                        {% for topic in topic_category_cache['topics'][-1] %}
-                        <a href="/topic/{{topic.str}}">{{topic.name}}</a>
-                        {% end %}
+                            {% for topic in topic_category_cache['topics'][-1] %}
+                            <a href="/topic/{{ topic.str }}">{{ topic.name }}</a>
+                            {% end %}
                         </div>
                     </div>
                 </div>
             </div>
-                <div class="post-detail-header cl">
-                    <div class="avatar hidden-xs ">
-                        <a class="username" href="/user/{{post_detail.user.id}}">
-                            {% if post_detail.user.avatar %}
-                            <img src="/assets/images/avatar/{{post_detail.user.avatar}}">
-                            {% else %}
-                            <span>{{post_detail.user.username[0].upper()}}</span>
-                            {% end %}
-                        </a>
-                    </div>
-                    <div class="post-detail-header-mid clear-xs">
-                        <div class="post-title"><a href="/">{{post_detail.title}}</a></div>
-                        <div class="post-info">
-                            <span><a class="username" href="/user/{{post_detail.user.id}}">{{post_detail.user.username}}</a></span>
-                            <span class="divider">•</span>
-                            <span>{{post_detail.create_time}}</span>
-                            {% if post_detail.latest_reply_user %}
-                            <span class="divider">•</span>
-                            <span><a class="username" href="/user/{{post_detail.latest_reply_user.id}}">{{post_detail.latest_reply_user.nickname}} </a>最后回复</span>
-                            {% end %}
-                        </div>
-                    </div>
+            <div class="post-detail-header cl">
+                <div class="avatar hidden-xs ">
+                    <a class="username" href="/user/{{ post.user.id }}">
+                        {% if post.user.avatar %}
+                        <img src="/assets/images/avatar/{{ post.user.avatar }}">
+                        {% else %}
+                        <span>{{ post.user.username[0].upper() }}</span>
+                        {% end %}
+                    </a>
                 </div>
-                <div class="card-block">
-                    <div class="">
-                        <div class="post-content">
-                            {% raw post_detail.content %}
-                        </div>
-                        <div class="post-function">
-                            <span>
-                                {% if is_collect %}
-                                <a href="#blank" class="collect-post post-collected"><i class="fa fa-bookmark-o"></i><span>已收藏</span></a>
-                                {% else %}
-                                <a href="#blank" class="collect-post"><i class="fa fa-bookmark-o"></i><span>收藏</span></a>
-                                {% end %}
-                            </span>
-                            <span class="divider">•</span>
-                            <span>{{post_detail.visit_count}} 浏览</span>
-                            <!-- <span><a href="#blank" class=""><i class="fa fa-thumbs-o-up"></i>点赞</a></span> -->
-                        </div>
-                    </div>
-
-                    <div class="post-reply">
-                        {% for i, post_reply in enumerate(post_replys) %}
-                        <div class="reply-item" reply_id="{{post_reply.id}}">
-                            {% set user = post_reply.user  %}
-                            <div class="avatar hidden-xs ">
-                                <a class="username" href="/user/{{user.id}}">
-                                    {% if user.avatar %}
-                                    <img src="/assets/images/avatar/{{user.avatar}}">
-                                    {% else %}
-                                    <span>{{user.username[0].upper()}}</span>
-                                    {% end %}
-                                </a>
-                            </div>
-                            <div class="reply-main clear-xs">
-                                <div class="reply-head">
-                                    <span><a class="username" href="/user/{{post_reply.user.id}}">{{post_reply.user.username}}</a></span>
-                                    <span class="divider">•</span>
-                                    <span class="friendly-time">{{datetime_delta(post_reply.create_time)}}</span>
-                                    <span class="divider">•</span>
-                                    <span>{{post_reply.like_count}} 赞同</span>
-                                    <span class="divider">•</span>
-                                    <span class="floor">#{{i}}</span>
-                                </div>
-                                <div class="reply-content">
-                                    {% raw post_reply.content %}
-                                </div>
-                                <div class="reply-function">
-                                    <!-- <span> <a href="/"><i class="fa fa-reply"></i>回复</a></span> -->
-                                    <span><a href="#support" class="support-reply"><i class="fa fa-thumbs-o-up"></i><span>赞同</span></a></span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="post-detail-header-mid clear-xs">
+                    <div class="post-title"><a href="/">{{ post.title }}</a></div>
+                    <div class="post-info">
+                        <span><a class="username" href="/user/{{ post.user.id }}">{{ post.user.username }}</a></span>
+                        <span class="divider">•</span>
+                        <span>{{ post.create_time }}</span>
+                        {% if post.latest_reply_user %}
+                        <span class="divider">•</span>
+                        <span><a class="username"
+                                 href="/user/{{ post.latest_reply_user.id }}">{{ post.latest_reply_user.nickname }} </a>最后回复</span>
+                        {% end %}
+                        {% if ext.is_own %}
+                        <span class="divider">|</span>
+                        <span><a href="/post/{{ post.id }}/modify">修改</a></span>
                         {% end %}
                     </div>
-                    <!-- 评论框 -->
                 </div>
-            </div> <!-- end card-->
-            <div class="card custom-card post-reply-card">
-                 <div class="card-header">
-                     新回复
+            </div>
+            <div class="card-block">
+                <div class="">
+                    <div class="post-content">
+                        {% raw post.content %}
+                    </div>
+                    <div class="post-function">
+                            <span>
+                                {% if ext.is_collect %}
+                                <a href="#blank" class="collect-post post-collected"><i
+                                        class="fa fa-bookmark-o"></i><span>已收藏</span></a>
+                                {% else %}
+                                <a href="#blank" class="collect-post"><i
+                                        class="fa fa-bookmark-o"></i><span>收藏</span></a>
+                                {% end %}
+                            </span>
+                        <span class="divider">•</span>
+                        <span>{{ post.visit_count }} 浏览</span>
+                        <!-- <span><a href="#blank" class=""><i class="fa fa-thumbs-o-up"></i>点赞</a></span> -->
+                    </div>
                 </div>
-                <div class="card-block">
-                    {% if current_user %}
-                    <form>
+
+                <div class="post-reply">
+                    {% for i, post_reply in enumerate(post_replys) %}
+                    <div class="reply-item" reply_id="{{ post_reply.id }}">
+                        {% set user = post_reply.user %}
+                        <div class="avatar hidden-xs ">
+                            <a class="username" href="/user/{{ user.id }}">
+                                {% if user.avatar %}
+                                <img src="/assets/images/avatar/{{ user.avatar }}">
+                                {% else %}
+                                <span>{{ user.username[0].upper() }}</span>
+                                {% end %}
+                            </a>
+                        </div>
+                        <div class="reply-main clear-xs">
+                            <div class="reply-head">
+                                <span><a class="username"
+                                         href="/user/{{ post_reply.user.id }}">{{ post_reply.user.username }}</a></span>
+                                <span class="divider">•</span>
+                                <span class="friendly-time">{{ datetime_delta(post_reply.create_time) }}</span>
+                                <span class="divider">•</span>
+                                <span>{{ post_reply.like_count }} 赞同</span>
+                                <span class="divider">•</span>
+                                <span class="floor">#{{ i }}</span>
+                            </div>
+                            <div class="reply-content">
+                                {% raw post_reply.content %}
+                            </div>
+                            <div class="reply-function">
+                                <!-- <span> <a href="/"><i class="fa fa-reply"></i>回复</a></span> -->
+                                <span><a href="#support" class="support-reply"><i
+                                        class="fa fa-thumbs-o-up"></i><span>赞同</span></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    {% end %}
+                </div>
+                <!-- 评论框 -->
+            </div>
+        </div> <!-- end card-->
+        <div class="card custom-card post-reply-card">
+            <div class="card-header">
+                新回复
+            </div>
+            <div class="card-block">
+                {% if current_user %}
+                <form>
                     <div class="mediumeditor" id="mediumeditor">Please Write Here.</div>
                     <div class="form-group float-left">
                         <img class="emoji" id="emoji-btn" src="/assets/images/emoji/basic/smile.png">
@@ -140,180 +149,183 @@
                         </ul>
                     </div>
                     <button type="submit" class="btn btn-primary float-right">提交</button>
-                    </form>
-                    {% else %}
-                    <div class="text-center">
+                </form>
+                {% else %}
+                <div class="text-center">
                     <div class="btn-group" style="text-align:center;">
                         <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
-                        <a class="btn btn-sm btn-primary" style="color:#fff;"role="button" href="/register">注册</a>
+                        <a class="btn btn-sm btn-primary" style="color:#fff;" role="button" href="/register">注册</a>
                     </div>
-                    </div>
+                </div>
+                {% end %}
+            </div>
+        </div>
+    </div> <!-- end col-md-9-->
+    <div class="col-md-3">
+        <div class="card notice-card custom-card">
+            <div class="card-header">
+                <i class="fa fa-flag" aria-hidden="true"></i>通知
+            </div>
+            <div class="card-block">
+                <p>1. 目前社区上线测试, 欢迎大家提各种意见. </p>
+                <p>2. 社区已经开源, 传送门. <a target="_blank" href="https://github.com/jmpews/torweb"><i class="fa fa-github"
+                                                                                                 aria-hidden="true"></i>torweb</a>
+                </p>
+                <!--{% if not current_user %}-->
+                <!--<p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>-->
+                <!--<div>没有账户? <a href="/register">点击注册</a></div>-->
+                <!--{% else %}-->
+                <!--{{current_user.username}}-->
+                <!--{% end %}-->
+            </div>
+        </div>
+        <div class="card post-hot-card custom-card">
+            <div class="card-header">
+                <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
+            </div>
+            <div class="card-block">
+                <ul class="list-inline">
+                    {% for p in hot_post_cache['reply'] %}
+                    <li><span class="">{{ p.reply_count }} ℃</span> <span class="important-divider">|</span> <a
+                            href="/p/{{ p.id }}">{{ p.title }}</a></li>
                     {% end %}
-                </div>
-            </div>
-        </div> <!-- end col-md-9-->
-        <div class="col-md-3">
-            <div class="card notice-card custom-card">
-                <div class="card-header">
-                    <i class="fa fa-flag" aria-hidden="true"></i>通知
-                </div>
-                <div class="card-block">
-                    <p>1. 目前社区上线测试, 欢迎大家提各种意见. </p>
-                    <p>2. 社区已经开源, 传送门. <a target="_blank" href="https://github.com/jmpews/torweb"><i class="fa fa-github" aria-hidden="true"></i>torweb</a></p>
-                    <!--{% if not current_user %}-->
-                    <!--<p><a class="btn btn-outline-primary" href="/login" role="button">登陆</a></p>-->
-                    <!--<div>没有账户? <a href="/register">点击注册</a></div>-->
-                    <!--{% else %}-->
-                    <!--{{current_user.username}}-->
-                    <!--{% end %}-->
-                </div>
-            </div>
-            <div class="card post-hot-card custom-card">
-                <div class="card-header">
-                    <i class="fa fa-fire" aria-hidden="true"></i> Hot文章
-                </div>
-                <div class="card-block">
-                    <ul class="list-inline">
-                        {% for post in hot_post_cache['reply'] %}
-                        <li><span class="">{{post.reply_count}} ℃</span> <span class="important-divider">|</span> <a href="/post/{{post.id}}">{{post.title}}</a></li>
-                        {% end %}
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 {% end %}
 
 {% block scripts %}
 <script src="/assets/js/medium-editor.min.js"></script>
 <script src="/assets/js/highlight.min.js"></script>
-<script >hljs.initHighlightingOnLoad();</script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
     $(document).ready(function () {
-    var post='{{post_detail.id}}';
-    editor = new MediumEditor('#mediumeditor', {
-        paste: {
-            /* This example includes the default options for paste,
-               if nothing is passed this is what it used */
-            forcePlainText: false,
-            cleanPastedHTML: false,
-            cleanReplacements: [],
-            cleanAttrs: ['class', 'style', 'dir'],
-            cleanTags: ['meta']
-        },
-        toolbar: {
-            /* These are the default options for the toolbar,
-            if nothing is passed this is what is used */
-            allowMultiParagraphSelection: true,
-            buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
-            diffLeft: 0,
-            diffTop: -10,
-            firstButtonClass: 'medium-editor-button-first',
-            lastButtonClass: 'medium-editor-button-last',
-            relativeContainer: null,
-            standardizeSelectionStart: false,
-            static: false,
-            /* options which only apply when static is true */
-            align: 'center',
-            sticky: false,
-            updateOnEmptySelection: false
-        }
-    });
-    $('form').on('submit', function (event) {
-        event.preventDefault();
-         $.ajax({
-            type: 'post',
-            dataType: 'json',
-            url: '/postreply/add',
-            data: {
-                'post': post,
-                'content': $('#mediumeditor').html()
+        var post = $('#post-id').attr('post-id');
+        editor = new MediumEditor('#mediumeditor', {
+            paste: {
+                /* This example includes the default options for paste,
+                 if nothing is passed this is what it used */
+                forcePlainText: false,
+                cleanPastedHTML: false,
+                cleanReplacements: [],
+                cleanAttrs: ['class', 'style', 'dir'],
+                cleanTags: ['meta']
             },
-            success: function(result, status) {
-                if(result.errorcode == 0) {
-                    window.location.href="/post/"+result.data['post_id'];
-                }
-                else if(result.errorcode == 1) {
-                    alert(result.txt);
-                }
+            toolbar: {
+                /* These are the default options for the toolbar,
+                 if nothing is passed this is what is used */
+                allowMultiParagraphSelection: true,
+                buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+                diffLeft: 0,
+                diffTop: -10,
+                firstButtonClass: 'medium-editor-button-first',
+                lastButtonClass: 'medium-editor-button-last',
+                relativeContainer: null,
+                standardizeSelectionStart: false,
+                static: false,
+                /* options which only apply when static is true */
+                align: 'center',
+                sticky: false,
+                updateOnEmptySelection: false
             }
         });
-        return 1;
-    });
-    $('.support-reply').on('click', function(e){
-        var reply_id = $(e.target).parents('.reply-item[reply_id]').attr('reply_id');
-        if(!reply_id)
-            $.notify('错误....');
-        var post_data = {'opt': 'support-postreply', 'data': {'postreply': reply_id}};
-        if($(e.currentTarget).hasClass('postreply-collected')) {
-            post_data = {'opt': 'cancle-support-postreply', 'data': {'postreply': reply_id}};
-        }
-        $.ajax({
-           type: 'post',
-           dataType: 'json',
-           url: '/postreplyopt',
-           data: JSON.stringify(),
-           success: function(result, status) {
-               if(result.errorcode == 0) {
-                   if($(e.currentTarget).hasClass('postreply-collected')) {
-                       $(e.currentTarget).removeClass('postreply-supported');
-                       $.notify('...');
-                   }
-                   else {
-                       $(e.currentTarget).addClass('postreply-supported');
-                       $.notify('...');
-                   }
-               }
-               else if(result.errorcode == -3) {
-                   $('#loginModal').modal('toggle');
-               }
-           }
+        $('form').on('submit', function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: '/postreply/add',
+                data: {
+                    'post': post,
+                    'content': $('#mediumeditor').html()
+                },
+                success: function (result, status) {
+                    if (result.errorcode == 0) {
+                        window.location.href = "/post/" + result.data['post_id'];
+                    }
+                    else if (result.errorcode == 1) {
+                        alert(result.txt);
+                    }
+                }
+            });
+            return 1;
         });
-    });
-    $('.collect-post').on('click', function(e){
-        e.preventDefault();
-        var post_data = {'opt': 'collect-post', 'data': {'post': post}};
-        if($(e.currentTarget).hasClass('post-collected')) {
-            post_data = {'opt': 'cancle-collect-post', 'data': {'post': post}};
-        }
-        $.ajax({
-           type: 'post',
-           dataType: 'json',
-           url: '/postreplyopt',
-           data: JSON.stringify(post_data),
-           success: function(result, status) {
-               if(result.errorcode == 0) {
-                   if($(e.currentTarget).hasClass('post-collected')) {
-                       $(e.currentTarget).removeClass('post-collected');
-                       $(e.currentTarget).find('span').html('收藏');
-                       $.notify('取消收藏');
-                   }
-                   else {
-                       $(e.currentTarget).addClass('post-collected');
-                       $(e.currentTarget).find('span').html('已收藏');
-                       $.notify('收藏成功...');
-                   }
-               }
-               else if(result.errorcode == -3) {
-                   $('#loginModal').modal('toggle');
-               }
-           }
+        $('.support-reply').on('click', function (e) {
+            var reply_id = $(e.target).parents('.reply-item[reply_id]').attr('reply_id');
+            if (!reply_id)
+                $.notify('错误....');
+            var post_data = {'opt': 'support-postreply', 'data': {'postreply': reply_id}};
+            if ($(e.currentTarget).hasClass('postreply-collected')) {
+                post_data = {'opt': 'cancle-support-postreply', 'data': {'postreply': reply_id}};
+            }
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: '/postreplyopt',
+                data: JSON.stringify(),
+                success: function (result, status) {
+                    if (result.errorcode == 0) {
+                        if ($(e.currentTarget).hasClass('postreply-collected')) {
+                            $(e.currentTarget).removeClass('postreply-supported');
+                            $.notify('...');
+                        }
+                        else {
+                            $(e.currentTarget).addClass('postreply-supported');
+                            $.notify('...');
+                        }
+                    }
+                    else if (result.errorcode == -3) {
+                        $('#loginModal').modal('toggle');
+                    }
+                }
+            });
         });
-    }).on('mouseover', function (e) {
-        if($(e.currentTarget).hasClass('post-collected')) {
-            $(e.currentTarget).find('span').html('取消收藏');
-        }
-        else
-            $(e.currentTarget).find('span').html('收藏');
-    }).on('mouseout', function (e) {
-        if($(e.currentTarget).hasClass('post-collected'))
-            $(e.currentTarget).find('span').html('已收藏');
-        else
-            $(e.currentTarget).find('span').html('收藏');
-    });
-    show_hide_cate_nav();
-    show_hide_emoji_list_medium();
-    load_emoji_medium();
+        $('.collect-post').on('click', function (e) {
+            e.preventDefault();
+            var post_data = {'opt': 'collect-post', 'data': {'post': post}};
+            if ($(e.currentTarget).hasClass('post-collected')) {
+                post_data = {'opt': 'cancle-collect-post', 'data': {'post': post}};
+            }
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: '/postreplyopt',
+                data: JSON.stringify(post_data),
+                success: function (result, status) {
+                    if (result.errorcode == 0) {
+                        if ($(e.currentTarget).hasClass('post-collected')) {
+                            $(e.currentTarget).removeClass('post-collected');
+                            $(e.currentTarget).find('span').html('收藏');
+                            $.notify('取消收藏');
+                        }
+                        else {
+                            $(e.currentTarget).addClass('post-collected');
+                            $(e.currentTarget).find('span').html('已收藏');
+                            $.notify('收藏成功...');
+                        }
+                    }
+                    else if (result.errorcode == -3) {
+                        $('#loginModal').modal('toggle');
+                    }
+                }
+            });
+        }).on('mouseover', function (e) {
+            if ($(e.currentTarget).hasClass('post-collected')) {
+                $(e.currentTarget).find('span').html('取消收藏');
+            }
+            else
+                $(e.currentTarget).find('span').html('收藏');
+        }).on('mouseout', function (e) {
+            if ($(e.currentTarget).hasClass('post-collected'))
+                $(e.currentTarget).find('span').html('已收藏');
+            else
+                $(e.currentTarget).find('span').html('收藏');
+        });
+        show_hide_cate_nav();
+        show_hide_emoji_list_medium();
+        load_emoji_medium();
     });
 </script>
 {% end %}

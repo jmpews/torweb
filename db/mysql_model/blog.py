@@ -23,11 +23,19 @@ class BlogPost(BaseModel):
     blog文章
     """
     title = CharField(max_length=71, verbose_name='post的标题')
+    slug = CharField(max_length=32, verbose_name='slug站点url')
     category = ForeignKeyField(BlogPostCategory, related_name='posts_category', verbose_name='post的分类')
     content = TextField(verbose_name='md内容')
     create_time = DateTimeField(default=datetime.datetime.now, verbose_name="时间")
     is_del = BooleanField(default=False, verbose_name='逻辑删除')
 
+    @staticmethod
+    def get_by_slug(slug):
+        try:
+            post = BlogPost.get(BlogPost.slug == slug)
+        except BlogPost.DoesNotExist:
+            return None
+        return post
 
     @staticmethod
     def list_recently(page_limit=config.default_page_limit, page_number=1):

@@ -688,7 +688,6 @@ form .form-control:disabled {
   z-index: 999;
   background-color: #446491;
   transition: 0.3s ease-out;
-  border-top: 4px solid transparent;
 }
 .header a {
   color: #fff;

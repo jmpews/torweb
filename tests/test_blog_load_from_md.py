@@ -35,7 +35,7 @@ def check_md_format(file_path):
     # Necessary Args: title, tags
     # Optional Args: date, category, auth, slug
     keys = md_info.keys()
-    if 'title' in keys and 'tags' in keys:
+    if 'title' in keys and 'tags' in keys and 'slug' in keys:
         md_info['content'] = fd.read(-1)
         fd.close()
         return md_info
@@ -50,6 +50,7 @@ def convert_md_2_post(md_info):
     cate = BlogPostCategory.get_by_name(category)
     post = BlogPost.create(title=md_info['title'],
                            category=cate,
+                           slug=md_info['slug'],
                            content=md_info['content'])
 
     BlogPostLabel.add_post_label(md_info['tags'], post)
@@ -68,6 +69,7 @@ def get_files(root_path):
                 convert_md_2_post(md_info)
 
 if __name__ == '__main__':
+    mysqldb.create_tables([BlogPostLabel, BlogPost, BlogPostCategory], safe=True)
     t = BlogPostLabel.delete()
     t.execute()
     t = BlogPost.delete()

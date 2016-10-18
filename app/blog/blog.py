@@ -109,8 +109,11 @@ class BlogPostDetailHandler(BaseRequestHandler):
     """
     具体文章详情页面
     """
-    def get(self, post_id, *args, **kwargs):
-        post = BlogPost.get(BlogPost.id == post_id)
+    def get(self, slug, *args, **kwargs):
+        post = BlogPost.get_by_slug(slug)
+        if not post:
+            self.redirect404()
+            return
         # post.content_html = markdowner.convert(post.content)
         post.content_html = markdown.markdown(post.content, extensions=['markdown.extensions.fenced_code', ])
         post.category_name = post.category.name

@@ -12,7 +12,7 @@ urlprefix = r''
 
 urlpattern = (
     (r'/blog', BlogIndexHandler),
-    (r'/blog/post/(\d+)', BlogPostDetailHandler),
+    (r'/blog/post/([\d\w-]+)', BlogPostDetailHandler),
     (r'/blog/opt', BlogPostOptHandler),
     (r'/blog/category/(\S+)', BlogIndexCategoryHandler),
     (r'/blog/label/(\S+)', BlogIndexLabelHandler),

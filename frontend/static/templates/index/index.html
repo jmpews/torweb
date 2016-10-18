@@ -154,6 +154,7 @@
             </nav>
             </div>
         </div>
+
         <div class="card all-cate-card-footer custom-card">
             <div class="card-header">
                 <i class="fa fa-align-left" aria-hidden="true"></i>所有分类
@@ -200,7 +201,7 @@
                                 <img src="/assets/images/avatar/{{ current_user.avatar }}">
                             </dt>
                             <dd class="float-left">
-                                <span>{{ current_user.username }}</span>
+                                <a href="/user/{{ current_user.id }}">{{ current_user.username }}</a>
                             </dd>
                         </dl>
                         <ul>

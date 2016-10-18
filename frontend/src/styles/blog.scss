@@ -1,0 +1,227 @@
+@charset "UTF-8";
+$color1: #FFBCBC;
+//$color2: #A4EDA4;
+$color2: #000;
+$color3: #2fca7b;
+$color4: #e95420;
+
+$lightpink: #FFBCBC;
+$lightgreen: #A4EDA4;
+$lightgreen2: #2fca7b;
+$bg1: #e1e1e1;
+
+$base-color: #4b89ac;
+
+//#2fca7b;
+$logo-color: #ace6f6;
+
+$font-color: #999;
+$link-color: #446491;
+$important-link-color: $logo-color;
+$body-backgroud-color: #f7f7f7;
+$nav-header-background-color: #446491;
+$nav-header-font-color: #fff;
+$nav-header-font-hover-color: $logo-color;
+$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
+
+$border-color: #f5f5f5;
+
+$important-font-color: #666;
+$important-link-color: #446491;
+$card-header-background-color: #fff;
+$card-header-font-color: $important-font-color;
+$card-body-background-color: #fff;
+$card-body-font-color: #999;
+$link-hover-color: darken($link-color, 15%);
+$link-light-color:  lighten($link-color, 15%);
+$btn-color: $link-color;
+$btn-hover-color: $link-hover-color;
+@import "base";
+
+
+
+
+// --------------------- Blog页面架构 -------------------
+// 同行的方式, float: right, 但是是parent的第一个元素
+@media (max-width: 767px){
+    .content {
+        margin-right: 0px !important;
+        .post-detail {
+            padding: 0px !important;
+        }
+    }
+    .side {
+        display: none !important;
+        width: inherit !important;
+        margin-left: 0px !important;
+        float: none !important;
+    }
+}
+.content {
+    margin-right: 300px;
+    padding: 10px 10px;
+    background-color: #fff;
+}
+
+.side {
+    float: right;
+    width: 280px;
+    padding-left: 20px;
+    border-left: 1px solid $border-color;
+    .post-category {
+        a {
+            color: $gray-font-color;
+            &:hover {
+                color: $link-color;
+            }
+        }
+        ul li {
+        }
+    }
+    .post-label {
+        a {
+            color: $gray-font-color;
+            &:hover {
+                color: $link-color;
+            }
+        }
+        ul.list-inline li {
+            margin: 3px;
+            a {
+                display: block;
+                padding: 3px;
+                border-bottom: 1px solid $gray-font-color;
+                &:hover {
+                    background-color: $gray-background-color;
+                    border-bottom: 1px solid $link-color;
+                }
+            }
+        }
+    }
+}
+
+// --------------------- post-list部分样式 -------------------
+
+.post-list {
+    padding: 20px;
+    background-color: #fff;
+    .post-item {
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        .post-title {
+            a {
+                color: $important-font-color;
+            }
+            margin: 0px;
+            font-weight: 400;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .post-info {
+            font-size: 11px;
+            margin-bottom: 10px;
+            color: $gray-font-color;
+            .post-info-label span {
+                color: $important-font-color;
+                &:first-of-type {
+                    color: $gray-font-color;
+                }
+            }
+        }
+        .post-summary {
+            color: $gray-font-color;
+            margin-bottom: 10px;
+
+        }
+        .post-function {
+            a {
+                color: $link-color;
+                border-left: 2px solid $link-color;
+                padding-left: 4px;
+                font-weight: 300;
+            }
+        }
+    }
+}
+
+// --------------------- post-detail 详情部分 -------------------
+.post-detail {
+    padding: 20px;
+    background-color: #fff;
+    .post-title {
+        margin: 0px;
+        font-weight: 400;
+        font-size: 36px;
+        margin-bottom: 15px;
+        text-align: center;
+        color: $important-link-color;
+    }
+    .post-info {
+        text-align: center;
+    }
+    .post-content {
+    }
+}
+.post-content {
+    font-size: 15px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    word-break: normal;
+    padding: 10px;
+    color: #555;
+    blockquote {
+        margin: 0 10px;
+        p {
+            //font-size: 1rem;
+            background-color: #fbfbfb;
+            margin-bottom: .33999rem;
+            font-style: italic;
+            padding: .66001rem 1rem 1rem;
+            border-left: 5px solid $logo-color;
+        }
+    }
+    strong, b {
+        font-weight: bold;
+    }
+    a {
+        color: $link-color;
+    }
+    img {
+        max-width: 90%;
+    }
+}
+// post-opt
+.post-opt {
+    .side {
+        float: left;
+        width: 280px;
+        margin-left: 0px;
+        .card-header .btn {
+            color: #fff;
+            font-size: inherit;
+            padding:2px 4px;
+            background-color: $link-color;
+            &:hover {
+                background-color: $link-hover-color;
+            }
+        }
+        .post-list {
+            li {
+                line-height: 30px;
+                .btn {
+                    font-size: inherit;
+                    padding:2px 4px;
+                    border-bottom: 1px solid $link-color;
+                    &:hover {
+                        background-color: $gray-background-color;
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        margin-right: 0px;
+        margin-left: 300px;
+    }
+}

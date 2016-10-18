@@ -37,11 +37,9 @@
                     标签
                 </div>
                 <div class="post-label card-block">
-                    <ul class="list-inline">
-                        {% for label in labels %}
-                        <li><a href="/blog/label/{{ label.name }}">{{ label.name }} ({{ label.count }})</a></li>
-                        {% end %}
-                    </ul>
+                    {% for label in labels %}
+                     <div class="tag-sp"><span>{{ label.name }}</span><a href="#blank"> {{ label.count }}</a></div>
+                    {% end %}
                 </div>
             </div>
         </div>
@@ -49,7 +47,7 @@
             <div class="post-list">
                 {% for post in posts %}
                 <div class="post-item">
-                    <div class="post-title"><a href="/blog/{{ post.id }}">{{ post.title }}</a></div>
+                    <div class="post-title"><a href="/blog/post/{{ post.id }}">{{ post.title }}</a></div>
                     <div class="post-info">
                         <span class="post-info-time">发表于: {{ post.create_time }}</span>
                         <div class="post-info-label">
@@ -63,7 +61,7 @@
                         {{ post.content[:100] }}
                     </div>
                     <div class="post-function">
-                        <a href="/blog/{{ post.id }}" class="post-function-read-more">Read More</a>
+                        <a href="/blog/post/{{ post.id }}" class="post-function-read-more">Read More</a>
                     </div>
                 </div>
                 {% end %}

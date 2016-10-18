@@ -27,7 +27,7 @@
                 <div class="post-label card-block">
                     <ul class="list-inline">
                         {% for label in post.labels.split(',') %}
-                        <li><a href="/blog/label/{{ label }}">{{ label }}</a></li>
+                        <div class="tag-sp"><span>{{ label }}</span><a href="/blog/label/{{ label }}"> - </a></div>
                         {% end %}
                     </ul>
                 </div>

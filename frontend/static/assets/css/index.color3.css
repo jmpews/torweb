@@ -1040,6 +1040,9 @@ form .form-control:disabled {
 .index-html .col-md-9 .card-block {
   padding: 0 1.25rem;
 }
+.index-html .col-md-3 {
+  padding-right: 0px;
+}
 .index-html.content-container {
   padding-left: 25px;
 }

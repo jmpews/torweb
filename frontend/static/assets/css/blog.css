@@ -1423,8 +1423,10 @@ form .form-control:disabled {
 .card-header-all .card-header-all-cate > li h4 .fa {
   color: tomato;
 }
-.card-header-all .card-header-all-cate .card-header-all-cate-topic > li {
+.card-header-all .card-header-all-cate .card-header-all-cate-topic {
   padding-left: 10px;
+}
+.card-header-all .card-header-all-cate .card-header-all-cate-topic > li {
   float: left;
 }
 .card-header-all .card-header-all-cate .card-header-all-cate-topic > li a {

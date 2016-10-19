@@ -9,94 +9,106 @@
 {% end %}
 
 {% block content %}
-    <div class="content-container container">
-        <div class="side">
-            <div class="card custom-card">
-                <div class="card-header">
-                    关于我
-                </div>
-                <div class="about-me card-block">
-                    <ul class="">
-                        <li>jmpews</li>
-                        <li>知道创宇 [Python, Go, C]</li>
-                        <li><a href="http://weibo.com/winter1ife"><i class="fa fa-weibo" aria-hidden="true"></i>@jmpews</a></li>
-                        <li><a href="https://github.com/jmpews"><i class="fa fa-github" aria-hidden="true"></i>jmpews</a></li>
-                    </ul>
-                </div>
-                <div class="card-header">
-                    分类
-                </div>
-                <div class="post-category card-block">
-                    <ul class="">
-                        {% for cate in categorys %}
-                        <li><a href="/blog/category/{{ cate.name }}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ cate.name }} ({{ cate.count }})</a></li>
-                        {% end %}
-                    </ul>
-                </div>
-                <div class="card-header">
-                    标签
-                </div>
-                <div class="post-label card-block">
-                    {% for label in labels %}
-                     <div class="tag-sp"><span>{{ label.name }}</span><a href="#blank"> {{ label.count }}</a></div>
-                    {% end %}
-                </div>
+<div class="content-container container">
+    <div class="side">
+        <div class="card custom-card">
+            <div class="card-header">
+                关于我
             </div>
-        </div>
-        <div class="content">
-            <div class="post-list">
-                {% for post in posts %}
-                <div class="post-item">
-                    <div class="post-title"><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a></div>
-                    <div class="post-info">
-                        <span class="post-info-time">发表于: {{ post.create_time }}</span>
-                        <div class="post-info-label">
-                            <span>标签: </span>
-                            {% for label in post.labels.split(',') %}
-                            <span>#{{ label }}</span>
-                            {% end %}
-                        </div>
-                    </div>
-                    <div class="post-summary">
-                        {{ post.content[:100] }}
-                    </div>
-                    <div class="post-function">
-                        <a href="/blog/post/{{ post.slug }}" class="post-function-read-more">Read More</a>
-                    </div>
-                </div>
+            <div class="about-me card-block">
+                <ul class="">
+                    <li>jmpews</li>
+                    <li>知道创宇 [Python, Go, C]</li>
+                    <li><a href="http://weibo.com/winter1ife"><i class="fa fa-weibo" aria-hidden="true"></i>@jmpews</a>
+                    </li>
+                    <li><a href="https://github.com/jmpews"><i class="fa fa-github" aria-hidden="true"></i>jmpews</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-header">
+                分类
+            </div>
+            <div class="post-category card-block">
+                <ul class="">
+                    {% for cate in categorys %}
+                    <li><a href="/blog/category/{{ cate.name }}"><i class="fa fa-angle-right"
+                                                                    aria-hidden="true"></i>{{ cate.name }}
+                        ({{ cate.count }})</a></li>
+                    {% end %}
+                </ul>
+            </div>
+            <div class="card-header">
+                标签
+            </div>
+            <div class="post-label card-block">
+                {% for label in labels %}
+                <div class="tag-sp"><span>{{ label.name }}</span><a href="#blank"> {{ label.count }}</a></div>
                 {% end %}
             </div>
-            <nav style="text-align:center">
-                <ul class="pagination">
+        </div>
+    </div>
+    <div class="content">
+        <div class="post-list">
+            {% for post in posts %}
+            <div class="post-item">
+                <div class="post-title"><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a></div>
+                <div class="post-info">
+                    <span class="post-info-time">发表于: {{ post.create_time }}</span>
+                    <div class="post-info-label">
+                        <span>标签: </span>
+                        {% for label in post.labels.split(',') %}
+                        <span>#{{ label }}</span>
+                        {% end %}
+                    </div>
+                </div>
+                <div class="post-summary">
+                    {{ post.content[:100] }}
+                </div>
+                <div class="post-function">
+                    <a href="/blog/post/{{ post.slug }}" class="post-function-read-more">Read More</a>
+                </div>
+            </div>
+            {% end %}
+        </div>
+        <nav style="text-align:center">
+            <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1'] if pages['cp-1'] else pages['cp']}}" aria-label="Previous">
+                    <a class="page-link"
+                       href="{{ pages_prefix_url }}{{ pages['cp-1'] if pages['cp-1'] else pages['cp'] }}"
+                       aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
                 <!-- 这里如果换成列表存放数据，这里直接使用for就可以了，但是字典表意更明确一点 -->
                 {% if pages['cp-2'] %}
-                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-2']}}">{{pages['cp-2']}}</a></li>
+                <li class="page-item"><a class="page-link"
+                                         href="{{ pages_prefix_url }}{{ pages['cp-2'] }}">{{ pages['cp-2'] }}</a></li>
                 {% end %}
                 {% if pages['cp-1'] %}
-                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp-1']}}">{{pages['cp-1']}}</a></li>
+                <li class="page-item"><a class="page-link"
+                                         href="{{ pages_prefix_url }}{{ pages['cp-1'] }}">{{ pages['cp-1'] }}</a></li>
                 {% end %}
-                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp']}}">{{pages['cp']}}</a></li>
+                <li class="page-item"><a class="page-link"
+                                         href="{{ pages_prefix_url }}{{ pages['cp'] }}">{{ pages['cp'] }}</a></li>
                 {% if pages['cp+1'] %}
-                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1']}}">{{pages['cp+1']}}</a></li>
+                <li class="page-item"><a class="page-link"
+                                         href="{{ pages_prefix_url }}{{ pages['cp+1'] }}">{{ pages['cp+1'] }}</a></li>
                 {% end %}
                 {% if pages['cp+2'] %}
-                <li class="page-item"><a class="page-link" href="{{pages_prefix_url}}{{pages['cp+2']}}">{{pages['cp+2']}}</a></li>
+                <li class="page-item"><a class="page-link"
+                                         href="{{ pages_prefix_url }}{{ pages['cp+2'] }}">{{ pages['cp+2'] }}</a></li>
                 {% end %}
                 <li class="page-item">
-                    <a class="page-link" href="{{pages_prefix_url}}{{pages['cp+1'] if pages['cp+1'] else pages['cp']}}" aria-label="Next">
+                    <a class="page-link"
+                       href="{{ pages_prefix_url }}{{ pages['cp+1'] if pages['cp+1'] else pages['cp'] }}"
+                       aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
                 </li>
-                </ul>
-            </nav>
-        </div>
-
+            </ul>
+        </nav>
     </div>
+</div>
 {% end %}

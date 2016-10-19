@@ -10,45 +10,67 @@
 {% end %}
 
 {% block content %}
-    <div class="content-container container">
-        <div class="side">
-            <div class="card custom-card">
-                <div class="card-header">
-                    分类
-                </div>
-                <div class="post-category card-block">
-                    <ul class="">
-                        <li><a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a></li>
-                    </ul>
-                </div>
-                <div class="card-header">
-                    标签
-                </div>
-                <div class="post-label card-block">
-                    <ul class="list-inline">
-                        {% for label in post.labels.split(',') %}
-                        <div class="tag-sp"><span>{{ label }}</span><a href="/blog/label/{{ label }}"> - </a></div>
-                        {% end %}
-                    </ul>
-                </div>
+<div class="content-container container">
+    <div class="side">
+        <div class="card custom-card">
+            <div class="card-header">
+                分类
             </div>
-        </div>
-        <div class="content">
-            <div class="post-detail">
-                <div class="post-title">{{ post.title }}</div>
-                <div class="post-info">
-                    <span class="post-info-time">{{ post.create_time }}</span>
-                    <span class="divider">/</span>
-                    <span class="post-category">分类: <a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a> </span>
-                </div>
-                <div class="post-content">
-                    {% raw post.content_html %}
-                </div>
+            <div class="post-category card-block">
+                <ul class="">
+                    <li><a href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a></li>
+                </ul>
+            </div>
+            <div class="card-header">
+                标签
+            </div>
+            <div class="post-label card-block">
+                <ul class="list-inline">
+                    {% for label in post.labels.split(',') %}
+                    <div class="tag-sp"><span>{{ label }}</span><a href="/blog/label/{{ label }}"> - </a></div>
+                    {% end %}
+                </ul>
             </div>
         </div>
     </div>
+    <div class="content">
+        <div class="post-detail">
+            <div class="post-title">{{ post.title }}</div>
+            <div class="post-info">
+                <span class="post-info-time">{{ post.create_time }}</span>
+                <span class="divider">/</span>
+                <span class="post-category">分类: <a
+                        href="/blog/category/{{ post.category_name }}">{{ post.category_name }}</a> </span>
+            </div>
+            <div class="post-content">
+                {% raw post.content_html %}
+            </div>
+        </div>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="{{ post.slug }}" data-title="{{ post.title }}" data-url="/blog/post/{{ post.slug }}"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name: "jmpews"};
+        (function () {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+    </div>
+
+
+</div>
+
 {% end %}
 {% block scripts %}
 <script src="/assets/js/highlight.min.js"></script>
-<script >hljs.initHighlightingOnLoad();</script>
+<script>hljs.initHighlightingOnLoad();</script>
 {% end %}

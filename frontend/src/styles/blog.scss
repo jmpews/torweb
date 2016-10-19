@@ -33,17 +33,18 @@ $card-header-font-color: $important-font-color;
 $card-body-background-color: #fff;
 $card-body-font-color: #999;
 $link-hover-color: darken($link-color, 15%);
-$link-light-color:  lighten($link-color, 15%);
+$link-light-color: lighten($link-color, 15%);
 $btn-color: $link-color;
 $btn-hover-color: $link-hover-color;
 @import "base";
 
+body {
 
-
+}
 
 // --------------------- Blog页面架构 -------------------
 // 同行的方式, float: right, 但是是parent的第一个元素
-@media (max-width: 767px){
+@media (max-width: 767px) {
     .content {
         margin-right: 0px !important;
         .post-detail {
@@ -57,7 +58,10 @@ $btn-hover-color: $link-hover-color;
         float: none !important;
     }
 }
+
 .content {
+    -webkit-box-shadow: 0 1px 2px #dedede;
+    box-shadow: 0 1px 2px #dedede;
     margin-right: 300px;
     padding: 10px 10px;
     background-color: #fff;
@@ -163,7 +167,10 @@ $btn-hover-color: $link-hover-color;
     .post-content {
     }
 }
+
 .post-content {
+    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    overflow-x: hidden;
     font-size: 15px;
     line-height: 1.6;
     word-wrap: break-word;
@@ -184,6 +191,12 @@ $btn-hover-color: $link-hover-color;
     strong, b {
         font-weight: bold;
     }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+        line-height: 1.7;
+        line-height: 1.1;
+        font-weight: 700;
+    }
     a {
         color: $link-color;
     }
@@ -191,6 +204,7 @@ $btn-hover-color: $link-hover-color;
         max-width: 90%;
     }
 }
+
 // post-opt
 .post-opt {
     .side {
@@ -200,7 +214,7 @@ $btn-hover-color: $link-hover-color;
         .card-header .btn {
             color: #fff;
             font-size: inherit;
-            padding:2px 4px;
+            padding: 2px 4px;
             background-color: $link-color;
             &:hover {
                 background-color: $link-hover-color;
@@ -211,7 +225,7 @@ $btn-hover-color: $link-hover-color;
                 line-height: 30px;
                 .btn {
                     font-size: inherit;
-                    padding:2px 4px;
+                    padding: 2px 4px;
                     border-bottom: 1px solid $link-color;
                     &:hover {
                         background-color: $gray-background-color;

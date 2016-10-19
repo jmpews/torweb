@@ -541,7 +541,7 @@ form .form-control:disabled {
   display: block;
   margin-bottom: 0.75rem;
   border-radius: 0.1rem;
-  border: 1px solid #f5f5f5;
+  box-shadow: 0 1px 2px #dedede;
   background-color: #fff;
 }
 .card .card-header {
@@ -1992,6 +1992,7 @@ form .form-control:disabled {
   }
 }
 .content {
+  box-shadow: 0 1px 2px #dedede;
   margin-right: 300px;
   padding: 10px 10px;
   background-color: #fff;
@@ -2085,6 +2086,8 @@ form .form-control:disabled {
 }
 
 .post-content {
+  font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  overflow-x: hidden;
   font-size: 15px;
   line-height: 1.6;
   word-wrap: break-word;
@@ -2104,6 +2107,12 @@ form .form-control:disabled {
 }
 .post-content strong, .post-content b {
   font-weight: bold;
+}
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+  font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  line-height: 1.7;
+  line-height: 1.1;
+  font-weight: 700;
 }
 .post-content a {
   color: #446491;

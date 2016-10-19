@@ -11,4 +11,4 @@ class IndexHandler(BaseRequestHandler):
     后台面板首页
     """
     def get(self, *args, **kwargs):
-        self.render('dashboard/pages/index.html')
+        self.render('dashboard/pages/db-post-list.html')

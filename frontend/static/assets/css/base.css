@@ -1024,7 +1024,6 @@ form .form-control:disabled {
 
 .card-header-all-bt {
   color: tomato !important;
-  border-bottom: 1px solid tomato;
   padding: 3px;
 }
 .card-header-all-bt .fa {
@@ -1409,31 +1408,55 @@ form .form-control:disabled {
   border-bottom: 1px solid #e8e8e8;
   color: #666;
 }
-.card-header-all .card-header-all-cate {
+.card-header-all .card-header-all-cate > li {
   padding: 5px 0;
   border-bottom: 1px solid #e8e8e8;
 }
-.card-header-all .card-header-all-cate h4 {
+.card-header-all .card-header-all-cate > li:last-of-type {
+  border-bottom: none;
+}
+.card-header-all .card-header-all-cate > li h4 {
   font-size: 13px;
   font-weight: bold;
   color: #666;
 }
-.card-header-all .card-header-all-cate h4 .fa {
+.card-header-all .card-header-all-cate > li h4 .fa {
   color: tomato;
 }
-.card-header-all .card-header-all-cate .card-header-all-cate-topic {
+.card-header-all .card-header-all-cate .card-header-all-cate-topic > li {
   padding-left: 10px;
+  float: left;
 }
-.card-header-all .card-header-all-cate .card-header-all-cate-topic a {
+.card-header-all .card-header-all-cate .card-header-all-cate-topic > li a {
   padding: 3px;
   color: #999;
 }
-.card-header-all .card-header-all-cate .card-header-all-cate-topic a:hover {
+.card-header-all .card-header-all-cate .card-header-all-cate-topic > li a:hover {
   background-color: #efefef;
   color: #FFBCBC;
 }
 .card-header-all .card-header-all-cate:last-of-type {
   border-bottom: none;
+}
+
+.card-header-all-bak .card-header-all-cate {
+  width: 100px;
+}
+.card-header-all-bak .card-header-all-cate > li {
+  position: relative;
+}
+.card-header-all-bak .card-header-all-cate > li:hover .card-header-all-cate-topic {
+  display: block;
+}
+.card-header-all-bak .card-header-all-cate .card-header-all-cate-topic {
+  display: none;
+  top: 0;
+  left: 100%;
+  width: 300px;
+  position: absolute;
+}
+.card-header-all-bak .card-header-all-cate .card-header-all-cate-topic > li {
+  float: none;
 }
 
 .card-header-all:hover {
@@ -1448,7 +1471,7 @@ form .form-control:disabled {
 .card-header-all-footer {
   width: 100%;
   background-color: #fff;
-  z-index: 999;
+  z-index: 2;
 }
 .card-header-all-footer h3 {
   font-size: 14px;
@@ -1456,31 +1479,32 @@ form .form-control:disabled {
   border-bottom: 1px dashed #e8e8e8;
   color: #666;
 }
-.card-header-all-footer .card-header-all-cate {
+.card-header-all-footer .card-header-all-cate > li {
   padding: 5px 0;
   border-bottom: 1px dashed #e8e8e8;
 }
-.card-header-all-footer .card-header-all-cate h4 {
+.card-header-all-footer .card-header-all-cate > li:last-of-type {
+  border-bottom: none;
+}
+.card-header-all-footer .card-header-all-cate > li h4 {
   font-size: 13px;
   font-weight: bold;
   color: #666;
 }
-.card-header-all-footer .card-header-all-cate h4 .fa {
+.card-header-all-footer .card-header-all-cate > li h4 .fa {
   color: tomato;
 }
-.card-header-all-footer .card-header-all-cate .card-header-all-cate-topic {
+.card-header-all-footer .card-header-all-cate .card-header-all-cate-topic > li {
   padding-left: 10px;
+  float: left;
 }
-.card-header-all-footer .card-header-all-cate .card-header-all-cate-topic a {
+.card-header-all-footer .card-header-all-cate .card-header-all-cate-topic > li a {
   padding: 3px;
   color: #999;
 }
-.card-header-all-footer .card-header-all-cate .card-header-all-cate-topic a:hover {
+.card-header-all-footer .card-header-all-cate .card-header-all-cate-topic > li a:hover {
   background-color: #efefef;
   color: #FFBCBC;
-}
-.card-header-all-footer .card-header-all-cate:last-of-type {
-  border-bottom: none;
 }
 
 .system-status-card li {

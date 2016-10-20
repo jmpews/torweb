@@ -1243,30 +1243,38 @@ form .form-control:disabled {
   color: #999;
 }
 .post-detail-card .post-content {
-  color: #34495E;
   word-wrap: break-word;
   word-break: normal;
+  font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  word-break: normal;
+  padding: 10px;
+  color: #555;
 }
-.post-detail-card .post-content prex {
-  padding: .66001rem 9.5px 9.5px;
-  line-height: 2rem;
-  background: linear-gradient(to bottom, #fff 0, #fff 0.75rem, #f5f7fa 0.75rem, #f5f7fa 2.75rem, #fff 2.75rem, #fff 4rem);
-  background-size: 100% 4rem;
-  border: 1px solid #D3DAEA;
-}
-.post-detail-card .post-content prex code {
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-  white-space: pre-wrap;
-  background-color: transparent;
-  border-radius: 0;
+.post-detail-card .post-content blockquote {
+  margin: 0 10px;
 }
 .post-detail-card .post-content blockquote p {
+  background-color: #fbfbfb;
   margin-bottom: .33999rem;
   font-style: italic;
   padding: .66001rem 1rem 1rem;
-  border-left: 3px solid #A0AABF;
+  border-left: 5px solid #34495E;
+}
+.post-detail-card .post-content strong, .post-detail-card .post-content b {
+  font-weight: bold;
+}
+.post-detail-card .post-content h1, .post-detail-card .post-content h2, .post-detail-card .post-content h3, .post-detail-card .post-content h4, .post-detail-card .post-content h5, .post-detail-card .post-content h6 {
+  font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  line-height: 1.7;
+  line-height: 1.1;
+  font-weight: 700;
+}
+.post-detail-card .post-content a {
+  color: #34495E;
 }
 .post-detail-card .post-content img {
   max-width: 90%;

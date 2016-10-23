@@ -506,8 +506,8 @@ form .form-control:disabled {
   display: none;
   padding: 5px 0;
   list-style: none;
-  background-color: #fff;
-  border: 1px solid #f5f5f5;
+  background-color: #446491;
+  border: 1px solid #ace6f6;
   border-top: none;
   border-radius: 0.1rem;
 }
@@ -517,7 +517,7 @@ form .form-control:disabled {
   width: 100%;
   padding: 3px 20px;
   clear: both;
-  font-weight: normal;
+  font-weight: 300;
   color: #373a3c;
   text-align: inherit;
   white-space: nowrap;
@@ -533,7 +533,7 @@ form .form-control:disabled {
 .dropdown .dropdown-menu .dropdown-item:focus, .dropdown .dropdown-menu .dropdown-item:hover {
   color: #2b2d2f;
   text-decoration: none;
-  background-color: #f5f5f5;
+  background-color: #ace6f6;
 }
 
 .card {

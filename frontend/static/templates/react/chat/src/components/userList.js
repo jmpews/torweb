@@ -1,5 +1,4 @@
-var React = require('react');
-import { store } from '../index'
+import React from 'react'
 
 import {
     SET_CURRENT_USER

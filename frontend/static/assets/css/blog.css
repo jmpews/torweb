@@ -88,6 +88,9 @@ ul {
   padding-left: 0;
   list-style: none;
 }
+.list-inline > li {
+  float: left;
+}
 
 .float-right {
   float: right;
@@ -1405,6 +1408,7 @@ form .form-control:disabled {
 .card-header-all {
   display: none;
   width: 100%;
+  left: 0;
   position: absolute;
   background-color: #fff;
   z-index: 999;

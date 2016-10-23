@@ -151,6 +151,9 @@ ul {
 .list-inline {
     padding-left: 0;
     list-style: none;
+    &>li {
+        float: left;
+    }
 }
 
 .float-right {
@@ -1694,6 +1697,7 @@ $current-topic-width: 21px;
 .card-header-all {
     display: none;
     width: 100%;
+    left: 0;
     position: absolute;
     background-color: #fff;
     z-index: 999;

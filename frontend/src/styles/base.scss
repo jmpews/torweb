@@ -1702,9 +1702,11 @@ $current-topic-width: 21px;
     background-color: #fff;
     z-index: 999;
     padding: 5px;
-    border-left: 1px solid $border-color;
-    border-right: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+    -webkit-box-shadow: 0 1px 2px #dedede;
+    box-shadow: 0 1px 2px #dedede;
+    //border-left: 1px solid $border-color;
+    //border-right: 1px solid $border-color;
+    //border-bottom: 1px solid $border-color;
     h3 {
         font-size: 14px;
         line-height: 30px;

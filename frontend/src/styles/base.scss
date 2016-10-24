@@ -1238,13 +1238,14 @@ $char-border-color: #ededed;
 }
 
 .card-header-all-bt {
-    color: tomato !important;
-    //font-weight: bold;
+    color: $important-link-color !important;
+    font-weight: bold;
     //border-bottom: 1px solid tomato;
     padding: 3px;
     .fa {
+        font-weight: bold;
         padding-right: 2px;
-        color: tomato;
+        color: $important-link-color;
     }
     &:hover {
         background-color: rgba(226, 223, 223, 0.62);
@@ -1700,7 +1701,7 @@ $current-topic-width: 21px;
     left: 0;
     position: absolute;
     background-color: #fff;
-    z-index: 999;
+    z-index: 1;
     padding: 5px;
     -webkit-box-shadow: 0 1px 2px #dedede;
     box-shadow: 0 1px 2px #dedede;

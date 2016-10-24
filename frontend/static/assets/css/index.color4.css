@@ -1026,12 +1026,14 @@ form .form-control:disabled {
 }
 
 .card-header-all-bt {
-  color: tomato !important;
+  color: #e95420 !important;
+  font-weight: bold;
   padding: 3px;
 }
 .card-header-all-bt .fa {
+  font-weight: bold;
   padding-right: 2px;
-  color: tomato;
+  color: #e95420;
 }
 .card-header-all-bt:hover {
   background-color: rgba(226, 223, 223, 0.62);
@@ -1411,7 +1413,7 @@ form .form-control:disabled {
   left: 0;
   position: absolute;
   background-color: #fff;
-  z-index: 999;
+  z-index: 1;
   padding: 5px;
   box-shadow: 0 1px 2px #dedede;
 }

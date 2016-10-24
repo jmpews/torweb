@@ -54,7 +54,7 @@
                         个人资料
                     </div>
                     <div class="profile-card-body-list">
-                        <ul class="list-inline">
+                        <ul class="">
                             <li>第{{ user.id }}位sxuer</li>
                             <li>{{ profile.reg_time }}加入</li>
                         </ul>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="profile-card-body-list">
                         {% if posts %}
-                        <ul class="list-inline">
+                        <ul class="">
                             {% for post in posts %}
                             <li><a href="/post/{{ post.id }}">《{{ post.title }}》</a></li>
                             {% end %}
@@ -86,7 +86,7 @@
                     </div>
                     <div class="profile-card-body-list">
                         {% if postreplys %}
-                        <ul class="list-inline">
+                        <ul class="">
                             {% for postreply in postreplys %}
                             <li>
                                 <a href="/post/{{ postreply.post.id }}">《{{ postreply.post.title }}》</a>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="profile-card-body-list">
                         {% if collectposts %}
-                        <ul class="list-inline">
+                        <ul class="">
                             {% for collectpost in collectposts %}
                             <li><a href="/post/{{ collectpost.post.id }}">《{{ collectpost.post.title }}》</a></li>
                             {% end %}

@@ -38,6 +38,10 @@ $card-header-font-color: $base-color !default;
 $card-body-background-color: #fff !default;
 $card-body-font-color: #999 !default;
 
+
+// import
+@import "./utils";
+
 // ---------------------全局自定义样式---------------------
 html {
     // padding 内包含

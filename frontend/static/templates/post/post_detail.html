@@ -33,9 +33,13 @@
                         <span><a class="username"
                                  href="/user/{{ post.latest_reply_user.id }}">{{ post.latest_reply_user.nickname }} </a>最后回复</span>
                         {% end %}
-                        {% if ext.is_own %}
+                        {% if ext.is_own or ext.is_auth %}
                         <span class="divider">|</span>
-                        <span><a href="/post/{{ post.id }}/modify">修改</a></span>
+                        <span class="important-font"><a href="/post/{{ post.id }}/modify">修改 <i class="fa fa-pencil"></i></a></span>
+                        {% end %}
+                        {% if ext.is_own or ext.is_auth %}
+                        <span class="divider">|</span>
+                        <span class="important-font"><a href="#blank" del-post="{{ post.id }}">删除 <i class="fa fa-trash"></i></a></span>
                         {% end %}
                     </div>
                 </div>
@@ -217,6 +221,8 @@
             });
             return 1;
         });
+
+        // 支持
         $('.support-reply').on('click', function (e) {
             var reply_id = $(e.target).parents('.reply-item[reply_id]').attr('reply_id');
             if (!reply_id)
@@ -247,6 +253,8 @@
                 }
             });
         });
+
+        // 收藏
         $('.collect-post').on('click', function (e) {
             e.preventDefault();
             var post_data = {'opt': 'collect-post', 'data': {'post': post}};
@@ -288,6 +296,31 @@
             else
                 $(e.currentTarget).find('span').html('收藏');
         });
+
+        // 删除post
+        $('[del-post]').on('click', function (e) {
+            console.log('del-post.');
+            var post_id = $(e.currentTarget).attr('del-post');
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: '/postreplyopt',
+                data: JSON.stringify({
+                    'opt': 'del-post',
+                    'data': {
+                        'post-id': post_id
+                    }
+                }),
+                success: function (result, status) {
+                    console.log(result);
+                    if (result.errorcode == 0) {
+                        alert('已测试删除(逻辑测试).');
+                        window.location.href = '/';
+                    }
+                }
+            });
+        });
+
         show_hide_cate_nav();
         show_hide_emoji_list_medium();
         load_emoji_medium();

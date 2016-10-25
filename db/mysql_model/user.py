@@ -7,10 +7,9 @@ from peewee import *
 from custor.utils import random_str, TimeUtil
 
 
-class USER_LEVEL:
-    BAN = 0
-    NORMAL = 10
-    ADMIN = 100
+class USER_ROLE:
+    NORMAL = 1
+    ADMIN = 0
 
 
 class User(BaseModel):
@@ -41,7 +40,7 @@ class User(BaseModel):
         return "[%s-%s]" % (self.nickname, self.username)
 
     def is_admin(self):
-        return self.level == USER_LEVEL.ADMIN
+        return self.role == USER_ROLE.ADMIN
 
     # 刷新token和时间
     def refresh_key(self):

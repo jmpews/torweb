@@ -836,6 +836,7 @@ $header-logo-height: 40px;
         .header-logo {
             position: relative;
             float: left;
+            z-index: 9;
             top: $header-height - ($header-logo-height / 2);
             text-align: center;
             font-size: 14px;

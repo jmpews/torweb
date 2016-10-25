@@ -775,6 +775,7 @@ form .form-control:disabled {
 .header .header-container .header-logo {
   position: relative;
   float: left;
+  z-index: 9;
   top: 50px;
   text-align: center;
   font-size: 14px;

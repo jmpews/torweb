@@ -24,32 +24,34 @@
                 </div>
                 <div class="form-group" style="position: relative;">
                     <label for="topic">主题</label>
-                    <input type="text" class="form-control" id="topic" name="topic" placeholder="点击选择主题" required
-                           readonly>
-                    <div class="card-header-all">
-                        <div class="hd">
-                            <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
-                            {% set len_categorys = len(topic_category_cache['categorys']) %}
-                            {% for i in range(len_categorys) %}
-                            {% set category = topic_category_cache['categorys'][i] %}
-                            {% set topics = topic_category_cache['topics'][i] %}
-                            <div class="card-header-all-cate">
-                                <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{ category.name }}</h4>
-                                <div class="card-header-all-cate-topic">
-                                    {% for topic in topics %}
-                                    <a href="#blank" id="{{ topic.str }}">{{ topic.name }}</a>
-                                    {% end %}
-                                </div>
-                            </div>
-                            {% end %}
-                            <div class="card-header-all-cate">
-                                <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
-                                <div class="card-header-all-cate-topic">
-                                    {% for topic in topic_category_cache['topics'][-1] %}
-                                    <a href="#blank" id="{{ topic.str }}">{{ topic.name }}</a>
-                                    {% end %}
-                                </div>
-                            </div>
+                    <div class="dropdown">
+                        <input type="text" class="form-control" id="topic" name="topic" placeholder="点击选择主题" required
+                               readonly>
+                        <div class="card-header-all">
+                            <ul class="card-header-all-cate hd">
+                                <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
+                                {% set len_categorys = len(topic_category_cache['categorys']) %}
+                                {% for i in range(len_categorys) %}
+                                {% set category = topic_category_cache['categorys'][i] %}
+                                {% set topics = topic_category_cache['topics'][i] %}
+                                <li>
+                                    <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{ category.name }}</h4>
+                                    <ul class="card-header-all-cate-topic cl">
+                                        {% for topic in topics %}
+                                        <li><a href="#blank" topic-id="{{ topic.str }}">{{ topic.name }}</a></li>
+                                        {% end %}
+                                    </ul>
+                                </li>
+                                {% end %}
+                                <li>
+                                    <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
+                                    <ul class="card-header-all-cate-topic cl">
+                                        {% for topic in topic_category_cache['topics'][-1] %}
+                                        <li><a href="#blank" topic-id="{{ topic.str }}">{{ topic.name }}</a></li>
+                                        {% end %}
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -159,7 +161,7 @@
                 data: {
                     'post': post_id,
                     'title': $('#title').val(),
-                    'topic': $('#topic').attr('topic'),
+                    'topic': $('#topic').attr('topic-id'),
                     'content': tinymce.activeEditor.getContent()
                 },
                 success: function (result, status) {
@@ -175,11 +177,10 @@
         });
         $(".post-new-html .card-header-all-cate a").on('click', function (e) {
             $('#topic').val($(this).html());
-            $('#topic').attr('topic',$(this).attr('id'));
+            $('#topic').attr('topic-id',$(this).attr('topic-id'));
         });
         post_new_show_hide_cate();
         show_hide_emoji_list();
-        load_emoji_summernote();
     });
 </script>
 {% end %}

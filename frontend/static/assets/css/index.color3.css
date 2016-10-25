@@ -740,6 +740,7 @@ form .form-control:disabled {
   }
 }
 .header.scroll {
+  transition: 0.3s ease-out;
   box-shadow: 0 3px 10px #e4e4e4;
   position: fixed;
   top: -70px;
@@ -755,7 +756,6 @@ form .form-control:disabled {
   margin: 0 auto;
   z-index: 999;
   background-color: #446491;
-  transition: 0.3s ease-out;
 }
 .header a {
   color: #fff;

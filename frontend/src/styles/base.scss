@@ -796,6 +796,7 @@ $header-height: 70px;
 $header-logo-height: 40px;
 
 .header.scroll {
+    transition: 0.3s ease-out;
     box-shadow: 0 3px 10px #e4e4e4;
     position: fixed;
     top: -70px;
@@ -813,7 +814,6 @@ $header-logo-height: 40px;
     margin: 0 auto;
     z-index: 999;
     background-color: $nav-header-background-color;
-    transition: 0.3s ease-out;
     //border-top: 4px solid transparent;
     //border-bottom: 1px solid $border-color;
 

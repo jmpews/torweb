@@ -15,6 +15,7 @@
  *
  */
 .sk-cube-grid {
+  display: none;
   width: 40px;
   height: 40px;
   margin: 40px auto;

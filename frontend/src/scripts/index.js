@@ -163,13 +163,13 @@ function show_hide_cate_nav() {
 
 // 显示隐藏所有分类(post-new页面)
 function post_new_show_hide_cate() {
-    $(".post-new-html #topic").on('click', function (e) {
-        $(".card-header-all").css('display', 'block');
-    });
-    $(".post-new-html .card-header-all-cate a").on('click', function (e) {
-        $(".card-header-all").css('display', 'none');
-        $("#topic").val($(this).html());
-    });
+    // $(".post-new-html #topic").on('click', function (e) {
+    //     $(".card-header-all").css('display', 'block');
+    // });
+    // $(".post-new-html .card-header-all-cate a").on('click', function (e) {
+    //     $(".card-header-all").css('display', 'none');
+    //     $("#topic").val($(this).html());
+    // });
 }
 
 //显示隐藏emoji

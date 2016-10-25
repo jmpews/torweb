@@ -1699,6 +1699,14 @@ $current-topic-width: 21px;
 
 // -----------------------------一些自定义组件---------------------------
 // 自定义下拉分类组件
+.dropdown {
+    &:hover {
+        .card-header-all {
+            display: block;
+        }
+    }
+}
+
 .card-header-all {
     display: none;
     width: 100%;

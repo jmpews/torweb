@@ -15,6 +15,7 @@
  *
  */
 .sk-cube-grid {
+  display: none;
   width: 40px;
   height: 40px;
   margin: 40px auto;
@@ -1484,6 +1485,10 @@ form .form-control:disabled {
 
 .note-toolbar button {
   height: 30px;
+}
+
+.dropdown:hover .card-header-all {
+  display: block;
 }
 
 .card-header-all {

@@ -11,77 +11,79 @@
 {% end %}
 
 {% block content %}
-    <div class="content-container container post-new-html">
-        <div class="post-new-card card custom-card">
-             <div class="card-header">
-                新主题
-            </div>
-            <div class="card-block">
-                <form data-parsley-validate="" action="/post/add" method="post">
-                    <div class="form-group">
-                        <label for="title">标题</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题" required>
-                    </div>
-                    <div class="form-group" style="position: relative;">
-                        <label for="topic">主题</label>
-                        <input type="text" class="form-control" id="topic" name="topic" placeholder="点击选择主题" required readonly>
+<div class="content-container container post-new-html">
+    <div class="post-new-card card custom-card">
+        <div class="card-header">
+            新主题
+        </div>
+        <div class="card-block">
+            <form data-parsley-validate="" action="/post/add" method="post">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题" required>
+                </div>
+                <div class="form-group" style="position: relative;">
+                    <label for="topic">主题</label>
+                    <div class="dropdown">
+                        <input type="text" class="form-control" id="topic" name="topic" placeholder="点击选择主题" required
+                               readonly>
                         <div class="card-header-all">
-
-                    <ul class="card-header-all-cate hd">
-                        <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
-                        {% set len_categorys = len(topic_category_cache['categorys']) %}
-                        {% for i in range(len_categorys) %}
-                        {% set category = topic_category_cache['categorys'][i] %}
-                        {% set topics = topic_category_cache['topics'][i] %}
-                        <li>
-                            <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{category.name}}</h4>
-                            <ul class="card-header-all-cate-topic cl">
-                                {% for topic in topics %}
-                                <li><a href="#blank" id="{{topic.str}}">{{topic.name}}</a></li>
+                            <ul class="card-header-all-cate hd">
+                                <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
+                                {% set len_categorys = len(topic_category_cache['categorys']) %}
+                                {% for i in range(len_categorys) %}
+                                {% set category = topic_category_cache['categorys'][i] %}
+                                {% set topics = topic_category_cache['topics'][i] %}
+                                <li>
+                                    <h4><i class="fa fa-hashtag" aria-hidden="true"></i>{{ category.name }}</h4>
+                                    <ul class="card-header-all-cate-topic cl">
+                                        {% for topic in topics %}
+                                        <li><a href="#blank" topic-id="{{ topic.str }}">{{ topic.name }}</a></li>
+                                        {% end %}
+                                    </ul>
+                                </li>
                                 {% end %}
+                                <li>
+                                    <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
+                                    <ul class="card-header-all-cate-topic cl">
+                                        {% for topic in topic_category_cache['topics'][-1] %}
+                                        <li><a href="#blank" topic-id="{{ topic.str }}">{{ topic.name }}</a></li>
+                                        {% end %}
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                        {% end %}
-                        <li>
-                            <h4><i class="fa fa-hashtag" aria-hidden="true"></i>未分类</h4>
-                            <ul class="card-header-all-cate-topic cl">
-                                {% for topic in topic_category_cache['topics'][-1] %}
-                                <li><a href="#blank" id="{{topic.str}}">{{topic.name}}</a></li>
-                                {% end %}
-                            </ul>
-                        </li>
-                    </ul>
                         </div>
                     </div>
+                </div>
 
-                        <!-- <select class="form-control" name="topic" id="topic"> -->
-                        <!--     {% set len_categorys = len(topic_category_cache['categorys']) %} -->
-                        <!--     {% for i in range(len_categorys) %} -->
-                        <!--     {% set category = topic_category_cache['categorys'][i] %} -->
-                        <!--     {% set topics = topic_category_cache['topics'][i] %} -->
-                        <!--     <optgroup label="{{category.name}}"> -->
+                <!-- <select class="form-control" name="topic" id="topic"> -->
+                <!--     {% set len_categorys = len(topic_category_cache['categorys']) %} -->
+                <!--     {% for i in range(len_categorys) %} -->
+                <!--     {% set category = topic_category_cache['categorys'][i] %} -->
+                <!--     {% set topics = topic_category_cache['topics'][i] %} -->
+                <!--     <optgroup label="{{category.name}}"> -->
 
-                        <!--         {% for topic in topics %} -->
-                        <!--         <option>{{topic.name}}</option> -->
-                        <!--         {% end %} -->
-                        <!--     </optgroup> -->
-                        <!--     {% end %} -->
-                        <!-- </select> -->
-                    <div class="form-group">
-                        <label for="password">内容</label>
-                        <textarea id="tinymce" hidden>Please Write Here.</textarea>
-                        <input name="image" type="file" id="upload" class="hidden" hidden>
-                    </div>
-                    <div class="form-group float-left">
-                        <img class="emoji" id="emoji-btn" src="/assets/images/emoji/basic/smile.png">
-                        <ul id="emoji-list" class="emojis list-inline" style="display: none;">
-                        </ul>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-right">提交</button>
-                </form>
-            </div>
+                <!--         {% for topic in topics %} -->
+                <!--         <option>{{topic.name}}</option> -->
+                <!--         {% end %} -->
+                <!--     </optgroup> -->
+                <!--     {% end %} -->
+                <!-- </select> -->
+                <div class="form-group">
+                    <label for="password">内容</label>
+                    <textarea id="tinymce" hidden>Please Write Here.</textarea>
+                    <input name="image" type="file" id="upload" class="hidden" hidden>
+                </div>
+                <div class="form-group float-left">
+                    <img class="emoji" id="emoji-btn" src="/assets/images/emoji/basic/smile.png">
+                    <ul id="emoji-list" class="emojis list-inline" style="display: none;">
+                    </ul>
+                </div>
+                <button type="submit" class="btn btn-primary float-right">提交</button>
+            </form>
         </div>
     </div>
+</div>
 {% end %}
 
 {% block scripts %}
@@ -89,13 +91,13 @@
     $(document).ready(function () {
         tinymce.init({
             selector: '#tinymce',
-            height : 300,
+            height: 300,
             theme: "modern",
             language: 'zh_CN',
             relative_urls: false,
-            content_css : '/assets/css/tinymce.content.min.css',
+            content_css: '/assets/css/tinymce.content.min.css',
             paste_data_images: true,
-            plugins: ['code','paste wordcount textcolor', 'pasteUpload',
+            plugins: ['code', 'paste wordcount textcolor', 'pasteUpload',
                 'insertdatetime media nonbreaking save table contextmenu directionality',
                 'advlist autolink lists link image preview hr anchor pagebreak'],
             toolbar: "insertfile undo redo | styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
@@ -105,7 +107,7 @@
                     var formData = new FormData();
                     formData.append('imageFile', file);
                     formData.append("mimeType", getMimeType(file, filename));
-                    console.log('uploading: '+filename);
+                    console.log('uploading: ' + filename);
                     $.ajax({
                         url: '/utils/uploadimg',
                         data: formData,
@@ -118,8 +120,8 @@
                         },
                         success: function (result) {
                             console.log('upload complete.');
-                            if(result.errorcode == 0) {
-                                success('/assets/images/'+result.data.image);
+                            if (result.errorcode == 0) {
+                                success('/assets/images/' + result.data.image);
                                 return;
                             }
                             else {
@@ -134,13 +136,13 @@
                 };
                 return uploadFile(blobInfo.blob(), blobInfo.filename());
             },
-            file_picker_callback: function(callback, value, meta) {
+            file_picker_callback: function (callback, value, meta) {
                 if (meta.filetype == 'image') {
                     $('#upload').trigger('click');
-                    $('#upload').on('change', function() {
+                    $('#upload').on('change', function () {
                         var file = this.files[0];
                         var reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = function (e) {
                             callback(e.target.result, {
                                 alt: ''
                             });
@@ -155,36 +157,35 @@
         //$('#tinymce').pasteUploadImage();
 
 
-    var topic = '';
-    $('form').on('submit', function (event) {
-        event.preventDefault();
-         $.ajax({
-            type: 'post',
-            dataType: 'json',
-            url: '/post/add',
-            data: {
-                'title': $('#title').val(),
-                'topic': $('#topic').attr('topic'),
-                'content': tinymce.activeEditor.getContent()
-            },
-            success: function(result, status) {
-                if(result.errorcode == 0) {
-                    window.location.href="/post/"+result.data['post_id'];
+        var topic = '';
+        $('form').on('submit', function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: '/post/add',
+                data: {
+                    'title': $('#title').val(),
+                    'topic': $('#topic').attr('topic-id'),
+                    'content': tinymce.activeEditor.getContent()
+                },
+                success: function (result, status) {
+                    if (result.errorcode == 0) {
+                        window.location.href = "/post/" + result.data['post_id'];
+                    }
+                    else if (result.errorcode == 1) {
+                        alert(result.txt);
+                    }
                 }
-                else if(result.errorcode == 1) {
-                    alert(result.txt);
-                }
-            }
-        })
-        return 1;
+            })
+            return 1;
+        });
+        $(".post-new-html .card-header-all-cate a").on('click', function (e) {
+            $('#topic').val($(this).html());
+            $('#topic').attr('topic-id', $(this).attr('topic-id'));
+        });
+        post_new_show_hide_cate();
+        show_hide_emoji_list();
     });
-    $(".post-new-html .card-header-all-cate a").on('click', function(e){
-        $('#topic').val($(this).html());
-        $('#topic').attr('topic',$(this).attr('id'));
-    });
-    post_new_show_hide_cate();
-    show_hide_emoji_list();
-    load_emoji_summernote();
-});
 </script>
 {% end %}

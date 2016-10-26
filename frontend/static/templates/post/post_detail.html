@@ -235,7 +235,7 @@
                 type: 'post',
                 dataType: 'json',
                 url: '/postreplyopt',
-                data: JSON.stringify(),
+                data: JSON.stringify(post_data),
                 success: function (result, status) {
                     if (result.errorcode == 0) {
                         if ($(e.currentTarget).hasClass('postreply-collected')) {

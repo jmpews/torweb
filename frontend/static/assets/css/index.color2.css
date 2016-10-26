@@ -1364,6 +1364,14 @@ form .form-control:disabled {
   padding: .66001rem 1rem 1rem;
   border-left: 5px solid #34495E;
 }
+.post-detail-card .post-content code {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
 .post-detail-card .post-content strong, .post-detail-card .post-content b {
   font-weight: bold;
 }

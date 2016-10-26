@@ -1548,6 +1548,14 @@ $current-topic-width: 21px;
                 border-left: 5px solid $logo-color;
             }
         }
+        code {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f7f7f7;
+            border-radius: 3px;
+        }
         strong, b {
             font-weight: bold;
         }

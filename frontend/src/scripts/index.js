@@ -379,7 +379,7 @@ replaceLoadingTest = function (filename) {
 };
 
 // 登陆框
-$('#loginModal [type="submit"]').on('click', function (event) {
+$("#loginModal [type='submit']").on('click', function (event) {
     event.preventDefault();
     $.ajax({
         type: 'post',
@@ -413,7 +413,7 @@ $('.captcha').on('click', function (event) {
     event.preventDefault();
     var src = $(event.currentTarget).attr('src');
     if(src == "") {
-        
+        src = "/utils/captcha";
     }
     var t = src.indexOf('?');
     if (t != -1)

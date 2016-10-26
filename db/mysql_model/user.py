@@ -63,7 +63,7 @@ class User(BaseModel):
         salt = random_str()
         password_md5 = md5(password.encode('utf-8')).hexdigest()
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
-        level = USER_LEVEL.NORMAL  # 首个用户赋予admin权限
+        level = USER_ROLE.NORMAL  # 首个用户赋予admin权限
         the_time = int(time.time())
         u = User.create(username=username,
                         nickname=nickname,

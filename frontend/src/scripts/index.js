@@ -412,6 +412,9 @@ $('#loginModal [type="submit"]').on('click', function (event) {
 $('.captcha').on('click', function (event) {
     event.preventDefault();
     var src = $(event.currentTarget).attr('src');
+    if(src == "") {
+        
+    }
     var t = src.indexOf('?');
     if (t != -1)
         src = src.substring(0, t);

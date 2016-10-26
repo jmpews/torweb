@@ -3,8 +3,7 @@ from db.mysql_model.post import CollectPost
 
 def get_post_user_ext(post, user):
     ext = type('ext', (), {})
-    is_collect = CollectPost.is_collect(post, user),
-
+    is_collect = CollectPost.is_collect(post, user)
     if user:
         is_own = post.check_own(user)
         is_auth = user.is_admin()

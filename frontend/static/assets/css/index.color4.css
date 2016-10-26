@@ -1349,6 +1349,7 @@ form .form-control:disabled {
   overflow-x: hidden;
   font-size: 15px;
   line-height: 1.6;
+  font-weight: 300px;
   word-wrap: break-word;
   word-break: normal;
   padding: 10px;
@@ -1365,12 +1366,10 @@ form .form-control:disabled {
   border-left: 5px solid #e95420;
 }
 .post-detail-card .post-content code {
-  padding: 16px;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #f7f7f7;
-  border-radius: 3px;
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0 5px;
+  background: #f7f8f8;
 }
 .post-detail-card .post-content strong, .post-detail-card .post-content b {
   font-weight: bold;
@@ -1378,11 +1377,10 @@ form .form-control:disabled {
 .post-detail-card .post-content h1, .post-detail-card .post-content h2, .post-detail-card .post-content h3, .post-detail-card .post-content h4, .post-detail-card .post-content h5, .post-detail-card .post-content h6 {
   font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
-  line-height: 1.1;
-  font-weight: 700;
 }
 .post-detail-card .post-content a {
   color: #e95420;
+  text-decoration: underline;
 }
 .post-detail-card .post-content img {
   max-width: 90%;

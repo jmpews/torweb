@@ -79,7 +79,7 @@
         function set_modify_data(title, topic_id, topic_name) {
             $('#title').val(title);
             $('#topic').val(topic_name);
-            $('#topic').attr('topic', topic_id);
+            $('#topic').attr('topic-id', topic_id);
         }
 
         set_modify_data('{{ post.title }}', '{{ post.topic.str }}', '{{ post.topic.name }}');

@@ -1533,6 +1533,7 @@ $current-topic-width: 21px;
         overflow-x: hidden;
         font-size: 15px;
         line-height: 1.6;
+        font-weight: 300px;
         word-wrap: break-word;
         word-break: normal;
         padding: 10px;
@@ -1549,12 +1550,10 @@ $current-topic-width: 21px;
             }
         }
         code {
-            padding: 16px;
-            overflow: auto;
-            font-size: 85%;
-            line-height: 1.45;
-            background-color: #f7f7f7;
-            border-radius: 3px;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 5px;
+    background: #f7f8f8;
         }
         strong, b {
             font-weight: bold;
@@ -1562,11 +1561,10 @@ $current-topic-width: 21px;
         h1, h2, h3, h4, h5, h6 {
             font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
             line-height: 1.7;
-            line-height: 1.1;
-            font-weight: 700;
         }
         a {
             color: $link-color;
+            text-decoration: underline;
         }
         img {
             max-width: 90%;

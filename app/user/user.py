@@ -222,7 +222,6 @@ class WebsocketChatHandler(BaseWebsocketHandler):
         if opt == 'update_recent_user_list':
             logger.debug('update_recent_user_list...')
             recent_user_list = ChatMessage.get_recent_user_list(self.current_user)
-            logger.debug(recent_user_list)
             self.write_message(json_result(0,{'code': 'recent_user_list', 'data': recent_user_list}))
 
         elif opt == 'update_recent_user_list_and_open':

@@ -18,6 +18,12 @@ class ChatContainer extends React.Component {
     }
 
     componentDidMount() {
+        var _this = this;
+        let { state, dispatch, setCurrentUserDispatch} = this.props;
+        $(document).on('chatTo', function(event, user){
+            setCurrentUserDispatch(user.id, user.avatar, user.name);
+            $(_this.refs.realchat).show();
+        });
     }
 
     componentWillMount() {
@@ -40,7 +46,8 @@ class ChatContainer extends React.Component {
 
 
     render() {
-        let { state, dispatch, setCurrentUser} = this.props;
+
+        let { state, dispatch, setCurrentUserDispatch} = this.props;
         var _this = this;
         var current_user = state.current_user;
         var chat_title = '';
@@ -51,21 +58,24 @@ class ChatContainer extends React.Component {
             chat_title = 'chat 2' + current_user.name;
         }
         return (
-            <div className="chat">
-                <div className="chat-header">
-                    <a href="#blank" className="chat-title">{chat_title}</a>
-                    <a href="#blank" className="chat-close">X</a>
+            <div className="chat-launcher">
+                <div className="chat" ref="realchat" >
+                    <div className="chat-header">
+                        <a href="#blank" className="chat-title">{chat_title}</a>
+                        <a href="#blank" className="chat-close" onClick={(e) => {console.log($(_this.refs.realchat).hide())}}>X</a>
+                    </div>
+                    <div className="chat-content">
+                        <UserList current_user={state.current_user} recent_user_list={state.recent_user_list} setCurrentUser={setCurrentUserDispatch} />
+                        <MessageList recent_message_list={state.recent_message_list} />
+                    </div>
+                    <div className="chat-footer">
+                        <form className="form-group row">
+                            <textarea className="form-control" cols="2" ref="content">...</textarea>
+                            <button type="submit" className="btn btn-primary col-sm2" onClick={(e) => {e.preventDefault();send_message(current_user.id, _this.refs.content.value.trim())}}>发送</button>
+                        </form>
+                    </div>
                 </div>
-                <div className="chat-content">
-                    <UserList recent_user_list={state.recent_user_list} setCurrentUser={setCurrentUser} />
-                    <MessageList recent_message_list={state.recent_message_list} />
-                </div>
-                <div className="chat-footer">
-                    <form className="form-group row">
-                        <textarea className="form-control" cols="2" ref="content">Write Here.</textarea>
-                        <button type="submit" className="btn btn-primary col-sm2" onClick={(e) => {e.preventDefault();send_message(current_user.id, _this.refs.content.value.trim())}}>发送</button>
-                    </form>
-                </div>
+                <div className="chat-button" onClick={(e) => {console.log($(_this.refs.realchat).show())}}></div>
             </div>
         );
     }
@@ -83,7 +93,7 @@ function mapDispatchToProps(dispatch) {
     return {
         // updateRecentUserList: bindActionCreators(updateRecentUserList, dispatch),
         // updateRecentMessageList: bindActionCreators(updateRecentMessageList, dispatch),
-        setCurrentUser: bindActionCreators(setCurrentUser, dispatch)
+        setCurrentUserDispatch: bindActionCreators(setCurrentUser, dispatch)
     }
 }
 

@@ -514,9 +514,6 @@ $(document).click(function (e) {
 });
 
 $(document).ready(function () {
-    $(".chat-close").on("click", function (e) {
-        $(".chat-container").hide();
-    });
     //replate_friendly_time();
     // set_theme();
     change_theme();

@@ -19,6 +19,7 @@ export const updateRecentUserList = (recent_user_list) => (dispatch, getState) =
 };
 
 export const setCurrentUser = (id, avatar , name) => (dispatch, getState) => {
+    console.log('set_current_user');
     dispatch({
         type: types.SET_CURRENT_USER,
         payload: {

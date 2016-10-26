@@ -33,7 +33,7 @@
                 {% else %}
                 <a class="btn btn-sm btn-outline-primary follow-user" href="#blank" is_follow="0" role="button">关注</a>
                 {% end %}
-                <a class="btn btn-sm btn-outline-primary" href="#blank" other="{{ user.id }}" role="button">私信</a>
+                <a class="btn btn-sm btn-outline-primary" href="#blank" id="chatTo" other-id="{{ user.id }}" role="button">私信</a>
             </div>
             {% end %}
         </div>
@@ -130,9 +130,16 @@
 {% block scripts %}
 <script type="text/javascript">
     $(document).ready(function () {
-        var user_id = {{user.id}};
+        var user_id = '{{user.id}}';
+        var user_avatar = '{{ user.avatar }}';
+        var user_name = '{{ user.username }}';
+
+        $('#chatTo').on('click', function (e) {
+            e.preventDefault();
+            $(document).trigger('chatTo', {'id': user_id, 'avatar': user_avatar, 'name': user_name});
+        });
+
         monitor_system_status();
-        get_websocket_url(start_chat_websocket);
 
         $('.follow-user').on('mouseover', function (e) {
             if ($(e.target).attr('is_follow') == '1') {

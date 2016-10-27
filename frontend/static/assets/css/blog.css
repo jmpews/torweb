@@ -14,11 +14,24 @@
       </div>
  *
  */
-.sk-cube-grid {
+.loading {
   display: none;
+  position: absolute;
+  background-color: rgba(144, 140, 140, 0.2);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+}
+
+.sk-cube-grid {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 40px;
   height: 40px;
-  margin: 40px auto;
   /*
    * Spinner positions
    * 1 2 3

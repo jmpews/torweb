@@ -3,14 +3,14 @@
 {% block title %}Tornado.Login{% end %}
 
 {% block content %}
-        <div class="content-container container">
-            <div class="card custom-card">
-                <div class="card-header">
-                    登陆
-                </div>
-                <div class="card-block">
-
-                <div class="sk-cube-grid loading">
+<div class="content-container container">
+    <div class="card custom-card">
+        <div class="card-header">
+            登陆
+        </div>
+        <div class="card-block">
+            <div class="loading">
+                <div class="sk-cube-grid">
                     <div class="sk-cube sk-cube1"></div>
                     <div class="sk-cube sk-cube2"></div>
                     <div class="sk-cube sk-cube3"></div>
@@ -21,30 +21,33 @@
                     <div class="sk-cube sk-cube8"></div>
                     <div class="sk-cube sk-cube9"></div>
                 </div>
-                <form data-parsley-validate="" action="/login" method="post">
-                    <fieldset class="form-group">
-                        <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名" required>
-                        <small class="text-muted">我们保证您的信息安全.</small>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <img class="captcha" src="/utils/captcha">
-                        <input class="form-control" id="captcha" placeholder="请验证码" required>
-                    </fieldset>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> 保持Session记录
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">登陆</button>
-                </form>
-                </div>
             </div>
+            <form data-parsley-validate="" action="/login" method="post">
+                <fieldset class="form-group">
+                    <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名"
+                           required>
+                    <small class="text-muted">我们保证您的信息安全.</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"
+                           required>
+                </fieldset>
+                <fieldset class="form-group">
+                    <img class="captcha" src="/utils/captcha">
+                    <input class="form-control" id="captcha" placeholder="请验证码" required>
+                </fieldset>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 保持Session记录
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">登陆</button>
+            </form>
         </div>
+    </div>
+</div>
 {% end %}
 
 {% block scripts %}
@@ -52,7 +55,7 @@
     $('form').on('submit', function (event) {
         event.preventDefault();
         $('.loading').show();
-         $.ajax({
+        $.ajax({
             type: 'post',
             dataType: 'json',
             url: '/login',
@@ -61,18 +64,19 @@
                 'password': $('#password').val(),
                 'captcha': $('#captcha').val()
             },
-            success: function(result, status) {
-                if(result.errorcode == 0) {
+            success: function (result, status) {
+                $('.loading').hide();
+                $('.captcha').click();
+                if (result.errorcode == 0) {
                     var data = result['data'];
                     $.notify('登陆成功');
-                    $('.loading').hide();
-                    window.location.href='/'
+                    window.location.href = '/'
                 }
-                else if(result.errorcode == -3) {
+                else if (result.errorcode == -3) {
                     $.notify(result.txt);
                     $('#captcha').val('');
                 }
-                else if(result.errorcode != 0) {
+                else if (result.errorcode != 0) {
                     $.notify(result.txt);
                 }
             }

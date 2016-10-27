@@ -391,6 +391,8 @@ $("#loginModal [type='submit']").on('click', function (event) {
             'captcha': $('#loginModal #captcha').val()
         },
         success: function (result, status) {
+            $('.loading').hide();
+            $('#loginModal .captcha').click();
             if (result.errorcode == 0) {
                 var data = result['data'];
                 $.notify('登陆成功');

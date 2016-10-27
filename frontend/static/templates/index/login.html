@@ -35,7 +35,7 @@
                            required>
                 </fieldset>
                 <fieldset class="form-group">
-                    <img class="captcha" src="/utils/captcha">
+                    <img class="captcha" id="login-captcha" src="/utils/captcha">
                     <input class="form-control" id="captcha" placeholder="请验证码" required>
                 </fieldset>
                 <div class="checkbox">
@@ -66,7 +66,7 @@
             },
             success: function (result, status) {
                 $('.loading').hide();
-                $('.captcha').click();
+                $('#login-captcha').click();
                 if (result.errorcode == 0) {
                     var data = result['data'];
                     $.notify('登陆成功');

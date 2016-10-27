@@ -112,55 +112,70 @@
                 登陆
             </div>
             <div class="card-block">
-                <form data-parsley-validate="" action="/login" method="post">
-                    <fieldset class="form-group">
-                        <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名"
-                               required>
-                        <small class="text-muted">我们保证您的信息安全.</small>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"
-                               required>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <img class="captcha" src="">
-                        <input class="form-control" id="captcha" placeholder="请验证码" required>
-                    </fieldset>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> 保持Session记录
-                        </label>
+                <div class="card-block">
+                    <div class="loading">
+                        <div class="sk-cube-grid">
+                            <div class="sk-cube sk-cube1"></div>
+                            <div class="sk-cube sk-cube2"></div>
+                            <div class="sk-cube sk-cube3"></div>
+                            <div class="sk-cube sk-cube4"></div>
+                            <div class="sk-cube sk-cube5"></div>
+                            <div class="sk-cube sk-cube6"></div>
+                            <div class="sk-cube sk-cube7"></div>
+                            <div class="sk-cube sk-cube8"></div>
+                            <div class="sk-cube sk-cube9"></div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">登陆</button>
-                </form>
+                    <form data-parsley-validate="" action="/login" method="post">
+                        <fieldset class="form-group">
+                            <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名"
+                                   required>
+                            <small class="text-muted">我们保证您的信息安全.</small>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="请输入密码"
+                                   required>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <img class="captcha" src="">
+                            <input class="form-control" id="captcha" placeholder="请验证码" required>
+                        </fieldset>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 保持Session记录
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">登陆</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="chat-container" id="chat-container">
-    </div>
+        <div class="chat-container" id="chat-container">
+        </div>
 
-    <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/bootstrap-notify.min.js"></script>
-    <!-- <script src="/assets/js/react/bundle.js"></script> -->
-    <script>
-    $(document).on("scroll", function() {
-        if(window.screen.width > 767) {
-            if ($(document).scrollTop() > 70) {
-                $(".header").addClass("scroll");
-            } else {
-                $(".header").removeClass("scroll");
-            }
-        }
-    });
-    </script>
-    {% block scripts %}
-    {% end %}
+        <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="/assets/js/main.js"></script>
+        <script src="/assets/js/bootstrap-notify.min.js"></script>
+        <!-- <script src="/assets/js/react/bundle.js"></script> -->
+        <script>
+            $(document).on("scroll", function () {
+                if (window.screen.width > 767) {
+                    if ($(document).scrollTop() > 70) {
+                        $(".header").addClass("scroll");
+                    } else {
+                        $(".header").removeClass("scroll");
+                    }
+                }
+            });
+        </script>
+        {% block scripts %}
+        {% end %}
 </body>
 </html>

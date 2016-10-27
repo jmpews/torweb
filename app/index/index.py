@@ -111,7 +111,7 @@ class LoginHandler(BaseRequestHandler):
             self.set_secure_cookie('uuid', user.username)
             result = json_result(0, 'login success!')
         else:
-            result = json_result(-1, 'login failed!')
+            result = json_result(-1, '用户名密码错误...')
         self.write(result)
 
 class LogoutHandler(BaseRequestHandler):

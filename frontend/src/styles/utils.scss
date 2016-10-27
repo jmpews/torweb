@@ -24,11 +24,24 @@
     left: 0;
     z-index: 1050;
 }
-.sk-cube-grid {
+.loading-content {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    .loading-tip {
+        margin-left: 10px;
+    }
+}
+.sk-cube-grid {
     width: 40px;
     height: 40px;
     //margin: 40px auto;

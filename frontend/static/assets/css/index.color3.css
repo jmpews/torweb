@@ -25,11 +25,22 @@
   z-index: 1050;
 }
 
-.sk-cube-grid {
+.loading-content {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: -ms-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.loading-content .loading-tip {
+  margin-left: 10px;
+}
+
+.sk-cube-grid {
   width: 40px;
   height: 40px;
   /*

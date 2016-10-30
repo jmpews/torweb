@@ -1,107 +1,3 @@
-/*
- *  Usage:
- *
-      <div class="sk-cube-grid">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
-      </div>
- *
- */
-.loading {
-  display: none;
-  position: absolute;
-  background-color: rgba(144, 140, 140, 0.2);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-}
-
-.loading-content {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: -ms-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-}
-.loading-content .loading-tip {
-  margin-left: 10px;
-}
-
-.sk-cube-grid {
-  width: 40px;
-  height: 40px;
-  /*
-   * Spinner positions
-   * 1 2 3
-   * 4 5 6
-   * 7 8 9
-   */
-}
-
-.sk-cube-grid .sk-cube {
-  width: 33.33%;
-  height: 33.33%;
-  background-color: #333;
-  float: left;
-  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
-}
-
-.sk-cube-grid .sk-cube1 {
-  animation-delay: 0.2s;
-}
-
-.sk-cube-grid .sk-cube2 {
-  animation-delay: 0.3s;
-}
-
-.sk-cube-grid .sk-cube3 {
-  animation-delay: 0.4s;
-}
-
-.sk-cube-grid .sk-cube4 {
-  animation-delay: 0.1s;
-}
-
-.sk-cube-grid .sk-cube5 {
-  animation-delay: 0.2s;
-}
-
-.sk-cube-grid .sk-cube6 {
-  animation-delay: 0.3s;
-}
-
-.sk-cube-grid .sk-cube7 {
-  animation-delay: 0.0s;
-}
-
-.sk-cube-grid .sk-cube8 {
-  animation-delay: 0.1s;
-}
-
-.sk-cube-grid .sk-cube9 {
-  animation-delay: 0.2s;
-}
-@keyframes sk-cubeGridScaleDelay {
-  0%, 70%, 100% {
-    transform: scale3D(1, 1, 1);
-  }
-  35% {
-    transform: scale3D(0, 0, 1);
-  }
-}
 html {
   box-sizing: border-box;
 }
@@ -219,6 +115,13 @@ ul {
   display: table;
 }
 
+.transition {
+  transition: all .2s ease-out;
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -ms-transition: all .2s ease-out;
+}
+
 .tag-sp {
   display: inline-block;
   margin-right: 5px;
@@ -248,18 +151,6 @@ ul {
   border-right: 1px solid #dedede;
 }
 
-.transition {
-  transition: all .2s ease-out;
-  -webkit-transition: all .2s ease-out;
-  -moz-transition: all .2s ease-out;
-  -ms-transition: all .2s ease-out;
-}
-
-.captcha {
-  height: 40px;
-  border: 1px solid #f5f5f5;
-}
-
 @media (max-width: 767px) {
   .hidden-xs {
     display: none !important;
@@ -272,57 +163,6 @@ ul {
     margin-right: 0px !important;
   }
 }
-a.username {
-  color: #446491;
-}
-
-.fa {
-  padding: 0 3px;
-}
-
-.note-toolbar {
-  padding: 0;
-  background-color: #fff;
-  border-bottom: none;
-}
-.note-toolbar > .btn-group {
-  margin-top: 0;
-}
-.note-toolbar .note-btn {
-  background: none;
-  border: none;
-}
-.note-toolbar .note-btn:visited, .note-toolbar .note-btn:focus {
-  background-color: #dadada;
-}
-.note-toolbar .note-btn.active {
-  background-color: #dadada;
-}
-
-.alert-info {
-  background-color: #4b89ac;
-  border-color: #4b89ac;
-  color: #fff;
-  text-align: center;
-  opacity: 0.7;
-  padding: 10px;
-  width: 25%;
-  top: 80px !important;
-}
-.alert-info:hover {
-  opacity: 1;
-}
-.alert-info .close {
-  cursor: pointer;
-  float: right;
-  color: #446491;
-  opacity: 0.5;
-}
-.alert-info .close:hover {
-  color: #446491;
-  opacity: 1;
-}
-
 .container {
   margin-left: auto;
   margin-right: auto;
@@ -2148,6 +1988,143 @@ form .form-control:disabled {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+/*
+ *  Usage:
+ *
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+ *
+ */
+.loading {
+  display: none;
+  position: absolute;
+  background-color: rgba(144, 140, 140, 0.2);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+}
+
+.loading-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: -ms-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.loading-content .loading-tip {
+  margin-left: 10px;
+}
+
+.sk-cube-grid {
+  width: 40px;
+  height: 40px;
+  /*
+   * Spinner positions
+   * 1 2 3
+   * 4 5 6
+   * 7 8 9
+   */
+}
+
+.sk-cube-grid .sk-cube {
+  width: 33.33%;
+  height: 33.33%;
+  background-color: #333;
+  float: left;
+  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.sk-cube-grid .sk-cube1 {
+  animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube2 {
+  animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube3 {
+  animation-delay: 0.4s;
+}
+
+.sk-cube-grid .sk-cube4 {
+  animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube5 {
+  animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube6 {
+  animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube7 {
+  animation-delay: 0.0s;
+}
+
+.sk-cube-grid .sk-cube8 {
+  animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube9 {
+  animation-delay: 0.2s;
+}
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
+}
+.captcha {
+  height: 40px;
+  border: 1px solid #f5f5f5;
+}
+
+.fa {
+  padding: 0 3px;
+}
+
+.alert-info {
+  background-color: #4b89ac;
+  border-color: #4b89ac;
+  color: #fff;
+  text-align: center;
+  opacity: 0.7;
+  padding: 10px;
+  width: 25%;
+  top: 80px !important;
+}
+.alert-info:hover {
+  opacity: 1;
+}
+.alert-info .close {
+  cursor: pointer;
+  float: right;
+  color: #446491;
+  opacity: 0.5;
+}
+.alert-info .close:hover {
+  color: #446491;
+  opacity: 1;
 }
 
 @media (max-width: 767px) {

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+$color1: #FFBCBC;
+//$color2: #A4EDA4;
+$color2: #34495E;
+$color3: #ace6f6;
+$color4: #e95420;
+
+$lightpink: #FFBCBC;
+$lightgreen: #A4EDA4;
+$lightgreen2: #2fca7b;
+$bg1: #e1e1e1;
+
+$base-color: #FFBCBC !default;
+
+$logo-color: $base-color !default;
+$font-color: #999 !default;
+$border-color: #eaeaea !default;
+$body-backgroud-color: #f7f7f7 !default;
+$gray-font-color: #8a8a8a !default;
+$gray-background-color: #efefef;
+
+$link-color: $base-color !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-light-color: lighten($font-color, 15%) !default;
+$btn-color: $link-color !default;
+$btn-hover-color: $link-hover-color !default;
+
+$important-font-color: #666 !default;
+$important-link-color: $logo-color !default;
+
+$nav-header-background-color: #fff !default;
+$nav-header-font-color: $font-color !default;
+$nav-header-font-hover-color: #fff !default;
+$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
+
+$card-header-background-color: #fff !default;
+$card-header-font-color: $base-color !default;
+$card-body-background-color: #fff !default;
+$card-body-font-color: #999 !default;
+
+
+@import "./base";
+@import "./utils";
+
+.captcha {
+    height: 40px;
+    border: 1px solid $border-color;
+}
+
+
+// ---------------------fa.js-------------------------
+.fa {
+    //color: $font-color;
+    padding: 0 3px;
+    //padding-right: 3px;
+    &:hover {
+        //color: $link-color;
+    }
+}
+
+
+// ---------------------notification.js-------------------------
+.alert-info {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: #fff;
+    text-align: center;
+    opacity: 0.7;
+    padding: 10px;
+    width: 25%;
+    top: 80px !important;
+    &:hover {
+        opacity: 1;
+    }
+    .close {
+        cursor: pointer;
+        float: right;
+        color: $link-color;
+        opacity: 0.5;
+        &:hover {
+            color: $link-color;
+            opacity: 1;
+        }
+    }
+}

@@ -36,4 +36,4 @@ $link-hover-color: darken($link-color, 15%);
 $link-light-color:  lighten($link-color, 15%);
 $btn-color: $link-color;
 $btn-hover-color: $link-hover-color;
-@import "base";
+@import "./jmp";

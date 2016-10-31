@@ -87,7 +87,7 @@ gulp.task('copy', function () {
 
 //deal with custom scipt
 gulp.task('scripts', function() {
-    return gulp.src('./src/scripts/index.js')
+    return gulp.src(['./src/scripts/index.js', './src/scripts/base.js'])
         .pipe(jshint.reporter('default'))
         .pipe(concat('main.js'))
         .pipe(gulp.dest(distPath+'/assets/js'))
@@ -132,6 +132,7 @@ gulp.task('watch', function() {
     gulp.watch('src/styles/*.scss', ['styles']);
     gulp.watch('src/lib/bootstrap/scss/*.scss', ['styles']);
     gulp.watch('src/scripts/index.js', ['scripts']);
+    gulp.watch('src/scripts/base.js', ['scripts']);
     gulp.watch('src/scripts/plugin.js', ['scripts-plugin']);
     gulp.watch('src/images/**/*', ['images']);
 });

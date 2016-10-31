@@ -44,3 +44,15 @@
         }
     }
 }
+
+// ---------------项目组件
+
+.topic-nav {
+    .hot-topic {
+        padding-top: 5px;
+        color: gray;
+        a {
+            color: $font-color !important;
+        }
+    }
+}

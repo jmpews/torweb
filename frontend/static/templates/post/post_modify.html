@@ -27,7 +27,7 @@
                     <div class="dropdown">
                         <input type="text" class="form-control" id="topic" name="topic" placeholder="点击选择主题" required
                                readonly>
-                        <div class="card-header-all">
+                        <div class="card-header-all dropdown-menu">
                             <ul class="card-header-all-cate hd">
                                 <!-- 这一块其实可以缓存起来, 因为所有用户都是取相同数据 -->
                                 {% set len_categorys = len(topic_category_cache['categorys']) %}

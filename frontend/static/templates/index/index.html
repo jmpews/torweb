@@ -11,22 +11,17 @@
     </div>
     <div class="col-md-9">
         <div class="card all-cate-card custom-card">
-            <div class="current-topic">
+            <div class="current-topic" style="display: none">
                 <span>{% if current_topic %}{{ current_topic.name }}{% else %}全部分类{% end %}</span>
             </div>
-            <div class="card-header ">
+            <div class="card-header topic-nav">
                 <ul class="list-inline cl">
                     <li>
-                        <a href="#_blank" class="light-font">热门: </a>
-                    </li>
-                    <li>
-                        <a href="/topic/study-material" class="light-font">学习资料</a>
-                        <span class="divider">/</span>
-                    </li>
-                    <li>
-                        <a href="/topic/study-competition" class="light-font">竞赛</a>
+                        <span class="span-title">当前:</span>
+                        <a href="">{% if current_topic %}{{ current_topic.name }}{% else %}全部分类{% end %}</a>
                         <span class="important-divider">|</span>
                     </li>
+
                     <li class="dropdown">
                         <a class="card-header-all-bt important-font" href="#blank">全部分类<i class="fa fa-angle-down"
                                                                                       aria-hidden="true"></i></a>
@@ -60,6 +55,10 @@
 
                     </li>
                 </ul>
+                <div class="hot-topic">
+                    <span class="span-title">热门: </span>
+                    <a href="#blank">暂无</a>
+                </div>
             </div>
 
             <div class="card-block">

@@ -99,8 +99,7 @@ gulp.task('scripts', function() {
 
 //deal with custom styles
 gulp.task('styles', function(){
-    //return sass(['./src/styles/**/*.scss','./src/lib/bootstrap/scss/bootstrap.scss'], { style: 'expanded'})
-    return sass(['./src/styles/**/*.scss',], { style: 'expanded'})
+    return sass(['./src/styles/index.color4.scss', './src/styles/blog.scss'], { style: 'expanded'})
         .pipe(autoprefixer('last 2 version', 'Safari 5', 'IE 8', 'IE 9', 'Opera 12.1', 'IOS 6', 'android 4'))
         .pipe(gulp.dest(distPath+'/assets/css'))
         .pipe(rename({suffix: '.min'}))
@@ -130,8 +129,8 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     // 监听文件变化
-    gulp.watch('src/bootstrap/scss/*.scss', ['styles']);
     gulp.watch('src/styles/*.scss', ['styles']);
+    gulp.watch('src/lib/bootstrap/scss/*.scss', ['styles']);
     gulp.watch('src/scripts/index.js', ['scripts']);
     gulp.watch('src/scripts/plugin.js', ['scripts-plugin']);
     gulp.watch('src/images/**/*', ['images']);

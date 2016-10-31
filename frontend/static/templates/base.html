@@ -10,12 +10,12 @@
     {#    <link rel="stylesheet" href="/assets/css/bs4_custom.css">#}
     {% block styles %}{% end %}
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
-    {% if current_user %}
-    {% set theme = current_user.get_theme_by_cookie_user(handler) %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{ theme }}.css"/>
-    {% else %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color3.css"/>
-    {% end %}
+{#    {% if current_user %}#}
+{#    {% set theme = current_user.get_theme_by_cookie_user(handler) %}#}
+{#    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{ theme }}.css"/>#}
+{#    {% else %}#}
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color4.css"/>
+{#    {% end %}#}
 </head>
 <body>
 <div class="header cl">

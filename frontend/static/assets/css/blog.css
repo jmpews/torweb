@@ -3562,11 +3562,12 @@ ul {
   color: #fff;
 }
 .header .btn-outline-primary {
-  border-color: #2c405d;
+  border-color: #446491;
+  color: #446491;
 }
 .header .btn-primary {
-  background-color: #2c405d;
-  border-color: #2c405d;
+  background-color: #446491;
+  border-color: #446491;
 }
 .header .header-container {
   height: 70px;
@@ -3654,9 +3655,6 @@ ul {
 }
 .header .header-container .header-tip #user-avatar img {
   border-radius: 50%;
-}
-.header .header-container .header-tip a {
-  color: #fff;
 }
 .header .header-container .header-tip a:hover {
   font-weight: 400;

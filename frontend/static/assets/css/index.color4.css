@@ -3194,8 +3194,8 @@ form .form-control:disabled {
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
   outline: none;
 }
 
@@ -3212,8 +3212,8 @@ form .form-control:disabled {
 .btn-primary.active:focus,
 .btn-primary.active.focus {
   color: #fff;
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -3562,11 +3562,12 @@ ul {
   color: #999;
 }
 .header .btn-outline-primary {
-  border-color: #ac3911;
+  border-color: #e95420;
+  color: #e95420;
 }
 .header .btn-primary {
-  background-color: #ac3911;
-  border-color: #ac3911;
+  background-color: #e95420;
+  border-color: #e95420;
 }
 .header .header-container {
   height: 70px;
@@ -3654,9 +3655,6 @@ ul {
 }
 .header .header-container .header-tip #user-avatar img {
   border-radius: 50%;
-}
-.header .header-container .header-tip a {
-  color: #999;
 }
 .header .header-container .header-tip a:hover {
   font-weight: 400;

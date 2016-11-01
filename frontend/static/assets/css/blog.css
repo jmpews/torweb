@@ -3300,7 +3300,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Neue Haas Grotesk Text Pro, Arial Nova, Segoe UI, Helvetica Neue, \.PingFang SC, PingFang SC, Microsoft YaHei, Microsoft JhengHei, Source Han Sans SC, Noto Sans CJK SC, Source Han Sans CN, Noto Sans SC, Source Han Sans TC, Noto Sans CJK TC, Hiragino Sans GB, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,Neue Haas Grotesk Text Pro,Arial Nova,Segoe UI,Helvetica Neue,\.PingFang SC,PingFang SC,Microsoft YaHei,Microsoft JhengHei,Source Han Sans SC,Noto Sans CJK SC,Source Han Sans CN,Noto Sans SC,Source Han Sans TC,Noto Sans CJK TC,Hiragino Sans GB,sans-serif;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
   color: #999;
@@ -3671,12 +3671,8 @@ ul {
 .header .header-container .header-tip .options > li > a:hover {
   background-color: rgba(255, 255, 255, 0.26);
 }
-.header .header-container .header-tip .options > li:first-of-type a {
+.header .header-container .header-tip .options > li > a:first-of-type {
   background: none;
-}
-.header .header-container .header-tip .options .dropdown .dropdown-menu li:hover {
-  color: #446491;
-  background-color: rgba(255, 255, 255, 0.26);
 }
 
 .banner {
@@ -4308,15 +4304,6 @@ ul {
 
 .dropdown:hover .card-header-all {
   display: block;
-}
-.dropdown .dropdown-menu {
-  display: none;
-  left: 0;
-  position: absolute;
-  background-color: #fff;
-  z-index: 1;
-  padding: 5px;
-  box-shadow: 0 1px 2px #dedede;
 }
 
 .card-header-all {
@@ -5064,14 +5051,6 @@ ul {
 .alert-info .close:hover {
   color: #446491;
   opacity: 1;
-}
-
-.topic-nav .hot-topic {
-  padding-top: 5px;
-  color: gray;
-}
-.topic-nav .hot-topic a {
-  color: #999 !important;
 }
 
 @media (max-width: 767px) {

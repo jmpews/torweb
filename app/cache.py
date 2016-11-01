@@ -36,7 +36,7 @@ def update_hot_post_cache():
     '''
     hot_post_cache['reply'] = []
     hot_post_cache['visit'] = []
-    posts = Post.select().order_by(Post.reply_count.desc()).limit(4)
+    posts = Post.select().where(Post.is_delete == False).order_by(Post.reply_count.desc()).limit(4)
     for post in posts:
         hot_post_cache['reply'].append(post)
 

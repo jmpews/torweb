@@ -19,7 +19,7 @@ class UserProfileHandler(BaseRequestHandler):
     def get(self, user_id, *args, **kwargs):
         user = User.get(User.id == user_id)
         profile = Profile.get_by_user(user)
-        posts = Post.select().where(Post.user == user).limit(10)
+        posts = Post.select().where(Post.user == user, Post.is_delete == False).limit(10)
         postreplys = PostReply.select().where(PostReply.user == user).limit(10)
         collectposts = CollectPost.select().where(CollectPost.user == user).limit(10)
         # 是否显示关注

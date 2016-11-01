@@ -67,7 +67,7 @@ class PostModifyHandler(BaseRequestHandler):
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['post', 'title', 'content', 'topic'])
         try:
-            post = Post.get(Post.id == post_data['post'])
+            post = Post.get(Post.id == post_data['post'], Post.is_delete == False)
         except Post.DoesNotExist:
             self.write(json_result(1, '请选择正确主题'))
             return
@@ -94,7 +94,7 @@ class PostReplyAddHandler(BaseRequestHandler):
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['post', 'content'])
         try:
-            post = Post.get(Post.id == post_data['post'])
+            post = Post.get(Post.id == post_data['post'], Post.is_delete == False)
         except PostTopic.DoesNotExist:
             self.write(json_result(1, '请选择正确post'))
             return
@@ -127,7 +127,7 @@ class PostReplyOptHandler(BaseRequestHandler):
         # 收藏该主题
         elif opt == 'collect-post':
             try:
-                post = Post.get(Post.id == data['post'])
+                post = Post.get(Post.id == data['post'], Post.is_delete == False)
             except:
                 self.write(json_result(1, '请输入正确的Post'))
                 return
@@ -136,7 +136,7 @@ class PostReplyOptHandler(BaseRequestHandler):
         # 取消收藏该主题
         elif opt == 'cancle-collect-post':
             try:
-                post = Post.get(Post.id == data['post'])
+                post = Post.get(Post.id == data['post'], Post.is_delete == False)
             except:
                 self.write(json_result(1, 'CollectPost不正确'))
                 return
@@ -146,7 +146,7 @@ class PostReplyOptHandler(BaseRequestHandler):
         # 取消收藏该主题
         elif opt == 'del-post':
             try:
-                post = Post.get(Post.id == data['post-id'])
+                post = Post.get(Post.id == data['post-id'], Post.is_delete == False)
             except:
                 self.write(json_result(1, 'CollectPost不正确'))
                 return

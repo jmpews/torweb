@@ -24,6 +24,6 @@ def get_topic_index_info(topic_id, current_page, page_limit=config.default_page_
     return topic, posts, top_posts, pages
 
 def get_index_user_info(user):
-    posts = Post.select().where(Post.user == user).count()
+    posts = Post.select().where(Post.user == user, Post.is_delete == False).count()
     collectposts = CollectPost.select().where(CollectPost.user == user).count()
     return {'posts_count': posts, 'collectposts_count': collectposts}

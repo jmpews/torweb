@@ -46,6 +46,8 @@ class Post(BaseModel):
     top = BooleanField(default=False, verbose_name='置顶')
     essence = BooleanField(default=False, verbose_name='精华')
 
+    is_delete = BooleanField(default=False, verbose_name='是否删除')
+
     def __str__(self):
         return "[%s-%s]" % (self.title, self.user)
 
@@ -95,7 +97,7 @@ class Post(BaseModel):
         :param self:
         :return:
         '''
-        top_posts = Post.select().where(Post.top == True)
+        top_posts = Post.select().where(Post.top == True, Post.is_delete == False)
         top_posts_count = top_posts.count()
         return top_posts, top_posts_count
 
@@ -107,8 +109,8 @@ class Post(BaseModel):
         :param page_number: 当前页
         :return:
         '''
-        page_number_limit = Post.select().order_by(Post.latest_reply_time.desc()).count()
-        posts = Post.select().order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
+        page_number_limit = Post.select().where(Post.is_delete == False).order_by(Post.latest_reply_time.desc()).count()
+        posts = Post.select().where(Post.is_delete == False).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         # result = []
         # for post in posts:
         #     result.append({
@@ -134,8 +136,8 @@ class Post(BaseModel):
         :param page_number: 当前页
         :return:
         '''
-        page_number_limit = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time.desc()).count()
-        posts = Post.select().where(Post.topic == topic).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
+        page_number_limit = Post.select().where(Post.topic == topic, Post.is_delete == False).order_by(Post.latest_reply_time.desc()).count()
+        posts = Post.select().where(Post.topic == topic, Post.is_delete == False).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         return posts, page_number_limit
 
     def detail(self):
@@ -159,7 +161,7 @@ class Post(BaseModel):
     @staticmethod
     def get_detail_and_replys(post_id):
         try:
-            post = Post.get(Post.id == post_id)
+            post = Post.get(Post.id == post_id, Post.is_delete == False)
         except Post.DoesNotExist:
             return None, None
         post.up_visit()
@@ -169,7 +171,7 @@ class Post(BaseModel):
     @staticmethod
     def get_detail(post_id):
         try:
-            post = Post.get(Post.id == post_id)
+            post = Post.get(Post.id == post_id, Post.is_delete == False)
         except Post.DoesNotExist:
             return None
         return post

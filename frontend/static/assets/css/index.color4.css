@@ -3419,6 +3419,20 @@ ul {
   -ms-transition: all .2s ease-out;
 }
 
+.tiny-nav {
+  margin-bottom: 20px;
+}
+.tiny-nav .nav-item {
+  display: inline-block;
+  font-size: 17px;
+  color: #666 !important;
+  padding: 10px;
+}
+.tiny-nav .nav-item:hover, .tiny-nav .nav-item.active {
+  color: #e95420 !important;
+  border-bottom: 2px solid #e95420;
+}
+
 .tag-sp {
   display: inline-block;
   margin-right: 5px;

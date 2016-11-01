@@ -150,7 +150,22 @@ ul {
     -moz-transition: all .2s ease-out;
     -ms-transition: all .2s ease-out;
 }
+// 自定义组件 - tiny导航
+.tiny-nav {
+    margin-bottom: 20px;
 
+    .nav-item {
+        display: inline-block;
+        font-size: 17px;
+        color: $important-font-color !important;
+        padding: 10px;
+        &:hover,
+        &.active {
+            color: $link-color !important;
+            border-bottom: 2px solid $link-color;
+        }
+    }
+}
 // 自定义组件 - 标签
 .tag-sp {
     display: inline-block;

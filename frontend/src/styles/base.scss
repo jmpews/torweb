@@ -916,7 +916,6 @@ $current-topic-width: 21px;
         float: right;
         max-width: 10%;
         min-width: 30px;
-        color: $important-link-color;
         right: 0px;
         top: 0px;
         width: 30px;
@@ -1445,23 +1444,23 @@ $current-topic-width: 21px;
             width: 40px;
         }
         ul {
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
+            // display: -moz-box;
+            // display: box;
+            // display: -webkit-flex;
+            // display: -moz-flex;
+            // display: -ms-flexbox;
+            // display: flex;
             li {
                 display: block;
                 text-align: center;
-                -webkit-box-flex: 1;
-                -moz-box-flex: 1;
-                box-flex: 1;
-                -webkit-flex: 1;
-                -moz-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
+				float: left;
+                // -webkit-box-flex: 1;
+                // -moz-box-flex: 1;
+                // box-flex: 1;
+                // -webkit-flex: 1;
+                // -moz-flex: 1;
+                // -ms-flex: 1;
+                // flex: 1;
             }
         }
     }

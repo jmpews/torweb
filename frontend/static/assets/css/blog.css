@@ -3421,6 +3421,7 @@ ul {
 
 .tiny-nav {
   margin-bottom: 20px;
+  background-color: #fff;
 }
 .tiny-nav .nav-item {
   display: inline-block;

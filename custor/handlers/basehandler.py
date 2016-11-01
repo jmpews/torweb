@@ -18,6 +18,9 @@ class BaseRequestHandler(RequestHandler):
     def redirect404(self):
         self.redirect(config.default_404_url)
 
+    def redirect404_json(self):
+        self.write(json_result(-1, '数据提交错误'))
+
     def prepare(self):
         '''
         peewee的连接池, request-hook(请求前连接)

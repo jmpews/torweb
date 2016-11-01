@@ -51,11 +51,16 @@ class Post(BaseModel):
     def __str__(self):
         return "[%s-%s]" % (self.title, self.user)
 
+    def logic_delete(self):
+        self.is_delete = True
+        self.save()
+
     def check_auth(self, user):
         if not user:
-            return 1, 0, 0
-        elif self.user == user:
-            return 1, 1 , 1
+            return False
+        if user.is_admin() or self.check_auth(user):
+            return True
+        return False
 
     def check_own(self, user):
         if user and self.user == user:

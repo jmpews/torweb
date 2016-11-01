@@ -57,8 +57,12 @@ class PostAddHandler(BaseRequestHandler):
 
 # 修改帖子
 class PostModifyHandler(BaseRequestHandler):
+    @login_required
     def get(self, post_id, *args, **kwargs):
         post = Post.get_detail(post_id)
+        if not post.check_auth(self.current_user):
+            self.redirect404()
+            return
         self.render('post/post_modify.html',
                     post=post,
                     topic_category_cache=topic_category_cache)
@@ -70,6 +74,10 @@ class PostModifyHandler(BaseRequestHandler):
             post = Post.get(Post.id == post_data['post'], Post.is_delete == False)
         except Post.DoesNotExist:
             self.write(json_result(1, '请选择正确主题'))
+            return
+
+        if not post.check_auth(self.current_user):
+            self.redirect404_json()
             return
 
         try:
@@ -150,6 +158,10 @@ class PostReplyOptHandler(BaseRequestHandler):
             except:
                 self.write(json_result(1, 'CollectPost不正确'))
                 return
+            if not post.check_auth(self.current_user):
+                self.redirect404_json()
+                return
+            post.logic_delete()
             self.write(json_result(0, 'success'))
         else:
             self.write(json_result(1, 'opt不支持'))

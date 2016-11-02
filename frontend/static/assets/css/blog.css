@@ -4048,11 +4048,9 @@ ul {
 .post-item .post-item-end {
   display: inline-block;
   float: right;
-  max-width: 10%;
-  min-width: 30px;
+  max-width: 15%;
   right: 0px;
   top: 0px;
-  width: 30px;
 }
 
 .post-detail-html .col-md-9, .post-detail-html .col-md-3 {

@@ -4048,7 +4048,7 @@ ul {
 .post-item .post-item-end {
   display: inline-block;
   float: right;
-  max-width: 15%;
+  max-width: 10%;
   right: 0px;
   top: 0px;
 }

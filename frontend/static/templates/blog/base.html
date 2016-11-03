@@ -17,61 +17,62 @@
     <div class="header-container clear-xs cl">
         <div class="header-logo">
             <a href="/">Jmp</a>
-                <div class="theme" user="">
-                    <span class="color color1" color="color1"></span>
-                    <span class="color color2" color="color2"></span>
-                    <span class="color color3" color="color3"></span>
-                    <span class="color color4" color="color4"></span>
-                </div>
-            </div>
-            <ul class="header-nav clear-xs cl">
-                <li class="active transition">
-                    <a href="/">首页 <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                    <!-- <a href="/blog"><i class="fa fa-cloud" aria-hidden="true"></i></a> -->
-                    <a href="http://github.com/jmpews">github</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    {% block content %}{% end %}
-    <div class="footer">
-        <div class="footer-container container">
-            <div class="cl hidden-xs">
-                <dl class="col-sm-2">
-                    <dt>关注我</dt>
-                    <dd><a href="/">Github</a></dd>
-                    <dd><a href="/">Weibo</a></dd>
-                </dl>
-            </div>
-            <div class="footer-logo">
-                <span>jmpews</span>
-                <span class="divider">/</span>
-                <span>2016</span>
-                <span class="divider">/</span>
-                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-                document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            <div class="theme" user="">
+                <span class="color color1" color="color1"></span>
+                <span class="color color2" color="color2"></span>
+                <span class="color color3" color="color3"></span>
+                <span class="color color4" color="color4"></span>
             </div>
         </div>
+        <ul class="header-nav clear-xs cl">
+            <li class="active transition">
+                <a href="/">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <!-- <a href="/blog"><i class="fa fa-cloud" aria-hidden="true"></i></a> -->
+                <a href="http://github.com/jmpews">github</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
+            </li>
+        </ul>
     </div>
-    <div class="chat-container" id="chat-container" style="display: none">
+</div>
+{% block content %}{% end %}
+<div class="footer">
+    <div class="footer-container container">
+        <div class="cl hidden-xs">
+            <dl class="col-sm-2">
+                <dt>关注我</dt>
+                <dd><a href="/">Github</a></dd>
+                <dd><a href="/">Weibo</a></dd>
+            </dl>
+        </div>
+        <div class="footer-logo">
+            <span>jmpews</span>
+            <span class="divider">/</span>
+            <span>2016</span>
+            <span class="divider">/</span>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </div>
     </div>
+</div>
 
-    <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/bootstrap-notify.min.js"></script>
-    <!-- <script src="/assets/js/react/bundle.js"></script> -->
-    <script>
-    $(document).on("scroll", function() {
-        if(window.screen.width > 767) {
+<div class="chat-container" id="chat-container" style="display: none">
+</div>
+
+<script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/bootstrap-notify.min.js"></script>
+<!-- <script src="/assets/js/react/bundle.js"></script> -->
+<script>
+    $(document).on("scroll", function () {
+        if (window.screen.width > 767) {
             if ($(document).scrollTop() > 100) {
                 $(".header").addClass("scroll");
             } else {
@@ -79,8 +80,8 @@
             }
         }
     });
-    </script>
-    {% block scripts %}
-    {% end %}
+</script>
+{% block scripts %}
+{% end %}
 </body>
 </html>

@@ -7,70 +7,73 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/assets/css/normalize.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/bs4_custom.css">
-    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/jquery.fullpage.min.css" />
-    {% if current_user %}
-    {% set theme = current_user.get_theme_by_cookie_user(handler) %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{theme}}.css" />
-    {% else %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color3.css" />
-    {% end %}
+    {#    <link rel="stylesheet" href="/assets/css/bs4_custom.css">#}
     {% block styles %}{% end %}
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+{#    {% if current_user %}#}
+{#    {% set theme = current_user.get_theme_by_cookie_user(handler) %}#}
+{#    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index{{ theme }}.css"/>#}
+{#    {% else %}#}
+    <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/index.color4.css"/>
+{#    {% end %}#}
 </head>
 <body>
     <div class="header cl">
         <div class="header-container clear-xs cl">
-            <div class="header-logo float-left">
+            <div class="header-logo">
                 <a href="/">Jmp</a>
                 {% if current_user %}
-                <div class="theme" user="{{current_user.id}}">
-                {% else %}
-                <div class="theme" user="">
-                {% end %}
-                    <span class="color color1" color="color1"></span>
-                    <span class="color color2" color="color2"></span>
-                    <span class="color color3" color="color3"></span>
-                    <span class="color color4" color="color4"></span>
+                <div class="theme" user="{{ current_user.id }}">
+                    {% else %}
+                    <div class="theme" user="">
+                        {% end %}
+                        <span class="color color1" color="color1"></span>
+                        <span class="color color2" color="color2"></span>
+                        <span class="color color3" color="color3"></span>
+                        <span class="color color4" color="color4"></span>
+                    </div>
                 </div>
-            </div>
-            <ul class="header-nav float-left list-inline cl">
-                <li>
-                    <a href="/">首页 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="active">
-                    <a href="/recommend">推荐</a>
-                </li>
-                <li>
-                    <!-- <a href="/blog"><i class="fa fa-cloud" aria-hidden="true"></i></a> -->
-                    <a href="/blog">官方博客</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-            <div class="header-tip hidden-xs">
-                {% if not current_user %}
-                <div class="btn-group" style="">
-                    <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
-                    <a class="btn btn-sm btn-primary" style="color:#fff;"role="button" href="/register">注册</a>
-                </div>
-                {% else %}
-                <ul class="options list-inline">
-                    <li class="dropdown">
-                        <a href="/user/{{current_user.id}}" id="user-avatar">
-                            <img src="/assets/images/avatar/{{current_user.avatar}}">
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="user-avatar">
-                            <li class="dropdown-item"><a href="/user/{{current_user.id}}">个人中心</a></li>
-                            <li class="dropdown-item"><a href="/user/edit">账号设置</a></li>
-                            <li class="dropdown-item"><a href="/logout">退出</a></li>
-                        </ul>
+                <ul class="header-nav clear-xs cl">
+                    <li>
+                        <a href="/">首页 <span class="sr-only">(current)</span></a>
                     </li>
-                    <li><a href="/user/notification">消息</a></li>
-                    <li><a href="/post/add">新主题</a></li>
+                    <li class="active transition">
+                        <a href="/recommend">推荐</a>
+                    </li>
+                    <li>
+                        <!-- <a href="/blog"><i class="fa fa-cloud" aria-hidden="true"></i></a> -->
+                        <a href="/blog">官方博客</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-envira" aria-hidden="true"></i></a>
+                    </li>
                 </ul>
-                {% end %}
+                <div class="header-tip">
+                    {% if not current_user %}
+                    <!-- 未登录 -->
+                    <div class="btn-group" style="">
+                        <a class="btn btn-sm btn-outline-primary" role="button" href="/login">登陆</a>
+                        <a class="btn btn-sm btn-primary" style="color:#fff;" role="button" href="/register">注册</a>
+                    </div>
+                    {% else %}
+                    <!-- 登陆 -->
+                    <ul class="options list-inline cl">
+                        <li class="dropdown">
+                            <a href="#blank" id="user-avatar">
+                                <img src="/assets/images/avatar/{{ current_user.avatar }}">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="user-avatar">
+                                <li class="dropdown-item real-time-chat"><a href="#blank">实时通讯</a></li>
+                                <li class="dropdown-item"><a href="/user/{{ current_user.id }}">个人中心</a></li>
+                                <li class="dropdown-item"><a href="/user/edit">账号设置</a></li>
+                                <li class="dropdown-item"><a href="/logout">退出</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/user/notification">消息</a></li>
+                        <li><a href="/post/add">新主题</a></li>
+                    </ul>
+                    {% end %}
+                </div>
             </div>
         </div>
     </div>
@@ -99,17 +102,83 @@
                 <span class="divider">/</span>
                 <span>2016</span>
                 <span class="divider">/</span>
-                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="loginModal">
+        <div class="card custom-card modal-dialog">
+            <div class="card-header">
+                登陆
+            </div>
+            <div class="card-block">
+                <div class="loading">
+                    <div class="sk-cube-grid">
+                        <div class="sk-cube sk-cube1"></div>
+                        <div class="sk-cube sk-cube2"></div>
+                        <div class="sk-cube sk-cube3"></div>
+                        <div class="sk-cube sk-cube4"></div>
+                        <div class="sk-cube sk-cube5"></div>
+                        <div class="sk-cube sk-cube6"></div>
+                        <div class="sk-cube sk-cube7"></div>
+                        <div class="sk-cube sk-cube8"></div>
+                        <div class="sk-cube sk-cube9"></div>
+                    </div>
+                </div>
+                <form data-parsley-validate="" action="/login" method="post">
+                    <fieldset class="form-group">
+                        <label for="username">用户名(目前可以使用的测试账户admin:admin, test:test)</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名"
+                               required>
+                        <small class="text-muted">我们保证您的信息安全.</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="请输入密码"
+                               required>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <img class="captcha" src="">
+                        <input class="form-control" id="captcha" placeholder="请验证码" required>
+                    </fieldset>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 保持Session记录
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">登陆</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+    </div>
+
     <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
     <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/jquery.fullpage.min.js"></script>
-    <script src="/assets/js/jquery.cookie.min.js"></script>
+    <script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
-    {% block scripts %}{% end %}
+    <script src="/assets/js/jquery.fullpage.min.js"></script>
+    <!-- <script src="/assets/js/react/bundle.js"></script> -->
+    <script>
+        $(document).on("scroll", function () {
+            if (window.screen.width > 767) {
+                if ($(document).scrollTop() > 70) {
+                    $(".header").addClass("scroll");
+                } else {
+                    $(".header").removeClass("scroll");
+                }
+            }
+        });
+    </script>
+    {% block scripts %}
+    {% end %}
 </body>
 </html>

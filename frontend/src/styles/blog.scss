@@ -1,4 +1,43 @@
 @charset "UTF-8";
+
+//$color1: #FFBCBC;
+////$color2: #A4EDA4;
+//$color2: #000;
+//$color3: #2fca7b;
+//$color4: #e95420;
+//
+//$lightpink: #FFBCBC;
+//$lightgreen: #A4EDA4;
+//$lightgreen2: #2fca7b;
+//$bg1: #e1e1e1;
+//
+//$base-color: #4b89ac;
+//
+////#2fca7b;
+//$logo-color: #ace6f6;
+//
+//$font-color: #999;
+//$link-color: #446491;
+//$important-link-color: $logo-color;
+//$body-backgroud-color: #f7f7f7;
+//$nav-header-background-color: #446491;
+//$nav-header-font-color: #fff;
+//$nav-header-font-hover-color: $logo-color;
+//$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
+//
+//$border-color: #f5f5f5;
+//
+//$important-font-color: #666;
+//$important-link-color: #446491;
+//$card-header-background-color: #fff;
+//$card-header-font-color: $important-font-color;
+//$card-body-background-color: #fff;
+//$card-body-font-color: #999;
+//$link-hover-color: darken($link-color, 15%);
+//$link-light-color: lighten($link-color, 15%);
+//$btn-color: $link-color;
+//$btn-hover-color: $link-hover-color;
+
 $color1: #FFBCBC;
 //$color2: #A4EDA4;
 $color2: #000;
@@ -10,32 +49,10 @@ $lightgreen: #A4EDA4;
 $lightgreen2: #2fca7b;
 $bg1: #e1e1e1;
 
-$base-color: #4b89ac;
-
-//#2fca7b;
-$logo-color: #ace6f6;
-
-$font-color: #999;
-$link-color: #446491;
-$important-link-color: $logo-color;
-$body-backgroud-color: #f7f7f7;
-$nav-header-background-color: #446491;
-$nav-header-font-color: #fff;
-$nav-header-font-hover-color: $logo-color;
-$nav-header-hover-color: rgba(255, 255, 255, 0.26) !default;
-
-$border-color: #f5f5f5;
-
-$important-font-color: #666;
-$important-link-color: #446491;
-$card-header-background-color: #fff;
-$card-header-font-color: $important-font-color;
-$card-body-background-color: #fff;
-$card-body-font-color: #999;
-$link-hover-color: darken($link-color, 15%);
-$link-light-color: lighten($link-color, 15%);
-$btn-color: $link-color;
-$btn-hover-color: $link-hover-color;
+$base-color: $color4;
+$link-color: $base-color;
+$nav-header-font-hover-color: $link-color;
+$btn-hover-color: $link-color;
 
 @import "./jmp";
 

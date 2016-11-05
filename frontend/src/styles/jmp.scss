@@ -67,3 +67,46 @@
         }
     }
 }
+
+// 自定义 card组件
+.user-profile-card {
+    padding: 10px;
+    //border-bottom: 1px dashed $link-color;
+    //&:last-of-type {
+    //    border-bottom: none;
+    //}
+    .profile-card-head {
+        color: $important-link-color;
+        font-size: 14px;
+        //text-decoration: underline;
+        text-align: center;
+        line-height: 40px;
+        padding: 5px;
+        background-color: #fbfbfb;
+
+        //border-top: 1px dashed #d8d6d6;
+        //border-bottom: 1px dashed #d8d6d6;
+    }
+    .profile-card-body {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .profile-card-body-list {
+        padding-left: 10px;
+        padding-right: 10px;
+
+        li {
+            line-height: 30px;
+            border-bottom: 1px dashed #d8d6d6;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+        }
+        li:first-of-type {
+        }
+        .fa {
+            font-size: 16px;
+        }
+    }
+}

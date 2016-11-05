@@ -28,11 +28,9 @@ class MessageList extends React.Component {
       });
 
       return (
-          <div className="message-list">
-              <ul id="messageList">
-                  {messages}
-              </ul>
-          </div>
+          <ul className="message-list">
+              {messages}
+          </ul>
       )
   }
 }

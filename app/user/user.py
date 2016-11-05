@@ -22,11 +22,17 @@ class UserProfileHandler(BaseRequestHandler):
         posts = Post.select().where(Post.user == user, Post.is_delete == False).limit(10)
         postreplys = PostReply.select().where(PostReply.user == user).limit(10)
         collectposts = CollectPost.select().where(CollectPost.user == user).limit(10)
+
+        who_follow = Follower.select(Follower.follower).where(Follower.user == user)
+        follow_who = Follower.select(Follower.user).where(Follower.follower == user)
+
         # 是否显示关注
         is_follow = True if Follower.is_follow(user, self.current_user) else False
         is_online = True if WebsocketChatHandler.is_online(user.username) else False
         self.render('user/profile.html',
                     user=user,
+                    who_follow=who_follow,
+                    follow_who=follow_who,
                     profile=profile,
                     posts=posts,
                     postreplys=postreplys,

@@ -23,7 +23,7 @@ class UserList extends React.Component {
                 </div>
             )
         });
-        var current = (<div className="current-user" key="current-user">
+        var current = (<div className="chat-user current-user" key="current-user">
             <img className="chat-user-avatar" />
             <span className="chat-user-name">{current_user.name} </span>
         </div>);

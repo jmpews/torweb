@@ -52,17 +52,17 @@ class ChatContainer extends React.Component {
         var current_user = state.current_user;
         var chat_title = '';
         if(current_user.id == -1) {
-            chat_title = 'real-time-chat';
+            chat_title = '基于websocket实时聊天';
         }
         else {
-            chat_title = 'chat 2' + current_user.name;
+            chat_title = current_user.name + "...";
         }
         return (
             <div className="chat-launcher">
                 <div className="chat" ref="realchat" >
                     <div className="chat-header">
                         <a href="#blank" className="chat-title">{chat_title}</a>
-                        <a href="#blank" className="chat-close" onClick={(e) => {console.log($(_this.refs.realchat).hide())}}>X</a>
+                        <a href="#blank" className="chat-close" onClick={(e) => {console.log($(_this.refs.realchat).hide())}}>关闭</a>
                     </div>
                     <div className="chat-content">
                         <UserList current_user={state.current_user} recent_user_list={state.recent_user_list} setCurrentUser={setCurrentUserDispatch} />

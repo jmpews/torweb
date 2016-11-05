@@ -26,6 +26,9 @@
                 <dd class="col-xs-6"><span class="">{{ '在线' if is_online else '离线' }}</span></dd>
                 {% end %}
             </dl>
+            <div class="row">
+
+            </div>
             {% if current_user and user.id != current_user.id %}
             <div class="text-center">
                 {% if is_follow %}
@@ -40,85 +43,128 @@
     </div>
     <div class="col-md-9">
         <div class="user-profile-trend">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/user/{{ user.id }}">个人资料</a>
+                    <a class="nav-link active" href="#user-profile-info" data-toggle="tab" aria-controls="user-profile-info" aria-expanded="true">个人资料</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/follower/{{ user.id }}">个人关注</a>
+                    <a class="nav-link" href="#user-profile-follow" data-toggle="tab" aria-controls="user-profile-follow">个人关注</a>
                 </li>
             </ul>
-            <div class="">
-                <div class="user-profile-card">
-                    <div class="profile-card-head" style="border-top: none;">
-                        个人资料
+            <div class="tab-content">
+                <div id="user-profile-info" class="tab-pane active" role="tabpanel" aria-expanded="true">
+                    <div class="user-profile-card">
+                        <div class="profile-card-head" style="border-top: none;">
+                            个人资料
+                        </div>
+                        <div class="profile-card-body-list">
+                            <ul class="">
+                                <li>第{{ user.id }}位sxuer</li>
+                                <li>{{ profile.reg_time }}加入</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="profile-card-body-list">
-                        <ul class="">
-                            <li>第{{ user.id }}位sxuer</li>
-                            <li>{{ profile.reg_time }}加入</li>
-                        </ul>
+
+                    <div class="user-profile-card">
+                        <div class="profile-card-head">
+                            发表过的Post
+                        </div>
+                        <div class="profile-card-body-list">
+                            {% if posts %}
+                            <ul class="">
+                                {% for post in posts %}
+                                <li><a href="/post/{{ post.id }}">《{{ post.title }}》</a></li>
+                                {% end %}
+                            </ul>
+                            {% else %}
+                            <div class="text-center">
+                                <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                            </div>
+                            {% end %}
+                        </div>
+                    </div>
+
+                    <div class="user-profile-card">
+                        <div class="profile-card-head">
+                            发表过的评论
+                        </div>
+                        <div class="profile-card-body-list">
+                            {% if postreplys %}
+                            <ul class="">
+                                {% for postreply in postreplys %}
+                                <li>
+                                    <a href="/post/{{ postreply.post.id }}">《{{ postreply.post.title }}》</a>
+                                    :
+                                    <a href="/post/{{ postreply.post.id }}">{{ postreply.content }}</a>
+                                </li>
+                                {% end %}
+                            </ul>
+                            {% else %}
+                            <div class="text-center">
+                                <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                            </div>
+                            {% end %}
+                        </div>
+                    </div>
+
+                    <div class="user-profile-card">
+                        <div class="profile-card-head">
+                            收藏过的Post
+                        </div>
+                        <div class="profile-card-body-list">
+                            {% if collectposts %}
+                            <ul class="">
+                                {% for collectpost in collectposts %}
+                                <li><a href="/post/{{ collectpost.post.id }}">《{{ collectpost.post.title }}》</a></li>
+                                {% end %}
+                            </ul>
+                            {% else %}
+                            <div class="text-center">
+                                <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                            </div>
+                            {% end %}
+                        </div>
                     </div>
                 </div>
 
-                <div class="user-profile-card">
-                    <div class="profile-card-head">
-                        发表过的Post
-                    </div>
-                    <div class="profile-card-body-list">
-                        {% if posts %}
-                        <ul class="">
-                            {% for post in posts %}
-                            <li><a href="/post/{{ post.id }}">《{{ post.title }}》</a></li>
-                            {% end %}
-                        </ul>
-                        {% else %}
-                        <div class="text-center">
-                            <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                <!-- follower页面 -->
+                <div id="user-profile-follow" class="tab-pane" role="tabpanel">
+                    <div class="user-profile-card">
+                        <div class="profile-card-head">
+                            Ta关注的人
                         </div>
-                        {% end %}
+                        <div class="profile-card-body cl">
+                            {% if follow_who %}
+                            <ul class="list-inline">
+                                {% for who in follow_who %}
+                                <li><a href="/user/{{who.user.id}}"><img src="/assets/images/avatar/{{who.user.avatar}}"><span>{{who.user.username}}</span></a> </li>
+                                {% end %}
+                            </ul>
+                            {% else %}
+                            <div class="text-center">
+                                <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                            </div>
+                            {% end %}
+                        </div>
                     </div>
-                </div>
 
-                <div class="user-profile-card">
-                    <div class="profile-card-head">
-                        发表过的评论
-                    </div>
-                    <div class="profile-card-body-list">
-                        {% if postreplys %}
-                        <ul class="">
-                            {% for postreply in postreplys %}
-                            <li>
-                                <a href="/post/{{ postreply.post.id }}">《{{ postreply.post.title }}》</a>
-                                :
-                                <a href="/post/{{ postreply.post.id }}">{{ postreply.content }}</a>
-                            </li>
-                            {% end %}
-                        </ul>
-                        {% else %}
-                        <div class="text-center">
-                            <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                    <div class="user-profile-card">
+                        <div class="profile-card-head">
+                            关注他的童鞋
                         </div>
-                        {% end %}
-                    </div>
-                </div>
-
-                <div class="user-profile-card">
-                    <div class="profile-card-head">
-                        收藏过的Post
-                    </div>
-                    <div class="profile-card-body-list">
-                        {% if collectposts %}
-                        <ul class="">
-                            {% for collectpost in collectposts %}
-                            <li><a href="/post/{{ collectpost.post.id }}">《{{ collectpost.post.title }}》</a></li>
-                            {% end %}
-                        </ul>
-                        {% else %}
-                        <div class="text-center">
+                        <div class="profile-card-body cl">
+                            {% if who_follow %}
+                            <ul class="list-inline">
+                                {% for who in who_follow %}
+                                <li><a href="/user/{{who.follower.id}}"><img src="/assets/images/avatar/{{who.follower.avatar}}"><span>{{who.follower.username}}</span></a> </li>
+                                {% end %}
+                            </ul>
+                            {% else %}
+                            <div class="text-center">
                             <i class="fa fa-meh-o" aria-hidden="true"></i>暂无
+                            </div>
+                            {% end %}
                         </div>
-                        {% end %}
                     </div>
                 </div>
             </div>

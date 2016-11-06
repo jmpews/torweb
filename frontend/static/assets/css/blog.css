@@ -3540,12 +3540,17 @@ ul {
 .tiny-nav .nav-item {
   display: inline-block;
   font-size: 17px;
-  color: #666 !important;
+  color: #999 !important;
   padding: 10px;
 }
 .tiny-nav .nav-item:hover, .tiny-nav .nav-item.active {
   color: #e95420 !important;
   border-bottom: 2px solid #e95420;
+}
+.tiny-nav::after {
+  clear: both;
+  content: " ";
+  display: table;
 }
 
 .tag-sp {
@@ -4840,13 +4845,13 @@ ul {
   background-color: transparent;
 }
 .recommend .header a {
-  color: #fff;
+  color: #666;
 }
 .recommend .header a:hover {
   color: #e95420;
 }
 .recommend .header .options .dropdown a {
-  color: #fff;
+  color: #666;
 }
 .recommend .header .options .dropdown a:hover {
   color: #e95420;

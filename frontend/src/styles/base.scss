@@ -157,13 +157,18 @@ ul {
     .nav-item {
         display: inline-block;
         font-size: 17px;
-        color: $important-font-color !important;
+        color: $font-color !important;
         padding: 10px;
         &:hover,
         &.active {
             color: $link-color !important;
             border-bottom: 2px solid $link-color;
         }
+    }
+    &::after {
+        clear: both;
+        content: " ";
+        display: table;
     }
 }
 // 自定义组件 - 标签
@@ -1737,16 +1742,16 @@ $current-topic-width: 21px;
             //background: none;
         }
         a {
-            color: #fff;
+            color: $important-font-color;
             &:hover {
-                color: $base-color;
+                color: $link-color;
             }
         }
         .options .dropdown {
             a {
-                color: #fff;
+                color: $important-font-color;
                 &:hover {
-                    color: $base-color;
+                    color: $link-color;
                 }
             }
         }

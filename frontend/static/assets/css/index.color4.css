@@ -3544,7 +3544,7 @@ ul {
   border: none !important;
   padding: 10px !important;
 }
-.tiny-nav .nav-item:hover, .tiny-nav .nav-item.active {
+.tiny-nav .nav-item:hover, .tiny-nav .nav-item.active, .tiny-nav .nav-item:focus {
   color: #e95420 !important;
   border-bottom: 2px solid #e95420 !important;
 }

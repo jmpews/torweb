@@ -161,7 +161,8 @@ ul {
         border: none !important;
         padding: 10px !important;
         &:hover,
-        &.active {
+        &.active,
+        &:focus {
             color: $link-color !important;
             border-bottom: 2px solid $link-color !important;
         }

@@ -3120,7 +3120,7 @@ form .form-control {
 form .form-control:focus {
   color: #55595c;
   background-color: #fff;
-  border-color: #66afe9;
+  border-color: #e95420;
   outline: none;
 }
 form .form-control:disabled, form .form-control[readonly] {

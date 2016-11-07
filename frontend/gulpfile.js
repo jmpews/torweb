@@ -87,7 +87,7 @@ gulp.task('copy', function () {
 
 //deal with custom scipt
 gulp.task('scripts', function() {
-    return gulp.src(['./src/scripts/index.js', './src/scripts/base.js'])
+    return gulp.src(['./src/scripts/index.js', './src/scripts/base.js', './bower_components/js-url/url.js'])
         .pipe(jshint.reporter('default'))
         .pipe(concat('main.js'))
         .pipe(gulp.dest(distPath+'/assets/js'))

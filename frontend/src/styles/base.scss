@@ -155,21 +155,21 @@ ul {
     margin-bottom: 20px;
     background-color: #fff;
     .nav-item {
+        float: left;
         display: inline-block;
         font-size: 17px;
-        color: $font-color !important;
-        border: none !important;
-        padding: 10px !important;
-        &:hover,
-        &.active,
-        &:focus {
-            color: $link-color !important;
-            border-bottom: 2px solid $link-color !important;
-        }
         a {
             clear: both;
-            padding: 0;
-            border: none;
+            border: none !important;
+            color: $font-color !important;
+            padding: 10px !important;
+
+            &:hover,
+            &.active,
+            &:focus {
+                color: $link-color !important;
+                border-bottom: 2px solid $link-color !important;
+            }
         }
     }
     &::after {

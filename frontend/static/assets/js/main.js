@@ -541,8 +541,8 @@ $('.dropdown-menu').on('click', function (e) {
 function init_tiny_nav() {
     var current_url = location.href;
     var current_filter = url('?filter', current_url);
-    $('.tiny-nav .nav-item').each(function (e) {
-        var f = url('?filter', $(this).attr('href'))
+    $('.tiny-nav .nav-item a').each(function (e) {
+        var f = url('?filter', $(this).attr('href'));
         if ((!current_filter) && f == 'all') {
             $(this).addClass('transition active');
             return

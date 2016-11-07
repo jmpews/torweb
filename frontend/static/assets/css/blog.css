@@ -3538,20 +3538,19 @@ ul {
   background-color: #fff;
 }
 .tiny-nav .nav-item {
+  float: left;
   display: inline-block;
   font-size: 17px;
-  color: #999 !important;
-  border: none !important;
-  padding: 10px !important;
-}
-.tiny-nav .nav-item:hover, .tiny-nav .nav-item.active, .tiny-nav .nav-item:focus {
-  color: #e95420 !important;
-  border-bottom: 2px solid #e95420 !important;
 }
 .tiny-nav .nav-item a {
   clear: both;
-  padding: 0;
-  border: none;
+  border: none !important;
+  color: #999 !important;
+  padding: 10px !important;
+}
+.tiny-nav .nav-item a:hover, .tiny-nav .nav-item a.active, .tiny-nav .nav-item a:focus {
+  color: #e95420 !important;
+  border-bottom: 2px solid #e95420 !important;
 }
 .tiny-nav::after {
   clear: both;

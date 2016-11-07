@@ -11,11 +11,17 @@
 {% block content %}
 <div class="content-container container post-detail-html">
     <div class="col-md-9">
-        <div class="tiny-nav" style="display: none;">
-            <a class="nav-item" href="?filter=all">所有镜像</a>
-            <a class="nav-item" href="?filter=collect"> 收藏镜像</a>
-            <a class="nav-item" href="?filter=mine"> 我的镜像</a>
-        </div>
+        <ul class="tiny-nav" style="display: none;">
+            <li class="nav-item">
+                <a class="nav-link" href="?filter=all">所有镜像</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?filter=collect"> 收藏镜像</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?filter=mine"> 我的镜像</a>
+            </li>
+        </ul>
         <div class="card all-cate-card post-detail-card custom-card" id="post-id" post-id="{{ post.id }}">
             <div class="post-detail-header cl">
                 <div class="avatar hidden-xs ">

@@ -158,11 +158,12 @@ ul {
         display: inline-block;
         font-size: 17px;
         color: $font-color !important;
-        padding: 10px;
+        border: none !important;
+        padding: 10px !important;
         &:hover,
         &.active {
             color: $link-color !important;
-            border-bottom: 2px solid $link-color;
+            border-bottom: 2px solid $link-color !important;
         }
     }
     &::after {

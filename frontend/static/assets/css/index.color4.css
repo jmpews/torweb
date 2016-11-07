@@ -3548,6 +3548,11 @@ ul {
   color: #e95420 !important;
   border-bottom: 2px solid #e95420 !important;
 }
+.tiny-nav .nav-item a {
+  clear: both;
+  padding: 0;
+  border: none;
+}
 .tiny-nav::after {
   clear: both;
   content: " ";

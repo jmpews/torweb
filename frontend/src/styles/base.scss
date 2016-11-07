@@ -165,6 +165,11 @@ ul {
             color: $link-color !important;
             border-bottom: 2px solid $link-color !important;
         }
+        a {
+            clear: both;
+            padding: 0;
+            border: none;
+        }
     }
     &::after {
         clear: both;

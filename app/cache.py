@@ -9,10 +9,10 @@ hot_post_cache = {'reply': [], 'visit': []}
 system_status_cache = [0, 0, 0, 0]
 
 def update_topic_category_cache():
-    '''
+    """
     更新主题分类缓存
     :return:
-    '''
+    """
     topic_category_cache['categorys'] = []
     topic_category_cache['topics'] = []
     categorys = PostCategory.select()
@@ -30,10 +30,10 @@ def update_topic_category_cache():
     topic_category_cache['topics'].append(tmp)
 
 def update_hot_post_cache():
-    '''
+    """
     更新 '热门文章' 缓存
     :return:
-    '''
+    """
     hot_post_cache['reply'] = []
     hot_post_cache['visit'] = []
     posts = Post.select().where(Post.is_delete == False).order_by(Post.reply_count.desc()).limit(4)
@@ -41,16 +41,16 @@ def update_hot_post_cache():
         hot_post_cache['reply'].append(post)
 
 def update_system_status_cache():
-    '''
+    """
     系统状态cache
     :return:
-    '''
+    """
     from threading import Thread
 
     class MonitorWorker(Thread):
-        '''
+        """
         监视系统状态线程
-        '''
+        """
         def __init__(self, name, systatus):
             Thread.__init__(self)
             self.name = name

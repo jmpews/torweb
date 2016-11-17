@@ -204,12 +204,12 @@ class ChatMessage(BaseModel):
 
     @staticmethod
     def get_recent_chat_message(current_user, other):
-        '''
+        """
         获取双方对话的聊天记录
         :param userA:
         :param userB:
         :return:
-        '''
+        """
         result = {}
         result['name'] = other.username
         result['id'] = other.id
@@ -235,11 +235,11 @@ class ChatMessage(BaseModel):
 
     @staticmethod
     def get_recent_user_list(current_user):
-        '''
+        """
         获取最近用户列表
         :param me:
         :return:
-        '''
+        """
         recent_user_list = {}
 
         user_id_list = []

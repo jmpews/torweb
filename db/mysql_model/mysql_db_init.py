@@ -26,7 +26,7 @@ def create_test_data(db_mysql):
     Follower.create(user=user_admin, follower=user_test)
 
     # -------------------- 测试分类功能 --------------
-    logger.debug('''
+    logger.debug("""
     版块分类
     docker:
         docker文章
@@ -35,7 +35,7 @@ def create_test_data(db_mysql):
 
     docker集群:
         docker集群文章
-    ''')
+    """)
 
     postcategory0 = PostCategory.create(name='docker', str='docker')
     postcategory1 = PostCategory.create(name='registry', str='registry')
@@ -100,10 +100,10 @@ def mysql_db_init(db_mysql):
     mysqldb.close()
 
 import html
-tmp_post = '''
+tmp_post = """
 <pre><code>
-'''+html.escape('''
+"""+html.escape("""
 test.test
-''')+ '''
+""")+ """
 </code></pre>
-'''
+"""

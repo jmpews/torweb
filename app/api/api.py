@@ -65,11 +65,11 @@ class SystemStatusWebsocketHandler(tornado.websocket.WebSocketHandler):
 
     @classmethod
     def write2all(cls, system_status_cache):
-        '''
+        """
         推送给所有用户
         :param system_status_cache:
         :return:
-        '''
+        """
         for client in cls.clients:
             client.write_message(json_result(0, {
             'cpu_per': system_status_cache[0],

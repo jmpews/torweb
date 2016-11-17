@@ -12,13 +12,13 @@ import urllib.parse
 import time
 
 def run_with_thread_future(*args, **kwargs):
-    '''
+    """
     如何利用future和线程的配合
     http://jmpews.github.io/posts/tornado-future-ioloop-yield.html
     :param args:
     :param kwargs:
     :return:
-    '''
+    """
     def wraps_func(func):
         @functools.wraps(func)
         def wraps_args(*args, **kwargs):
@@ -31,11 +31,11 @@ def run_with_thread_future(*args, **kwargs):
 
 
 def exception_deal(exceptions):
-    '''
+    """
     捕获get, post函数异常
     :param exceptions:
     :return:
-    '''
+    """
     def wrapper_func(func):
         # 保存原函数信息
         @functools.wraps(func)
@@ -56,11 +56,11 @@ def exception_deal(exceptions):
     return wrapper_func
 
 def timeit(func):
-    '''
+    """
     计算函数执行时间
     :param func:
     :return:
-    '''
+    """
     def wrapper(*args, **kwargs):
         start = time.clock()
         func(*args, **kwargs)
@@ -89,14 +89,14 @@ def check_captcha(errorcode, result):
     return wrap_func
 
 def login_required(method):
-    '''
+    """
     登陆 装饰器
 
     from "tornado.web.authenticated"
     `self.current_user`是一个@property
     :param method:
     :return:
-    '''
+    """
     from tornado.httpclient import HTTPError
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -135,11 +135,11 @@ def login_required_json(errorcode, result):
     return wrap_func
 
 def ppeewwee(func):
-    '''
+    """
     peewee的db hook
     :param func:
     :return:
-    '''
+    """
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         db_mysql.connect()

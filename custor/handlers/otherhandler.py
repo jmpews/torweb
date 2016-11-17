@@ -3,17 +3,17 @@ from db.mongo_db.server_status import ServerStatus
 
 from .basehandler import BaseRequestHandler
 
-'''
+"""
 主要包含一些高级的handler
-'''
+"""
 
 
 class Adv_BaseRequestHandler(BaseRequestHandler):
-    '''
+    """
     mongo:记录url、session
     增加了url访问记录
     增加session,形成一个session属性进行调用,在finish时进行更新
-    '''
+    """
 
     def __init__(self, application, request, **kwargs):
         BaseRequestHandler.__init__(self, application, request, **kwargs)

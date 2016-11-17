@@ -4,9 +4,9 @@ import functools
 
 
 class ServerStatus():
-    '''
+    """
     url访问记录
-    '''
+    """
     _collection = DB_mongo['serverstatus']
 
     @classmethod

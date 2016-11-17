@@ -69,27 +69,27 @@ class Post(BaseModel):
             return False
 
     def up_collect(self):
-        '''
+        """
         收藏帖子
         :return:
-        '''
+        """
         self.collect_count += 1
         self.save()
 
     def up_visit(self):
-        '''
+        """
         浏览数
         :return:
-        '''
+        """
         self.visit_count += 1
         self.save()
 
     def update_latest_reply(self, postreply):
-        '''
+        """
         更新最近回复
         :param postreply:
         :return:
-        '''
+        """
         self.latest_reply_user = postreply.user
         self.latest_reply_time = postreply.create_time
         self.reply_count += 1
@@ -97,23 +97,23 @@ class Post(BaseModel):
 
     @staticmethod
     def list_top():
-        '''
+        """
         获取指定帖子,可以用trick缓存
         :param self:
         :return:
-        '''
+        """
         top_posts = Post.select().where(Post.top == True, Post.is_delete == False)
         top_posts_count = top_posts.count()
         return top_posts, top_posts_count
 
     @staticmethod
     def list_recently(page_limit=config.default_page_limit, page_number=1):
-        '''
+        """
         列出最近帖子
         :param page_limit: 每一页帖子数量
         :param page_number: 当前页
         :return:
-        '''
+        """
         page_number_limit = Post.select().where(Post.is_delete == False).order_by(Post.latest_reply_time.desc()).count()
         posts = Post.select().where(Post.is_delete == False).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         # result = []
@@ -134,22 +134,22 @@ class Post(BaseModel):
 
     @staticmethod
     def list_by_topic(topic, page_limit=config.default_page_limit, page_number=1):
-        '''
+        """
         列出当前主题下的梯子
         :param topic: 具体主题
         :param page_limit: 每一页帖子数量
         :param page_number: 当前页
         :return:
-        '''
+        """
         page_number_limit = Post.select().where(Post.topic == topic, Post.is_delete == False).order_by(Post.latest_reply_time.desc()).count()
         posts = Post.select().where(Post.topic == topic, Post.is_delete == False).order_by(Post.latest_reply_time.desc()).paginate(page_number, page_limit)
         return posts, page_number_limit
 
     def detail(self):
-        '''
+        """
         获取帖子详情
         :return:
-        '''
+        """
         result = {}
         result['title'] = self.title
         result['content'] = self.content
@@ -184,9 +184,9 @@ class Post(BaseModel):
 
 
 class PostReply(BaseModel):
-    '''
+    """
     回复
-    '''
+    """
     post = ForeignKeyField(Post, verbose_name="对应帖子")
     user = ForeignKeyField(User, verbose_name="回复者")
     content = TextField(verbose_name="回复内容")
@@ -197,10 +197,10 @@ class PostReply(BaseModel):
         return "[%s-%s]" % (self.user, self.content)
 
     def up_like(self):
-        '''
+        """
         赞同
         :return:
-        '''
+        """
         self.like_count += 1
         self.save()
 
@@ -214,9 +214,9 @@ class PostReply(BaseModel):
 
 
 class CollectPost(BaseModel):
-    '''
+    """
     收藏帖子
-    '''
+    """
     post = ForeignKeyField(Post, verbose_name="对应帖子")
     user = ForeignKeyField(User, verbose_name="收藏者")
     collect_time = DateTimeField(default=datetime.datetime.now, verbose_name="收藏时间")

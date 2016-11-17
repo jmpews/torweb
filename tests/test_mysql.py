@@ -38,7 +38,7 @@ def create_test_data(db_mysql):
     Follower.create(user=user_admin, follower=user_test)
 
     # -------------------- 测试分类功能 --------------
-    logger.debug('''
+    logger.debug("""
     版块分类
     专业:
         计算机
@@ -53,7 +53,7 @@ def create_test_data(db_mysql):
 
     未分类:
         校园通知、讨论
-    ''')
+    """)
 
     postcategory0 = PostCategory.create(name='学习', str='study')
     postcategory1 = PostCategory.create(name='专业', str='major')
@@ -125,13 +125,13 @@ def mysql_db_init(db_mysql, db_name):
     mysqldb.close()
 
 import html
-tmp_post = '''
+tmp_post = """
 <pre><code>
-'''+html.escape('''
+"""+html.escape("""
 test.test
-''')+ '''
+""")+ """
 </code></pre>
-'''
+"""
 
 if __name__ == '__main__':
     from db.mysql_model import db_mysql

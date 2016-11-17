@@ -22,10 +22,10 @@ class BaseRequestHandler(RequestHandler):
         self.write(json_result(-1, '数据提交错误'))
 
     def prepare(self):
-        '''
+        """
         peewee的连接池, request-hook(请求前连接)
         :return:
-        '''
+        """
         db_mysql.connect()
         return super(BaseRequestHandler, self).prepare()
 
@@ -55,10 +55,10 @@ class BaseRequestHandler(RequestHandler):
             self.redirect("/static/500.html")
 
     def get_current_user(self):
-        '''
+        """
         获取当前用户
         :return:
-        '''
+        """
         username = self.get_secure_cookie('uuid')
         if not username:
             return None
@@ -66,37 +66,37 @@ class BaseRequestHandler(RequestHandler):
         return user
 
     def get_login_url(self):
-        '''
+        """
         获取登陆url
         :return:
-        '''
+        """
         return config.LOGIN_URL
 
     def success(self, data, errorcode=0):
-        '''
+        """
         成功返回
         :param data:
         :param errorcode:
         :return:
-        '''
+        """
         self.write(json_result(errorcode,data))
         self.finish()
 
     def error(self, data, errorcode=-1):
-        '''
+        """
         失败返回
         :param data:
         :param errorcode:
         :return:
-        '''
+        """
         self.write(json_result(errorcode, data))
         self.finish()
 
     def on_finish(self):
-        '''
+        """
         peewee的request-hook(请求完成后关闭)
         :return:
-        '''
+        """
         if not db_mysql.is_closed():
             db_mysql.close()
         return super(BaseRequestHandler, self).on_finish()
@@ -107,10 +107,10 @@ class BaseWebsocketHandler(WebSocketHandler):
     基础handler
     """
     def get_current_user(self):
-        '''
+        """
         获取当前用户
         :return:
-        '''
+        """
         username = self.get_secure_cookie('uuid')
         if not username:
             return None
@@ -118,9 +118,9 @@ class BaseWebsocketHandler(WebSocketHandler):
         return user
 
 class ErrorHandler(BaseRequestHandler):
-    '''
+    """
     默认404处理
-    '''
+    """
 
     def prepare(self):
         super(BaseRequestHandler, self).prepare()

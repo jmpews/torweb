@@ -7,9 +7,9 @@ import functools
 
 
 class BaseSession(dict):
-    '''
+    """
     session字典存储
-    '''
+    """
 
     def __init__(self, session_id, data):
         self._session_id = session_id
@@ -24,9 +24,9 @@ class BaseSession(dict):
 
 
 class MongoSessionManager():
-    '''
+    """
     在纠结到底是使用类方法,还是实例方法
-    '''
+    """
     _collection = DB_mongo['session']
 
     def __init__(self, collection_name='sessions'):

@@ -4,9 +4,9 @@ import datetime
 
 
 class CommentDB():
-    '''
+    """
     微信后台comment记录
-    '''
+    """
     _collection = DB_mongo['comment']
 
     @classmethod

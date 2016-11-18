@@ -1,4 +1,4 @@
-#encoding:utf-8
+# coding:utf-8
 from custor.utils import json_result
 from custor.errors import RequestMissArgumentError
 from custor.logger import logger
@@ -11,9 +11,10 @@ from db.mysql_model.user import User
 from tornado.web import RequestHandler
 from tornado.websocket import WebSocketHandler
 
+
 class BaseRequestHandler(RequestHandler):
     """
-    基础handler
+    base handler
     """
     def redirect404(self):
         self.redirect(config.default_404_url)
@@ -79,7 +80,7 @@ class BaseRequestHandler(RequestHandler):
         :param errorcode:
         :return:
         """
-        self.write(json_result(errorcode,data))
+        self.write(json_result(errorcode, data))
         self.finish()
 
     def error(self, data, errorcode=-1):
@@ -116,6 +117,7 @@ class BaseWebsocketHandler(WebSocketHandler):
             return None
         user = User.get_by_username(username)
         return user
+
 
 class ErrorHandler(BaseRequestHandler):
     """

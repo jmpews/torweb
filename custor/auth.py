@@ -1,4 +1,4 @@
-from db.mysql_model.user import User
+# coding:utf8
 
 
 class Auth:

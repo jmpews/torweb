@@ -1,15 +1,16 @@
 # -*- coding:utf-8 -*-
 
-from custor.utils import TimeUtil
-from settings.config import config
+""" Tornado Template Module
+"""
 
-"""
-将方法注入到template模板中
-"""
+from settings.config import config
+from custor.utils import TimeUtil
+
+__all__ = ['datetime_delta', 'is_default_avatar']
 
 def datetime_delta(handler, t):
     """
-    时间友好显示
+    display friendly time
     :param handler:
     :param t:
     :return:
@@ -18,16 +19,17 @@ def datetime_delta(handler, t):
         return '???'
     return TimeUtil.datetime_delta(t)
 
+
 def is_default_avatar(handler, avatar):
     """
-    判断用户头像是否是默认头像
+     weather the avatar is default avatar
     :param handler:
     :param avatar:
     :return:
     """
     if avatar == config.default_avatar:
         return True
-    if avatar == None:
+    if avatar is None:
         return True
     return False
 

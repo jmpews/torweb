@@ -1,18 +1,20 @@
-#encoding: utf-8
+# encoding: utf-8
 
 """
-自定义的异常
+Custom Exception
 """
+
 
 class BaseException(Exception):
     def deal_with(self):
         pass
 
+
 class RequestMissArgumentError(BaseException):
     """
-    参数确实异常
+    Miss Request
     """
-    def __init__(self, msg='Unknown', code=233):
+    def __init__(self, msg='Args Miss.', code=233):
         self.msg = msg
         self.code = code
         super(RequestMissArgumentError, self).__init__(code, msg)
@@ -20,9 +22,10 @@ class RequestMissArgumentError(BaseException):
     def __str__(self):
         return self.msg
 
+
 class PageNotFoundError(BaseException):
     """
-    没有找到该页异常
+    Page not found
     """
     def __init__(self, redirect_url='/static/404.html', code=233):
         self.redirect_url = redirect_url
@@ -30,4 +33,4 @@ class PageNotFoundError(BaseException):
         super(PageNotFoundError, self).__init__(code, redirect_url)
 
     def __str__(self):
-        return self.redirect_url
+        return 'page not found.'

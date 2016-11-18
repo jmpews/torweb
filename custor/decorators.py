@@ -1,19 +1,19 @@
-#encoding:utf-8
-
-from custor.utils import ColorPrint, get_cleaned_post_data, json_result, ThreadWorker
-from custor.errors import RequestMissArgumentError, PageNotFoundError
-
-from db.mysql_model import db_mysql
-
-from tornado.concurrent import Future
+# encoding:utf-8
 
 import functools
 import urllib.parse
 import time
+from tornado.concurrent import Future
+from tornado.httpclient import HTTPError
+
+from custor.utils import ColorPrint, get_cleaned_post_data, json_result, ThreadWorker
+from custor.errors import RequestMissArgumentError, PageNotFoundError
+from db.mysql_model import db_mysql
+
 
 def run_with_thread_future(*args, **kwargs):
     """
-    如何利用future和线程的配合
+    future with thread
     http://jmpews.github.io/posts/tornado-future-ioloop-yield.html
     :param args:
     :param kwargs:
@@ -32,12 +32,12 @@ def run_with_thread_future(*args, **kwargs):
 
 def exception_deal(exceptions):
     """
+    catch `get` and `post` Exception
     捕获get, post函数异常
     :param exceptions:
     :return:
     """
     def wrapper_func(func):
-        # 保存原函数信息
         @functools.wraps(func)
         def wrapper_args(handler, *args, **kwargs):
             try:
@@ -55,9 +55,10 @@ def exception_deal(exceptions):
         return wrapper_args
     return wrapper_func
 
+
 def timeit(func):
     """
-    计算函数执行时间
+    profile function cost
     :param func:
     :return:
     """
@@ -66,12 +67,13 @@ def timeit(func):
         func(*args, **kwargs)
         end = time.clock()
         # ColorPrint.print('> Profiler: '+func.__qualname__+'used: '+str((end - start) * 1e6) + 'us')
-        ColorPrint.print('> Profiler: ['+func.__qualname__+'] used: '+str((end - start)) + 'us')
+        ColorPrint.print("> Profiler: ["+func.__qualname__+"] used: "+str((end - start)) + "us")
     return wrapper
+
 
 def check_captcha(errorcode, result):
     """
-    检查验证码 注意装饰器顺序
+    check captcha. (attention @decorator order!)
     :param errorcode:
     :param result:
     :return:
@@ -88,16 +90,14 @@ def check_captcha(errorcode, result):
         return wrapper
     return wrap_func
 
+
 def login_required(method):
     """
-    登陆 装饰器
-
     from "tornado.web.authenticated"
     `self.current_user`是一个@property
     :param method:
     :return:
     """
-    from tornado.httpclient import HTTPError
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         if not self.current_user:
@@ -117,9 +117,10 @@ def login_required(method):
 
     return wrapper
 
+
 def login_required_json(errorcode, result):
     """
-    同上, 错误返回json_result结果
+    same as `login_required` but return json
     :param errorcode:
     :param result:
     :return:
@@ -134,16 +135,17 @@ def login_required_json(errorcode, result):
         return wrapper
     return wrap_func
 
-def ppeewwee(func):
+
+def ppeewwee(method):
     """
-    peewee的db hook
-    :param func:
+    peewee hook, connect before request ,release after done.
+    :param method:
     :return:
     """
-    @functools.wraps(func)
+    @functools.wraps(method)
     def wrapper(*args, **kwargs):
         db_mysql.connect()
-        func(*args, **kwargs)
+        method(*args, **kwargs)
         if not db_mysql.is_closed():
             db_mysql.close()
     return wrapper

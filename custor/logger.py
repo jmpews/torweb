@@ -3,10 +3,8 @@ import logging, os, sys
 from settings.config import config
 
 
-class Logger:
-    """
-    自定义log
-    """
+class Logger(object):
+    """custom logger"""
     def __init__(self, log_path, level=logging.DEBUG):
         self.logger = logging.getLogger(log_path)
         out_format = logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s')
@@ -29,8 +27,8 @@ class Logger:
     def info(self, message):
         self.logger.info(message)
 
-    def warn(self, message):
-        self.logger.warn(message)
+    def warning(self, message):
+        self.logger.warning(message)
 
     def error(self, message):
         self.logger.error(message)

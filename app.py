@@ -30,7 +30,7 @@ def close_server():
 # handle signal
 def server_shutdown_handler(sig, frame):
     from custor.logger import logger
-    logger.warn('...Caught signal: {0}'.format(sig))
+    logger.warning('...Caught signal: {0}'.format(sig))
     tornado.ioloop.IOLoop.instance().add_callback(close_server)
 
 

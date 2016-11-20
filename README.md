@@ -1,14 +1,9 @@
-# jmp
-
 ## 介绍
-
 基于tornado并且有很多trick用法的社区.
 
-#### Link: **[jmp](http://sxu.today)**
-
-### 设计到的功能和模块:
-
-#### 前端部分
+---
+## 设计到的功能和模块:
+### 前端部分
 
 * 标准化的前端构建流程(gulp+bower)
 * 基于react的实时通讯解决方案
@@ -19,7 +14,7 @@
 * TinyMCE的富文本(加了一个支持粘贴上传的插件)
 * 主题切换(通过DB和cookie两种方式以保证快速切换)
 
-#### 后端部分
+### 后端部分
 
 * 结构化项目组织
 * 很多trick(缓存、异步...)
@@ -38,15 +33,11 @@
 
 [基于react实时通讯解决方案](docs/solutions/react-redux-websocket-chat.md)
 
-
+---
 ## TODO列表
-
-#### 0. handler里设置
-```
-def get(self, *args, **kwargs):
-	self.success()
-```
 #### 1. tornado+greenlet+decorators
+Done.
+#### 2. 把所有数据库连接改成异步的方式
 
 ## 安装&使用
 
@@ -126,7 +117,6 @@ MySQL, gulp, bower, pycharm, vim
 
 ## Tricks
 ### 0. Yield、Future与线程的结合，处理阻塞函数
-
 把tornado的Future、Python里的Yield和线程结合起来，处理阻塞函数。可以查看`tests/test_thread_future.py` ，具体分析可以查看 http://jmpews.github.io/posts/tornado-future-ioloop-yield.html
 
 ```
@@ -565,6 +555,7 @@ def json_result(error_code, data):
         result = {'errorcode': error_code, 'data': data}
     return json.dumps(result)
 ```
+
 #### login_required(from tornado)
 ```
 def login_required(method):
@@ -600,7 +591,4 @@ def login_required(method):
 ```
 
 #### 添加websocket的相关实现
-
-参考链接:
-
-https://www.zhihu.com/question/20215561
+参考链接: https://www.zhihu.com/question/20215561

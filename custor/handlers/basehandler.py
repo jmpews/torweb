@@ -134,5 +134,5 @@ class ErrorHandler(BaseRequestHandler):
         self.set_status(404)
         self.redirect("/static/404.html")
 
-    def write_error(self):
+    def write_error(self, status_code, **kwargs):
         pass

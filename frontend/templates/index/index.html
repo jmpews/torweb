@@ -1,19 +1,23 @@
 {% extends "../base.html" %}
 
-{% block title %}Tornado.Index{% end %}
+{% block title %}Torweb{% end %}
 
 {% block content %}
 <div class="content-container container index-html">
     <div class="banner">
-        <div class="bg" style="background: url('http://ac-mhke0kuv.clouddn.com/a8ce11664fe98f11b04c.png');">
-            <img src="http://developer.huawei.com/cn/ict/DevChallenge2016/assert/img/field/field_banner.jpg">
+        <div class="bg" style="background-image: url('/assets/images/banner.jpeg');">
+            <img src="">
         </div>
     </div>
     <div class="col-md-9">
         <div class="card all-cate-card custom-card">
+            <!--
             <div class="current-topic" style="display: none">
                 <span>{% if current_topic %}{{ current_topic.name }}{% else %}全部分类{% end %}</span>
             </div>
+            -->
+
+            <!-- 类别导航 -->
             <div class="card-header topic-nav">
                 <ul class="list-inline cl">
                     <li>
@@ -140,6 +144,8 @@
                     </div>
                 </div>
                 {% end %}
+
+                <!-- 页脚导航 -->
                 <nav style="text-align:center">
                     <ul class="pagination">
                         <li class="page-item">
@@ -180,9 +186,11 @@
                         </li>
                     </ul>
                 </nav>
+
             </div>
         </div>
 
+        <!-- 类别导航 -->
         <div class="card all-cate-card-footer custom-card">
             <div class="card-header">
                 <i class="fa fa-align-left" aria-hidden="true"></i>所有分类
@@ -216,9 +224,10 @@
                 </div>
             </div>
         </div>
+
     </div>
 
-    <!-- ***侧边栏*** -->
+    <!-- 侧边栏 -->
     <div class="col-md-3">
         {% if current_user %}
         <div class="card profile-card custom-card">
@@ -233,8 +242,6 @@
                         </dd>
                     </dl>
                     <ul class="cl">
-                        <!-- <li><span>{{ index_user_info.get('posts_count') }}</span> 收藏</li>
-                            <li><span>{{ index_user_info.get('collectposts_count') }}</span> 发表</li> -->
                         <li>
                             <div class="tag-sp"><span>收藏</span><a href="#blank">1</a></div>
                         </li>
@@ -311,7 +318,6 @@
 <script src="/assets/i18n/zh_cn.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        {#        monitor_system_status()#}
         show_hide_cate_nav();
     });
 

@@ -2,15 +2,17 @@
 from custor.logger import logger
 
 from db.mysql_model.post import PostCategory, PostTopic, Post
+import psutil, datetime, time
 
-# 缓存一些cache
+# Trick cache
 topic_category_cache = {'categorys': [], 'topics': []}
 hot_post_cache = {'reply': [], 'visit': []}
 system_status_cache = [0, 0, 0, 0]
 
+
 def update_topic_category_cache():
     """
-    更新主题分类缓存
+    update topic
     :return:
     """
     topic_category_cache['categorys'] = []
@@ -29,9 +31,10 @@ def update_topic_category_cache():
         tmp.append(topics[i])
     topic_category_cache['topics'].append(tmp)
 
+
 def update_hot_post_cache():
     """
-    更新 '热门文章' 缓存
+    ignore...
     :return:
     """
     hot_post_cache['reply'] = []
@@ -40,24 +43,22 @@ def update_hot_post_cache():
     for post in posts:
         hot_post_cache['reply'].append(post)
 
+
 def update_system_status_cache():
     """
-    系统状态cache
+    ignore...
     :return:
     """
     from threading import Thread
 
     class MonitorWorker(Thread):
-        """
-        监视系统状态线程
-        """
-        def __init__(self, name, systatus):
+        def __init__(self, name, system_status_cache):
             Thread.__init__(self)
             self.name = name
-            self.systatus = systatus
+            self.systatus = system_status_cache
+
         def run(self):
             logger.debug("start monitor system status...")
-            import psutil, datetime, time
             while True:
                 try:
                     s1 = psutil.cpu_percent()
@@ -79,6 +80,7 @@ def update_system_status_cache():
 
     monitor = MonitorWorker('system', system_status_cache)
     monitor.start()
+
 
 def update_cache():
     logger.debug('start update cache...')

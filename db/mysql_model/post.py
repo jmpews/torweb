@@ -59,9 +59,7 @@ class Post(BaseModel):
         self.save()
 
     def check_auth(self, user):
-        if not user:
-            return False
-        if user.is_admin() or self.check_auth(user):
+        if user.is_admin() or self.check_own(user):
             return True
         return False
 

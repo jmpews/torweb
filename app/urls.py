@@ -1,4 +1,4 @@
-# encoding:utf-8
+# coding:utf-8
 
 import app.api.urls
 import app.index.urls

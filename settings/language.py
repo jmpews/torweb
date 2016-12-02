@@ -1,5 +1,21 @@
 # coding:utf-8
 
+class MSGDict(dict):
+    """
+    rewrite for language
+    """
+    def __getitem__ (self, key):
+        """
+        ex: MSG['DB.common.new_post_msg']
+        :param key:
+        :return:
+        """
+        keys = key.split('.')
+        tmp = self
+        for k in keys:
+            tmp = super(MSGDict, tmp).__getitem__(k)
+        return tmp
+
 MSG = MSGDict({
     'DB': {
         'common': {
@@ -9,10 +25,3 @@ MSG = MSGDict({
     }
 })
 
-class MSGDict(dict):
-    def __getitem__ (self, key):
-        keys = key.split('.')
-        tmp = self
-        for k in keys:
-            tmp = super(MSGDict, tmp).__getitem__(k)
-        return tmp

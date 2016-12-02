@@ -9,44 +9,47 @@ from settings.config import config
 
 class PostCategory(BaseModel):
     """
-    总分类
+    class
     """
-    name = CharField(verbose_name='标题')
+    name = CharField(verbose_name='name')
     str = CharField(unique=True, verbose_name='str')
 
 
 class PostTopic(BaseModel):
     """
-    分类下的主题
+    sub class
     """
     category = ForeignKeyField(PostCategory, related_name='topics_category', null=True)
-    name = CharField(verbose_name='标题')
+    name = CharField(verbose_name='name')
     str = CharField(unique=True, verbose_name='str')
-    hot = BooleanField(default=False, verbose_name='热门主题')
+    hot = BooleanField(default=False, verbose_name='hot topic')
 
 
 class Post(BaseModel):
+    """
+    post
+    """
     AUTH_READ = 0
     AUTH_MODIFY = 1
     AUTH_DELETE = 2
     AUTH_ALL = 3
     topic = ForeignKeyField(PostTopic, related_name='posts_topic')
-    title = CharField(verbose_name="帖子的标题")
-    content = TextField(verbose_name="帖子内容")
-    user = ForeignKeyField(User, verbose_name="发帖人")
-    create_time = DateTimeField(default=datetime.datetime.now, verbose_name="发帖时间")
+    title = CharField(verbose_name='post-title')
+    content = TextField(verbose_name='post-content')
+    user = ForeignKeyField(User, verbose_name='who post this')
+    create_time = DateTimeField(default=datetime.datetime.now, verbose_name='post-time')
 
-    latest_reply_user = ForeignKeyField(User, null=True, related_name="reply_user", verbose_name="最后回复用户")
-    latest_reply_time = DateTimeField(null=True, verbose_name="最近回复时间")
+    latest_reply_user = ForeignKeyField(User, null=True, related_name="reply_user", verbose_name='rt')
+    latest_reply_time = DateTimeField(null=True, verbose_name='rt')
 
-    visit_count = IntegerField(default=1, verbose_name="帖子浏览数")
-    reply_count = IntegerField(default=0, verbose_name="帖子回复数")
-    collect_count = IntegerField(default=0, verbose_name="赞同数")
+    visit_count = IntegerField(default=1, verbose_name='rt')
+    reply_count = IntegerField(default=0, verbose_name='rt')
+    collect_count = IntegerField(default=0, verbose_name='rt')
 
-    top = BooleanField(default=False, verbose_name='置顶')
-    essence = BooleanField(default=False, verbose_name='精华')
+    top = BooleanField(default=False, verbose_name='top')
+    essence = BooleanField(default=False, verbose_name='rt')
 
-    is_delete = BooleanField(default=False, verbose_name='是否删除')
+    is_delete = BooleanField(default=False, verbose_name='rt')
 
     def __str__(self):
         return "[%s-%s]" % (self.title, self.user)
@@ -69,27 +72,14 @@ class Post(BaseModel):
             return False
 
     def up_collect(self):
-        """
-        收藏帖子
-        :return:
-        """
         self.collect_count += 1
         self.save()
 
     def up_visit(self):
-        """
-        浏览数
-        :return:
-        """
         self.visit_count += 1
         self.save()
 
     def update_latest_reply(self, postreply):
-        """
-        更新最近回复
-        :param postreply:
-        :return:
-        """
         self.latest_reply_user = postreply.user
         self.latest_reply_time = postreply.create_time
         self.reply_count += 1
@@ -98,8 +88,7 @@ class Post(BaseModel):
     @staticmethod
     def list_top():
         """
-        获取指定帖子,可以用trick缓存
-        :param self:
+        get top posts
         :return:
         """
         top_posts = Post.select().where(Post.top == True, Post.is_delete == False)
@@ -109,9 +98,9 @@ class Post(BaseModel):
     @staticmethod
     def list_recently(page_limit=config.default_page_limit, page_number=1):
         """
-        列出最近帖子
-        :param page_limit: 每一页帖子数量
-        :param page_number: 当前页
+        get recent posts
+        :param page_limit: result num in per page
+        :param page_number: current page number
         :return:
         """
         page_number_limit = Post.select().where(Post.is_delete == False).order_by(Post.latest_reply_time.desc()).count()
@@ -135,10 +124,10 @@ class Post(BaseModel):
     @staticmethod
     def list_by_topic(topic, page_limit=config.default_page_limit, page_number=1):
         """
-        列出当前主题下的梯子
-        :param topic: 具体主题
-        :param page_limit: 每一页帖子数量
-        :param page_number: 当前页
+        get recent posts of specific topic
+        :param topic:
+        :param page_limit:
+        :param page_number:
         :return:
         """
         page_number_limit = Post.select().where(Post.topic == topic, Post.is_delete == False).order_by(Post.latest_reply_time.desc()).count()
@@ -147,16 +136,17 @@ class Post(BaseModel):
 
     def detail(self):
         """
-        获取帖子详情
+        get post detail
         :return:
         """
         result = {}
+        user = self.user
         result['title'] = self.title
         result['content'] = self.content
         result['topic'] = self.topic.name
-        result['username'] = self.user.username
-        result['nickname'] = self.user.nickname
-        result['avatar'] = self.user.avatar
+        result['username'] = user.username
+        result['nickname'] = user.nickname
+        result['avatar'] = user.avatar
         result['create_time'] = self.create_time,
         result['visit_count'] = self.visit_count
         result['reply_count'] = self.reply_count
@@ -165,6 +155,11 @@ class Post(BaseModel):
 
     @staticmethod
     def get_detail_and_replys(post_id):
+        """
+        get post's detail and replys
+        :param post_id:
+        :return:
+        """
         try:
             post = Post.get(Post.id == post_id, Post.is_delete == False)
         except Post.DoesNotExist:
@@ -174,7 +169,12 @@ class Post(BaseModel):
         return post, post_replys
 
     @staticmethod
-    def get_detail(post_id):
+    def get_by_id(post_id):
+        """
+        get post by id
+        :param post_id:
+        :return:
+        """
         try:
             post = Post.get(Post.id == post_id, Post.is_delete == False)
         except Post.DoesNotExist:
@@ -185,28 +185,21 @@ class Post(BaseModel):
 
 class PostReply(BaseModel):
     """
-    回复
+    PostReply
     """
-    post = ForeignKeyField(Post, verbose_name="对应帖子")
-    user = ForeignKeyField(User, verbose_name="回复者")
-    content = TextField(verbose_name="回复内容")
-    create_time = DateTimeField(default=datetime.datetime.now, verbose_name="回复时间")
-    like_count = IntegerField(default=0, verbose_name="赞同数")
+    post = ForeignKeyField(Post, verbose_name='post')
+    user = ForeignKeyField(User, verbose_name='who reply this')
+    content = TextField(verbose_name='content')
+    create_time = DateTimeField(default=datetime.datetime.now, verbose_name='reply time')
+    like_count = IntegerField(default=0, verbose_name='count of like')
 
     def __str__(self):
         return "[%s-%s]" % (self.user, self.content)
 
     def up_like(self):
-        """
-        赞同
-        :return:
-        """
         self.like_count += 1
         self.save()
 
-    #  对user进行展开，方便API设计
-    # 'user': reply.user 展开为
-    # 'username': reply.user.username
     @staticmethod
     def list_all(post):
         postreplys = PostReply.select().where(PostReply.post == post)
@@ -215,11 +208,11 @@ class PostReply(BaseModel):
 
 class CollectPost(BaseModel):
     """
-    收藏帖子
+    collect post
     """
-    post = ForeignKeyField(Post, verbose_name="对应帖子")
-    user = ForeignKeyField(User, verbose_name="收藏者")
-    collect_time = DateTimeField(default=datetime.datetime.now, verbose_name="收藏时间")
+    post = ForeignKeyField(Post, verbose_name='post')
+    user = ForeignKeyField(User, verbose_name='who collect this')
+    collect_time = DateTimeField(default=datetime.datetime.now, verbose_name='collect time')
 
     @staticmethod
     def is_collect(post, user):

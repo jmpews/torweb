@@ -59,7 +59,7 @@ class PostAddHandler(BaseRequestHandler):
 class PostModifyHandler(BaseRequestHandler):
     @login_required
     def get(self, post_id, *args, **kwargs):
-        post = Post.get_detail(post_id)
+        post = Post.get_by_id(post_id)
         if not post.check_auth(self.current_user):
             self.redirect404()
             return

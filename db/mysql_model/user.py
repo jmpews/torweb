@@ -1,10 +1,12 @@
 # coding:utf-8
-import time, datetime
-from hashlib import md5
+
 from db.mysql_model import BaseModel
 from settings.config import config
-from peewee import *
 from custor.utils import random_str, TimeUtil
+
+import time, datetime
+from hashlib import md5
+from peewee import *
 
 
 class USER_ROLE:
@@ -13,6 +15,9 @@ class USER_ROLE:
 
 
 class User(BaseModel):
+    """
+    Base User Model
+    """
     ROLE = (
         (0, "administrator"),
     )
@@ -23,13 +28,13 @@ class User(BaseModel):
     email = CharField(max_length=32)
     avatar = CharField(max_length=20, null=True)
     theme = CharField(max_length=16, null=True)
-    role = IntegerField(choices=ROLE, default=1, verbose_name="用户角色")
+    role = IntegerField(choices=ROLE, default=1, verbose_name="user role")
     password = CharField(max_length=32)
-    # 密码加盐
+    # password salt
     salt = CharField(max_length=64)
     # token
     key = CharField(index=True, max_length=64)
-    # 用户等级
+    # user level
     level = IntegerField()
 
     # default current time
@@ -42,14 +47,14 @@ class User(BaseModel):
     def is_admin(self):
         return self.role == USER_ROLE.ADMIN
 
-    # 刷新token和时间
     def refresh_key(self):
+        """refresh token"""
         self.key = random_str(32)
         self.key_time = int(time.time())
         self.save()
 
-    # 设置密码
     def set_password(self, new_password):
+        """set password"""
         salt = random_str()
         password_md5 = md5(new_password.encode('utf-8')).hexdigest()
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
@@ -57,20 +62,29 @@ class User(BaseModel):
         self.password = password_final
         self.save()
 
-    # 创建新的用户
     @staticmethod
     def new(username, password, email, nickname='', avatar=config.default_avatar):
+        """
+        new user
+        :param username:
+        :param password:
+        :param email:
+        :param nickname: optional
+        :param avatar: optional
+        :return:
+        """
         salt = random_str()
         password_md5 = md5(password.encode('utf-8')).hexdigest()
         password_final = md5((password_md5 + salt).encode('utf-8')).hexdigest()
-        level = USER_ROLE.NORMAL  # 首个用户赋予admin权限
+        level = USER_ROLE.NORMAL
         the_time = int(time.time())
         u = User.create(username=username,
                         nickname=nickname,
                         email=email,
                         avatar=avatar,
                         password=password_final,
-                        salt=salt, level=level,
+                        salt=salt,
+                        level=level,
                         key=random_str(32),
                         key_time=the_time)
         u.save()
@@ -91,20 +105,21 @@ class User(BaseModel):
     def auth(username, password):
         try:
             u = User.get(User.username == username)
-        except DoesNotExist:
-            return False
+        except User.DoesNotExist:
+            return None
         else:
             password_md5 = md5(password.encode('utf-8')).hexdigest()
             password_final = md5((password_md5 + u.salt).encode('utf-8')).hexdigest()
             if u.password == password_final:
                 return u
-        return False
+            else:
+                return False
 
     @staticmethod
     def exist(username):
         try:
             r = User.get(User.username == username).count() > 0
-        except DoesNotExist:
+        except User.DoesNotExist:
             return False
         else:
             return r
@@ -114,7 +129,7 @@ class User(BaseModel):
         the_key = str(key or b'', 'utf-8')
         try:
             r = User.get(User.key == the_key)
-        except DoesNotExist:
+        except User.DoesNotExist:
             return None
         else:
             return r
@@ -133,7 +148,7 @@ class User(BaseModel):
         try:
             r = User.get(User.email == email)
         except DoesNotExist:
-            return False
+            return None
         else:
             return r
 
@@ -147,6 +162,11 @@ class User(BaseModel):
             return r
 
     def get_theme_by_cookie_user(self, handler):
+        """
+        get theme cookie, use for change theme
+        :param handler:
+        :return:
+        """
         theme_color = handler.get_cookie('theme', '')
         if theme_color != '':
             return '.' + theme_color
@@ -157,6 +177,9 @@ class User(BaseModel):
 
 
 class Profile(BaseModel):
+    """
+    User Profile
+    """
     user = ForeignKeyField(User, related_name='user_profile')
     nickname = CharField(max_length=16, default="")
     weibo = CharField(max_length=64, default="")
@@ -164,23 +187,27 @@ class Profile(BaseModel):
     reg_time = DateTimeField(default=datetime.datetime.now)
     last_login_time = DateTimeField(default=datetime.datetime.now)
 
+    @staticmethod
     def get_by_user(user):
         try:
             r = Profile.get(Profile.user == user)
         except DoesNotExist:
-            return False
+            return None
         else:
             return r
 
 
 class Follower(BaseModel):
+    """
+    following and follower
+    """
     user = ForeignKeyField(User, related_name='who_follow_this')
     follower = ForeignKeyField(User, verbose_name='this_follow_who')
     follow_time = DateTimeField(default=datetime.datetime.now)
 
     @staticmethod
     def is_follow(user, current_user):
-        is_follow = None
+        is_follow = False
         if current_user and user != current_user:
             is_follow = True
             try:
@@ -192,9 +219,13 @@ class Follower(BaseModel):
 
 class ChatMessage(BaseModel):
     """
-    A,B,C 都给D发送消息。 D有三种状态。 1. D在线 2. D不在线 3。 断线后重新连接
+    chat messsage
 
-    对于D,需要针对这三种情况做处理
+    @sender: who send the message
+    @receiver: the message send to who
+    @content: ...
+    @is_read: ...
+    @time: ...
     """
     sender = ForeignKeyField(User, related_name='sender')
     receiver = ForeignKeyField(User, related_name='receiver')
@@ -205,9 +236,9 @@ class ChatMessage(BaseModel):
     @staticmethod
     def get_recent_chat_message(current_user, other):
         """
-        获取双方对话的聊天记录
-        :param userA:
-        :param userB:
+        get the recent message between `current_user` and `other`
+        :param current_user:
+        :param other:
         :return:
         """
         result = {}
@@ -216,9 +247,7 @@ class ChatMessage(BaseModel):
         result['avatar'] = other.avatar
         result['msg'] = ChatMessage.get_unread_message(current_user, other)
         result['msg'] = []
-        # import pdb;pdb.set_trace()
 
-        # () 注意需要全包
         recent_messages = (ChatMessage.select().where(((ChatMessage.sender == current_user) & (ChatMessage.receiver == other)) | ((ChatMessage.sender == other) & (ChatMessage.receiver == current_user))).order_by(ChatMessage.time).limit(10))
         for msg in recent_messages:
             d = '>' if msg.sender == current_user else '<'
@@ -227,8 +256,17 @@ class ChatMessage(BaseModel):
 
     @staticmethod
     def get_unread_message(current_user, other):
+        """
+        get the unread message between `current_user` and `other`
+        :param current_user:
+        :param other:
+        :return:
+        """
         tmp = []
-        unread_messages = ChatMessage.select().where(ChatMessage.receiver == current_user, ChatMessage.sender==other, ChatMessage.is_read == False).order_by(ChatMessage.time)
+        unread_messages = ChatMessage.select().where(ChatMessage.receiver == current_user,
+                                                     ChatMessage.sender == other,
+                                                     ChatMessage.is_read == False
+                                                     ).order_by(ChatMessage.time)
         for msg in unread_messages:
             tmp.append(['<',msg.content, TimeUtil.datetime_delta(msg.time)])
         return tmp
@@ -236,8 +274,8 @@ class ChatMessage(BaseModel):
     @staticmethod
     def get_recent_user_list(current_user):
         """
-        获取最近用户列表
-        :param me:
+        get the recent user who chat with `current_user`
+        :param current_user:
         :return:
         """
         recent_user_list = {}
@@ -246,20 +284,6 @@ class ChatMessage(BaseModel):
         recent_user_list['user_id_list'] = user_id_list
 
         tmp_recent_user_list = []
-
-        # other send to me
-        # recent_message = ChatMessage.select().where(ChatMessage.receiver == current_user, ChatMessage.is_read == False).order_by(ChatMessage.time)
-        # for msg in recent_message:
-        #     sender = msg.sender
-        #     if sender.id not in recent_user_list.keys():
-        #         user_id_list.append(sender.id)
-        #         recent_user_list[sender.id]={}
-        #         recent_user_list[sender.id]['other_name'] = sender.username
-        #         recent_user_list[sender.id]['other_id'] = sender.id
-        #         recent_user_list[sender.id]['other_avatar'] = sender.avatar
-        #         recent_user_list[sender.id]['msg'] = []
-        #     recent_user_list[sender.id]['msg'].append(['<', msg.content, TimeUtil.datetime_delta(msg.time)])
-        #     recent_user_list[sender.id]['update_time'] = str(msg.time)
 
         one_day_ago = TimeUtil.get_ago(60*60*24*10*10)
 
@@ -275,14 +299,14 @@ class ChatMessage(BaseModel):
                 continue
 
             user_id_list.append(other.id)
-            unread_count = ChatMessage.select().where(ChatMessage.sender == u.sender, ChatMessage.receiver == u.receiver).count()
+            unread_count = ChatMessage.select().where(ChatMessage.sender == u.sender,
+                                                      ChatMessage.receiver == u.receiver).count()
 
             recent_user_list[other.id] = {}
             recent_user_list[other.id]['other_name'] = other.username
             recent_user_list[other.id]['other_id'] = other.id
             recent_user_list[other.id]['other_avatar'] = other.avatar
 
-            #---
             tmp_recent_user_list.append({
                 'id': other.id,
                 'avatar': other.avatar,

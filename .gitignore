@@ -6,3 +6,4 @@ __pycache__/*
 *.hot-update.json
 *.hot-update.js
 registry/
+tags

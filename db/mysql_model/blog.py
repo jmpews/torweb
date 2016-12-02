@@ -7,7 +7,10 @@ from peewee import *
 
 
 class BlogPostCategory(BaseModel):
-    name = CharField(verbose_name='标题')
+    """
+    blog post category
+    """
+    name = CharField(verbose_name='title')
     str = CharField(verbose_name='str', unique=True)
     @staticmethod
     def get_by_name(str):

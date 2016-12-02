@@ -1,9 +1,14 @@
-#coding: utf-8
+# coding:utf-8
 
 from settings.common import *
 
 PORT = 9001
 
+
+# BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
+# BACKEND_REDIS = ('localhost', 6379, 0)
+
+# MySQL Database
 BACKEND_MYSQL = {
     'database': 'torweb',
     'max_connections': 20,
@@ -13,9 +18,8 @@ BACKEND_MYSQL = {
     'host': '127.0.0.1',
     'port': 3306
 }
-BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
-BACKEND_REDIS = ('localhost', 6379, 0)
 
+# Static Path
 STATIC_PATH = (
     (r'/static/(.*)', {'path': 'frontend/static/templates/static/'}),
     (r'/avatar/(.*)', {'path': 'frontend/static/assets/'}),
@@ -24,4 +28,3 @@ STATIC_PATH = (
     (r'/blog/images/(.*)', {'path': 'frontend/static/templates/blog/images/'}),
     (r'/dashboard/(.*)', {'path': 'frontend/static/templates/dashboard/'})
 )
-

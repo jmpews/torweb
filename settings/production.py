@@ -1,7 +1,12 @@
-#encoding: utf-8
+# coding:utf-8
+
 from settings.common import *
 
 
+# BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
+# BACKEND_REDIS = ('localhost', 6379, 0)
+
+# MySQL Database
 BACKEND_MYSQL = {
     'database': 'torweb',
     'max_connections': 20,
@@ -11,5 +16,3 @@ BACKEND_MYSQL = {
     'host': '127.0.0.1',
     'port': 3306
 }
-BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
-BACKEND_REDIS = ('localhost', 6379, 0)

@@ -13,7 +13,7 @@ mysqldb = MySQLDatabase('',
 
 
 from db.mysql_model.blog import BlogPostCategory, BlogPostLabel, BlogPost
-md_path = '/Users/jmpews/Desktop/articles'
+md_path = './docs/articles'
 
 
 def check_md_format(file_path):

@@ -16,3 +16,10 @@ BACKEND_MYSQL = {
     'host': '127.0.0.1',
     'port': 3306
 }
+# Static Path
+STATIC_PATH = (
+    (r'/static/(.*)', {'path': 'frontend/templates/static/'}),
+    (r'/assets/(.*)', {'path': 'frontend/static/assets/'}),
+    (r'/blog/assets/(.*)', {'path': 'docs/assets/'}),
+    (r'/dashboard/(.*)', {'path': 'frontend/templates/dashboard/'})
+)

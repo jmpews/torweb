@@ -4,7 +4,6 @@ sys.path.append(os.path.dirname(sys.path[0]))
 
 from settings.config import config
 from peewee import Model, MySQLDatabase
-from custor.logger import logger
 
 mysqldb = MySQLDatabase('',
                         user=config.BACKEND_MYSQL['user'],
@@ -12,13 +11,14 @@ mysqldb = MySQLDatabase('',
                         host=config.BACKEND_MYSQL['host'],
                         port=config.BACKEND_MYSQL['port'])
 
+
 from db.mysql_model.blog import BlogPostCategory, BlogPostLabel, BlogPost
 md_path = '/Users/jmpews/Desktop/articles'
+
 
 def check_md_format(file_path):
     fd = open(file_path)
     md_info = {}
-    #import pdb;pdb.set_trace()
     while True:
         line = fd.readline().strip()
         if len(line) == 0:
@@ -43,10 +43,11 @@ def check_md_format(file_path):
         fd.close()
         return None
 
+
 def convert_md_2_post(md_info):
     category = md_info.get('category')
     if not category:
-        category = '未分类'
+        category = 'UnClassified'
     cate = BlogPostCategory.get_by_name(category)
     post = BlogPost.create(title=md_info['title'],
                            category=cate,

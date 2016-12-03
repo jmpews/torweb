@@ -21,10 +21,7 @@ BACKEND_MYSQL = {
 
 # Static Path
 STATIC_PATH = (
-    (r'/static/(.*)', {'path': 'frontend/static/templates/static/'}),
-    (r'/avatar/(.*)', {'path': 'frontend/static/assets/'}),
-    (r'/assets/lib/(.*)', {'path': 'frontend/lib/'}),
+    (r'/static/(.*)', {'path': 'frontend/templates/static/'}),
     (r'/assets/(.*)', {'path': 'frontend/static/assets/'}),
-    (r'/blog/images/(.*)', {'path': 'frontend/static/templates/blog/images/'}),
-    (r'/dashboard/(.*)', {'path': 'frontend/static/templates/dashboard/'})
+    (r'/dashboard/(.*)', {'path': 'frontend/templates/dashboard/'})
 )

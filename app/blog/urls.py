@@ -1,6 +1,7 @@
-# conding:utf-8
+# coding:utf-8
 
-from app.blog.blog import  (
+
+from app.blog.blog import (
     BlogIndexHandler,
     BlogPostDetailHandler,
     BlogPostOptHandler,

@@ -5207,6 +5207,10 @@ ul {
     float: none !important;
   }
 }
+.header .header-container .header-nav li.active {
+  box-shadow: none;
+}
+
 .content {
   box-shadow: 0 1px 2px #dedede;
   margin-right: 300px;
@@ -5217,8 +5221,6 @@ ul {
 .side {
   float: right;
   width: 280px;
-  padding-left: 20px;
-  border-left: 1px solid #eaeaea;
 }
 .side .post-category a {
   color: #8a8a8a;

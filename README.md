@@ -1,4 +1,5 @@
 ## 介绍
+[![Build Status](https://travis-ci.org/jmpews/torweb.svg?branch=master)](https://travis-ci.org/jmpews/torweb)
 基于tornado并且有很多trick用法的社区.
 
 ---

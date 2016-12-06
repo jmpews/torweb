@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 
 from app.cache import system_status_cache
 

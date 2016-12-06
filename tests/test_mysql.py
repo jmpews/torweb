@@ -1,3 +1,4 @@
+# coding:utf-8
 import sys, os
 import os.path
 sys.path.append(os.path.dirname(sys.path[0]))

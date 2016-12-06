@@ -1,4 +1,5 @@
 # coding:utf-8
+
 import datetime
 from .user import User
 from db.mysql_model import BaseModel

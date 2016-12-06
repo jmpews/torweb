@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 from db.mysql_model.post import CollectPost
 
 def get_post_user_ext(post, user):

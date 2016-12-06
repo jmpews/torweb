@@ -1,4 +1,4 @@
-# conding:utf-8
+# coding:utf-8
 
 from app.utils.utils import (
     UploadImgHandler,

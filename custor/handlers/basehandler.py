@@ -7,6 +7,7 @@ from settings.config import config
 
 from db.mysql_model import db_mysql
 from db.mysql_model.user import User
+from db.mongo_db.session import MongoSessionManager
 
 from tornado.web import RequestHandler
 from tornado.websocket import WebSocketHandler
@@ -57,14 +58,20 @@ class BaseRequestHandler(RequestHandler):
 
     def get_current_user(self):
         """
-        获取当前用户
         :return:
         """
         username = self.get_secure_cookie('uuid')
+        # session = MongoSessionManager.load_session_from_request(self)
+        # username = session.get('username', None)
+
         if not username:
             return None
         user = User.get_by_username(username)
         return user
+
+    # def set_current_user(self, username):
+    #     session = MongoSessionManager.load_session_from_request(self)
+    #     session['username'] = username
 
     def get_login_url(self):
         """

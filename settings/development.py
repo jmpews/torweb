@@ -5,9 +5,14 @@ from settings.common import *
 PORT = 9001
 
 
-# BACKEND_MONGO = "mongodb://127.0.0.1/torweb"
 # BACKEND_REDIS = ('localhost', 6379, 0)
 
+# Mongo Database
+BACKEND_MONGO = {
+    'host': 'localhost',
+    'port': 27017
+
+}
 # MySQL Database
 BACKEND_MYSQL = {
     'database': 'torweb',

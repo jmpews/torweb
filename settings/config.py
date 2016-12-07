@@ -14,8 +14,6 @@ def load_config(c):
             config = production
         elif c == 'development':
             config = development
-        elif c == 'docker':
-            pass
         else:
             config = development
     else:
@@ -25,8 +23,6 @@ def load_config(c):
             config = production
         elif envc == 'development':
             config = development
-        elif envc == 'docker':
-            pass
         else:
             config = development
     return config

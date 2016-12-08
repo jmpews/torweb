@@ -10,11 +10,15 @@ from db.mysql_model.post import Post, PostReply, PostTopic, CollectPost
 
 from .utils import get_post_user_ext
 
+import greenado
+from settings.language import MSG
 
-# 换种注释方式
 
-# 帖子详情
 class PostDetailHandler(BaseRequestHandler):
+    """
+    post detail
+    """
+    @greenado.groutine
     def get(self, post_id, *args, **kwargs):
         post, post_replys = Post.get_detail_and_replys(post_id)
         if not post:
@@ -29,20 +33,24 @@ class PostDetailHandler(BaseRequestHandler):
                     topic_category_cache=topic_category_cache)
 
 
-# 添加帖子
 class PostAddHandler(BaseRequestHandler):
+    """
+    add post
+    """
+    @greenado.groutine
     @login_required
     def get(self, *args, **kwargs):
         self.render('post/post_new.html',
                     topic_category_cache=topic_category_cache)
 
+    @greenado.groutine
     @login_required
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['title', 'content', 'topic'])
         try:
             topic = PostTopic.get(PostTopic.str == post_data['topic'])
         except PostTopic.DoesNotExist:
-            self.write(json_result(1, '请选择正确主题'))
+            self.write(json_result(1, MSG.str()))
             return
         post = Post.create(
             topic=topic,
@@ -50,13 +58,16 @@ class PostAddHandler(BaseRequestHandler):
             content=post_data['content'],
             user=self.current_user
         )
-        # 添加通知, 通知给其他关注的用户
+        # TODO: notification
         Notification.new_post(post)
         self.write(json_result(0, {'post_id': post.id}))
 
 
-# 修改帖子
 class PostModifyHandler(BaseRequestHandler):
+    """
+    modify post
+    """
+    @greenado.groutine
     @login_required
     def get(self, post_id, *args, **kwargs):
         post = Post.get_by_id(post_id)
@@ -67,6 +78,7 @@ class PostModifyHandler(BaseRequestHandler):
                     post=post,
                     topic_category_cache=topic_category_cache)
 
+    @greenado.groutine
     @login_required
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['post', 'title', 'content', 'topic'])
@@ -96,8 +108,8 @@ class PostModifyHandler(BaseRequestHandler):
         self.write(json_result(0, {'post_id': post.id}))
 
 
-# 添加回复
 class PostReplyAddHandler(BaseRequestHandler):
+    @greenado.groutine
     @login_required
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['post', 'content'])
@@ -118,6 +130,10 @@ class PostReplyAddHandler(BaseRequestHandler):
 
 # 帖子相关操作, 类似API的方式, 需要有opt,data参数(统一格式)
 class PostReplyOptHandler(BaseRequestHandler):
+    """
+    A set of operation of
+    """
+    @greenado.groutine
     @login_required_json(-3, 'login failed.')  # 要求登录, 否则返回(错误码, 错误信息)
     def post(self, *args, **kwargs):
         json_data = get_cleaned_json_data(self, ['opt', 'data'])

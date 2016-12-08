@@ -11,11 +11,13 @@ from db.mysql_model.common import Notification
 from db.mysql_model.post import Post, PostReply, CollectPost
 from db.mysql_model.user import User, Profile, Follower, ChatMessage
 
+import greenado
 
 class UserProfileHandler(BaseRequestHandler):
     """
-    用户资料页面
+    user profile
     """
+    @greenado.groutine
     def get(self, user_id, *args, **kwargs):
         user = User.get(User.id == user_id)
         profile = Profile.get_by_user(user)
@@ -42,8 +44,9 @@ class UserProfileHandler(BaseRequestHandler):
 
 class UserProfileEditHandler(BaseRequestHandler):
     """
-    用户资料编辑页面
+    user profile edit
     """
+    @greenado.groutine
     @login_required
     def get(self, *args, **kwargs):
         user = self.current_user
@@ -53,6 +56,7 @@ class UserProfileEditHandler(BaseRequestHandler):
         userinfo['weibo'] = profile.weibo
         self.render('user/profile_edit.html', userinfo=userinfo)
 
+    @greenado.groutine
     @login_required
     def post(self, *args, **kwargs):
         post_data = get_cleaned_post_data(self, ['weibo',])
@@ -65,8 +69,9 @@ class UserProfileEditHandler(BaseRequestHandler):
 
 class UserAvatarEditHandler(BaseRequestHandler):
     """
-    用户头像编辑处理
+    editor user avatar
     """
+    @greenado.groutine
     @login_required
     def post(self, *args, **kwargs):
         user = self.current_user
@@ -81,8 +86,9 @@ class UserAvatarEditHandler(BaseRequestHandler):
 
 class UserNotificationHandler(BaseRequestHandler):
     """
-    用户消息通知页面
+    user message notification
     """
+    @greenado.groutine
     @login_required
     def get(self, *args, **kwargs):
         user = self.current_user
@@ -95,8 +101,9 @@ class UserNotificationHandler(BaseRequestHandler):
 
 class UserFollowerHandler(BaseRequestHandler):
     """
-    用户关注与粉丝页面
+    user follower
     """
+    @greenado.groutine
     def get(self, user_id, *args, **kwargs):
         user = User.get(User.id == user_id)
         who_follow = Follower.select(Follower.follower).where(Follower.user == user)
@@ -112,9 +119,10 @@ class UserFollowerHandler(BaseRequestHandler):
 
 class UserOptHandler(BaseRequestHandler):
     """
-    跟用户API相关的操作
+    user operation set
     和postreplyopthandelr设计的类似，api模式
     """
+    @greenado.groutine
     @login_required_json(-3, 'login failed.')
     def post(self, *args, **kwargs):
         json_data = get_cleaned_json_data(self, ['opt', 'data'])
@@ -198,6 +206,7 @@ class WebsocketChatHandler(BaseWebsocketHandler):
     def check_origin(self, origin):
         return True
 
+    @greenado.groutine
     @ppeewwee
     def open(self, *args, **kwargs):
         user = self.current_user
@@ -205,6 +214,7 @@ class WebsocketChatHandler(BaseWebsocketHandler):
             WebsocketChatHandler.clients[user.username] = self
             # self.write_message(json_result(2,ChatMessage.get_not_read_log(user)))
 
+    @greenado.groutine
     @ppeewwee
     def on_close(self):
         user = self.current_user

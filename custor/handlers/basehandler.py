@@ -12,6 +12,8 @@ from db.mongo_db.session import MongoSessionManager
 from tornado.web import RequestHandler
 from tornado.websocket import WebSocketHandler
 
+from greenlet import greenlet
+
 
 class BaseRequestHandler(RequestHandler):
     """
@@ -60,18 +62,20 @@ class BaseRequestHandler(RequestHandler):
         """
         :return:
         """
-        username = self.get_secure_cookie('uuid')
-        # session = MongoSessionManager.load_session_from_request(self)
-        # username = session.get('username', None)
+        # username = self.get_secure_cookie('uuid')
+        if greenlet.getcurrent().parent:
+            session = MongoSessionManager.load_session_from_request(self)
+            username = session.data.get('username', None)
+            if not username:
+                return None
+            user = User.get_by_username(username)
+            return user
+        return None
 
-        if not username:
-            return None
-        user = User.get_by_username(username)
-        return user
-
-    # def set_current_user(self, username):
-    #     session = MongoSessionManager.load_session_from_request(self)
-    #     session['username'] = username
+    def set_current_user(self, username):
+        session = MongoSessionManager.load_session_from_request(self)
+        session.data['username'] = username
+        MongoSessionManager.update_session(session.get_session_id(), session.data)
 
     def get_login_url(self):
         """

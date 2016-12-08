@@ -8,6 +8,7 @@ from custor.utils import random_str
 import functools
 import asyncio
 import tornado.web
+import greenado
 from tornado.web import gen
 
 
@@ -42,7 +43,7 @@ class MongoSessionManager():
         return random_str(16)
 
     @classmethod
-    async def new_session(cls, session_id=None, data=None):
+    def new_session(cls, session_id=None, data=None):
         """
         new session
         :param session_id:
@@ -53,8 +54,8 @@ class MongoSessionManager():
             data = {}
         if not session_id:
             session_id = cls.generate_session_id()
-        await cls._collection.save({'_id': session_id, 'data': data})
-        import pdb;pdb.set_trace()
+        greenado.gyield(cls._collection.save({'_id': session_id, 'data': data}))
+        # import pdb;pdb.set_trace()
         return BaseSession(session_id, {})
 
 
@@ -67,28 +68,26 @@ class MongoSessionManager():
         """
         data = {}
         if session_id:
-            print('test')
-            session_data = yield cls._collection.find_one({'_id': session_id})
+            session_data = greenado.gyield(cls._collection.find_one({'_id': session_id}))
             if session_data:
                 data = session_data['data']
                 return BaseSession(session_id, data)
         future = tornado.web.Future()
         future.set_result(None)
-        result = yield future
+        result = greenado.gyield(future)
         return result
 
     @classmethod
-    @gen.coroutine
     def update_session(cls, session_id, data):
-        yield cls._collection.update({'_id': session_id}, {'$set': {'data': data}})
+        greenado.gyield(cls._collection.update({'_id': session_id}, {'$set': {'data': data}}))
 
     @classmethod
     def load_session_from_request(cls, handler):
-        s = MongoSessionManager.new_session()
-        handler.set_secure_cookie('session_id', s.get_session_id())
-        s = MongoSessionManager.load_session(handler.get_secure_cookie('session_id', None))
-        # import pdb;pdb.set_trace()
-        if s and s != '':
+        session_id = handler.get_secure_cookie('session_id', None)
+        if session_id:
+            session_id = session_id.decode()
+        s = MongoSessionManager.load_session(session_id)
+        if s is not None:
             return s
         else:
             s = MongoSessionManager.new_session()

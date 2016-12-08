@@ -22,7 +22,11 @@ msg = {
             'new_post_msg': '发新文章',
             'new_reply_msg': '发表新评论'
         }
-    }
+    },
+    'register_same_name': '用户名重复',
+    'register_same_email': '用户邮箱重复',
+    'login_captcha_error': '验证码错误',
+    'login_password_error': '用户名或者密码错误',
 }
 
 MSG = MSGDict(msg)

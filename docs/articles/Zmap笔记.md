@@ -1,21 +1,27 @@
 Title: Zmap笔记
 Date: 2016-06-09 09:12
 Author: jmpews
-Category: zmap
+Category: scan
 Tags: zmap
 Slug: zmap-tool
 
-## Zmap编译安装
+> https://github.com/zmap/zmap
+
+> https://zmap.io/documentation.html
+
+## 安装
 ```
 cmake -DWITH_REDIS=OFF -DENABLE_DEVELOPMENT=ON .
 ```
+---
 
-## 扫描IP段
+## 扫描
+#### 基本的扫描方式
 ```
 sudo zmap -p 80 -o results.csv 114.215.105.0/24
 ```
 
-## 使用配置文件进行扫描
+#### 使用配置文件进行扫描
 ```
 probe-module tcp_synscan
 target-port 80
@@ -43,9 +49,9 @@ log-file zmap-80.log
 # zmap status
 status-updates-file zmap-status.txt
 ```
+---
 
 ## 参考资料
----
 
 [Github-Issue] https://github.com/zmap/zmap/issues (比如:summary选项已经移除、使用metadata-file代替)
 

@@ -82,7 +82,7 @@ class ChatContainer extends React.Component {
 }
 
 // 从总的store树分离出我们需要的state
-function select(state) {
+function mapStateToProps(state) {
     return {
         state: state.chat
     }
@@ -97,5 +97,5 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(select,mapDispatchToProps)(ChatContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(ChatContainer);
 // export default ChatContainer;

@@ -1,6 +1,5 @@
-## 完全安装
+## 搭建python3环境
 
-### 搭建python3环境
 ```
 wget https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
 tar zxvf Python-3.5.2.tgz
@@ -12,7 +11,9 @@ mkidr ~/virtualenv
 virtualenv -p /usr/local/python3.5.2/bin/python3.5
 ```
 
-### 安装mysql等依赖服务
+---
+
+## 安装mysql等依赖服务
 
 #### 安装mysql
 
@@ -40,66 +41,25 @@ debconf-set-selections <<< "mysql-community-server mysql-community-server/re-roo
 apt-get install -y mysql-server
 ```
 
+#### 安装Mongo
+
+参考: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
+
+```
+curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.tgz
+tar -zxvf mongodb-linux-x86_64-3.4.tgz
+mkdir -p mongodb
+cp -R -n mongodb-linux-x86_64-3.4/ mongodb
+export PATH=<mongodb-install-directory>/bin:$PATH
+```
+
 #### 安装nginx
 
-```
-sudo apt-get install nginx
-vim /etc/nginx/conf.d/tornado.conf
-upstream torweb {
-	server 127.0.0.1:9001;
-}
-server {
-	listen 9000;
-    access_log  /usr/local/var/log/nginx/torweb.access.log;
-    error_log  /usr/local/var/log/nginx/torweb.error.log;
+`tornado.conf` 请参考 [configs/nginx/tornado.conf](configs/nginx/tornado.conf)
 
-	# Allow file uploads
-    client_max_body_size 50M;
+---
 
-	location ^~ /assets/ {
-	    root /Users/jmpews/Desktop/codesnippet/python/torweb/frontend/static;
-	    if ($query_string) {
-	        expires max;
-	    }
-	}
-
-	location ^~ /avatar/ {
-	    root /Users/jmpews/Desktop/codesnippet/python/torweb/static/images;
-	    if ($query_string) {
-	        expires max;
-	    }
-	}
-
-	location ^~ /dashboard/ {
-	    root /Users/jmpews/Desktop/codesnippet/python/torweb/frontend/static/templates;
-	    if ($query_string) {
-	        expires max;
-	    }
-	}
-
-	location = /favicon.ico {
-		rewrite (.*) /static/favicon.ico;
-	}
-	location = /robots.txt {
-		rewrite (.*) /static/robots.txt;
-	}
-
-	location / {
-		proxy_http_version 1.1;
-		proxy_read_timeout 300s;
-		proxy_redirect off;
-		proxy_pass_header Server;
-		proxy_set_header Host $http_host;
-		proxy_set_header Upgrade $http_upgrade;
-		proxy_set_header Connection "upgrade";
-		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header X-Scheme $scheme;
-		proxy_pass http://torweb;
-	}
-}
-```
-
-### 启动服务
+## 启动服务
 
 ```
 # py3环境

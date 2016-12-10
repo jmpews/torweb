@@ -1,30 +1,48 @@
-Title: Greenlet源码分析
+Title: greenlet源码分析
 Date: 2015-12-27 03:43
 Author: jmpews
 Category: greenlet
 Tags: 协程,coroutine,greenlet
 Slug: read-greenlet
 
-## Summary:
+> 2016-12-10 更新
 
-协程可以算是自定义控制切换的微线程。
+协程可以说是让程序员自己做控制的微线程.
 
-## 栈切换的本质
-#### 1.栈
+## 为什么使用greenlet?
+
+可以同时开启多个微线程(准确说应该是依次开启, 当遇到需要 I/O 的地方, 自动切换到另一个协程), 从而可以实现超大并发.
+
+## greenlet的相关QA?
+
+#### @应该开启多少greenlet协程?
+
+应该根据具体的带宽和机器配置
+
+#### @greenlet协程数受什么限制?
+
+因为greenlet是用户自控制的微线程, 保存greenlet栈状态是将栈状态保存在堆中, 所以是受内存大小的限制. 但是即使开启了很多的线程去并发, 但由于带宽不足, 扫描速度依然不会快.
+
+## 怎么自建greenlet协程?
+
+借助系统调用相关函数, 形成调用栈, 保存父调用, 以便在函数执行完毕后返回.
+
+## 怎么进行greenlet协程切换?
+
+先进行C层的栈切换, 将当前函数的栈保存到堆中, 之后进行python层的栈切换, 设置 `top_frame`.
+
+## 关于调用栈的基本概念
+
+#### 栈
 
 * 栈是从高地址向低地址
-* 栈大小固定不变
-* 栈帧(stack frame)，机器用栈来传递过程参数，存储返回信息，保存寄存器用于以后恢复，以及本地存储。为单个过程(函数调用)分配的那部分栈称为栈帧。栈帧其实是两个指针寄存器，寄存器%ebp为帧指针(栈底-高地址)，而寄存器%esp为栈指针(栈顶-低地址)
+* 汇编用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复. 函数调用分配的那部分称为栈帧, 栈帧其实是两个指针寄存器, `%ebp` 为帧指针(栈底,高地址), 而 `%esp` 为栈指针(栈顶, 低地址). 一般来说以 `%ebp` 作为基址进行参数等相关寻址, 因为 `%esp` 为变址.
 
-#### 2.切换
+## 协程的切换
 
-* 切换首先需要切换执行位置(`top_frame`)
-* 但是当切换执行位置，同时要切换到目的栈，同时要保证栈内数据没有丢失，且没有被无意修改。这就需要栈数据的保存与恢复(`slp_switch`)。
+#### @特例:C语言中的函数调用(栈切换)
 
-## 如何进行切换？
-### 1. C栈切换
-
-其实协程的一个很特殊的例子，就是函数调用。下面这个例子在main中调用func
+其实协程的一个很特殊的例子，就是函数调用。下面这个例子在 `main` 中调用 `func`
 
 ```
 #include<stdio.h>
@@ -46,7 +64,8 @@ int main()
     c=a+b;
 }
 ```
-用gcc生成汇编code，建议在redhat或centos下
+
+用gcc生成汇编代码(建议在redhat或centos下`
 
 ```
 .file   "stackpointer.c"
@@ -78,7 +97,7 @@ movl    $1, -12(%ebp)
 movl    $2, -8(%ebp)
 movl    $3, -4(%ebp)
 movl    -4(%ebp), %eax
-movl    %eax, (%esp)  
+movl    %eax, (%esp)
 call    func
 movl    -8(%ebp), %eax
 movl    -12(%ebp), %edx
@@ -90,81 +109,76 @@ ret
 .ident  "GCC: (GNU) 4.4.7 20120313 (Red Hat 4.4.7-11)"
 .section        .note.GNU-stack,"",@progbits
 ```
+栈的切换发生在函数调用, 从 `main` 函数进入 `func`.
 
 ```
-函数调用
-从main函数进入func
-
 1. 首先将需要传入func的参数入栈。
-
-2. push『call func』=下一条地址(IP压栈),jmp 『func』的函数地址(设置IP)
-
-4. 进入func
-
-5. `push bp`
-
-6. `mov sp,bp`
+2. push <func 的下一条指令>
+3. 进入func
+4. push bp (保存栈底)
+5. mov sp,bp (设置新栈顶)
 
 ---至此为止的栈，属于上一个栈
 
-7. 开始为局部变量分配地址
-
-8. `leave = mov bp,sp,pop bp`
-
-9. `ret`
+6. 开始为局部变量分配地址
+8. 执行func
+7. leave = mov bp,sp,pop bp (恢复 main 函数栈)
+8. ret (返回 func 的下一条指令继续执行)
 ```
 
-#### `call func`
-* `push ip`，保存下一条指令的地址
-* `jump func`，修改ip跳转到func执行函数
+---
 
-####  func
-* push ebp,保存bp
-* mov esp,ebp，设置新的栈底。
-* 以新的bp进行偏移，保存临时、本地变量，完成函数功能
-* leave(等价与mov ebp，esp；pop ebp)恢复esp和ebp
-* ret 恢复ip，回到call的下一条指令继续执行。
-
-### 2. Python栈切换
-我们进行的切换方式与此类似，但是python的栈和c栈不同，python栈建立在虚拟机上。
-
-总体上说，就是先进行c栈切换，关于ip设置跳转到下条指令执行(即执行位置的切换,如何跳到函数位置开始执行，如何从函数返回原来位置执行)，需要在python上实现`top_frame`的设置。
-
-具体细节参考:
-
-* [python的Greenlet模块源码分析](http://rootk.com/post/python-greenlet.html)
-* [greenlet栈帧切换细节](http://114.215.135.238:8001/?p=108)
-
-## switch具体实现
+#### @python中进行栈切换
 
 
-几个注意点：
 
-* 导入greenlet会初始化一个`main_greenlet`，并设置current为`main_greenlet`
-* greenlet运行结束，会返回到父greenlet执行
+**python的栈和C栈不同, python栈建立在虚拟机上**, 关于具体原理请参考 《python源码剖析》
+
+总体上说, 就是先进行C栈切换, 对于 `%eip` 设置(即执行位置的切换, 如何switch到另一个协程执行, 如何在协程执行完毕后返回父协程继续执行)需要设置 `top_frame`.
+
+greenlet 的结构
 
 ```
-from greenlet import greenlet  
+typedef struct _greenlet {
+  PyObject_HEAD
+  char* stack_start;
+  char* stack_stop;
+  char* stack_copy;
+  intptr_t stack_saved;
+  struct _greenlet* stack_prev;
+  struct _greenlet* parent;
+  PyObject* run_info;
+  struct _frame* top_frame;
+  int recursion_depth;
+  PyObject* weakreflist;
+  PyObject* exc_type;
+  PyObject* exc_value;
+  PyObject* exc_traceback;
+  PyObject* dict;
+} PyGreenlet;
+```
 
-def func1(arg):  
-    print (arg)  
-    gr2.switch()  
-    print ("func1 end")  
+下面分析 greenlet 的具体调用过程
 
-def func2():  
-    print ("fun2 come")  
+```
+from greenlet import greenlet
+
+def func1(arg):
+    print (arg)
+    gr2.switch()
+    print ("func1 end")
+
+def func2():
+    print ("fun2 come")
 
 #设置parent为main_greenlet
-gr1 = greenlet(func1)  
-gr2 = greenlet(func2)  
-value = gr1.switch("fun1 come")  
-print (value)  
+gr1 = greenlet(func1)
+gr2 = greenlet(func2)
+value = gr1.switch("fun1 come")
+print (value)
 ```
-首先：
-```
-gr1.switch("func1")
-```
-会调用`g_switch函数`，其中`target=gr1,args=('func1')`
+
+首先: `gr1.switch("func1")` 会调用 `g_switch` 函数, 其中 `target=gr1,args=('func1')`
 
 ```
 static PyObject *
@@ -191,13 +205,16 @@ g_switch(PyGreenlet* target, PyObject* args, PyObject* kwargs)
   ...
 }
 ```
-* `gr1(new_greenlet)`，默认`stack_start = NULL(没有运行)`,`stack_stop = NULL(没有启动)`，因而执行`g_initialstub()`
-* dummymarker设置为栈底
-* 为什么要将dummymarker栈底设置于此处？
+
+`gr1(new_greenlet)`, 默认 `stack_start = NULL(没有运行)` ,`stack_stop = NULL(没有启动)`, 因而执行`g_initialstub()`
+
+dummymarker设置为栈底
+
+##### 为什么要将dummymarker栈底设置于此处？
 
 `g_initialstub`的栈中包含函数需要的参数等数据，然而`&dummymarker`的位置恰为`g_initialstub`栈的ebp。
 
-### `g_initialstub` 分析
+#### `g_initialstub` 分析
 
 代码已简化
 
@@ -240,65 +257,66 @@ static int GREENLET_NOINLINE(g_initialstub)(void* mark))
 }
 
 ```
-* 设置当前greenlet的`stack_prev`为`ts_current`，即上一个正在运行的栈
-* `PyEval_CallObjectWithKeywords`过程中可能会切换另一个greenlet，否则函数运行到结束
 
-### `g_switchstack` 分析
+设置当前greenlet的 `stack_prev` 为 `ts_current`, 即上一个正在运行的栈
+
+`PyEval_CallObjectWithKeywords` 过程中可能会切换另一个greenlet, 否则函数运行到结束
+
+#### `g_switchstack` 分析
 ```
 static int g_switchstack(void)
 {
-	int err;
-	{   /* save state */
-	    /* 保存线程状态或者说EIP */
-		PyGreenlet* current = ts_current;
-		PyThreadState* tstate = PyThreadState_GET();
-		current->recursion_depth = tstate->recursion_depth;
-		current->top_frame = tstate->frame;
-		current->exc_type = tstate->exc_type;
-		current->exc_value = tstate->exc_value;
-		current->exc_traceback = tstate->exc_traceback;
-	}
-	/* 汇编实现栈切换，分不同平台 */
-	err = slp_switch();
-	if (err < 0) {   /* error */
-		PyGreenlet* current = ts_current;
-		current->top_frame = NULL;
-		current->exc_type = NULL;
-		current->exc_value = NULL;
-		current->exc_traceback = NULL;
+  int err;
+  {
+    /* save state */
+    /* 保存状态(%EIP), 进行python层的frame状态保存 */
+    PyGreenlet* current = ts_current;
+    PyThreadState* tstate = PyThreadState_GET();
+    current->recursion_depth = tstate->recursion_depth;
+    current->top_frame = tstate->frame;
+    current->exc_type = tstate->exc_type;
+    current->exc_value = tstate->exc_value;
+    current->exc_traceback = tstate->exc_traceback;
+  }
+  /* 汇编实现C层栈切换, 分不同平台 */
+  err = slp_switch();
+  if (err < 0) {   /* error */
+    PyGreenlet* current = ts_current;
+    current->top_frame = NULL;
+    current->exc_type = NULL;
+    current->exc_value = NULL;
+    current->exc_traceback = NULL;
 
-		assert(ts_origin == NULL);
-		ts_target = NULL;
-	}
-	else {
-	    /* 恢复线程状态，或者说EIP，即跳转执行位置 */
-		PyGreenlet* target = ts_target;
-		PyGreenlet* origin = ts_current;
-		PyThreadState* tstate = PyThreadState_GET();
-		tstate->recursion_depth = target->recursion_depth;
-		tstate->frame = target->top_frame;
-		target->top_frame = NULL;
-		tstate->exc_type = target->exc_type;
-		target->exc_type = NULL;
-		tstate->exc_value = target->exc_value;
-		target->exc_value = NULL;
-		tstate->exc_traceback = target->exc_traceback;
-		target->exc_traceback = NULL;
+    assert(ts_origin == NULL);
+    ts_target = NULL;
+  }
+  else {
+    /* 恢复状态(%EIP), 进行python层的frame状态恢复 */
+    PyGreenlet* target = ts_target;
+    PyGreenlet* origin = ts_current;
+    PyThreadState* tstate = PyThreadState_GET();
+    tstate->recursion_depth = target->recursion_depth;
+    tstate->frame = target->top_frame;
+    target->top_frame = NULL;
+    tstate->exc_type = target->exc_type;
+    target->exc_type = NULL;
+    tstate->exc_value = target->exc_value;
+    target->exc_value = NULL;
+    tstate->exc_traceback = target->exc_traceback;
+    target->exc_traceback = NULL;
 
-		assert(ts_origin == NULL);
-		Py_INCREF(target);
-		ts_current = target;
-		ts_origin = origin;
-		ts_target = NULL;
-	}
-	return err;
+    assert(ts_origin == NULL);
+    Py_INCREF(target);
+    ts_current = target;
+    ts_origin = origin;
+    ts_target = NULL;
+  }
+  return err;
 }
 ```
-* 保存线程状态，即EIP
-* 进行C栈切换，汇编实现
-* 恢复目标线程状态，即跳转执行位置
 
-### `slp_switch` (核心代码) 分析
+#### `slp_switch`
+
 ```
 static int
 slp_switch(void)
@@ -322,7 +340,7 @@ slp_switch(void)
         /* 当为new_greenlet直接返回1，无栈可切换 */
         SLP_SAVE_STATE(stackref, stsizediff);
 
-        /* 重要！current在此暂停，target从此处继续之前的状态之前 */
+        /* 重要! current在此暂停，target从此处继续之前的状态之前 */
         __asm__ volatile (
             "addq %0, %%rsp\n"
             "addq %0, %%rbp\n"
@@ -346,8 +364,12 @@ slp_switch(void)
 
 很重要的一点，当从恢复ebp和esp开始，current暂停，target继续之前运行，恢复之前数据，恢复的寄存器也仍为之前保存的状态，因为他们是基于ebp的偏移寻址，寻址方式不变，只受ebp的控制。
 
-参考资料：
 ---
-[python的Greenlet模块源码分析](http://rootk.com/post/python-greenlet.html)
 
-[greenlet栈帧切换细节](http://114.215.135.238:8001/?p=108)
+##参考资料：
+
+http://rootk.com/post/python-greenlet.html
+
+http://114.215.135.238:8001/?p=108
+
+http://www.cnblogs.com/alan-babyblog/p/5353152.html

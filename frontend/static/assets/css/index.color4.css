@@ -5191,3 +5191,36 @@ ul {
   white-space: -o-pre-wrap;
   word-wrap: break-word;
 }
+
+.content-container {
+  margin-top: 100px;
+}
+
+.header {
+  transition: transform .25s ease-in-out;
+  will-change: transform;
+  position: fixed;
+  top: 0;
+}
+
+.header.headroom--pinned {
+  box-shadow: 0 3px 10px #e4e4e4;
+  transform: translateY(0);
+}
+.header.headroom--pinned .header-container .header-logo {
+  top: 20px;
+  left: 0;
+}
+
+.header.headroom--top .header-container .header-logo {
+  top: 55px;
+  left: -30px;
+}
+
+.header.headroom--unpinned {
+  transform: translateY(-100%);
+}
+.header.headroom--unpinned .header-container .header-logo {
+  top: 20px;
+  left: 0;
+}

@@ -1287,3 +1287,45 @@ $current-topic-width: 21px;
         }
     }
 }
+
+// header headroom.js
+.content-container {
+    margin-top: 100px;
+}
+.header {
+    transition: transform .25s ease-in-out;
+    will-change: transform;
+    position: fixed;
+    top: 0;
+}
+.header.headroom--pinned {
+    //transition: 0.3s ease-out;
+    box-shadow: 0 3px 10px #e4e4e4;
+    //top: -70px;
+    transform: translateY(0);
+    //transform: translateY(70px);
+    //top: 0;
+    .header-container .header-logo {
+        //transform: translateY(50%);
+        //top: 0;
+        top: ($header-height /2 ) - ($header-logo-height / 2);
+        left: 0;
+    }
+}
+
+.header.headroom--top {
+    .header-container .header-logo {
+        top: $header-height - ($header-logo-height / 2);
+        left: -30px;
+    }
+}
+
+.header.headroom--unpinned {
+    transform: translateY(-100%);
+    .header-container .header-logo {
+        //transform: translateY(50%);
+        //top: 0;
+        top: ($header-height /2 ) - ($header-logo-height / 2);
+        left: 0;
+    }
+}

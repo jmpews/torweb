@@ -17,7 +17,7 @@
 {#    {% end %}#}
 </head>
 <body>
-    <div class="header cl">
+    <header class="header cl" id="header">
         <div class="header-container clear-xs cl">
             <div class="header-logo">
                 <div class="logo-image"></div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </header>
     {% block content %}{% end %}
 
     <!-- Footer -->
@@ -170,17 +170,15 @@
     <script src="/assets/js/jquery.cookie.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
-    <script src="/assets/js/react/bundle.js"></script>
+    <!-- <script src="/assets/js/react/bundle.js"></script> -->
+    <script src="/assets/js/headroom.min.js"></script>
     <script>
-        $(document).on("scroll", function () {
-            if (window.screen.width > 767) {
-                if ($(document).scrollTop() > 70) {
-                    $(".header").addClass("scroll");
-                } else {
-                    $(".header").removeClass("scroll");
-                }
-            }
-        });
+        // grab an element
+        var myElement = document.getElementById("header");
+        // construct an instance of Headroom, passing the element
+        var headroom  = new Headroom(myElement);
+        // initialise
+        headroom.init();
     </script>
     {% block scripts %}
     {% end %}

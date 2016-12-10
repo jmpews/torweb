@@ -13,7 +13,7 @@
     <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/blog.css"/>
 </head>
 <body>
-<div class="header cl">
+<div class="header cl" id="header">
     <div class="header-container clear-xs cl">
         <div class="header-logo">
             <!-- <div class="logo-image"></div> -->
@@ -58,13 +58,13 @@
 
 <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
 <script src="/assets/js/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
+<script src="/assets/js//tether.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
-<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/bootstrap-notify.min.js"></script>
+<script src="/assets/js/headroom.min.js"></script>
 <!-- <script src="/assets/js/react/bundle.js"></script> -->
-<script>
+<!-- <script>
     $(document).on("scroll", function () {
         if (window.screen.width > 767) {
             if ($(document).scrollTop() > 70) {
@@ -74,6 +74,14 @@
             }
         }
     });
+</script> -->
+<script>
+    // grab an element
+    var myElement = document.getElementById("header");
+    // construct an instance of Headroom, passing the element
+    var headroom  = new Headroom(myElement);
+    // initialise
+    headroom.init();
 </script>
 {% block scripts %}
 {% end %}

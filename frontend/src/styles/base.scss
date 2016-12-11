@@ -301,6 +301,13 @@ ul {
                 font-size: 15px !important;
                 padding: 0 !important;
             }
+            .logo-image {
+                display: none !important;
+            }
+            .logo-text {
+                display: block !important;
+            }
+
         }
         .header-nav {
             // 这里和absolute的配合
@@ -366,6 +373,13 @@ $header-logo-height: 30px;
             left: -30px;
             background-color: $logo-color;
             line-height: $header-logo-height;
+
+            .logo-image {
+                display: block;
+            }
+            .logo-text {
+                display: none;
+            }
             .color {
                 cursor: pointer;
                 display: none;

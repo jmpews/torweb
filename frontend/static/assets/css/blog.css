@@ -3666,6 +3666,12 @@ ul {
     font-size: 15px !important;
     padding: 0 !important;
   }
+  .header .header-container .header-logo .logo-image {
+    display: none !important;
+  }
+  .header .header-container .header-logo .logo-text {
+    display: block !important;
+  }
   .header .header-container .header-nav {
     padding-left: 50px !important;
     max-width: none !important;
@@ -3718,6 +3724,12 @@ ul {
   left: -30px;
   background-color: #e95420;
   line-height: 30px;
+}
+.header .header-container .header-logo .logo-image {
+  display: block;
+}
+.header .header-container .header-logo .logo-text {
+  display: none;
 }
 .header .header-container .header-logo .color {
   cursor: pointer;
@@ -4248,31 +4260,6 @@ ul {
 }
 .index-html.content-container {
   padding-left: 25px;
-}
-
-@media (max-width: 767px) {
-  .index-html .all-cate-card {
-    margin-left: 21px !important;
-  }
-}
-.current-topic {
-  background-color: #e95420;
-  float: left;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  left: -21px;
-  width: 21px;
-  min-height: 70px;
-}
-.current-topic span {
-  position: absolute;
-  display: block;
-  text-align: center;
-  top: 50%;
-  transform: translate(0, -50%);
-  color: #fff;
-  font-size: 11px;
 }
 
 .top-post.post-item .item-title .fa-hashtag {

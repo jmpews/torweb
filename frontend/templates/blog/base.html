@@ -13,77 +13,79 @@
     <link id="theme" rel="stylesheet" type="text/css" href="/assets/css/blog.css"/>
 </head>
 <body>
-<div class="header cl" id="header">
-    <div class="header-container clear-xs cl">
-        <div class="header-logo">
-            <!-- <div class="logo-image"></div> -->
-            <a href="/">Zz</a>
-            <div class="theme" user="">
-                <span class="color color1" color="color1"></span>
-                <span class="color color2" color="color2"></span>
-                <span class="color color3" color="color3"></span>
-                <span class="color color4" color="color4"></span>
+    <div class="header cl" id="header">
+        <div class="header-container clear-xs cl">
+            <div class="header-logo">
+                <!-- <div class="logo-image"></div> -->
+                <a href="/">Zz</a>
+                <div class="theme" user="">
+                    <span class="color color1" color="color1"></span>
+                    <span class="color color2" color="color2"></span>
+                    <span class="color color3" color="color3"></span>
+                    <span class="color color4" color="color4"></span>
+                </div>
+            </div>
+            <ul class="header-nav clear-xs cl">
+                <li class="active transition">
+                    <a href="/">戴帽子的鼠Zz <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% block content %}{% end %}
+    <div class="footer">
+        <div class="footer-container container">
+            <div class="cl hidden-xs">
+                <dl class="col-sm-2">
+                    <dt>关注我</dt>
+                    <dd><a href="/">Github</a></dd>
+                    <dd><a href="/">Weibo</a></dd>
+                </dl>
+            </div>
+            <div class="footer-logo">
+                <span>jmpews</span>
+                <span class="divider">/</span>
+                <span>2016</span>
+                <span class="divider">/</span>
+                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
             </div>
         </div>
-        <ul class="header-nav clear-xs cl">
-            <li class="active transition">
-                <a href="/">戴帽子的鼠Zz <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
     </div>
-</div>
-{% block content %}{% end %}
-<div class="footer">
-    <div class="footer-container container">
-        <div class="cl hidden-xs">
-            <dl class="col-sm-2">
-                <dt>关注我</dt>
-                <dd><a href="/">Github</a></dd>
-                <dd><a href="/">Weibo</a></dd>
-            </dl>
-        </div>
-        <div class="footer-logo">
-            <span>jmpews</span>
-            <span class="divider">/</span>
-            <span>2016</span>
-            <span class="divider">/</span>
-            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-            document.write(unescape("%3Cspan id='cnzz_stat_icon_1260457274'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260457274%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-        </div>
+
+    <div class="chat-container" id="chat-container" style="display: none">
     </div>
-</div>
 
-<div class="chat-container" id="chat-container" style="display: none">
-</div>
-
-<script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js//tether.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/main.js"></script>
-<script src="/assets/js/bootstrap-notify.min.js"></script>
-<script src="/assets/js/headroom.min.js"></script>
-<!-- <script src="/assets/js/react/bundle.js"></script> -->
-<!-- <script>
-    $(document).on("scroll", function () {
-        if (window.screen.width > 767) {
-            if ($(document).scrollTop() > 70) {
-                $(".header").addClass("scroll");
-            } else {
-                $(".header").removeClass("scroll");
+    <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js//tether.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
+    <script src="/assets/js/headroom.min.js"></script>
+    <!-- <script src="/assets/js/react/bundle.js"></script> -->
+    <!-- <script>
+        $(document).on("scroll", function () {
+            if (window.screen.width > 767) {
+                if ($(document).scrollTop() > 70) {
+                    $(".header").addClass("scroll");
+                } else {
+                    $(".header").removeClass("scroll");
+                }
             }
+        });
+    </script> -->
+    <script>
+        if (window.screen.width > 767) {
+            // grab an element
+            var myElement = document.getElementById("header");
+            // construct an instance of Headroom, passing the element
+            var headroom = new Headroom(myElement);
+            // initialise
+            headroom.init();
         }
-    });
-</script> -->
-<script>
-    // grab an element
-    var myElement = document.getElementById("header");
-    // construct an instance of Headroom, passing the element
-    var headroom  = new Headroom(myElement);
-    // initialise
-    headroom.init();
-</script>
-{% block scripts %}
-{% end %}
+    </script>
+    {% block scripts %}
+    {% end %}
 </body>
 </html>

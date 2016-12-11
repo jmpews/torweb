@@ -21,7 +21,7 @@
         <div class="header-container clear-xs cl">
             <div class="header-logo">
                 <div class="logo-image"></div>
-                <a href="/" style="display: none">Jmp</a>
+                <a class="logo-text" href="/" style="display: none">Jmp</a>
                 {% if current_user %}
                 <div class="theme" user="{{ current_user.id }}">
                     {% else %}
@@ -173,12 +173,14 @@
     <!-- <script src="/assets/js/react/bundle.js"></script> -->
     <script src="/assets/js/headroom.min.js"></script>
     <script>
-        // grab an element
-        var myElement = document.getElementById("header");
-        // construct an instance of Headroom, passing the element
-        var headroom  = new Headroom(myElement);
-        // initialise
-        headroom.init();
+        if (window.screen.width > 767) {
+            // grab an element
+            var myElement = document.getElementById("header");
+            // construct an instance of Headroom, passing the element
+            var headroom = new Headroom(myElement);
+            // initialise
+            headroom.init();
+        }
     </script>
     {% block scripts %}
     {% end %}

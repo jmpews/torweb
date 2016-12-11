@@ -173,49 +173,47 @@
 }
 
 // ------------左侧当前主题
-$current-topic-width: 21px;
-
-@media (max-width: 767px) {
-    .index-html .all-cate-card {
-        margin-left: $current-topic-width !important;
-    }
-}
-
-//.index-html .col-md-9 { padding-left: $current-topic-width !important;}
-//.index-html .banner { margin-left: $current-topic-width !important;}
-.current-topic {
-    background-color: $btn-color;
-    float: left;
-    position: absolute;
-    // 垂直居中
-    top: 50%;
-    transform: translate(0, -50%);
-    left: 0-$current-topic-width;
-    // 文字竖排显示,强制宽度
-    width: $current-topic-width;
-    min-height: 70px;
-    span {
-        // 1. 面向所有类型居中,必须设置父类的高度
-        //position: absolute;
-        //left: 50%;
-        //top: 50%;
-        //transform: translate(-50%, -50%);
-
-        // 2. 文字居中
-        position: absolute;
-        display: block;
-        text-align: center;
-        top: 50%;
-        transform: translate(0, -50%);
-
-        //padding-left: 5px;
-        color: #fff;
-        font-size: 11px;
-        //writing-mode: vertical-lr;
-        //word-wrap: break-word;
-        //display: block;
-    }
-}
+//$current-topic-width: 21px;
+//
+//@media (max-width: 767px) {
+//    .index-html .all-cate-card {
+//        margin-left: $current-topic-width !important;
+//    }
+//}
+//
+//.current-topic {
+//    background-color: $btn-color;
+//    float: left;
+//    position: absolute;
+//    // 垂直居中
+//    top: 50%;
+//    transform: translate(0, -50%);
+//    left: 0-$current-topic-width;
+//    // 文字竖排显示,强制宽度
+//    width: $current-topic-width;
+//    min-height: 70px;
+//    span {
+//        // 1. 面向所有类型居中,必须设置父类的高度
+//        //position: absolute;
+//        //left: 50%;
+//        //top: 50%;
+//        //transform: translate(-50%, -50%);
+//
+//        // 2. 文字居中
+//        position: absolute;
+//        display: block;
+//        text-align: center;
+//        top: 50%;
+//        transform: translate(0, -50%);
+//
+//        //padding-left: 5px;
+//        color: #fff;
+//        font-size: 11px;
+//        //writing-mode: vertical-lr;
+//        //word-wrap: break-word;
+//        //display: block;
+//    }
+//}
 
 // --------------------- post-item -----------------------
 // 置顶的帖子

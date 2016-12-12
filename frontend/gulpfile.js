@@ -99,7 +99,7 @@ gulp.task('scripts', function() {
 
 //deal with custom styles
 gulp.task('styles', function(){
-    return sass(['./src/styles/index.color4.scss', './src/styles/blog.scss'], { style: 'expanded'})
+    return sass(['./src/styles/index.color4.scss', './src/styles/index.color2.scss', './src/styles/blog.scss'], { style: 'expanded'})
         .pipe(autoprefixer('last 2 version', 'Safari 5', 'IE 8', 'IE 9', 'Opera 12.1', 'IOS 6', 'android 4'))
         .pipe(gulp.dest(distPath+'/assets/css'))
         .pipe(rename({suffix: '.min'}))
